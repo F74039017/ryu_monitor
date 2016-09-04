@@ -1,6 +1,6 @@
 from ryu.controller import ofp_event, event
 
-class EventMessage(event.EventBase):
+class PortMessage(event.EventBase):
     def __init__(self, msg):
-        super(EventMessage, self).__init__()
+        super(PortMessage, self).__init__()
         self.msg = msg

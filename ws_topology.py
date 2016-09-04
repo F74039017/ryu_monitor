@@ -47,7 +47,7 @@ from ryu.app.wsgi import (
 from ryu.base import app_manager
 from ryu.topology import event, switches
 from ryu.controller.handler import set_ev_cls
-
+from ryu.app.port_message import PortMessage
 
 class WebSocketTopology(app_manager.RyuApp):
     _CONTEXTS = {
@@ -87,6 +87,12 @@ class WebSocketTopology(app_manager.RyuApp):
     def _event_host_add_handler(self, ev):
         msg = ev.host.to_dict()
         self._rpc_broadcall('event_host_add', msg)
+
+    @set_ev_cls(PortMessage)
+    def _port_message_handler(self, ev):
+        # print "---------- port message handler -------------------"
+        # print ev.msg
+        self._rpc_broadcall('event_port_info', ev.msg)
 
     def _rpc_broadcall(self, func_name, msg):
         disconnected_clients = []

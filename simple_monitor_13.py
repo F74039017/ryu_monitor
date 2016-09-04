@@ -6,13 +6,15 @@ from ryu.controller.handler import MAIN_DISPATCHER, DEAD_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.lib import hub
 
-from ryu.app.event_message import EventMessage
+from ryu.app.port_message import PortMessage
 from ryu.topology.api import get_switch, get_link, get_host
 import json
 
 from ryu.topology import event, switches
 from ryu.lib.port_no import str_to_port_no
-from ryu.lib.dpid import str_to_dpid
+from ryu.lib.dpid import str_to_dpid, dpid_to_str
+
+import datetime, time
 
 from ryu.app.wsgi import ControllerBase, WSGIApplication, route
 from webob import Response
@@ -30,7 +32,7 @@ class SimpleMonitor(simple_switch_13.SimpleSwitch13):
         'switches': switches.Switches,
     }
 
-    _EVENTS = [EventMessage]
+    _EVENTS = [PortMessage]
     BANDWIDTH_LIMIT = 1024*1024*1024
     REQ_INTERVAL = 5
 
@@ -104,7 +106,7 @@ class SimpleMonitor(simple_switch_13.SimpleSwitch13):
             # print body
 
             print "*******************  border_mac  *****************************"
-            print self.border_mac
+            # print self.border_mac
 
             # send event to observers
             # this is a testing event, which will be caught by ws_topology app
@@ -148,37 +150,38 @@ class SimpleMonitor(simple_switch_13.SimpleSwitch13):
         datapath = self.datapaths[dpid]
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
-        for stat in sorted([flow for flow in body if flow.priority == 1],
-                           key=lambda flow: (flow.match['in_port'],
-                                             flow.match['eth_dst'])):
-            key = "%d, %d:%d" % (dpid, stat.match['in_port'], stat.instructions[0].actions[0].port)
-            if key in self.lastState:
-                if (stat.byte_count-self.lastState[key])//SimpleMonitor.REQ_INTERVAL>SimpleMonitor.BANDWIDTH_LIMIT:
-                    # send Message to websocket
-                    print "Exceed warning bandwidth at %016x %s %13s B => %13s B" % (ev.msg.datapath.id, key, self.lastState[key], stat.byte_count)
-
-                    # send modflow to dpid => try drop all packets recv from in_port
-                    in_port = stat.match['in_port']
-                    inport_mac = self.swPort_to_mac[dpid][in_port]
-                    # drop only in the border switch
-                    if inport_mac in self.border_mac:
-                        match = parser.OFPMatch(in_port=stat.match['in_port'])
-                        actions = []
-                        super(SimpleMonitor, self).add_flow(datapath=datapath, priority=2, match=match, actions=actions, idle_timeout=10)
-                        # send message to ws
-                        ev_msg = {'dpid': dpid, 'inport_mac': inport_mac}
-                        event = EventMessage(ev_msg)
-                        self.send_event_to_observers(event)
-                        # show warning message on console
-                        print "Drop dpid: %d, in_port %d" % (dpid, in_port)
+        # for stat in sorted([flow for flow in body if flow.priority == 1],
+                           # key=lambda flow: (flow.match['in_port'],
+                                             # flow.match['eth_dst'])):
+            # key = "%d, %d:%d" % (dpid, stat.match['in_port'], stat.instructions[0].actions[0].port)
             # if key in self.lastState:
-                # print self.lastState[key], "   ", stat.byte_count
-            self.lastState[key] = stat.byte_count
+                # if (stat.byte_count-self.lastState[key])//SimpleMonitor.REQ_INTERVAL>SimpleMonitor.BANDWIDTH_LIMIT:
+                    # # send Message to websocket
+                    # print "Exceed warning bandwidth at %016x %s %13s B => %13s B" % (ev.msg.datapath.id, key, self.lastState[key], stat.byte_count)
+
+                    # # send modflow to dpid => try drop all packets recv from in_port
+                    # in_port = stat.match['in_port']
+                    # inport_mac = self.swPort_to_mac[dpid][in_port]
+                    # # drop only in the border switch
+                    # if inport_mac in self.border_mac:
+                        # match = parser.OFPMatch(in_port=stat.match['in_port'])
+                        # actions = []
+                        # super(SimpleMonitor, self).add_flow(datapath=datapath, priority=2, match=match, actions=actions, idle_timeout=10)
+                        # # send message to ws
+                        # ev_msg = {'dpid': dpid, 'inport_mac': inport_mac}
+                        # event = EventMessage(ev_msg)
+                        # self.send_event_to_observers(event)
+                        # # show warning message on console
+                        # print "Drop dpid: %d, in_port %d" % (dpid, in_port)
+            # # if key in self.lastState:
+                # # print self.lastState[key], "   ", stat.byte_count
+            # self.lastState[key] = stat.byte_count
 
     @set_ev_cls(ofp_event.EventOFPPortStatsReply, MAIN_DISPATCHER)
     def _port_stats_reply_handler(self, ev):
         body = ev.msg.body
-        print "****************** port state body ****************************"
+        # print "****************** port state body ****************************"
+        # print "check dpid " + dpid_to_str(ev.msg.datapath.id).lstrip('0')
         print body
 
         self.logger.info('datapath         port     '
@@ -192,6 +195,22 @@ class SimpleMonitor(simple_switch_13.SimpleSwitch13):
                              ev.msg.datapath.id, stat.port_no,
                              stat.rx_packets, stat.rx_bytes, stat.rx_errors,
                              stat.tx_packets, stat.tx_bytes, stat.tx_errors)
+
+
+        # get port traffic info.
+        # XXX: not consider overflow condition yet. 
+        # Openflow 1.3 use counter that is wrap around with no overflow indicator. 
+        dpid = dpid_to_str(ev.msg.datapath.id).lstrip('0')
+        d = datetime.datetime.utcnow()
+        ts_for_js = int(time.mktime(d.timetuple())) * 1000
+        ev_msg = {'dpid': dpid, 'port_info': [], 'ts': ts_for_js}
+        for stat in sorted(body, key=attrgetter('port_no')):
+            ev_msg['port_info'].append({'port_no': stat.port_no,
+                                        'rx_pkt': stat.rx_packets, 'rx_byte': stat.rx_bytes,
+                                        'tx_pkt': stat.tx_packets, 'tx_byte': stat.tx_bytes})
+        event = PortMessage(ev_msg)
+        self.send_event_to_observers(event)
+
 
 class ResponseController(ControllerBase):
     def __init__(self, req, link, data, **config):
@@ -216,6 +235,7 @@ class ResponseController(ControllerBase):
         body = json.dumps(next_dpid)
         return Response(content_type='application/json', body=body)
 
-	@route('response', '/check', methods=['GET'])
-	def check(self, req, **kwargs):
-		return Response(content_type='application/json', body='check message')
+    @route('response', '/Hello', methods=['GET'])
+    def hello(self, req, **kwargs):
+        print "Hello world"
+        return Response(content_type='application/json', body="Hello")

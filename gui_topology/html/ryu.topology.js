@@ -180,12 +180,9 @@ var rpc = {
         //elem.update();
         return "";
     },
-	event_block: function (params) {
-		console.log(params);
-		return "";
-	},
-	event_resume: function (params) {
-		console.log(params);
+	event_port_info: function(data) {
+		console.log("port_info message");
+		console.log(data);
 		return "";
 	},
 }
