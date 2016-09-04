@@ -52,7 +52,7 @@ var topo = {
     add_links: function (links) {
         for (var i = 0; i < links.length; i++) {
             if (!is_valid_link(links[i])) continue;
-            console.log("add link: " + JSON.stringify(links[i]));
+            // console.log("add link: " + JSON.stringify(links[i]));
 
             var src_dpid = links[i].src.dpid;
             var dst_dpid = links[i].dst.dpid;
@@ -182,7 +182,8 @@ var rpc = {
     },
 	event_port_info: function(data) {
 		console.log("port_info message");
-		console.log(data);
+		console.log(JSON.stringify(data));
+		console.log(JSON.stringify(data[0]));
 		return "";
 	},
 }
@@ -223,12 +224,14 @@ var netdata = {
 			netdata.nodes.push({id: trimInt(x.dpid), properties: {type: "switch"}});
 		});
 		topo.links.forEach( function(x) {
+			// put links between switches
 			netdata.links.push({source: parseInt(trim_zero(x.port.src.dpid)), target: trimInt(x.port.dst.dpid),
 				properties: {src_mac: x.port.src.hw_addr, src_port: trimInt(x.port.src.port_no),
 							dst_mac: x.port.dst.hw_addr, dst_port: trimInt(x.port.dst.port_no)}});
 		});
 		hosts.forEach(function(host) {
 			netdata.nodes.push({id: host.ipv4[0], properties: {type: "host"}});
+			// put links between host and switch
 			netdata.links.push({source: host.ipv4[0], target: trimInt(host.port.dpid), 
 				properties: {src_mac: host.mac, dst_mac: host.port.hw_addr, sw_in_port: trimInt(host.port.port_no)}});
 		});
