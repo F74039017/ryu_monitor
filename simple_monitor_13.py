@@ -14,6 +14,7 @@ from ryu.lib import hub
 from ryu.app.port_message import PortMessage
 from ryu.topology.api import get_switch, get_link, get_host
 import json
+import requests
 
 from ryu.topology import event, switches
 from ryu.lib.port_no import str_to_port_no
@@ -136,7 +137,8 @@ class SimpleMonitor(app_manager.RyuApp):
         else:
             out_port = ofproto.OFPP_FLOOD
 
-        if self.dpi_info['port_no']:
+        # if the dpi server is on. forward copys of packet.
+        if self.dpi_info['dpid'] and self.dpi_info['port_no'] and int(self.dpi_info['dpid'])==dpid:
             actions = [parser.OFPActionOutput(out_port), parser.OFPActionOutput(int(self.dpi_info['port_no']))]
         else:
             actions = [parser.OFPActionOutput(out_port)]
