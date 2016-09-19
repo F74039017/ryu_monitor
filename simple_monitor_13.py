@@ -49,7 +49,6 @@ class SimpleMonitor(app_manager.RyuApp):
         self.mac_to_port = {}
         self.datapaths = {}
         self.monitor_thread = hub.spawn(self._port_monitor)
-        self.dpi_thread = hub.spawn(self._dpi_monitor)
         self.lastState = {}
         # switch port_no to port mac
         self.swPort_to_mac = {}
@@ -57,7 +56,9 @@ class SimpleMonitor(app_manager.RyuApp):
         self.swPort_to_dpid = {}
         self.border_mac = set()
 
-        self.dpi_info = {'mac': None, 'port_no': None, 'dpid': None, 'name': None}
+        # mac, ip, port => dpi server info
+        # port_no, dpid, name => dp info which connecting to dpi server
+        self.dpi_info = {'mac': None, 'port_no': None, 'dpid': None, 'name': None, 'ip': None, 'port': None}
 
         wsgi = kwargs['wsgi']
         wsgi.register(ResponseController, {'response_app': self})
@@ -361,6 +362,9 @@ class SimpleMonitor(app_manager.RyuApp):
         """
         while True:
             # TODO: send a REST request to DPI server
+            if self.dpi_info['ip']:
+                r = requests.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
+                print r.text
             hub.sleep(SimpleMonitor.DPI_REQ_INTERVAL)
             pass
 
@@ -406,16 +410,29 @@ class ResponseController(ControllerBase):
         body = json.dumps(path)
         return Response(content_type='application/json', body=body)
 
-    @route('dpi_init', '/dpi/connect/{hw_addr}',
-            methods=['GET'], requirements={'hw_addr': r'([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})'})
+    @route('dpi_init', '/dpi/connect', methods=['POST'])
     def dpi_init(self, req, **kwargs):
+        # get post data
+        post_data = req.text.split(",")
+        try:
+            hw_addr = post_data[0]
+            ip_addr = post_data[1]
+            dpi_port = post_data[2]
+        except:
+            return "DPI_POST_ERROR"
+
         if self.response_app.dpi_info['mac']:
             return "DPI_ALREADY_EXIST"
         else:
+            # set dpi_info
+            self.response_app.dpi_info['mac'] = hw_addr
+            self.response_app.dpi_info['ip'] = ip_addr
+            self.response_app.dpi_info['port'] = dpi_port
+
+            # check whether the dpi is in network
             for host in get_host(self.response_app):
                 host_dict = host.to_dict()
-                #print host_dict['mac'] + "     " + kwargs['hw_addr'] # debug - check all compare mac pairs
-                if host_dict['mac'] == kwargs['hw_addr']:
+                if host_dict['mac'] == hw_addr:
                     self.response_app.dpi_info['dpid'] = host_dict['port']['dpid']
                     self.response_app.dpi_info['port_no'] = host_dict['port']['port_no']
                     self.response_app.dpi_info['name'] = host_dict['port']['name']
@@ -424,7 +441,7 @@ class ResponseController(ControllerBase):
                 print "DPI server not found??!"
                 return "DPI_INIT_FAIL"
 
-        self.response_app.dpi_info['mac']= kwargs['hw_addr']
+        # XXX: remove all datapaths' table. It's better to remove datapath which dpi server attached to.
         for dp in self.response_app.datapaths.values():
             ofproto = dp.ofproto
             parser = dp.ofproto_parser
@@ -437,4 +454,7 @@ class ResponseController(ControllerBase):
             inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)]
             self.response_app.add_flow(dp, 0, match, actions)
 
+        # start dpi monitor
+        print "dpi monitor thread: start"
+        self.dpi_thread = hub.spawn(self.response_app._dpi_monitor)
         return "DPI_INIT_OK"
