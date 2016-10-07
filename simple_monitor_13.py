@@ -11,10 +11,12 @@ from operator import attrgetter
 
 from ryu.lib import hub
 
-from ryu.app.port_message import PortMessage
+from ryu.app.custom_message import PortMessage, DPIMessage
 from ryu.topology.api import get_switch, get_link, get_host
 import json
 import requests
+
+import collections
 
 from ryu.topology import event, switches
 from ryu.lib.port_no import str_to_port_no
@@ -39,7 +41,7 @@ class SimpleMonitor(app_manager.RyuApp):
         'switches': switches.Switches,
     }
 
-    _EVENTS = [PortMessage]
+    _EVENTS = [PortMessage, DPIMessage]
     BANDWIDTH_LIMIT = 1024*1024*1024
     PORT_REQ_INTERVAL = 5
     DPI_REQ_INTERVAL = 5
@@ -55,6 +57,10 @@ class SimpleMonitor(app_manager.RyuApp):
         # dpid with port no to next dpid
         self.swPort_to_dpid = {}
         self.border_mac = set()
+
+        # dpi recorder
+        self.proto_acc = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
+
 
         # mac, ip, port => dpi server info
         # port_no, dpid, name => dp info which connecting to dpi server
@@ -355,6 +361,16 @@ class SimpleMonitor(app_manager.RyuApp):
         event = PortMessage(ev_msg)
         self.send_event_to_observers(event)
 
+    def udict2strdict(self, data):
+        if isinstance(data, basestring):
+            return str(data)
+        elif isinstance(data, collections.Mapping):
+            return dict(map(self.udict2strdict, data.iteritems()))
+        elif isinstance(data, collections.Iterable):
+            return type(data)(map(self.udict2strdict, data))
+        else:
+            return data
+
     def _dpi_monitor(self):
         """
         Send dpi request to server peroidically.
@@ -363,8 +379,35 @@ class SimpleMonitor(app_manager.RyuApp):
         while True:
             # TODO: send a REST request to DPI server
             if self.dpi_info['ip']:
-                r = requests.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
-                print r.text
+                s = requests.session()
+                s.keep_alive = False
+                r = s.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
+                res = r.json()
+                event = DPIMessage(res)
+                self.send_event_to_observers(event)
+
+                print("DPI checking --------------\n")
+                res_info = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
+                for x in res.get('detected.protos', []):
+                    if x['name'] == 'Yahoo':
+                        res_info['Yahoo'] = x['bytes']
+                    if x['name'] == 'Facebook':
+                        res_info['Facebook'] = x['bytes']
+                    if x['name'] == 'Google':
+                        res_info['Google'] = x['bytes']
+
+                with open("dpi_log.txt", "a") as dpioutput:
+                    ts = time.time()
+                    ts = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+                    dpioutput.write("Protocol\tBytes\t\t")
+                    dpioutput.write(ts)
+                    dpioutput.write("\nYahoo\t")
+                    dpioutput.write("Facebook\t")
+                    dpioutput.write("Google\n")
+                    dpioutput.write(str(res_info["Yahoo"])+"\t")
+                    dpioutput.write(str(res_info["Facebook"])+"\t")
+                    dpioutput.write(str(res_info["Google"])+"\n")
+
             hub.sleep(SimpleMonitor.DPI_REQ_INTERVAL)
             pass
 

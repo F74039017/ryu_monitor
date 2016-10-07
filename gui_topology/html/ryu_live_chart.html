@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Load c3.css -->
+		<link href="/static/c3_lib/c3.min.css" rel="stylesheet" type="text/css">
+		<style>
+			.c3-grid .c3-xgrid-focus {
+			   visibility : hidden !important;
+			}
+		</style>
+
+		<!-- Load d3.js and c3.js -->
+		<script src="/static/d3.min.js" charset="utf-8"></script>
+		<script src="/static/c3_lib/c3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!--Create websocekt to ryu-->
+		<script src="/static/ryu.topology.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="chart"></div>
+
+
+        <!--javascript definition-->
+
+        <!--create c3 chart-->
+		<script>
+            (function(window){
+                var data = {'Google': ['Google'], 'Yahoo': ['Yahoo'], 'Facebook': ['Facebook'], 'ts': ['ts']};
+                var cnt = 0;
+                window.dv_oper.live_chart = {};
+
+                /* default tooltip definition */
+                var default_tooltip = function (d, defaultTitleFormat, defaultValueFormat, color) {
+                    var $$ = this, config = $$.config,
+                        titleFormat = config.tooltip_format_title || defaultTitleFormat,
+                        nameFormat = config.tooltip_format_name || function (name) { return name; },
+                        valueFormat = config.tooltip_format_value || defaultValueFormat,
+                        text, i, title, value, name, bgcolor;
+                    for (i = 0; i < d.length; i++) {
+                        if (! (d[i] && (d[i].value || d[i].value === 0))) { continue; }
+
+                        if (! text) {
+                          title = titleFormat ? titleFormat(d[i].x) : d[i].x;
+                          text = "<table class='" + $$.CLASS.tooltip + "'>" + (title || title === 0 ? "<tr><th colspan='2'>" + title + "</th></tr>" : "");
+                        }
+
+                        name = nameFormat(d[i].name);
+                        value = valueFormat(d[i].value, d[i].ratio, d[i].id, d[i].index);
+                        bgcolor = $$.levelColor ? $$.levelColor(d[i].value) : color(d[i].id);
+
+                        text += "<tr class='" + $$.CLASS.tooltipName + "-" + d[i].id + "'>";
+                        text += "<td class='name'><span style='background-color:" + bgcolor + "'></span>" + name + "</td>";
+                        text += "<td class='value'>" + value + "</td>";
+                        text += "</tr>";
+                    }
+                    return text + "</table>";
+                }
+
+
+                /* Init the c3 chart */
+                $(document).ready(function(){
+                    var chart = c3.generate({
+                        bindto: "#chart",
+                        data: {
+                            x: 'ts',
+                            columns: [
+                                data.Google,
+                                data.Yahoo,
+                                data.Facebook,
+                                data.ts
+                            ]
+                        },
+                        legend: {
+                            item: {
+                                onclick: function(id) {
+                                    chart.toggle(id);
+                                    d3.event.stopPropagation();
+                                }
+                            }
+                        },
+                        tooltip: {
+                            contents: default_tooltip
+                        }
+                    });
+
+                    window.dv_oper.live_chart.livedpi = function(dpi_data) {
+                        var res_info = {Yahoo: 0, Facebook: 0, Google: 0}
+                        console.log(dpi_data);
+                        if(!dpi_data["detected.protos"])
+                            return;
+                        for(var x in dpi_data["detected.protos"]) {
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Yahoo' ) {
+                                res_info['Yahoo'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Facebook' ) {
+                                res_info['Facebook'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Google' ) {
+                                res_info['Google'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                        }
+                        console.log(res_info);
+
+                        /* collect dpi data */
+                        data.Google.push(res_info['Google']);
+                        data.Yahoo.push(res_info['Yahoo']);
+                        data.Facebook.push(res_info['Facebook']);
+                        data.ts.push(cnt);
+                        cnt = cnt+5;
+                        console.log(data);
+
+                        /* update the chart */
+                        chart.load({
+                            x: 'ts',
+                            columns: [
+                                data.Google,
+                                data.Yahoo,
+                                data.Facebook,
+                                data.ts
+                            ]	
+                        });
+
+                    };
+
+                    /* TODO: In Ryu app, this should be replaced by network info. */
+                    /*
+                    setInterval(function(){
+                        var value = Math.round(Math.random()*100);
+                        data.Google.push(value);
+                        value = Math.round(Math.random()*100);
+                        data.Yahoo.push(value);
+                        value = Math.round(Math.random()*100);
+                        data.Facebook.push(value);
+
+                        data.ts.push(cnt);
+                        cnt = cnt+10;
+
+                        chart.load({
+                            x: 'ts',
+                            columns: [
+                                data.Google,
+                                data.Yahoo,
+                                data.Facebook,
+                                data.ts
+                            ]	
+                        });
+
+                    }, 1000);
+                    */
+                });
+             })(window);
+		</script>
+	</body>
+</html>

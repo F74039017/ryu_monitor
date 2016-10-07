@@ -181,9 +181,22 @@ var rpc = {
         return "";
     },
 	event_port_info: function(data) {
-		console.log("port_info message");
-		console.log(JSON.stringify(data));
-		console.log(JSON.stringify(data[0]));
+		//console.log("port_info message");
+		//console.log(JSON.stringify(data));
+		//console.log(JSON.stringify(data[0]));
+		return "";
+	},
+	event_dpi_info: function(data) {
+		//console.log("dpi info message");
+		//console.log(JSON.stringify(data));
+		//console.log(JSON.stringify(data[0]));
+		if(dv_oper.live_chart && dv_oper.live_chart.livedpi) {
+			console.log("send dpi");
+			dv_oper.live_chart.livedpi(data[0]);
+		}
+		else {
+			console.log("opps");
+		}
 		return "";
 	},
 }
@@ -207,8 +220,15 @@ function initialize_topology(callback) {
     });
 }
 
-function main(callback) { // pass netJsonGraph callback
-    initialize_topology(callback);
+window.dv_oper = {};
+function main(callback) { // pass callbacks
+	var netjsongraph = callback.netjsongraph;
+	if(netjsongraph) {
+		initialize_topology(netjsongraph);
+	}
+	else {
+		console.log("netjsongraph callback error!");
+	}
 }
 
 //main(); // to conbime netJsonGraph and topo data => call in index.html js with callback
