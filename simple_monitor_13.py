@@ -43,8 +43,8 @@ class SimpleMonitor(app_manager.RyuApp):
 
     _EVENTS = [PortMessage, DPIMessage]
     BANDWIDTH_LIMIT = 1024*1024*1024
-    PORT_REQ_INTERVAL = 5
-    DPI_REQ_INTERVAL = 5
+    PORT_REQ_INTERVAL = 1
+    DPI_REQ_INTERVAL = 1
 
     def __init__(self, *args, **kwargs):
         super(SimpleMonitor, self).__init__(*args, **kwargs)
@@ -64,7 +64,7 @@ class SimpleMonitor(app_manager.RyuApp):
 
         # mac, ip, port => dpi server info
         # port_no, dpid, name => dp info which connecting to dpi server
-        self.dpi_info = {'mac': None, 'port_no': None, 'dpid': None, 'name': None, 'ip': None, 'port': None}
+        self.dpi_info = {'mac': None, 'port_no': None, 'dpid': None, 'name': None, 'ip': None, 'port': None, 'tree': None}
 
         wsgi = kwargs['wsgi']
         wsgi.register(ResponseController, {'response_app': self})
@@ -496,6 +496,54 @@ class ResponseController(ControllerBase):
                                           ofproto.OFPCML_NO_BUFFER)]
             inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)]
             self.response_app.add_flow(dp, 0, match, actions)
+
+        ### Create dpi tree when the dpi server connects to the Ryu controller
+        # XXX: only for tree topology. It's better to resolve cyclic topology too.
+        # create the topology tree only with links data
+        links = get_link(self.response_app, None)
+        links = [link.to_dict() for link in links]
+        links_r = []
+        for x in links:
+            a = int(x['src']['dpid'])
+            b = int(x['dst']['dpid'])
+            t = ()
+            if a < b:
+                t = (a, b)
+            else:
+                t  = (b, a)
+            if t in links_r:
+                continue
+            else:
+                links_r.append(t)
+        #  print links_r
+
+        rdpid = int(self.response_app.dpi_info['dpid'])
+        tree = self.response_app.dpi_info['tree'] # create a ref to dpi_info.tree
+        tree = {rdpid: {'parent': None, 'child': []}}
+
+        # tn_check is a list matains the dpid in the tree already
+        tn_check = [rdpid]
+
+        # try to create the tree
+        while len(links_r)>0:
+            for x in links_r:
+                p = None
+                if x[0] in tn_check:
+                    p = x[0]
+                    c = x[1]
+                if p is not None and x[1] in tn_check:
+                    c = x[0]
+                    p = x[1]
+                if p is not None:
+                    tn_check.append(c)
+                    tree[p]['child'].append(c)
+                    tree[c] = {'parent': None, 'child': []} # init child node
+                    tree[c]['parent'] = p # only one parent currently
+                    links_r.remove(x)
+                    break
+            else:
+                break
+        print tree
 
         # start dpi monitor
         print "dpi monitor thread: start"
