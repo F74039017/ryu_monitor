@@ -377,36 +377,44 @@ class SimpleMonitor(app_manager.RyuApp):
         Period = DPI_REQ_INTERVAL (default value is 5)
         """
         while True:
-            # TODO: send a REST request to DPI server
-            if self.dpi_info['ip']:
-                s = requests.session()
-                s.keep_alive = False
-                r = s.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
-                res = r.json()
-                event = DPIMessage(res)
-                self.send_event_to_observers(event)
+            # send a REST request to DPI server
+            try:
+                if self.dpi_info['ip']:
+                    s = requests.session()
+                    s.keep_alive = False
+                    r = s.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
+                    res = r.json()
+                    res['dpid'] = self.dpi_info['dpid']
+                    event = DPIMessage(res)
+                    self.send_event_to_observers(event)
+            except:
+                    # clear dpi and wait next connection
+                    print("DPI disconnected..")
+                    self.dpi_info = {'mac': None, 'port_no': None, 'dpid': None, 'name': None, 'ip': None, 'port': None, 'tree': None}
+                    return
 
-                print("DPI checking --------------\n")
-                res_info = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
-                for x in res.get('detected.protos', []):
-                    if x['name'] == 'Yahoo':
-                        res_info['Yahoo'] = x['bytes']
-                    if x['name'] == 'Facebook':
-                        res_info['Facebook'] = x['bytes']
-                    if x['name'] == 'Google':
-                        res_info['Google'] = x['bytes']
+            # XXX: only check three protocols currently
+            # print("DPI Request --------------\n")
+            # res_info = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
+            # for x in res.get('detected.protos', []):
+                # if x['name'] == 'Yahoo':
+                    # res_info['Yahoo'] = x['bytes']
+                # if x['name'] == 'Facebook':
+                    # res_info['Facebook'] = x['bytes']
+                # if x['name'] == 'Google':
+                    # res_info['Google'] = x['bytes']
 
-                with open("dpi_log.txt", "a") as dpioutput:
-                    ts = time.time()
-                    ts = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                    dpioutput.write("Protocol\tBytes\t\t")
-                    dpioutput.write(ts)
-                    dpioutput.write("\nYahoo\t")
-                    dpioutput.write("Facebook\t")
-                    dpioutput.write("Google\n")
-                    dpioutput.write(str(res_info["Yahoo"])+"\t")
-                    dpioutput.write(str(res_info["Facebook"])+"\t")
-                    dpioutput.write(str(res_info["Google"])+"\n")
+            # with open("dpi_log.txt", "a") as dpioutput:
+                # ts = time.time()
+                # ts = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+                # dpioutput.write("Protocol\tBytes\t\t")
+                # dpioutput.write(ts)
+                # dpioutput.write("\nYahoo\t")
+                # dpioutput.write("Facebook\t")
+                # dpioutput.write("Google\n")
+                # dpioutput.write(str(res_info["Yahoo"])+"\t")
+                # dpioutput.write(str(res_info["Facebook"])+"\t")
+                # dpioutput.write(str(res_info["Google"])+"\n")
 
             hub.sleep(SimpleMonitor.DPI_REQ_INTERVAL)
             pass
@@ -417,23 +425,27 @@ class ResponseController(ControllerBase):
         super(ResponseController, self).__init__(req, link, data, **config)
         self.response_app = data['response_app']
 
-    @route('response', '/SWstate/{src}/{dst}', methods=['GET'])
+    @route('ForwardPath', '/ForwardPath/{src}/{dst}', methods=['GET'])
     def list_switches(self, req, **kwargs):
-        # TODO: consider internet ip location
+        # XXX: match flow enties instead
 
         src = kwargs['src']
         dst = kwargs['dst']
         hosts = get_host(self.response_app)
 
+        # XXX: hard code => static mac address of gateway (NAT)
         ## find the first matching obj in the list
         src_host = next((x for x in hosts if x.ipv4[0] == src), None)
         dst_host = next((x for x in hosts if x.ipv4[0] == dst), None)
         if src_host is None:
-            return Response(content_type='text/plain', body="Wrong Src")
+            return Response(content_type='text/plain', body="Can not found the SRC")
         if dst_host is None:
-            return Response(content_type='text/plain', body="Wrong Dst")
-        dst_mac = dst_host.mac
+            # return Response(content_type='text/plain', body="Wrong Dst")
+            dst_mac = "00:00:00:ff:00:00"
+        else:
+            dst_mac = dst_host.mac
 
+        print self.response_app.mac_to_port
         ## create path from src to dst
         # find the first dpid connecting to the host
         path = []
@@ -451,6 +463,12 @@ class ResponseController(ControllerBase):
         # print self.response_app.swPort_to_dpid
 
         body = json.dumps(path)
+        return Response(content_type='application/json', body=body)
+
+    @route('dpi_tree', '/dpi_tree', methods=['GET'])
+    def list_switches(self, req, **kwargs):
+        # XXX: Only one dpi currently
+        body = json.dumps(self.response_app.dpi_info['tree'])
         return Response(content_type='application/json', body=body)
 
     @route('dpi_init', '/dpi/connect', methods=['POST'])
@@ -499,6 +517,7 @@ class ResponseController(ControllerBase):
 
         ### Create dpi tree when the dpi server connects to the Ryu controller
         # XXX: only for tree topology. It's better to resolve cyclic topology too.
+        # XXX: not consider switch leave and enter situation
         # create the topology tree only with links data
         links = get_link(self.response_app, None)
         links = [link.to_dict() for link in links]
@@ -518,7 +537,6 @@ class ResponseController(ControllerBase):
         #  print links_r
 
         rdpid = int(self.response_app.dpi_info['dpid'])
-        tree = self.response_app.dpi_info['tree'] # create a ref to dpi_info.tree
         tree = {rdpid: {'parent': None, 'child': []}}
 
         # tn_check is a list matains the dpid in the tree already
@@ -542,8 +560,11 @@ class ResponseController(ControllerBase):
                     links_r.remove(x)
                     break
             else:
+                print "Link wrong in dpi tree: "+str(x)
                 break
         print tree
+        self.response_app.dpi_info['tree'] = tree
+        print self.response_app.dpi_info['tree']
 
         # start dpi monitor
         print "dpi monitor thread: start"

@@ -16,6 +16,9 @@
 
         <!--Create websocekt to ryu-->
 		<script src="/static/ryu.topology.js" charset="utf-8"></script>
+
+        <!--Test dpi_oper.js-->
+		<script src="/static/dpi_oper.js" charset="utf-8"></script>
 	</head>
 	<body>
 		<div id="chart"></div>
@@ -86,7 +89,7 @@
 
                     window.dv_oper.live_chart.livedpi = function(dpi_data) {
                         var res_info = {Yahoo: 0, Facebook: 0, Google: 0}
-                        console.log(dpi_data);
+                        // console.log(dpi_data);
                         if(!dpi_data["detected.protos"])
                             return;
                         for(var x in dpi_data["detected.protos"]) {
@@ -100,15 +103,15 @@
                                 res_info['Google'] = dpi_data["detected.protos"][x]['bytes'];
                             }
                         }
-                        console.log(res_info);
+                        // console.log(res_info);
 
                         /* collect dpi data */
                         data.Google.push(res_info['Google']);
                         data.Yahoo.push(res_info['Yahoo']);
                         data.Facebook.push(res_info['Facebook']);
                         data.ts.push(cnt);
-                        cnt = cnt+5;
-                        console.log(data);
+                        cnt = cnt+1;
+                        // console.log(data);
 
                         /* update the chart */
                         chart.load({
@@ -123,7 +126,7 @@
 
                     };
 
-                    /* TODO: In Ryu app, this should be replaced by network info. */
+                    /* protocol data for testing */
                     /*
                     setInterval(function(){
                         var value = Math.round(Math.random()*100);
@@ -150,6 +153,7 @@
                     */
                 });
              })(window);
+
 		</script>
 	</body>
 </html>

@@ -187,16 +187,23 @@ var rpc = {
 		return "";
 	},
 	event_dpi_info: function(data) {
-		//console.log("dpi info message");
+		console.log("dpi info message");
 		//console.log(JSON.stringify(data));
 		//console.log(JSON.stringify(data[0]));
+		
+		/* init dpi operator */
+		if(typeof window.dpi == "undefined") {
+			window.dpi = new dpi_oper(trimInt(data[0]['dpid']));
+		}
+		dpi.collectDPI();
+	
+		// TEST - LIVE CHART EXAMPLE
 		if(dv_oper.live_chart && dv_oper.live_chart.livedpi) {
-			console.log("send dpi");
+			//console.log("send dpi");
 			dv_oper.live_chart.livedpi(data[0]);
+			window.dpi.updateData(data[0]);
 		}
-		else {
-			console.log("opps");
-		}
+
 		return "";
 	},
 }
