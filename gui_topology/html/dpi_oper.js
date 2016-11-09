@@ -1,12 +1,15 @@
 /*
 dpi_oper object is a ndpi parser and accessor.
+For convenience, this object will also process switch port data, including bytes and packets counter of switch's port.
+The port data is collected with OpenFlow 1.3 protocol by Ryu App.
+DPI and Port data are processed with two independent event.
 
 Usage:
     new dpi_oper(dpid): 
         new object and init dpid, tree, sw_host_table
 
-    updateData(data): 
-        update ndpi data.
+    updateDPI(data): 
+        update ndpi data. Call collectDPI() automatically.
 
     collectDPI(): 
         parse DPI data. save dpi data to dpi.tree and dpi.host_data.
@@ -26,6 +29,7 @@ function dpi_oper(dpid) {
     /* variables */
     this.dpid; // root dpid, which is the switch connecting to the dpi server
     this.dpi_info;
+    this.port_info;
     this.sw_host_table;
     this.tree;
     this.host_data;
@@ -34,10 +38,11 @@ function dpi_oper(dpid) {
     /* constructor */
     this.dpid = dpid;
     this.dpi_info = null;
-    this.sw_host_table = null; // {dpid: [host1, host2], dpid2: [...]}
-        // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}} }
+    this.dpi_port = null;
+    this.sw_host_table = null; // {dpid: port_no: {host_ipv4}, dpid2: {...}}
+        // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {rx_pkt, rx_byte, tx_pkt, tx_byte}} }
     this.tree = null; // contain parent and child info. update this with updateTree() method  
-    this.host_data = null; // dpi_info => host_data by ip {hostname: protocol_name: {bytes, packets}}
+    this.host_data = null; // dpi_info => host_data by ip {hostname: {'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {...}}}
     this.callback_buffer = []; // [[name, function], ..]
 
     this.updateHost();
@@ -53,8 +58,14 @@ function dpi_oper(dpid) {
  **********************************/
 
 /* update dpi_info */
-dpi_oper.prototype.updateData = function(data) {
+dpi_oper.prototype.updateDPI = function(data) {
     this.dpi_info = data;
+    this.collectDPI();
+}
+
+/* update port_info */
+dpi_oper.prototype.updatePort = function(data) {
+    this.port_info = data;
 }
 
 /* 
@@ -69,14 +80,15 @@ dpi_oper.prototype.updateHost = function(callback=null) {
         hosts.forEach(function(host) {
             var h = host.ipv4[0];
             var s = trimInt(host.port.dpid);
+            var p = trimInt(host.port.port_no);
             if (typeof _this.sw_host_table[s] == "undefined") {
-                _this.sw_host_table[s] = [];
+                _this.sw_host_table[s] = {};
             }
-            _this.sw_host_table[s].push(h);
+            _this.sw_host_table[s][p] = h;
         });
         // DEBUG - CHECK HOST TABLE
-        //console.log("dump sw_host_table");
-        //console.log(_this.sw_host_table);
+        // console.log("dump sw_host_table");
+        // console.log(_this.sw_host_table);
         
         if(callback) {
             callback.call(_this);
@@ -198,19 +210,29 @@ dpi_oper.prototype.info2hostData = function() {
                 this.host_data[hostb_name] = {};
             }
 
-            // init protocol entry
-            if(! this.host_data[hosta_name].hasOwnProperty(protocol)) {
-                this.host_data[hosta_name][protocol] = {bytes: 0, packets: 0};
+            // init dpi_data tag
+            if(! this.host_data[hosta_name].hasOwnProperty('dpi_data')) {
+                this.host_data[hosta_name]['dpi_data'] = {};
             }
-            if(! this.host_data[hostb_name].hasOwnProperty(protocol)) {
-                this.host_data[hostb_name][protocol] = {bytes: 0, packets: 0};
+            if(! this.host_data[hostb_name].hasOwnProperty('dpi_data')) {
+                this.host_data[hostb_name]['dpi_data'] = {};
             }
 
-            this.host_data[hostb_name][protocol]['bytes'] += parseInt(bytes);
-            this.host_data[hostb_name][protocol]['packets'] += parseInt(packets);
+            // init protocol entry
+            if(! this.host_data[hosta_name]['dpi_data'].hasOwnProperty(protocol)) {
+                this.host_data[hosta_name]['dpi_data'][protocol] = {bytes: 0, packets: 0};
+            }
+            if(! this.host_data[hostb_name]['dpi_data'].hasOwnProperty(protocol)) {
+                this.host_data[hostb_name]['dpi_data'][protocol] = {bytes: 0, packets: 0};
+            }
+
+            this.host_data[hosta_name]['dpi_data'][protocol]['bytes'] += parseInt(bytes);
+            this.host_data[hosta_name]['dpi_data'][protocol]['packets'] += parseInt(packets);
+            this.host_data[hostb_name]['dpi_data'][protocol]['bytes'] += parseInt(bytes);
+            this.host_data[hostb_name]['dpi_data'][protocol]['packets'] += parseInt(packets);
         }
 
-        // console.log(this.host_data);
+         //console.log(this.host_data);
     }
 
     function checkIPv4(str) {
@@ -228,7 +250,7 @@ dpi_oper.prototype.info2hostData = function() {
 /* get protocol information with protoName. If the protoName not found, then return null.
  * Type: include "bytes", "packets", "entry"
  * */
-dpi_oper.prototype.getDetectProto = function(protoName, type) {
+dpi_oper.prototype.getDetectProto = function(protoName, type='entry') {
     for(var x in this.dpi_info["detected.protos"]) {
         if ( this.dpi_info["detected.protos"][x]['name'] == protoName ) {
             if ( type == "bytes" ) {
@@ -340,7 +362,7 @@ dpi_oper.prototype.collectDPI = function() {
             //console.log("check "+hostName);
             // look up table to check whether there are some data for the connecting host
             if(this.host_data.hasOwnProperty(hostName)) {
-                var protocol_list = this.host_data[hostName];
+                var protocol_list = this.host_data[hostName]['dpi_data'];
                 // add all dpi data of the host
                 for(var protoName in protocol_list) {
                     //console.log(hostName+" "+protoName);
@@ -363,12 +385,12 @@ dpi_oper.prototype.collectDPI = function() {
 }
 
 /* 
- * host_data => {host_name: protoName: {bytes, packets}}
+ * host_data => {host_name: 'dpi_data': protoName: {bytes, packets}}
  * */
 dpi_oper.prototype.hostExistProto = function(hostName, protoName) {
     if(this.hasOwnProperty('host_data')) {
         if(this.host_data.hasOwnProperty(hostName)) {
-            if(this.host_data[hostName].hasOwnProperty(protoName)) {
+            if(this.host_data[hostName]['dpi_data'].hasOwnProperty(protoName)) {
                 return true;
             }
         }
@@ -405,7 +427,7 @@ dpi_oper.prototype.swExistProto = function(dpid, protoName) {
 /* return entry of the host protocol */
 dpi_oper.prototype.getHostProto = function(hostName, protoName) {
     if(this.hostExistProto(hostName, protoName)) {
-        var target = this.host_data[hostName][protoName];
+        var target = this.host_data[hostName]['dpi_data'][protoName];
         return this.toEntry(protoName, target['bytes'], target['packets']);
     }
 }
@@ -423,7 +445,7 @@ dpi_oper.prototype.getHostProtoList = function(hostName) {
     if(this.hasOwnProperty('host_data')) {
         if(this.host_data.hasOwnProperty(hostName)) {
             var ret = [];
-            var list = this.host_data[hostName];
+            var list = this.host_data[hostName]['dpi_data'];
             for(var x in list) {
                 var name = x;
                 ret.push(this.toEntry(name, list[name]['bytes'], list[name]['packets']));

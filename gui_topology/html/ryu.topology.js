@@ -184,6 +184,14 @@ var rpc = {
 		//console.log("port_info message");
 		//console.log(JSON.stringify(data));
 		//console.log(JSON.stringify(data[0]));
+		
+		//console.log("port info message");
+		if(typeof window.dpi == "undefined") {
+			window.dpi = new dpi_oper(null);
+		}
+		
+		dpi.updatePort(data[0]);
+
 		return "";
 	},
 	event_dpi_info: function(data) {
@@ -195,13 +203,16 @@ var rpc = {
 		if(typeof window.dpi == "undefined") {
 			window.dpi = new dpi_oper(trimInt(data[0]['dpid']));
 		}
-		dpi.collectDPI();
-	
+		else if(window.dpi.dpid == null) {
+			window.dpi.dpid = trimInt(data[0]['dpid']);
+		}
+
+		dpi.updateDPI(data[0]);
+
 		// TEST - LIVE CHART EXAMPLE
 		if(dv_oper.live_chart && dv_oper.live_chart.livedpi) {
 			//console.log("send dpi");
 			dv_oper.live_chart.livedpi(data[0]);
-			window.dpi.updateData(data[0]);
 		}
 
 		return "";
