@@ -15,6 +15,7 @@ from ryu.app.custom_message import PortMessage, DPIMessage
 from ryu.topology.api import get_switch, get_link, get_host
 import json
 import requests
+import Queue
 
 import collections
 
@@ -57,6 +58,7 @@ class SimpleMonitor(app_manager.RyuApp):
         # dpid with port no to next dpid
         self.swPort_to_dpid = {}
         self.border_mac = set()
+        self.dpiq = Queue.Queue()
 
         # dpi recorder
         self.proto_acc = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
@@ -247,6 +249,7 @@ class SimpleMonitor(app_manager.RyuApp):
     def _port_monitor(self):
         while True:
             for dp in self.datapaths.values():
+                # XXX: handle multiple dpi with queue (sync)
                 self._request_stats(dp)
             hub.sleep(SimpleMonitor.PORT_REQ_INTERVAL)
 
@@ -265,6 +268,11 @@ class SimpleMonitor(app_manager.RyuApp):
         self.logger.debug('send stats request: %016x', datapath.id)
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
+
+        if not self.dpiq.empty():
+            # remove dpi ref. and start thread
+            self.dpiq.get()
+            self.dpi_thread = hub.spawn(self._dpi_monitor)
 
         req = parser.OFPFlowStatsRequest(datapath)
         datapath.send_msg(req)
@@ -419,6 +427,9 @@ class SimpleMonitor(app_manager.RyuApp):
             hub.sleep(SimpleMonitor.DPI_REQ_INTERVAL)
             pass
 
+    ##############
+    ##   REST   ##
+    ##############
 
 class ResponseController(ControllerBase):
     def __init__(self, req, link, data, **config):
@@ -426,7 +437,7 @@ class ResponseController(ControllerBase):
         self.response_app = data['response_app']
 
     @route('ForwardPath', '/ForwardPath/{src}/{dst}', methods=['GET'])
-    def list_switches(self, req, **kwargs):
+    def forward_path(self, req, **kwargs):
         # XXX: match flow enties instead
 
         src = kwargs['src']
@@ -466,7 +477,7 @@ class ResponseController(ControllerBase):
         return Response(content_type='application/json', body=body)
 
     @route('dpi_tree', '/dpi_tree', methods=['GET'])
-    def list_switches(self, req, **kwargs):
+    def dpi_tree(self, req, **kwargs):
         # XXX: Only one dpi currently
         body = json.dumps(self.response_app.dpi_info['tree'])
         return Response(content_type='application/json', body=body)
@@ -567,6 +578,12 @@ class ResponseController(ControllerBase):
         print self.response_app.dpi_info['tree']
 
         # start dpi monitor
-        print "dpi monitor thread: start"
-        self.dpi_thread = hub.spawn(self.response_app._dpi_monitor)
+
+        # print "dpi monitor thread: start"
+        # self.dpi_thread = hub.spawn(self.response_app._dpi_monitor)
+
+        # add dpi to query queue
+        # XXX: handle Full exception
+        self.response_app.dpiq.put(self.response_app.dpi_info)
+
         return "DPI_INIT_OK"

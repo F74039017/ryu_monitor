@@ -95,7 +95,7 @@ class WebSocketTopology(app_manager.RyuApp):
         self._rpc_broadcall('event_port_info', ev.msg)
 
     @set_ev_cls(DPIMessage)
-    def _port_message_handler(self, ev):
+    def _dpi_message_handler(self, ev):
         # print "---------- dpi message handler -------------------"
         # print ev.msg
         self._rpc_broadcall('event_dpi_info', ev.msg)
