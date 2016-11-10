@@ -29,7 +29,6 @@ function dpi_oper(dpid) {
     /* variables */
     this.dpid; // root dpid, which is the switch connecting to the dpi server
     this.dpi_info;
-    this.port_info;
     this.sw_host_table;
     this.tree;
     this.host_data;
@@ -40,9 +39,9 @@ function dpi_oper(dpid) {
     this.dpi_info = null;
     this.dpi_port = null;
     this.sw_host_table = null; // {dpid: port_no: {host_ipv4}, dpid2: {...}}
-        // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {rx_pkt, rx_byte, tx_pkt, tx_byte}} }
+        // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}} }
     this.tree = null; // contain parent and child info. update this with updateTree() method  
-    this.host_data = null; // dpi_info => host_data by ip {hostname: {'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {...}}}
+    this.host_data = {}; // dpi_info => host_data by ip {hostname: {'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {...}}}
     this.callback_buffer = []; // [[name, function], ..]
 
     this.updateHost();
@@ -54,7 +53,7 @@ function dpi_oper(dpid) {
 }
 
 /**********************************
- *  Setters
+ *  update basic data
  **********************************/
 
 /* update dpi_info */
@@ -65,7 +64,7 @@ dpi_oper.prototype.updateDPI = function(data) {
 
 /* update port_info */
 dpi_oper.prototype.updatePort = function(data) {
-    this.port_info = data;
+    this.updatePortTable(data);
 }
 
 /* 
@@ -166,6 +165,54 @@ dpi_oper.prototype.removeCallback = function(cb_name) {
  *  Helper function
  **********************************/
 
+dpi_oper.prototype.resetHostDPI = function() {
+    if(this.host_data) {
+        for(var x in this.host_data) {
+            this.host_data[x]['dpi_data'] = {};
+        }
+    }
+}
+
+dpi_oper.prototype.resetTreeDPI = function() {
+    if(this.tree) {
+        for(var x in this.tree) { // x is dpid
+            this.tree[x]['dpi_data'] = {};
+        }
+    }
+    else {
+        console.log("error: tree struct is null");
+    }
+}
+
+dpi_oper.prototype.resetHostPort = function() {
+    if(this.host_data) {
+        for(var x in this.host_data) {
+            this.host_data[x]['port_data'] = {};
+        }
+    }
+}
+
+dpi_oper.prototype.resetTreePort = function() {
+    if(this.tree) {
+        for(var x in this.tree) { // x is dpid
+            this.tree[x]['port_data'] = {};
+        }
+    }
+    else {
+        console.log("error: tree struct is null");
+    }
+}
+
+dpi_oper.prototype.resetDPI = function() {
+    this.resetHostDPI();
+    this.resetTreeDPI();
+}
+
+dpi_oper.prototype.resetPort = function() {
+    this.resetHostPort();
+    this.resetTreePort();
+}
+
 /* 
  * protocol entry
  * {
@@ -178,13 +225,14 @@ dpi_oper.prototype.toEntry = function(protoName, bytes, packets) {
     return {protoName: protoName, bytes: bytes, packets: packets};
 }
 
-dpi_oper.prototype.info2hostData = function() {
+dpi_oper.prototype.dpiInfo2HostData = function() {
     if(!this.dpi_info) {
         console.log("No dpi_info");
         return;
     }
 
-    this.host_data = {}; // reset data
+    /* reset dpi */
+    this.resetHostDPI();
     
     for(var x in this.dpi_info['known.flows']) {
         var entry = this.dpi_info['known.flows'][x];
@@ -210,7 +258,7 @@ dpi_oper.prototype.info2hostData = function() {
                 this.host_data[hostb_name] = {};
             }
 
-            // init dpi_data tag
+            // init dpi_data entry
             if(! this.host_data[hosta_name].hasOwnProperty('dpi_data')) {
                 this.host_data[hosta_name]['dpi_data'] = {};
             }
@@ -287,6 +335,8 @@ dpi_oper.prototype.getSwHostTable = function() {
  *  API - sw and host
  **********************************/
 
+/**************************     DPI Info.     *********************************/
+
 /* DFS tree and collect DPI data */
 dpi_oper.prototype.collectDPI = function() {
 
@@ -314,7 +364,8 @@ dpi_oper.prototype.collectDPI = function() {
         return -1;
     }
 
-    this.info2hostData();
+    this.dpiInfo2HostData();
+    this.resetTreeDPI();
 
     //console.log(this.host_data);
     dfs.call(this, this.dpid);
@@ -334,9 +385,6 @@ dpi_oper.prototype.collectDPI = function() {
     }
 
     function dfs(dpid) {
-        // clear last record
-        this.tree[dpid]['dpi_data'] = {};
-
         // dfs search
         //console.log(dpid);
         var child_list = this.tree[dpid]['child'];
@@ -473,3 +521,74 @@ dpi_oper.prototype.getSwProtoList = function(dpid) {
     }
     return null;
 }
+
+
+/**************************     Port Info.     *********************************/
+
+/* 
+ * Convert dpid and port_no to host ipv4 address 
+ * If not exist, return null
+ * */
+dpi_oper.prototype.dp2host = function(dpid, port_no) {
+    if(this.sw_host_table[dpid].hasOwnProperty(port_no)) {
+        return this.sw_host_table[dpid][port_no];
+    }
+    return null;
+}
+
+
+/*
+ * tree = {dpid: 'port_data': {port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}, 'tot_pkt': int, 'tot_byte': int}}
+ * */
+dpi_oper.prototype.updatePortTable = function(data) {
+    var dpid = data['dpid'];
+    var port_info = data['port_info'];
+
+    if(this.tree == null) {
+        console.log("Tree is null... Try to update");
+        this.updateTree(function(){
+            if(this.tree==null) {
+                console.log("Fatal: Can't update tree. Stop update port table");
+            }
+        });
+        return -1;
+    }
+
+    /* reset port data */
+    this.resetPort();
+
+    var tot_pkt=0, tot_byte=0;
+    for(var x in port_info) {
+
+        /* collect tree (sw) info. */
+        var entry = port_info[x];
+        var port_no = entry['port_no'];
+        var rx_pkt = entry['rx_pkt'];
+        var rx_byte = entry['rx_byte'];
+        var tx_pkt = entry['tx_pkt'];
+        var tx_byte = entry['tx_byte'];
+
+        this.tree[dpid]['port_data'][port_no] = {rx_pkt: rx_pkt, rx_byte: rx_byte, 
+                                            tx_pkt: tx_pkt, tx_byte: tx_byte};
+        
+        tot_pkt += rx_pkt+tx_pkt;
+        tot_byte += rx_byte+tx_byte;
+
+        /* host data */
+        var hostName = this.dp2host(dpid, port_no);
+        if(hostName) {
+            if(!this.host_data.hasOwnProperty(hostName)) {
+                this.host_data[hostName] = {};
+            }
+
+            this.host_data[hostName]['port_data'] = {rx_pkt: rx_pkt, rx_byte: rx_byte, 
+                                                tx_pkt: tx_pkt, tx_byte: tx_byte,
+                                                tot_pkt: rx_pkt+tx_pkt, tot_byte: rx_byte+tx_byte};
+        }
+    }
+
+    /* tree (sw) total data */
+    this.tree[dpid]['port_data']['tot_pkt'] = tot_pkt;
+    this.tree[dpid]['port_data']['tot_byte'] = tot_byte;
+}
+
