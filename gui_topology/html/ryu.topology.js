@@ -204,7 +204,7 @@ var rpc = {
 			window.dpi = new dpi_oper(trimInt(data[0]['dpid']));
 		}
 		else if(window.dpi.dpid == null) {
-			window.dpi.dpid = trimInt(data[0]['dpid']);
+			window.dpi.setRootDpid(trimInt(data[0]['dpid']));
 		}
 
 		dpi.updateDPI(data[0]);

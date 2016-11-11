@@ -9,16 +9,21 @@ Usage:
         new object and init dpid, tree, sw_host_table
 
     updateDPI(data): 
-        update ndpi data. Call collectDPI() automatically.
+        update DPI data and callback
 
-    collectDPI(): 
-        parse DPI data. save dpi data to dpi.tree and dpi.host_data.
-        invoke all callbacks in callback_buffer
+    updatePort(data):
+        update Port data and callback
 
-    regCallBack(callback_name, callback_function, oper_obj):
-        register callback, and it will be invoked after dpi data is updated.
+    regCallBack(type, cb_name, id, cb_func, ref=null) {
+        register callback, and it will be invoked after data updated.
+        if id can not be found, callback will be removed automatically.
+            type: 'dpi' or 'port'
+            cb_name: callback name. This is the id for callback
+            id: ipv4 or dpid. It will return corresponding data in callback
+            cb_func: invoked with one argument. e.g function(dpi_data){}
+            ref: thisArg. allow user use this variable to reference to the object
 
-    removeCallback(callback_name):
+    removeCallback(type, callback_name):
         remove callback from callback_buffer
 
 Notice:
@@ -32,20 +37,24 @@ function dpi_oper(dpid) {
     this.sw_host_table;
     this.tree;
     this.host_data;
-    this.callback_buffer;
+    this.dpi_callbacks;
+    this.port_callbacks;
+    this.ready; // 1:dpid, 2:tree, 4:sw_host_table
 
     /* constructor */
-    this.dpid = dpid;
     this.dpi_info = null;
     this.dpi_port = null;
     this.sw_host_table = null; // {dpid: port_no: {host_ipv4}, dpid2: {...}}
         // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}} }
     this.tree = null; // contain parent and child info. update this with updateTree() method  
     this.host_data = {}; // dpi_info => host_data by ip {hostname: {'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {...}}}
-    this.callback_buffer = []; // [[name, function], ..]
+    this.dpi_callbacks = []; // [[name, id, function(dpi_data), ref], ..]
+    this.port_callbacks = []; // [[name, id, function(port_data), ref], ..]
+    this.ready = 0;
 
     this.updateHost();
     this.updateTree();
+    this.setRootDpid(dpid);
 
     // DEBUG - CONTRUCT
     console.log("dpi_oper is constrcuted");
@@ -59,12 +68,24 @@ function dpi_oper(dpid) {
 /* update dpi_info */
 dpi_oper.prototype.updateDPI = function(data) {
     this.dpi_info = data;
-    this.collectDPI();
+    if((this.ready&7)==7) {
+        this.collectDPI();
+    }
 }
 
 /* update port_info */
 dpi_oper.prototype.updatePort = function(data) {
-    this.updatePortTable(data);
+    if((this.ready&7)==7) {
+        this.updatePortTable(data);
+    }
+}
+
+/* set root dpid */
+dpi_oper.prototype.setRootDpid = function(dpid) {
+    if(dpid) {
+        this.dpid = dpid;
+        this.ready |= 1;
+    }
 }
 
 /* 
@@ -89,6 +110,7 @@ dpi_oper.prototype.updateHost = function(callback=null) {
         // console.log("dump sw_host_table");
         // console.log(_this.sw_host_table);
         
+        _this.ready |= 4;
         if(callback) {
             callback.call(_this);
         }
@@ -103,9 +125,11 @@ dpi_oper.prototype.updateHost = function(callback=null) {
 dpi_oper.prototype.updateTree = function(callback=null) {
     _this = this;
     d3.json("/dpi_tree", function(error, tree) {
-        //console.log("init tree");
-        //console.log(tree);
+        // console.log("init tree");
+        // console.log(tree);
         _this.tree = tree;
+
+        _this.ready |= 2;
         if(callback) {
             callback.call(_this);
         }
@@ -117,12 +141,24 @@ dpi_oper.prototype.updateTree = function(callback=null) {
  **********************************/
 
 /*
+ * type => 'dpi' or port 
  * return index of callback function.
  * if not exist, return -1 
  * */
-dpi_oper.prototype.cb_indexOf = function(cb_name) {
-    for(var x in this.callback_buffer) {
-        if(this.callback_buffer[x][0]==cb_name) {
+dpi_oper.prototype.cb_indexOf = function(type, cb_name) {
+    var callbacks;
+    if(type=='dpi') {
+        callbacks = this.dpi_callbacks;
+    }
+    else if(type=='port') {
+        callbacks = this.port_callbacks;
+    }
+    else {
+        throw "unknown type";
+    }
+
+    for(var x in callbacks) {
+        if(callbacks[x][0]==cb_name) {
             return x;
         }
     }
@@ -133,31 +169,55 @@ dpi_oper.prototype.cb_indexOf = function(cb_name) {
  * Register callback function 
  * All callback functions will be called after collectDPI()
  * param:
+ *   type => 'dpi' or 'port'
  *   ref => this will point to ref object in cn_func
+ *   id => ipv4 or dpid. callback will return corresponding data
  *   cb_name => callback name
  *   cb_func => callback function
  * */
-dpi_oper.prototype.regCallBack = function(cb_name, cb_func, ref=null) {
-    /* check existence */
-    if(this.cb_indexOf(cb_name)!=-1) {
-        console.log("Registered callback name already existed..");
-        return;
+dpi_oper.prototype.regCallBack = function(type, cb_name, id, cb_func, ref=null) {
+    if(type=='dpi') {
+        if(this.cb_indexOf(type, cb_name)!=-1) {
+            console.log(cb_name+" callback existed already");
+            return;
+        }
+        this.dpi_callbacks.push([cb_name, id, cb_func, ref]);
     }
-    /* register */
-    this.callback_buffer.push([cb_name, cb_func, ref]);
+    else if(type=='port') {
+        if(this.cb_indexOf(type, cb_name)!=-1) {
+            console.log(cb_name+" callback existed already");
+            return;
+        }
+        this.port_callbacks.push([cb_name, id, cb_func, ref]);
+    }
+    else {
+        throw "unknown type";
+    }
 }
 
 /* remove callback event from buffer */
-dpi_oper.prototype.removeCallback = function(cb_name) {
+dpi_oper.prototype.removeCallback = function(type, cb_name) {
     /* check existence */
-    var index = this.cb_indexOf(cb_name)
+    var index;
+    try {
+        index = this.cb_indexOf(type, cb_name);
+    }
+    catch(err) {
+        console.log(err);
+    }
+
     if(index==-1) {
         console.log(cb_name+" callback not exist");
         return;
     }
 
     /* remove */
-    this.callback_buffer.splice(index, 1);
+    if(type=='dpi') {
+        this.dpi_callbacks.splice(index, 1);
+    }
+    else if(type=='port') {
+        this.port_callbacks.splice(index, 1);
+    }
 }
 
 
@@ -213,6 +273,14 @@ dpi_oper.prototype.resetPort = function() {
     this.resetTreePort();
 }
 
+dpi_oper.prototype.checkIPv4 = function(str) {
+    if (/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/.test(str)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /* 
  * protocol entry
  * {
@@ -238,7 +306,7 @@ dpi_oper.prototype.dpiInfo2HostData = function() {
         var entry = this.dpi_info['known.flows'][x];
 
         /* only record flow using ipv4 */
-        if(checkIPv4(entry['host_a.name']) && checkIPv4(entry['host_b.name'])) {
+        if(this.checkIPv4(entry['host_a.name']) && this.checkIPv4(entry['host_b.name'])) {
             // create a dict, which contain both src and dst.
             // Though one of src and dst may not under the tree,
             // we won't count it because it won't be found during dfs.
@@ -281,13 +349,6 @@ dpi_oper.prototype.dpiInfo2HostData = function() {
         }
 
          //console.log(this.host_data);
-    }
-
-    function checkIPv4(str) {
-        if(str.indexOf(":")==-1)
-            return true;
-        else
-            return false;
     }
 }
 
@@ -372,15 +433,18 @@ dpi_oper.prototype.collectDPI = function() {
     //console.log(this.tree);
 
     /* call all callback functions */
-    for(var x in this.callback_buffer) {
-        var callback = this.callback_buffer[x];
+    for(var x in this.dpi_callbacks) {
+        // callback => 0:name, 1:id, 2:func, 3:thisArg
+        var callback = this.dpi_callbacks[x];
         try {
-            callback[1].call(callback[2]);
+            var data = this.getDPIById(callback[1]);
+            if(data==null) throw "unknown id";
+            callback[2].call(callback[3], data); // callback is invoked with one argument, dpi_data.
         }
         catch (err) {
             console.log("Exception callback - "+callback[0]+": "+err);
             console.log("Remove callback - "+callback[0]);
-            this.removeCallback(callback[0]);
+            this.removeCallback('dpi', callback[0]);
         }
     }
 
@@ -492,13 +556,15 @@ dpi_oper.prototype.getSwProto = function(dpid, protoName) {
 dpi_oper.prototype.getHostProtoList = function(hostName) {
     if(this.hasOwnProperty('host_data')) {
         if(this.host_data.hasOwnProperty(hostName)) {
-            var ret = [];
-            var list = this.host_data[hostName]['dpi_data'];
-            for(var x in list) {
-                var name = x;
-                ret.push(this.toEntry(name, list[name]['bytes'], list[name]['packets']));
+            if(this.host_data[hostName].hasOwnProperty('dpi_data')) {
+                var ret = [];
+                var list = this.host_data[hostName]['dpi_data'];
+                for(var x in list) {
+                    var name = x;
+                    ret.push(this.toEntry(name, list[name]['bytes'], list[name]['packets']));
+                }
+                return ret;
             }
-            return ret;
         }   
     }
     return null;
@@ -509,17 +575,33 @@ dpi_oper.prototype.getSwProtoList = function(dpid) {
     if(this.hasOwnProperty('tree')) {
         if(this.tree.hasOwnProperty(dpid)) {
             if(this.tree[dpid].hasOwnProperty('dpi_data')) {
-                var ret = [];
-                var list = this.tree[dpid]['dpi_data'];
-            for(var x in list) {
-                var name = x;
-                ret.push(this.toEntry(name, list[name]['bytes'], list[name]['packets']));
-            }
-            return ret;
+                if(this.tree[dpid].hasOwnProperty('dpi_data')) {
+                    var ret = [];
+                    var list = this.tree[dpid]['dpi_data'];
+                    for(var x in list) {
+                        var name = x;
+                        ret.push(this.toEntry(name, list[name]['bytes'], list[name]['packets']));
+                    }
+                    return ret;
+                }
             }
         }
     }
     return null;
+}
+
+/*
+ * id => ipv4 or dpid
+ * return dpi_data entry {protoName: {bytes: int, packets: int}}
+ * */
+dpi_oper.prototype.getDPIById = function(id) {
+    var isHost = this.checkIPv4(id);
+    if(isHost) {
+        return this.getHostProtoList(id);
+    }
+    else {
+        return this.getSwProtoList(id);
+    }
 }
 
 
@@ -558,6 +640,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
     this.resetPort();
 
     var tot_pkt=0, tot_byte=0;
+    var effected_host = [];
     for(var x in port_info) {
 
         /* collect tree (sw) info. */
@@ -577,6 +660,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
         /* host data */
         var hostName = this.dp2host(dpid, port_no);
         if(hostName) {
+            effected_host.push(hostName);
             if(!this.host_data.hasOwnProperty(hostName)) {
                 this.host_data[hostName] = {};
             }
@@ -590,5 +674,69 @@ dpi_oper.prototype.updatePortTable = function(data) {
     /* tree (sw) total data */
     this.tree[dpid]['port_data']['tot_pkt'] = tot_pkt;
     this.tree[dpid]['port_data']['tot_byte'] = tot_byte;
+
+    /* call all callback functions */
+    for(var x in this.port_callbacks) {
+        // callback => 0:name, 1:id, 2:func, 3:thisArg
+        var callback = this.port_callbacks[x];
+        var id = callback[1];
+
+        // only invoke the callback of effected switch of hosts
+        if(id==dpid || effected_host.indexOf(id)!=-1) {
+            try {
+                var data = this.getPortById(id);
+                if(data==null) throw "unknown id";
+                callback[2].call(callback[3], data); // callback is invoked with one argument, dpi_data.
+            }
+            catch (err) {
+                console.log("Exception callback - "+callback[0]+": "+err);
+                console.log("Remove callback - "+callback[0]);
+                this.removeCallback('port', callback[0]);
+            }
+        }
+    }
+}
+
+/* 
+ * XXX: shallow copy of object.
+ * Do not change the value in the return object
+ * id => 'dpi' or 'ipv4'
+ * */
+dpi_oper.prototype.getHostPort = function(hostName) {
+    if(this.hasOwnProperty('host_data')) {
+        if(this.host_data.hasOwnProperty(hostName)) {
+            if(this.host_data[hostName].hasOwnProperty('port_data')) {
+                return this.host_data[hostName]['port_data'];
+            }
+        }   
+    }
+    return null;
+}
+
+dpi_oper.prototype.getSwPort = function(dpid) {
+    if(this.hasOwnProperty('tree')) {
+        if(this.tree.hasOwnProperty(dpid)) {
+            if(this.tree[dpid].hasOwnProperty('port_data')) {
+                if(this.tree[dpid].hasOwnProperty('port_data')) {
+                    return this.tree[dpid]['port_data'];
+                }
+            }
+        }
+    }
+    return null;
+}
+
+/*
+ * id => ipv4 or dpid
+ * return dpi_data entry {protoName: {bytes: int, packets: int}}
+ * */
+dpi_oper.prototype.getPortById = function(id) {
+    var isHost = this.checkIPv4(id);
+    if(isHost) {
+        return this.getHostPort(id);
+    }
+    else {
+        return this.getSwPort(id);
+    }
 }
 
