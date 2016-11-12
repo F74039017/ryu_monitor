@@ -393,6 +393,7 @@ class SimpleMonitor(app_manager.RyuApp):
                     r = s.get('http://'+self.dpi_info['ip']+":"+self.dpi_info['port'])
                     res = r.json()
                     res['dpid'] = self.dpi_info['dpid']
+                    res['period'] = SimpleMonitor.DPI_REQ_INTERVAL
                     event = DPIMessage(res)
                     self.send_event_to_observers(event)
             except:

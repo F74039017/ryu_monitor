@@ -188,6 +188,7 @@ var rpc = {
 		//console.log("port info message");
 		if(typeof window.dpi == "undefined") {
 			window.dpi = new dpi_oper(null);
+			window.c3w = new c3_wrapper(dpi);
 		}
 		
 		dpi.updatePort(data[0]);
@@ -201,10 +202,12 @@ var rpc = {
 		
 		/* init dpi operator */
 		if(typeof window.dpi == "undefined") {
-			window.dpi = new dpi_oper(trimInt(data[0]['dpid']));
+			window.dpi = new dpi_oper(trimInt(data[0]['dpid']), data[0]['period']);
+			window.c3w = new c3_wrapper(dpi);
 		}
 		else if(window.dpi.dpid == null) {
 			window.dpi.setRootDpid(trimInt(data[0]['dpid']));
+			window.dpi.setPeriod(data[0]['period']);
 		}
 
 		dpi.updateDPI(data[0]);

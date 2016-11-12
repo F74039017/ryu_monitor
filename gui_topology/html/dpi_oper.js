@@ -1,8 +1,8 @@
 /*
-dpi_oper object is a ndpi parser and accessor.
-For convenience, this object will also process switch port data, including bytes and packets counter of switch's port.
-The port data is collected with OpenFlow 1.3 protocol by Ryu App.
-DPI and Port data are processed with two independent event.
+dpi_oper object is a DPI parser and accessor originally.
+For convenience, this object also parses switch port data, including bytes and packets counter of switch's port.
+The port data is collected with OpenFlow 1.3 protocol by Ryu App. And DPI data is analyzed by ndpi.
+DPI and Port data are processed by two independent events.
 
 Usage:
     new dpi_oper(dpid): 
@@ -17,6 +17,7 @@ Usage:
     regCallBack(type, cb_name, id, cb_func, ref=null) {
         register callback, and it will be invoked after data updated.
         if id can not be found, callback will be removed automatically.
+        callback is invoked with one argument, dpi_data or port_data.
             type: 'dpi' or 'port'
             cb_name: callback name. This is the id for callback
             id: ipv4 or dpid. It will return corresponding data in callback
@@ -30,9 +31,10 @@ Notice:
     This operator is only for tree structure network currently.
 */
 
-function dpi_oper(dpid) {
+function dpi_oper(dpid=null, period=null) {
     /* variables */
     this.dpid; // root dpid, which is the switch connecting to the dpi server
+    this.period;
     this.dpi_info;
     this.sw_host_table;
     this.tree;
@@ -55,6 +57,7 @@ function dpi_oper(dpid) {
     this.updateHost();
     this.updateTree();
     this.setRootDpid(dpid);
+    this.setPeriod(period);
 
     // DEBUG - CONTRUCT
     console.log("dpi_oper is constrcuted");
@@ -68,14 +71,14 @@ function dpi_oper(dpid) {
 /* update dpi_info */
 dpi_oper.prototype.updateDPI = function(data) {
     this.dpi_info = data;
-    if((this.ready&7)==7) {
+    if(this.isReady()) {
         this.collectDPI();
     }
 }
 
 /* update port_info */
 dpi_oper.prototype.updatePort = function(data) {
-    if((this.ready&7)==7) {
+    if(this.isReady()) {
         this.updatePortTable(data);
     }
 }
@@ -86,6 +89,11 @@ dpi_oper.prototype.setRootDpid = function(dpid) {
         this.dpid = dpid;
         this.ready |= 1;
     }
+}
+
+/* set period */
+dpi_oper.prototype.setPeriod = function(period) {
+    this.period = period;
 }
 
 /* 
@@ -224,6 +232,13 @@ dpi_oper.prototype.removeCallback = function(type, cb_name) {
 /**********************************
  *  Helper function
  **********************************/
+
+dpi_oper.prototype.isReady = function() {
+    if((this.ready&7)==7) {
+        return true;
+    }
+    return false;
+}
 
 dpi_oper.prototype.resetHostDPI = function() {
     if(this.host_data) {
@@ -620,7 +635,7 @@ dpi_oper.prototype.dp2host = function(dpid, port_no) {
 
 
 /*
- * tree = {dpid: 'port_data': {port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}, 'tot_pkt': int, 'tot_byte': int}}
+ * tree = {dpid: 'port_data': {port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}, 'tot_pkt': int, 'tot_bytes': int}}
  * */
 dpi_oper.prototype.updatePortTable = function(data) {
     var dpid = data['dpid'];
@@ -639,7 +654,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
     /* reset port data */
     this.resetPort();
 
-    var tot_pkt=0, tot_byte=0;
+    var tot_pkt=0, tot_bytes=0;
     var effected_host = [];
     for(var x in port_info) {
 
@@ -655,7 +670,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
                                             tx_pkt: tx_pkt, tx_byte: tx_byte};
         
         tot_pkt += rx_pkt+tx_pkt;
-        tot_byte += rx_byte+tx_byte;
+        tot_bytes += rx_byte+tx_byte;
 
         /* host data */
         var hostName = this.dp2host(dpid, port_no);
@@ -667,13 +682,13 @@ dpi_oper.prototype.updatePortTable = function(data) {
 
             this.host_data[hostName]['port_data'] = {rx_pkt: rx_pkt, rx_byte: rx_byte, 
                                                 tx_pkt: tx_pkt, tx_byte: tx_byte,
-                                                tot_pkt: rx_pkt+tx_pkt, tot_byte: rx_byte+tx_byte};
+                                                tot_pkt: rx_pkt+tx_pkt, tot_bytes: rx_byte+tx_byte};
         }
     }
 
     /* tree (sw) total data */
     this.tree[dpid]['port_data']['tot_pkt'] = tot_pkt;
-    this.tree[dpid]['port_data']['tot_byte'] = tot_byte;
+    this.tree[dpid]['port_data']['tot_bytes'] = tot_bytes;
 
     /* call all callback functions */
     for(var x in this.port_callbacks) {
