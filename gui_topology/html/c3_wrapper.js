@@ -69,7 +69,7 @@ c3_wrapper.prototype.setConnFilter = function(filter, conn) {
 
     /* set port filter */
     if(filter['port'] == null) {
-        conn['connFilter']['port'] = ['rx_pkt', 'rx_bytes', 'tx_pkt', 'tx_bytes', 'tot_pkt', 'tot_bytes'];
+        conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte', 'tot_pkt', 'tot_byte'];
     }
     else if(typeof filter['port'] === 'string') {
         // one param
@@ -123,11 +123,11 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
             conn['showFilter']['port'] = conn['connFilter']['port'].slice();
         }
         else if(typeof port_list === 'string') {
-            tryAdd(port_list, conn['connFilter']['port'], conn['showFilter']['port']);
+            this.tryAppend(port_list, conn['connFilter']['port'], conn['showFilter']['port']);
         }
         else if(Object.prototype.toString.call(port_list) === '[object Array]') {
             for(var x in port_list) {
-                tryAdd(port_list[x], conn['connFilter']['port'], conn['showFilter']['port']);
+                this.tryAppend(port_list[x], conn['connFilter']['port'], conn['showFilter']['port']);
             }
         }
         else
@@ -141,11 +141,11 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
                 conn['showFilter']['dpi'] = conn['connFilter']['dpi'].slice();
         }
         else if(typeof dpi_list === 'string') {
-            tryAdd(dpi_list, conn['connFilter']['dpi'], conn['showFilter']['dpi']);
+            this.tryAppend(dpi_list, conn['connFilter']['dpi'], conn['showFilter']['dpi']);
         }
         else if(Object.prototype.toString.call(dpi_list) === '[object Array]') {
             for(var x in dpi_list) {
-                tryAdd(dpi_list[x], conn['connFilter']['dpi'], conn['showFilter']['dpi']);
+                this.tryAppend(dpi_list[x], conn['connFilter']['dpi'], conn['showFilter']['dpi']);
             }
         }
         else
@@ -156,26 +156,28 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         throw err; // rethrow
     }
 
-    /* if element in carr, then push to iarr */
-    function tryAdd(element, carr, iarr) {
-        if(inArray(element, carr))
-            iarr.push(element);
-        else
-            throw "showFilter must be subset of connFilter";
-    }
 
-    function inArray(str, arr) {
-        for(var x in arr) {
-            var tmp = arr[x];
-            if(tmp == str)
-                return true;
-        }
-        return false;
+}
+
+/* if element in carr, then push to iarr */
+c3_wrapper.prototype.tryAppend = function(element, carr, iarr) {
+    if(inArray(element, carr))
+        iarr.push(element);
+    else
+        throw "showFilter must be subset of connFilter";
+}
+
+c3_wrapper.prototype.inArray = function(str, arr) {
+    for(var x in arr) {
+        var tmp = arr[x];
+        if(tmp == str)
+            return true;
     }
+    return false;
 }
 
 c3_wrapper.prototype.isPortInfo= function(str) {
-    if(str=='rx_pkt' || str=='rx_bytes' || str=='tx_pkt' || str=='tx_bytes' || str=='tot_pkt' || str=='tot_bytes')
+    if(str=='rx_pkt' || str=='rx_byte' || str=='tx_pkt' || str=='tx_byte' || str=='tot_pkt' || str=='tot_byte')
         return true;
     else
         return false;
@@ -219,6 +221,45 @@ c3_wrapper.prototype.isReady = function() {
     return false;
 }
 
+c3_wrapper.prototype.deepCloneObj = function(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+/* 
+ * db => data array
+ * protoName
+ * value => [byte, pkt]
+ * */
+c3_wrapper.prototype.appendDPIData = function(db, protoName, value) {
+    var pkt_field = protoName+"_pkt";
+    var byte_field = protoName+"_byte";
+
+    if(!db.hasOwnProperty(byte_field)) {
+        db[byte_field] = [byte_field, value[0]];
+    }  
+    else {
+        db[byte_field].push(value[0]);
+    }
+
+    if(!db.hasOwnProperty(pkt_field)) {
+        db[pkt_field] = [pkt_field, value[1]];
+    }  
+    else {
+        db[pkt_field].push(value[1]);
+    }
+}
+
+c3_wrapper.prototype.appendPortData = function(db, fieldName, value) {
+    if(!this.isPortInfo(fieldName))
+        throw "error port field";
+    if(!db.hasOwnProperty(fieldName)) {
+        db[fieldName] = [fieldName, value];
+    }  
+    else {
+        db[fieldName].push(value);
+    }
+}
+
 
 /**********************************
  *  API
@@ -241,18 +282,61 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 	}
 
     var conn = this.genConnection(chart, id, connFilter, showFilter, size);
-    //try {
-        //_this = this; 
-        //this.dpi_oper.regCallBack(type, conn.cb_name, id, function(data){
-            //// this is chart, _this is c3_wrapper
-            //var dpi = _this.dpi_oper;
+
+    /* register dpi_oper callback */
+    try {
+        _this = this; 
+
+        /* Register dpi data */
+        this.dpi_oper.regCallBack('dpi', conn.cb_name, id, function(dpi_data){
             
-        //}, chart)
-    //}
-    //catch(err) {
-        //console.log("connectData error: "+err);
-        //return;
-    //}
+            //console.log(data);
+            //console.log(this);
+            //console.log(conn);
+            
+            var db = conn.data['dpi'];
+            console.log(dpi_data);
+            for(var x in dpi_data) {
+                if(conn.connFilter['dpi']==null || this.inArray(dpi_data[x]['protoName'], conn.connFilter['dpi'])) { // check connFilter
+                    _this.appendDPIData(db, dpi_data[x]['protoName'], [dpi_data[x]['bytes'], dpi_data[x]['packets']]);
+                }
+            }
+
+            console.log(db);
+            //chart.load({
+                //x: 'ts',
+                //columns: [
+                    //data.Google,
+                    //data.Yahoo,
+                    //data.Facebook,
+                    //data.ts
+                //]	
+            //});
+
+        }, this)
+
+        /* Register port data */
+        this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data){
+            // this is chart, _this is c3_wrapper
+            
+            //console.log(data);
+            var db = conn.data['port'];
+            console.log(port_data);
+            for(var fieldName in port_data) {
+                if(this.inArray(fieldName, conn.connFilter['port'])) { // check connFilter
+                    _this.appendPortData(db, fieldName, port_data[fieldName]);
+                }
+            }
+
+            //console.log(JSON.stringify(db));
+
+        }, this)
+
+    }
+    catch(err) {
+        console.log("connectData error: "+err);
+        return;
+    }
 
     return conn;
 }

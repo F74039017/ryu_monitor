@@ -635,7 +635,7 @@ dpi_oper.prototype.dp2host = function(dpid, port_no) {
 
 
 /*
- * tree = {dpid: 'port_data': {port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}, 'tot_pkt': int, 'tot_bytes': int}}
+ * tree = {dpid: 'port_data': {port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}, 'tot_pkt': int, 'tot_byte': int}}
  * */
 dpi_oper.prototype.updatePortTable = function(data) {
     var dpid = data['dpid'];
@@ -654,7 +654,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
     /* reset port data */
     this.resetPort();
 
-    var tot_pkt=0, tot_bytes=0;
+    var tot_pkt=0, tot_byte=0;
     var effected_host = [];
     for(var x in port_info) {
 
@@ -670,7 +670,7 @@ dpi_oper.prototype.updatePortTable = function(data) {
                                             tx_pkt: tx_pkt, tx_byte: tx_byte};
         
         tot_pkt += rx_pkt+tx_pkt;
-        tot_bytes += rx_byte+tx_byte;
+        tot_byte += rx_byte+tx_byte;
 
         /* host data */
         var hostName = this.dp2host(dpid, port_no);
@@ -682,13 +682,13 @@ dpi_oper.prototype.updatePortTable = function(data) {
 
             this.host_data[hostName]['port_data'] = {rx_pkt: rx_pkt, rx_byte: rx_byte, 
                                                 tx_pkt: tx_pkt, tx_byte: tx_byte,
-                                                tot_pkt: rx_pkt+tx_pkt, tot_bytes: rx_byte+tx_byte};
+                                                tot_pkt: rx_pkt+tx_pkt, tot_byte: rx_byte+tx_byte};
         }
     }
 
     /* tree (sw) total data */
     this.tree[dpid]['port_data']['tot_pkt'] = tot_pkt;
-    this.tree[dpid]['port_data']['tot_bytes'] = tot_bytes;
+    this.tree[dpid]['port_data']['tot_byte'] = tot_byte;
 
     /* call all callback functions */
     for(var x in this.port_callbacks) {
