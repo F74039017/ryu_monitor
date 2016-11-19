@@ -206,18 +206,13 @@ dpi_oper.prototype.regCallBack = function(type, cb_name, id, cb_func, ref=null) 
 /* remove callback event from buffer */
 dpi_oper.prototype.removeCallback = function(type, cb_name) {
     /* check existence */
-    var index;
-    try {
-        index = this.cb_indexOf(type, cb_name);
-    }
-    catch(err) {
-        console.log(err);
-    }
+    var index = this.cb_indexOf(type, cb_name);
 
     if(index==-1) {
-        console.log(cb_name+" callback not exist");
-        return;
+        //console.log(cb_name+" callback not exist"); 
+        throw cb_name+" callback not exist";
     }
+
 
     /* remove */
     if(type=='dpi') {
@@ -606,16 +601,35 @@ dpi_oper.prototype.getSwProtoList = function(dpid) {
 }
 
 /*
- * id => ipv4 or dpid
+ * id => ipv4 or dpid / support ids []
  * return dpi_data entry {protoName: {bytes: int, packets: int}}
  * */
 dpi_oper.prototype.getDPIById = function(id) {
-    var isHost = this.checkIPv4(id);
-    if(isHost) {
-        return this.getHostProtoList(id);
+
+    if(Object.prototype.toString.call(id) === '[object Array]') {
+        var arr = id;
+        var ret = {};
+        for(var x in arr) {
+            var _id = arr[x];
+            var isHost = this.checkIPv4(_id);
+
+            if(isHost) {
+                ret[_id] = this.getHostProtoList(_id);
+            }
+            else {
+                ret[_id] = this.getSwProtoList(_id);
+            }
+        }
+        return ret;
     }
     else {
-        return this.getSwProtoList(id);
+        var isHost = this.checkIPv4(id);
+        if(isHost) {
+            return this.getHostProtoList(id);
+        }
+        else {
+            return this.getSwProtoList(id);
+        }
     }
 }
 
@@ -651,8 +665,8 @@ dpi_oper.prototype.updatePortTable = function(data) {
         return -1;
     }
 
-    /* reset port data */
-    this.resetPort();
+    /* reset sw port data */
+    this.tree[dpid]['port_data'] = {};
 
     var tot_pkt=0, tot_byte=0;
     var effected_host = [];
@@ -742,16 +756,35 @@ dpi_oper.prototype.getSwPort = function(dpid) {
 }
 
 /*
- * id => ipv4 or dpid
+ * id => ipv4 or dpid / support ids []
  * return dpi_data entry {protoName: {bytes: int, packets: int}}
  * */
 dpi_oper.prototype.getPortById = function(id) {
-    var isHost = this.checkIPv4(id);
-    if(isHost) {
-        return this.getHostPort(id);
+    if(Object.prototype.toString.call(id) === '[object Array]') {
+        var arr = id;
+        var ret = {};
+        for(var x in arr) {
+            var _id = arr[x];
+            var isHost = this.checkIPv4(_id);
+
+            if(isHost) {
+                ret[_id] = this.getHostPort(_id);
+            }
+            else {
+                ret[_id] = this.getSwPort(_id);
+            }
+        }
+        return ret;
     }
     else {
-        return this.getSwPort(id);
+        var isHost = this.checkIPv4(id);
+        if(isHost) {
+            return this.getHostPort(id);
+        }
+        else {
+            return this.getSwPort(id);
+        }
     }
+
 }
 
