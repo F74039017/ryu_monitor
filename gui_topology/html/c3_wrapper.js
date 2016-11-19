@@ -260,6 +260,7 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
     var pkt_field = protoName+"_pkt";
     var byte_field = protoName+"_byte";
 
+    /* padding head 0 */
     if(!db.hasOwnProperty(byte_field)) {
         db[byte_field] = [];
         if(head_padding!=0) {
@@ -280,7 +281,7 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
 }
 
 /* process one kind of field. e.g rx_pkt */
-c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data) {
+c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data, size) {
     if(!this.isPortInfo(fieldName))
         throw "error port field";
 
@@ -292,6 +293,7 @@ c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data) {
             var last = db[fieldName].pop();
             db[fieldName].push(port_data[fieldName]-last);
             db[fieldName].push(port_data[fieldName]);
+            this.rmOldData(db[fieldName], size+1); // +1 => last record
         }
     }
     else {
@@ -309,11 +311,19 @@ c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data) {
                     var last = db[port_no][fieldName].pop();
                     db[port_no][fieldName].push(port_data[port_no][fieldName]-last);
                     db[port_no][fieldName].push(port_data[port_no][fieldName]);
+                    this.rmOldData(db[port_no][fieldName], size+1); // +1 => last record
                 }
             }
         }
     }
 
+}
+
+c3_wrapper.prototype.rmOldData = function(arr, size) {
+    if(arr.length > size+1) {
+        var delta = arr.length-size-1;
+        arr.splice(1, delta);
+    }
 }
 
 
@@ -362,15 +372,11 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             /* add dpi data */
             for(var x in dpi_data) {
                 if(conn.connFilter['dpi']==null || this.inArray(dpi_data[x]['protoName'], conn.connFilter['dpi'])) { // check connFilter
-                    /* padding head 0 */
-
+                    var protoName = dpi_data[x]['protoName'];
                     // diff_time = null if not first data
-                    _this.appendDPIData(db, dpi_data[x]['protoName'], [dpi_data[x]['bytes'], dpi_data[x]['packets']], Math.round(diff_time/1000));
+                    _this.appendDPIData(db, protoName, [dpi_data[x]['bytes'], dpi_data[x]['packets']], Math.round(diff_time/1000));
                 }
             }
-
-
-            /* check history len */
 
             /* 
              * padding tail 0 
@@ -381,7 +387,11 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
                 if(db[x].length<len) {
                     db[x].push(0);
                 }
+
+                /* check history len */
+                this.rmOldData(db[x], conn.size);
             }
+            this.rmOldData(conn['dpi_ts'], conn.size);
 
         }, this)
 
@@ -399,8 +409,9 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             var db = conn.data['port'];
             for(var x in conn.connFilter['port']) { // try to add all field in connFilter
                 var fieldName = conn.connFilter['port'][x];
-                _this.appendPortData(db, fieldName, port_data); // port_data = {port_no: {} || tot_xxx: int}
+                _this.appendPortData(db, fieldName, port_data, conn.size); // port_data = {port_no: {} || tot_xxx: int}
             }
+            this.rmOldData(conn['port_ts'], conn.size);
 
             //console.log(JSON.stringify(port_data));
 
@@ -466,13 +477,17 @@ c3_wrapper.prototype.startShow = function(chart, type) {
             for(var x in conn.showFilter['port']) {
                 var fieldName = conn.showFilter['port'][x];
                 if(fieldName.substring(0, 3)=='tot') { // tot_xxx
-                    columns.push(db[fieldName].slice(0, -1));
+                    if(typeof db[fieldName] != 'undefined') {
+                        columns.push(db[fieldName].slice(0, -1));
+                    }
                 }
                 else {
                     for(var x in db) {
                         var port = parseInt(x);
                         if(!isNaN(port) && _this.inArray(port, conn.showFilter['port_no'])) { // check show port_no
-                            columns.push(db[x][fieldName].slice(0, -1));
+                            if(typeof db[x][fieldName] != 'undefined') {
+                                columns.push(db[x][fieldName].slice(0, -1));
+                            }
                         }
                     }
                 }
@@ -536,21 +551,28 @@ c3_wrapper.prototype.startShow = function(chart, type) {
 
 c3_wrapper.prototype.stopShow = function(chart) {
     var conn = this.chart2conn(chart);
-    if(conn.intervalId) {
-        clearInterval(conn.intervalId);
-        conn.intervalId = null;
+    if(conn) {
+        if(conn.intervalId) {
+            clearInterval(conn.intervalId);
+            conn.intervalId = null;
+        }
     }
 }
 
-c3_wrapper.prototype.setHistorySize = function(size) {
-
+c3_wrapper.prototype.setHistorySize = function(chart, size) {
+    var conn = this.chart2conn(chart);
+    if(conn) {
+        conn.size = size;
+    }
 }
 
 c3_wrapper.prototype.clearData = function(chart) {
     var conn = this.chart2conn(chart);
-    conn['data'] = {'dpi': {}, 'port': {}};
-    conn['port_data_ready'] = false;
-    chart.unload();
+    if(conn) {
+        conn['data'] = {'dpi': {}, 'port': {}};
+        conn['port_data_ready'] = false;
+        chart.unload();
+    }
 }
 
 c3_wrapper.prototype.chart2conn = function(chart) {
