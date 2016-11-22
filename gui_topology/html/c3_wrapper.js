@@ -26,6 +26,10 @@
  *      if the size is greater than that of present, append new data.
  *      else if size is less than that of present, only keep the latest number of data.
  *
+ *  XXX: after reset showFilter, remember "unload() the chart"
+ *  setShowFilter(showFilter, conn):
+ *      reset showFilter in the connection.
+ *
  *  destroy(chart):
  *      clear all events and remove connection from manager
  *
@@ -37,6 +41,7 @@
  *  clearData(chart):
  *      clear all records
  *      
+ *  XXX: total data bug => all port has total data. reset every time
  * */
 
 function c3_wrapper(dpi_oper) {
@@ -120,6 +125,10 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
     if(!showFilter.hasOwnProperty('port'))
         showFilter['port'] = null;
 
+    /* reset showFilter in connection */
+    conn.showFilter = {'dpi': [], 'port': []};
+
+
     var dpi_list = showFilter['dpi'];
     var port_list = showFilter['port'];
 
@@ -144,12 +153,19 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
             showFilter['port_no'] = null; // null port_no will show all ports
         }
         else if(showFilter['port_no']!=null){
-            for(var x in showFilter['port_no']) {
-                var port = showFilter['port_no'][x];
-                if(!Number.isInteger(port))
-                    throw "showFilter: port_no not integer";
+
+            if(typeof showFilter['port_no'] == 'number') { // only one port
+                conn['showFilter']['port_no'] = [showFilter['port_no']];
             }
-            conn['showFilter']['port_no'] = showFilter['port_no'].slice();
+            else { // port array
+                /* int validate */
+                for(var x in showFilter['port_no']) {
+                    var port = showFilter['port_no'][x];
+                    if(!Number.isInteger(port))
+                        throw "showFilter: port_no not integer";
+                }
+                conn['showFilter']['port_no'] = showFilter['port_no'].slice();
+            }
         }
 
         /* set dpi filter */
@@ -183,12 +199,11 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         console.log(err);
         throw err; // rethrow
     }
-
 }
 
 /* if element in carr, then push to iarr */
 c3_wrapper.prototype.tryAppend = function(element, carr, iarr) {
-    if(inArray(element, carr))
+    if(this.inArray(element, carr))
         iarr.push(element);
     else
         throw "showFilter must be subset of connFilter";
@@ -261,7 +276,6 @@ c3_wrapper.prototype.deepCloneObj = function(obj) {
  * protoName
  * value => [byte, pkt]
  * head_padding => if not exist field, padding head 0
- * XXX: check history size
  * */
 c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding=0) {
     var pkt_field = protoName+"_pkt";
@@ -373,7 +387,6 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             //console.log(dpi_data);
 
             /* add ts */
-            // XXX: only work sec-unit period. e.g 1, 2, 3 sec per request
             var diff_time = addTS('dpi', conn);
 
             /* add dpi data */
@@ -473,10 +486,11 @@ c3_wrapper.prototype.destroy = function(chart) {
 
 /* 
  * show data on chart 
- * type: dpi or port
+ * data_type: dpi or port
+ * chart_type: default line
  * return: false => already start
  * */
-c3_wrapper.prototype.startShow = function(chart, type) {
+c3_wrapper.prototype.startShow = function(chart, data_type, chart_type='line') {
     var conn = this.chart2conn(chart);
     if(conn.intervalId) {
         console.log("already start show: "+conn.intervalId.toString());
@@ -485,7 +499,7 @@ c3_wrapper.prototype.startShow = function(chart, type) {
     var _this = this;
     var setId;
 
-    if(type=='port') {
+    if(data_type=='port') {
         setId = setInterval(function(){
             var db = conn.data['port'];
 
@@ -502,7 +516,8 @@ c3_wrapper.prototype.startShow = function(chart, type) {
                 else {
                     for(var x in db) {
                         var port = parseInt(x);
-                        if(!isNaN(port) && _this.inArray(port, conn.showFilter['port_no'])) { // check show port_no
+                        // check show port_no
+                        if(!isNaN(port) && (conn.showFilter['port_no']==null || _this.inArray(port, conn.showFilter['port_no']))) { 
                             if(typeof db[x][fieldName] != 'undefined') {
                                 columns.push(db[x][fieldName].slice(0, -1));
                             }
@@ -511,17 +526,18 @@ c3_wrapper.prototype.startShow = function(chart, type) {
                 }
             }
 
-            //console.log(columns);
+            console.log(JSON.stringify(columns));
             /* update c3 chart */
             if(conn.port_data_ready && conn['port_sts']) {
                 chart.load({
                     x: 'ts',
+                    type: chart_type,
                     columns: columns
                 });
             }
         }, 1000);
     }
-    else if(type=='dpi') {
+    else if(data_type=='dpi') {
         setId = setInterval(function(){
             var db = conn.data['dpi'];
 
@@ -556,7 +572,8 @@ c3_wrapper.prototype.startShow = function(chart, type) {
             /* update c3 chart */
             chart.load({
                 x: 'ts',
-            columns: columns
+                type: chart_type,
+                columns: columns
             });
         }, 1000);
     }
