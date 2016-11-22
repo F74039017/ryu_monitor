@@ -15,7 +15,7 @@
  *      This API will register event to dpi_oper and save data as c3.js columns style.
  *
  *  XXX: data are updated per second currently..
- *  startShow(chart, type):
+ *  startShowLine(chart, type, rank=null):
  *      type => 'dpi' or 'port'
  *      show data on chart per second
  *  stopShow(chart):
@@ -40,8 +40,7 @@
  *
  *  clearData(chart):
  *      clear all records
- *      
- *  XXX: total data bug => all port has total data. reset every time
+ *
  * */
 
 function c3_wrapper(dpi_oper) {
@@ -64,6 +63,38 @@ function c3_wrapper(dpi_oper) {
 /**********************************
  *  Helper function
  **********************************/
+
+/* process obj {name: 'A', value: int} */
+c3_wrapper.prototype.protoCMP = function(a, b) {
+    if(a.value==b.value) {
+        return a.name.localeCompare(b.name);
+    }
+    return a.value-b.value;
+}
+
+c3_wrapper.prototype.updateDPIrank = function(conn) {
+    var db = conn.data['dpi'];
+    var dpi_rank = conn['dpi_rank'];
+    var proto_byte=[], proto_pkt=[];
+    for(var x in db) {
+        var field = x; // protoName_byte or protoName_pkt
+        var last_char = field.charAt(field.length-1);
+        var protoName;
+        if(last_char=='e') {
+            proto_byte.push({name: field.substring(0, field.length-5), value: db[x][db[x].length-1]});
+        }
+        else if(last_char=='t') {
+            proto_pkt.push({name: field.substring(0, field.length-4), value: db[x][db[x].length-1]});
+        }
+        else {
+            throw "error dpi field: "+field;
+        }
+    }
+
+    dpi_rank['byte'] = proto_byte.sort(c3_wrapper.prototype.protoCMP).reverse();
+    dpi_rank['pkt'] = proto_pkt.sort(c3_wrapper.prototype.protoCMP).reverse();
+    //console.log(JSON.stringify(dpi_rank['byte']));
+}
 
 c3_wrapper.prototype.genId = function() {
     return this.idCnt++;
@@ -240,6 +271,7 @@ c3_wrapper.prototype.isPortInfo= function(str) {
  *      'cb_name': string // Generate by c3_wrapper idCnt
  *      'id': int // ipv4 or dpid
  *      'intervalId': setInterval id
+ *      'dpi_rank': {byte: [], pkt: []}
  * }
  *  
  * */
@@ -252,7 +284,7 @@ c3_wrapper.prototype.genConnection = function(chart, id, connFilter, showFilter,
     if(size<=0)
         throw "size can not <= 0";
 
-    var conn =  {ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: {'dpi': [], 'port': []}, showFilter: {'dpi': [], 'port': []}, data: {'dpi': {}, 'port': {}}, cb_name: _id, id: id, port_data_ready: false, intervalId: null};
+    var conn =  {ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: {'dpi': [], 'port': []}, showFilter: {'dpi': [], 'port': []}, data: {'dpi': {}, 'port': {}}, cb_name: _id, id: id, port_data_ready: false, intervalId: null, dpi_rank: {byte: [], pkt: []}};
     this.setConnFilter(connFilter, conn);
     this.setShowFilter(showFilter, conn);
 
@@ -287,7 +319,9 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
         if(head_padding!=0) {
             db[byte_field] = Array(head_padding+1).fill(0);
         }
-        db[byte_field][0] = byte_field;
+        // XXX: both byte and pkt data's tag are protoName!!
+        // Do not show them at the same time...
+        db[byte_field][0] = protoName;
     }  
     db[byte_field].push(value[0]);
 
@@ -296,7 +330,7 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
         if(head_padding!=0) {
             db[pkt_field] = Array(head_padding+1).fill(0);
         }
-        db[pkt_field][0] = pkt_field;
+        db[pkt_field][0] = protoName;
     }  
     db[pkt_field].push(value[1]);
 }
@@ -413,7 +447,10 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             }
             this.rmOldData(conn['dpi_ts'], conn.size);
 
+            /* update rank */
+            this.updateDPIrank(conn);
         }, this)
+
 
         /* Register port data */
         this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data){
@@ -487,13 +524,21 @@ c3_wrapper.prototype.destroy = function(chart) {
 /* 
  * show data on chart 
  * data_type: dpi or port
- * chart_type: default line
- * return: false => already start
+ * rank: only show top rank
+ * return: false => not start successfully
  * */
-c3_wrapper.prototype.startShow = function(chart, data_type, chart_type='line') {
+c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
     var conn = this.chart2conn(chart);
     if(conn.intervalId) {
         console.log("already start show: "+conn.intervalId.toString());
+        return false;
+    }
+    else if(rank!=null && !Number.isInteger(rank)) {
+        console.log("rank isn't integer");
+        return false;
+    }
+    else if(rank!=null && data_type=='port') {
+        console.log("rank only for dpi data_type");
         return false;
     }
     var _this = this;
@@ -531,7 +576,6 @@ c3_wrapper.prototype.startShow = function(chart, data_type, chart_type='line') {
             if(conn.port_data_ready && conn['port_sts']) {
                 chart.load({
                     x: 'ts',
-                    type: chart_type,
                     columns: columns
                 });
             }
@@ -544,37 +588,98 @@ c3_wrapper.prototype.startShow = function(chart, data_type, chart_type='line') {
             /* prepare columns */
             var columns = [];
             columns.push(conn['dpi_ts']);
-            for(var x in db) {
-                var field = x; // protoName_byte or protoName_pkt
-                var last_char = field.charAt(field.length-1);
-                var protoName;
-                var byteORpkt; // byte: 1, pkt: 2
-                if(last_char=='e') {
-                    protoName = field.slice(0, -5);
-                    byteORpkt = 1;
-                }
-                else if(last_char=='t') {
-                    protoName = field.slice(0, -4);
-                    byteORpkt = 2;
-                }
-                else {
-                    throw "error dpi field: "+field;
-                }
+            //for(var x in db) {
+                //var field = x; // protoName_byte or protoName_pkt
+                //var last_char = field.charAt(field.length-1);
+                //var protoName;
+                //var byteORpkt; // byte: 1, pkt: 2
+                //if(last_char=='e') {
+                    //protoName = field.slice(0, -5);
+                    //byteORpkt = 1;
+                //}
+                //else if(last_char=='t') {
+                    //protoName = field.slice(0, -4);
+                    //byteORpkt = 2;
+                //}
+                //else {
+                    //throw "error dpi field: "+field;
+                //}
 
-                if(conn.showFilter['dpi']==null || _this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
-                    var flag = conn.showFilter['dpi_flag'];
-                    if((byteORpkt&flag)>0) { // check byte and pkt flag
-                        columns.push(db[x]);
+                //if(conn.showFilter['dpi']==null || _this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
+                    //var flag = conn.showFilter['dpi_flag'];
+                    //if((byteORpkt&flag)>0) { // check byte and pkt flag
+                        //columns.push(db[x]);
+                    //}
+                //}
+            //}
+            
+            var flag = conn.showFilter['dpi_flag'];
+            // XXX: because of protocol tag, flag==3 => show only byte
+            if((1&flag)>0) { // byte
+                addDPIcolumn.call(_this, conn, columns, 'byte', rank);
+            }
+            else if((2&flag)>0) { // pkt
+                addDPIcolumn.call(_this, conn, columns, 'pkt', rank);
+            }
+
+            // type => byte or pkt
+            function addDPIcolumn(conn, columns, type, rankLimit) {
+                if(type!='byte' && type!='pkt')
+                    throw "unknown type in addDPIcolumn";
+
+                // [{name: protoName, value: int}, ...]
+                var cnt = 0;
+                var arr = conn.dpi_rank[type];
+                var db = conn.data['dpi'];
+                for(var x in arr) {
+                    var protoName = arr[x]['name'];
+                    if(conn.showFilter['dpi']==null || this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
+                        columns.push(db[protoName+'_'+type]);
+                        cnt++;
+                        if(cnt==rankLimit)
+                            return;
                     }
                 }
             }
 
-            /* update c3 chart */
-            chart.load({
-                x: 'ts',
-                type: chart_type,
-                columns: columns
-            });
+            console.log(JSON.stringify(columns));
+
+            /* check whether same protocol rank list */
+            var same = true;
+            for(var x in chart.internal.legend[0][0].childNodes) {
+                var name = chart.internal.legend[0][0].childNodes[x].__data__;
+                var ok = false;
+                if(typeof name == "undefined")
+                    continue;
+                for(var i in columns) {
+                    if(name == columns[i][0]) {
+                        ok = true;
+                        break;
+                    }
+                }
+                console.log(ok);
+                if(!ok) {
+                    same = false;
+                    chart.unload({
+                        done: function() {
+                            /* update c3 chart */
+                            chart.load({
+                                x: 'ts',
+                                columns: columns
+                            });
+                        }
+                    });
+                    break;
+                }
+            }
+            if(same) {
+                /* update c3 chart */
+                chart.load({
+                    x: 'ts',
+                    columns: columns
+                });
+            }
+
         }, 1000);
     }
     else

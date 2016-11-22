@@ -683,8 +683,9 @@ dpi_oper.prototype.updatePortTable = function(data) {
         this.tree[dpid]['port_data'][port_no] = {rx_pkt: rx_pkt, rx_byte: rx_byte, 
                                             tx_pkt: tx_pkt, tx_byte: tx_byte};
         
-        tot_pkt += rx_pkt+tx_pkt;
-        tot_byte += rx_byte+tx_byte;
+        // tot_xxx => sum of ports' recv data
+        tot_pkt += rx_pkt;
+        tot_byte += rx_byte;
 
         /* host data */
         var hostName = this.dp2host(dpid, port_no);
