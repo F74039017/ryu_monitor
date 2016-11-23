@@ -452,7 +452,7 @@ dpi_oper.prototype.collectDPI = function() {
             callback[2].call(callback[3], data); // callback is invoked with one argument, dpi_data.
         }
         catch (err) {
-            console.log("Exception callback - "+callback[0]+": "+err);
+            console.log("Exception callback - "+callback[0]+": "+err.stack);
             console.log("Remove callback - "+callback[0]);
             this.removeCallback('dpi', callback[0]);
         }

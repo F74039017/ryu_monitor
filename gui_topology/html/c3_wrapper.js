@@ -80,11 +80,28 @@ c3_wrapper.prototype.updateDPIrank = function(conn) {
         var field = x; // protoName_byte or protoName_pkt
         var last_char = field.charAt(field.length-1);
         var protoName;
+        var len = db[x].length;
         if(last_char=='e') {
-            proto_byte.push({name: field.substring(0, field.length-5), value: db[x][db[x].length-1]});
+            var protoName = field.substring(0, field.length-5);
+            var avg_byte_ref = dpi_rank['avg_byte'];
+            if(!avg_byte_ref.hasOwnProperty(protoName)) {
+                avg_byte_ref[protoName] = 0.125*db[x][len-1] + 0.875*0;
+            }
+            else {
+                avg_byte_ref[protoName] = 0.125*db[x][len-1] + 0.875*avg_byte_ref[protoName];
+            }
+            proto_byte.push({name: protoName, value: avg_byte_ref[protoName]});
         }
         else if(last_char=='t') {
-            proto_pkt.push({name: field.substring(0, field.length-4), value: db[x][db[x].length-1]});
+            var protoName = field.substring(0, field.length-4);
+            var avg_pkt_ref = dpi_rank['avg_pkt'];
+            if(!avg_pkt_ref.hasOwnProperty(protoName)) {
+                avg_pkt_ref[protoName] = 0.125*db[x][len-1] + 0.875*0;
+            }
+            else {
+                avg_pkt_ref[protoName] = 0.125*db[x][len-1] + 0.875*avg_pkt_ref[protoName];
+            }
+            proto_pkt.push({name: protoName, value: avg_byte_ref[protoName]});
         }
         else {
             throw "error dpi field: "+field;
@@ -271,7 +288,7 @@ c3_wrapper.prototype.isPortInfo= function(str) {
  *      'cb_name': string // Generate by c3_wrapper idCnt
  *      'id': int // ipv4 or dpid
  *      'intervalId': setInterval id
- *      'dpi_rank': {byte: [], pkt: []}
+ *      'dpi_rank': {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}} // avg is the average value
  * }
  *  
  * */
@@ -284,7 +301,7 @@ c3_wrapper.prototype.genConnection = function(chart, id, connFilter, showFilter,
     if(size<=0)
         throw "size can not <= 0";
 
-    var conn =  {ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: {'dpi': [], 'port': []}, showFilter: {'dpi': [], 'port': []}, data: {'dpi': {}, 'port': {}}, cb_name: _id, id: id, port_data_ready: false, intervalId: null, dpi_rank: {byte: [], pkt: []}};
+    var conn =  {ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: {'dpi': [], 'port': []}, showFilter: {'dpi': [], 'port': []}, data: {'dpi': {}, 'port': {}}, cb_name: _id, id: id, port_data_ready: false, intervalId: null, dpi_rank: {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}}};
     this.setConnFilter(connFilter, conn);
     this.setShowFilter(showFilter, conn);
 
@@ -529,7 +546,16 @@ c3_wrapper.prototype.destroy = function(chart) {
  * */
 c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
     var conn = this.chart2conn(chart);
-    if(conn.intervalId) {
+    if(chart.hasOwnProperty("intervalId")) {
+        console.log("The chart is showed as proto pie");
+        return false;
+    }
+
+    if(!conn) {
+        console.log("can not found connection");
+        return false;
+    }
+    else if(conn.intervalId) {
         console.log("already start show: "+conn.intervalId.toString());
         return false;
     }
@@ -544,6 +570,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
     var _this = this;
     var setId;
 
+    chart.transform('line');
     if(data_type=='port') {
         setId = setInterval(function(){
             var db = conn.data['port'];
@@ -686,17 +713,32 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
         throw "unknown type";
     
     conn.intervalId = setId;
+    chart.show_type = 'line';
     return true;
 }
 
 c3_wrapper.prototype.stopShow = function(chart) {
-    var conn = this.chart2conn(chart);
-    if(conn) {
-        if(conn.intervalId) {
-            clearInterval(conn.intervalId);
-            conn.intervalId = null;
+    if(!chart.hasOwnProperty("show_type")) {
+        console.log("chart was not showed yet");
+        return false;
+    }
+
+    if(chart.show_type == "pie") {
+        clearInterval(chart.intervalId);
+        delete chart.intervalId;
+        return true;
+    }
+    else { // line
+        var conn = this.chart2conn(chart);
+        if(conn) {
+            if(conn.intervalId) {
+                clearInterval(conn.intervalId);
+                conn.intervalId = null;
+                return true;
+            }
         }
     }
+
 }
 
 c3_wrapper.prototype.setHistorySize = function(chart, size) {
@@ -709,8 +751,13 @@ c3_wrapper.prototype.setHistorySize = function(chart, size) {
 c3_wrapper.prototype.clearData = function(chart) {
     var conn = this.chart2conn(chart);
     if(conn) {
+        conn['dpi_ts'] = ['ts'];
+        conn['port_ts'] = ['ts'];
+        conn['dpi_sts'] = null;
+        conn['port_sts'] = null;
         conn['data'] = {'dpi': {}, 'port': {}};
         conn['port_data_ready'] = false;
+        conn['dpi_rank'] = {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}};
         chart.unload();
     }
 }
@@ -741,4 +788,75 @@ c3_wrapper.prototype.removeConnByChart = function(chart) {
         }
     }
     return null;
+}
+
+/*********        PROTOCOL PIE CHART          *********/
+/*
+ * give dpid and show protocol traffic percentage of each child switches
+ * XXX: For convenience, does not use connection conception...
+ * Instead, record show_type and intervalId in chart
+ * */
+c3_wrapper.prototype.showProtoPie = function(chart, dpid, protoName, type='byte') {
+    if(chart.hasOwnProperty('intervalId')) {
+        console.log("chart already showed");
+        return false;
+    }
+    if(typeof protoName == 'undefined') {
+        console.log("undefined protoName");
+        return false;
+    }
+    if(type!='byte' && type!='pkt') {
+        console.log("unknown type in showProtoPie");
+        return false;
+    }
+
+    var _this = this;
+    var id = setInterval(function(){
+        var dpi = _this.dpi_oper; 
+        var child_list;
+        try {
+            child_list = dpi.tree[dpid].child;
+        }
+        catch (err) {
+            console.log(err.stack);
+            return;
+        }
+
+        var data = dpi.getDPIById(child_list);
+        var columns = [['ts', 0]];
+        for(var x in data) {
+            var cdpid_str = x.toString();
+            var dpi_list = data[x];
+            var found = false;
+            for(var i in dpi_list) {
+                var entry = dpi_list[i];
+                if(entry['protoName']==protoName) {
+                    found = true;
+                    if(type=='byte') {
+                        columns.push([cdpid_str, entry['bytes']]);
+                    }
+                    else if(type=='pkt') {
+                        columns.push([cdpid_str, entry['packets']]);
+                    }
+                    break;
+                }
+            }
+            if(!found) {
+                columns.push([cdpid_str, 0]); // not found
+            }
+        }
+
+        //console.log(JSON.stringify(columns));
+        chart.transform('pie');
+        chart.load({
+            columns: columns
+        });
+    }, 1000);
+    chart.show_type = "pie";
+    chart.intervalId = id;
+    return true;
+}
+
+c3_wrapper.prototype.stopProtoPie = function(dpid, protoName) {
+
 }
