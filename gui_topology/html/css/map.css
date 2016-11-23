@@ -1,0 +1,59 @@
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+.hidden {
+    display: none;
+}
+
+div.tooltip {
+    color: #222;
+    background-color: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px;
+    opacity: 0.9;
+    position: absolute;
+}
+
+.region {
+    fill: #B1B3B3;
+}
+
+.road {
+    fill: #4D4D4D;
+}
+
+.water {
+    fill: #5BC0DE;
+    stroke: #428BCA;
+    stroke-width: 1.0px;
+    cursor: pointer;
+}
+
+.water:hover {
+    fill: #90E0F9;
+}
+
+.department {
+    fill: #F05F40;
+    stroke: #541C0E;
+    stroke-width: 1.0px;
+    cursor: pointer;
+}
+
+.department:hover {
+    fill: #FF886A;
+}
+
+.department.active {
+    fill: orange;
+}
+
+.mesh_dept {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

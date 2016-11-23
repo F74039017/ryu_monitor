@@ -215,7 +215,7 @@ var rpc = {
 		// TEST - LIVE DPI EXAMPLE
 		if(live_dpi_chart && !init_flag) {
 			init_flag = true;
-			c3w.connectData(live_dpi_chart, 1, null, {port_no: [1]}); // show all protocols info. of dpid 1
+			c3w.connectData(live_dpi_chart, 1, null, {port_no: [1], dpi_flag: 2}); // show all protocols info. of dpid 1
 		}
 
 		// TEST - LIVE CHART EXAMPLE
