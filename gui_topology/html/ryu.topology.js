@@ -242,7 +242,7 @@ function initialize_topology(callback) {
                 netdata.update(hosts);
                 //console.log("init netdata => callback netJsonGraph");
                 console.log(JSON.stringify(netdata));
-                callback(netdata); // callback netJsonGraph
+                callback(netdata, {el: "#left"}); // callback netJsonGraph
             });
         });
     });
@@ -286,7 +286,7 @@ var netdata = {
 	}	
 };
 netdata['type'] = "NetworkGraph";
-netdata['label'] = "SDN topo";
+netdata['label'] = "Topology";
 netdata['protocol'] = "OpenFlow";
 netdata['version'] = "1.3";
 netdata['metric'] = "";

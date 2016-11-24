@@ -803,7 +803,7 @@ c3_wrapper.prototype.removeConnByChart = function(chart) {
  * XXX: For convenience, does not use connection conception...
  * Instead, record show_type and intervalId in chart
  * */
-c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, type='byte') {
+c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, type='byte', interval=2000) {
     if(chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
         return false;
@@ -818,7 +818,7 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
     }
 
     var _this = this;
-    var id = setInterval(function(){
+    var myfunc = function(){
         var dpi = _this.dpi_oper; 
         var child_list;
         try {
@@ -853,14 +853,40 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
             }
         }
 
-        //console.log(JSON.stringify(columns));
+        var host_list = dpi.sw_host_table[dpid];
+        for(var x in host_list) {
+            //console.log(JSON.stringify(host_list[x]));
+            var host_name = host_list[x];
+            var host_data = dpi.getDPIById(host_name);
+            var found = false;
+            for(var i in host_data) {
+                var entry = host_data[i];
+                if(entry['protoName']==protoName) {
+                    found = true;
+                    if(type=='byte') {
+                        columns.push([host_name, entry['bytes']]);
+                    }
+                    else if(type=='pkt') {
+                        columns.push([host_name, entry['packets']]);
+                    }
+                    break;
+                }
+            }
+            if(!found) {
+                columns.push([host_name, 0]); // not found
+            }
+        }
+
+        console.log(JSON.stringify(columns));
         chart.transform('pie');
         chart.load({
             columns: columns
         });
-    }, 1000);
+    };
+    myfunc();
+    var intervalId = setInterval(myfunc, interval);
     chart.show_type = "pie";
-    chart.intervalId = id;
+    chart.intervalId = intervalId;
     return true;
 }
 
@@ -957,4 +983,10 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=20
     chart.show_type = "pie";
     chart.intervalId = intervalId;
     return true;
+}
+
+function demo() {
+    c3w.startShowLine(live_dpi_chart, 'dpi', 3)
+    c3w.showProtoPie(pie_chart, 1, 'byte', 2000, live_dpi_chart, 3)
+    c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt')
 }

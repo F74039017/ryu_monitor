@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="/static/netjsongraph.css" rel="stylesheet">
+<link href="/static/netjsongraph-theme.css" rel="stylesheet">
+<style>body {overflow: hidden}</style>
+		<style>
+			#container {
+				width: 1300px;
+				height: 750px;
+			}
+
+			#left {
+				width: 750px;
+				height: 750px;
+				float: left;
+			}
+
+			#right {
+				margin-left: 750px;
+				height: 750px;
+			}
+
+			#right_top {
+				height: 200px;
+			}
+
+            #basic_info {
+                width: 275px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            .pie_chart_container {
+                float: left;
+                width: 275px;
+                height: 250px;
+            }
+            .chart_title {
+                font-size: 1.2em;
+                height: 25px;
+                margin: 0px;
+            }
+            .pie_chart {
+                width: 275px;
+                height: 225px;
+            }
+
+			#right_down {
+				height: 300px;
+			}
+		</style>
+
+		<!-- Load c3.css -->
+		<link href="/static/c3_lib/c3.min.css" rel="stylesheet" type="text/css">
+		<style>
+			.c3-grid .c3-xgrid-focus {
+			   visibility : hidden !important;
+			}
+		</style>
+
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+		<!-- Load d3.js and c3.js -->
+		<script src="/static/d3.min.js" charset="utf-8"></script>
+		<script src="/static/c3_lib/c3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!--Create websocekt to ryu-->
+		<script src="/static/ryu.topology.js" charset="utf-8"></script>
+
+        <!--Test dpi_oper.js-->
+		<script src="/static/dpi_oper.js" charset="utf-8"></script>
+
+        <!--Test c3_wrapper.js-->
+		<script src="/static/c3_wrapper.js" charset="utf-8"></script>
+</head>
+<body>
+<script src="/static/ryu.topology.js" charset="utf-8"></script>
+<script src="/static/netjsongraph.js"></script>
+<script>
+	var test = {};
+		test['type'] = "NetworkGraph";
+		test['label'] = "SDN topo";
+		test['protocol'] = "OpenFlow";
+		test['version'] = "1.0";
+		test['metric'] = "ETX";
+		test['nodes'] = [];
+		test['links'] = [];
+		test.nodes.push({id: 1});
+		test.nodes.push({id: 2});
+</script>
+<script>console.log(test)</script>
+<script>
+main({"netjsongraph": d3.netJsonGraph});
+(function(window){
+    $(document).ready(function(){
+        /* Init the c3 chart */
+        window.pie_chart = null;
+        window.contribute_chart = null;
+        window.live_dpi_chart = null;
+
+        window.pie_chart = c3.generate({
+            bindto: "#proto_pie_chart",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                x: 'ts',
+                type: 'pie',
+                columns: []
+            },
+        });
+        window.contribute_chart = c3.generate({
+            bindto: "#contribute_pie_chart",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                x: 'ts',
+                type: 'pie',
+                columns: []
+            },
+        });
+        window.live_dpi_chart = c3.generate({
+            bindto: "#line_chart",
+            size: {
+                height: 300,
+                width: 525
+            },
+            data: {
+                x: 'ts',
+                columns: []
+            },
+        });
+    });
+ })(window);
+</script>
+
+    <div id="container">
+        <!--for netjson-->
+        <div id="left">
+        </div>
+        <div id="right">
+            <div id=basic_info>
+                <p id="device_id">Dpid: 1</p>
+            </div>
+            <div id="right_top">
+                <div id="proto_pie" class="pie_chart_container">
+                    <p class="chart_title">Protocols</p>
+                    <div id="proto_pie_chart" class="pie_chart">chart</div>
+                </div>
+                <div id="contribute_pie" class="pie_chart_container">
+                    <p class="chart_title">HTTP</p>
+                    <div id="contribute_pie_chart" class="pie_chart">chart</div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div id="right_down">
+                <div id="line_chart">
+                    line_chart
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
