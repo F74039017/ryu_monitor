@@ -398,6 +398,39 @@ c3_wrapper.prototype.rmOldData = function(arr, size) {
     }
 }
 
+c3_wrapper.prototype.checkUnload = function(chart, columns) {
+    var unload_list = [];
+    for(var x in chart.internal.legend[0][0].childNodes) { // all legends
+        var name = chart.internal.legend[0][0].childNodes[x].__data__;
+        var ok = false;
+        if(typeof name == "undefined")
+            continue;
+        for(var i in columns) { // in columns
+            if(name == columns[i][0]) {
+                ok = true;
+                break;
+            }
+        }
+        if(!ok) {
+            unload_list.push(name);
+        }
+    }
+    if(unload_list.length!=0) {
+        chart.unload({
+            ids: unload_list,
+            done: function() {
+                /* update c3 chart */
+                chart.load({
+                    x: 'ts',
+                    columns: columns
+                });
+            }
+        });
+        return false;
+    }
+    return true;
+}
+
 
 /**********************************
  *  API
@@ -672,33 +705,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
             console.log(JSON.stringify(columns));
 
             /* check whether same protocol rank list */
-            var same = true;
-            for(var x in chart.internal.legend[0][0].childNodes) {
-                var name = chart.internal.legend[0][0].childNodes[x].__data__;
-                var ok = false;
-                if(typeof name == "undefined")
-                    continue;
-                for(var i in columns) {
-                    if(name == columns[i][0]) {
-                        ok = true;
-                        break;
-                    }
-                }
-                console.log(ok);
-                if(!ok) {
-                    same = false;
-                    chart.unload({
-                        done: function() {
-                            /* update c3 chart */
-                            chart.load({
-                                x: 'ts',
-                                columns: columns
-                            });
-                        }
-                    });
-                    break;
-                }
-            }
+            var same = _this.checkUnload(chart, columns);
             if(same) {
                 /* update c3 chart */
                 chart.load({
@@ -796,7 +803,7 @@ c3_wrapper.prototype.removeConnByChart = function(chart) {
  * XXX: For convenience, does not use connection conception...
  * Instead, record show_type and intervalId in chart
  * */
-c3_wrapper.prototype.showProtoPie = function(chart, dpid, protoName, type='byte') {
+c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, type='byte') {
     if(chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
         return false;
@@ -857,6 +864,97 @@ c3_wrapper.prototype.showProtoPie = function(chart, dpid, protoName, type='byte'
     return true;
 }
 
-c3_wrapper.prototype.stopProtoPie = function(dpid, protoName) {
+/*
+ * If shareChart is not set, show this id's percentage of protocols.
+ * If set, show percentage of conn data // including rank and showFilter
+ * */
+c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=2000, shareChart=null, rank) {
+    if(chart.hasOwnProperty('intervalId')) {
+        console.log("chart already showed");
+        return false;
+    }
+    if(type!='byte' && type!='pkt') {
+        console.log("unknown type in showProtoPie");
+        return false;
+    }
 
+    var _this = this;
+    var dpi = this.dpi_oper; 
+    var myfunc;
+    if(shareChart==null) {
+        myfunc = function(){
+            var data = dpi.getDPIById(id);
+            var columns = [['ts', 0]];
+            for(var x in data) {
+                var entry = data[x];
+                if(type=='byte') {
+                    columns.push([entry['protoName'], entry['bytes']]);
+                }
+                else if(type=='pkt') {
+                    columns.push([entry['protoName'], entry['packets']]);
+                }
+            }
+
+            //console.log(JSON.stringify(columns));
+            chart.transform('pie');
+            var same = _this.checkUnload(chart, columns);
+            if(same) {
+                chart.load({
+                    columns: columns
+                });
+            }
+        };
+    }
+    else {
+        var shareConn = this.chart2conn(shareChart);
+        // XXX: not validate yet...
+        if(typeof rank == 'undefined') {
+            throw "rank undefined";
+        }
+        myfunc = function(){
+            var columns = [];
+            columns.push(shareConn['dpi_ts']);
+            if(type=='byte') { // byte
+                addDPIcolumn.call(_this, shareConn, columns, 'byte', rank);
+            }
+            else if(type=='pkt') { // pkt
+                addDPIcolumn.call(_this, shareConn, columns, 'pkt', rank);
+            }
+
+            chart.transform('pie');
+            var same = _this.checkUnload(chart, columns);
+            if(same) {
+                /* update c3 chart */
+                chart.load({
+                    x: 'ts',
+                    columns: columns
+                });
+            }
+
+            // type => byte or pkt
+            function addDPIcolumn(shareConn, columns, type, rankLimit) {
+                if(type!='byte' && type!='pkt')
+                    throw "unknown type in addDPIcolumn";
+
+                // [{name: protoName, value: int}, ...]
+                var cnt = 0;
+                var arr = shareConn.dpi_rank[type];
+                var db = shareConn.data['dpi'];
+                for(var x in arr) {
+                    var protoName = arr[x]['name'];
+                    if(shareConn.showFilter['dpi']==null || _this.inArray(protoName, shareConn.showFilter['dpi'])) { // check protocol showFilter
+                        columns.push(db[protoName+'_'+type]);
+                        cnt++;
+                        if(cnt==rankLimit)
+                            return;
+                    }
+                }
+            }
+        }
+    }
+    myfunc();
+    var intervalId = setInterval(myfunc, interval);
+    chart.show_type = "pie";
+    chart.intervalId = intervalId;
+    return true;
 }

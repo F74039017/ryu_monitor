@@ -25,6 +25,7 @@
 	</head>
 	<body>
 		<div id="chart"></div>
+		<div id="chart2"></div>
 
 
         <!--javascript definition-->
@@ -38,9 +39,17 @@
 
                 /* Init the c3 chart */
                 window.live_dpi_chart = null;
+                window.pie_chart = null;
                 $(document).ready(function(){
                     window.live_dpi_chart = c3.generate({
                         bindto: "#chart",
+                        data: {
+                            x: 'ts',
+                            columns: []
+                        },
+                    });
+                    window.pie_chart = c3.generate({
+                        bindto: "#chart2",
                         data: {
                             x: 'ts',
                             columns: []
