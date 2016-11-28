@@ -17,8 +17,88 @@ div.tooltip {
     position: absolute;
 }
 
-.region {
-    fill: #B1B3B3;
+.reg_0,
+.reg_1,
+.reg_2,
+.reg_3,
+.reg_4,
+.reg_5,
+.reg_6,
+.reg_7 {
+    fill: #DDDFDF;
+    cursor: pointer;
+    display: inline-block;
+    z-index: 1;
+    -webkit-transition: 200ms ease-in-out;
+    -ms-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.reg_0:hover,
+.reg_1:hover,
+.reg_2:hover,
+.reg_3:hover,
+.reg_4:hover,
+.reg_5:hover,
+.reg_6:hover,
+.reg_7:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 150px #000000;
+    -webkit-transition: 200ms ease-in-out;
+    -ms-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.reg_0:hover {
+    fill: #2BFFA4;
+}
+
+.reg_1:hover {
+    fill: #5DDDFD;
+}
+
+.reg_2:hover {
+    fill: #FDE87C;
+}
+
+.reg_3:hover {
+    fill: #FF8783;
+}
+
+.reg_4:hover {
+    fill: #A9FF98;
+}
+
+.reg_5:hover {
+    fill: #E7ACFF;
+}
+
+.reg_6:hover {
+    fill: #968EFF;
+}
+
+.reg_7:hover {
+    fill: #FFBAD2;
+}
+
+.reg_0.active,
+.reg_1.active,
+.reg_2.active,
+.reg_3.active,
+.reg_4.active,
+.reg_5.active,
+.reg_6.active,
+.reg_7.active {
+    fill: orange;
+}
+
+.mesh_reg {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .road {

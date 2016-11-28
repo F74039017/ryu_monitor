@@ -1,605 +1,655 @@
 {
     "type": "Topology",
     "objects": {
-        "region": {
+        "reg_0": {
             "type": "GeometryCollection",
             "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "成杏校區" },
-                "arcs": [
-                    [0]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業校區" },
-                "arcs": [
-                    [1, 2]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成功校區" },
-                "arcs": [
-                    [3]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝利校區" },
-                "arcs": [
-                    [4]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區" },
-                "arcs": [
-                    [5]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "東寧校區" },
-                "arcs": [
-                    [6]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "光復校區" },
+                "properties": { "reg": 0, "name": "光復校區" },
                 "arcs": [
                     [7]
                 ]
-            }, {
+            }]
+        },
+        "reg_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "力行校區" },
+                "properties": { "reg": 1, "name": "力行校區" },
                 "arcs": [
                     [8]
                 ]
             }]
         },
-        "department": {
+        "reg_2": {
             "type": "GeometryCollection",
             "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "修齊大樓" },
+                "properties": { "reg": 2, "name": "成杏校區" },
+                "arcs": [
+                    [0]
+                ]
+            }]
+        },
+        "reg_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 3, "name": "敬業校區" },
+                "arcs": [
+                    [1, 2]
+                ]
+            }]
+        },
+        "reg_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 4, "name": "自強校區" },
+                "arcs": [
+                    [5]
+                ]
+            }]
+        },
+        "reg_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 5, "name": "東寧校區" },
+                "arcs": [
+                    [6]
+                ]
+            }]
+        },
+        "reg_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 6, "name": "勝利校區" },
+                "arcs": [
+                    [4]
+                ]
+            }]
+        },
+        "reg_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 7, "name": "成功校區" },
+                "arcs": [
+                    [3]
+                ]
+            }]
+        },
+        "dept_0": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "修齊大樓" },
                 "arcs": [
                     [9]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "中文系館" },
+                "properties": { "reg": "光復校區", "name": "中文系館" },
                 "arcs": [
                     [10]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "歷史系館" },
+                "properties": { "reg": "光復校區", "name": "歷史系館" },
                 "arcs": [
                     [11]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "都計系館" },
+                "properties": { "reg": "光復校區", "name": "都計系館" },
                 "arcs": [
                     [12]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "建築系館" },
+                "properties": { "reg": "光復校區", "name": "建築系館" },
                 "arcs": [
                     [13]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "空中大學" },
+                "properties": { "reg": "光復校區", "name": "空中大學" },
                 "arcs": [
                     [14]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "工設系館" },
+                "properties": { "reg": "光復校區", "name": "工設系館" },
                 "arcs": [
                     [15]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "唯農大樓" },
+                "properties": { "reg": "光復校區", "name": "唯農大樓" },
                 "arcs": [
                     [16]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "軍訓室" },
+                "properties": { "reg": "光復校區", "name": "軍訓室" },
                 "arcs": [
                     [17]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "建築研究大樓" },
+                "properties": { "reg": "光復校區", "name": "建築研究大樓" },
                 "arcs": [
                     [18]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "禮賢樓" },
+                "properties": { "reg": "光復校區", "name": "禮賢樓" },
                 "arcs": [
                     [19]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "耐震教學大樓" },
+                "properties": { "reg": "光復校區", "name": "耐震教學大樓" },
                 "arcs": [
                     [20]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光三舍" },
+                "properties": { "reg": "光復校區", "name": "光三舍" },
                 "arcs": [
                     [21]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光一舍" },
+                "properties": { "reg": "光復校區", "name": "光一舍" },
                 "arcs": [
                     [22]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光二舍" },
+                "properties": { "reg": "光復校區", "name": "光二舍" },
                 "arcs": [
                     [23]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "成功廳" },
+                "properties": { "reg": "光復校區", "name": "成功廳" },
                 "arcs": [
                     [24]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "國際會議廳" },
+                "properties": { "reg": "光復校區", "name": "國際會議廳" },
                 "arcs": [
                     [25]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "學生第一活動中心" },
+                "properties": { "reg": "光復校區", "name": "學生第一活動中心" },
                 "arcs": [
                     [26]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "郵局" },
+                "properties": { "reg": "光復校區", "name": "郵局" },
                 "arcs": [
                     [27]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "管理學院" },
+                "properties": { "reg": "光復校區", "name": "管理學院" },
                 "arcs": [
                     [28]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "雲平大樓" },
+                "properties": { "reg": "光復校區", "name": "雲平大樓" },
                 "arcs": [
                     [29]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "歷史文物館" },
+                "properties": { "reg": "光復校區", "name": "歷史文物館" },
                 "arcs": [
                     [30]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "中正堂" },
+                "properties": { "reg": "光復校區", "name": "中正堂" },
                 "arcs": [
                     [31]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復體育室" },
+                "properties": { "reg": "光復校區", "name": "光復體育室" },
                 "arcs": [
                     [32]
                 ]
-            }, {
+            }]
+        },
+        "dept_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "成大會館" },
-                "arcs": [
-                    [33]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "綜合大樓" },
-                "arcs": [
-                    [34]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "物理二館" },
-                "arcs": [
-                    [35]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "地科系館" },
-                "arcs": [
-                    [36]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "理化大樓" },
-                "arcs": [
-                    [37]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "資訊大樓" },
-                "arcs": [
-                    [38]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "格致堂" },
-                "arcs": [
-                    [39]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成大博物館" },
-                "arcs": [
-                    [40]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "物理系館" },
-                "arcs": [
-                    [41]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "化學系館" },
-                "arcs": [
-                    [42]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "數學系館" },
-                "arcs": [
-                    [43]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "測量系館" },
-                "arcs": [
-                    [44]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "總圖書館" },
-                "arcs": [
-                    [45]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "生科系館" },
-                "arcs": [
-                    [46]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "水利系館" },
-                "arcs": [
-                    [47]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "海工大樓" },
-                "arcs": [
-                    [48]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "環工系館" },
-                "arcs": [
-                    [49]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "卓羣大樓" },
-                "arcs": [
-                    [50]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "土木系館" },
-                "arcs": [
-                    [51]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "材料系館" },
-                "arcs": [
-                    [52]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "資源系館" },
-                "arcs": [
-                    [53]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "資訊系館" },
-                "arcs": [
-                    [54]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "工科系館" },
-                "arcs": [
-                    [55]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "測量系教室" },
-                "arcs": [
-                    [56]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "化工系館" },
-                "arcs": [
-                    [57]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "電機系館" },
-                "arcs": [
-                    [58]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "儀器設備大樓" },
-                "arcs": [
-                    [59]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "機械系館" },
-                "arcs": [
-                    [60]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "系統系館" },
-                "arcs": [
-                    [61]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "奇美大樓" },
-                "arcs": [
-                    [62]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "科技大樓" },
-                "arcs": [
-                    [63]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "航太系館" },
-                "arcs": [
-                    [64]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "航太宿舍" },
-                "arcs": [
-                    [65]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "太子學舍" },
-                "arcs": [
-                    [66]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成大圖書部" },
-                "arcs": [
-                    [67]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "學生第二活動中心" },
-                "arcs": [
-                    [68]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝三舍" },
-                "arcs": [
-                    [69]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝二舍" },
-                "arcs": [
-                    [70]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝八舍" },
-                "arcs": [
-                    [71]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝九舍" },
-                "arcs": [
-                    [72]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝六舍" },
-                "arcs": [
-                    [73]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝四舍" },
-                "arcs": [
-                    [74]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝一舍" },
-                "arcs": [
-                    [75]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "游泳池" },
-                "arcs": [
-                    [76]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "學人學舍" },
-                "arcs": [
-                    [77]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強教職員宿舍" },
-                "arcs": [
-                    [78]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強體育室" },
-                "arcs": [
-                    [79]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬一舍" },
-                "arcs": [
-                    [80]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬二舍" },
-                "arcs": [
-                    [81]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬三舍" },
-                "arcs": [
-                    [82]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業教職員宿舍" },
-                "arcs": [
-                    [83]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "醫師宿舍" },
-                "arcs": [
-                    [84]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成杏廳" },
-                "arcs": [
-                    [85]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "醫技系館" },
-                "arcs": [
-                    [86]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "護理系館" },
-                "arcs": [
-                    [87]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成大醫院" },
-                "arcs": [
-                    [88, 89]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "醫學院" },
-                "arcs": [
-                    [-90, 90]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成大醫院門診大樓" },
-                "arcs": [
-                    [91, 92]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "統一健康大樓" },
-                "arcs": [
-                    [93]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "心理健康中心" },
-                "arcs": [
-                    [94]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "醫護大樓" },
-                "arcs": [
-                    [95]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "綠建築" },
+                "properties": { "reg": "力行校區", "name": "綠建築" },
                 "arcs": [
                     [96]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "公衛大樓" },
+                "properties": { "reg": "力行校區", "name": "公衛大樓" },
                 "arcs": [
                     [97]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "社科院大樓" },
+                "properties": { "reg": "力行校區", "name": "社科院大樓" },
                 "arcs": [
                     [98]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "職治系館" },
+                "properties": { "reg": "力行校區", "name": "臺文系館" },
+                "arcs": [
+                    [101]
+                ]
+            }]
+        },
+        "dept_2": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏廳" },
+                "arcs": [
+                    [85]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫技系館" },
+                "arcs": [
+                    [86]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "護理系館" },
+                "arcs": [
+                    [87]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成大醫院" },
+                "arcs": [
+                    [88, 89]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫學院" },
+                "arcs": [
+                    [-90, 90]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成大醫院門診大樓" },
+                "arcs": [
+                    [91, 92]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "統一健康大樓" },
+                "arcs": [
+                    [93]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "心理健康中心" },
+                "arcs": [
+                    [94]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫護大樓" },
+                "arcs": [
+                    [95]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "職治系館" },
                 "arcs": [
                     [99]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "物治系館" },
+                "properties": { "reg": "成杏校區", "name": "物治系館" },
                 "arcs": [
                     [100]
                 ]
+            }]
+        },
+        "dept_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬一舍" },
+                "arcs": [
+                    [80]
+                ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "臺文系館" },
+                "properties": { "reg": "敬業校區", "name": "敬二舍" },
                 "arcs": [
-                    [101]
+                    [81]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬三舍" },
+                "arcs": [
+                    [82]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業教職員宿舍" },
+                "arcs": [
+                    [83]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "醫師宿舍" },
+                "arcs": [
+                    [84]
+                ]
+            }]
+        },
+        "dept_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "化工系館" },
+                "arcs": [
+                    [57]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "電機系館" },
+                "arcs": [
+                    [58]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "儀器設備大樓" },
+                "arcs": [
+                    [59]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "機械系館" },
+                "arcs": [
+                    [60]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "系統系館" },
+                "arcs": [
+                    [61]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "奇美大樓" },
+                "arcs": [
+                    [62]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "科技大樓" },
+                "arcs": [
+                    [63]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "航太系館" },
+                "arcs": [
+                    [64]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "航太宿舍" },
+                "arcs": [
+                    [65]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強教職員宿舍" },
+                "arcs": [
+                    [78]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強體育室" },
+                "arcs": [
+                    [79]
+                ]
+            }]
+        },
+        "dept_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "學人學舍" },
+                "arcs": [
+                    [77]
+                ]
+            }]
+        },
+        "dept_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "太子學舍" },
+                "arcs": [
+                    [66]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "成大圖書部" },
+                "arcs": [
+                    [67]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "學生第二活動中心" },
+                "arcs": [
+                    [68]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝三舍" },
+                "arcs": [
+                    [69]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝二舍" },
+                "arcs": [
+                    [70]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝八舍" },
+                "arcs": [
+                    [71]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝九舍" },
+                "arcs": [
+                    [72]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝六舍" },
+                "arcs": [
+                    [73]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝四舍" },
+                "arcs": [
+                    [74]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝一舍" },
+                "arcs": [
+                    [75]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "游泳池" },
+                "arcs": [
+                    [76]
+                ]
+            }]
+        },
+        "dept_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "綜合大樓" },
+                "arcs": [
+                    [34]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "物理二館" },
+                "arcs": [
+                    [35]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "地科系館" },
+                "arcs": [
+                    [36]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "理化大樓" },
+                "arcs": [
+                    [37]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資訊大樓" },
+                "arcs": [
+                    [38]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "格致堂" },
+                "arcs": [
+                    [39]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成大博物館" },
+                "arcs": [
+                    [40]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "物理系館" },
+                "arcs": [
+                    [41]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "化學系館" },
+                "arcs": [
+                    [42]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "數學系館" },
+                "arcs": [
+                    [43]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "測量系館" },
+                "arcs": [
+                    [44]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "總圖書館" },
+                "arcs": [
+                    [45]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "生科系館" },
+                "arcs": [
+                    [46]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "水利系館" },
+                "arcs": [
+                    [47]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "海工大樓" },
+                "arcs": [
+                    [48]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "環工系館" },
+                "arcs": [
+                    [49]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "卓羣大樓" },
+                "arcs": [
+                    [50]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "土木系館" },
+                "arcs": [
+                    [51]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "材料系館" },
+                "arcs": [
+                    [52]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資源系館" },
+                "arcs": [
+                    [53]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資訊系館" },
+                "arcs": [
+                    [54]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "工科系館" },
+                "arcs": [
+                    [55]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "測量系教室" },
+                "arcs": [
+                    [56]
                 ]
             }]
         },
@@ -607,277 +657,99 @@
             "type": "GeometryCollection",
             "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "成功湖" },
+                "properties": { "reg": "光復校區", "name": "成功湖" },
                 "arcs": [
                     [102]
                 ]
             }]
         },
-        "road": {
+        "road_0": {
             "type": "GeometryCollection",
             "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [103, 104]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [105]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [106]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [107, 108, 109, 110]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [111]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [112]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [113, 114, 115]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [116, 117]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [118]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [119]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "光復校區道路" },
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
                 "arcs": [
                     [120]
                 ]
-            }, {
+            }]
+        },
+        "road_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
                 "type": "Polygon",
-                "properties": { "name": "勝利校區道路" },
-                "arcs": [
-                    [121]
-                ]
-            }, {
-                "type": "GeometryCollection",
-                "properties": { "name": "勝利校區道路" },
-                "geometries": [{
-                    "type": "Polygon",
-                    "arcs": [
-                        [122, 123, 124]
-                    ]
-                }, {
-                    "type": "Polygon",
-                    "arcs": [
-                        [125, 126]
-                    ]
-                }, {
-                    "type": "Polygon",
-                    "arcs": [
-                        [127]
-                    ]
-                }]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝利校區道路" },
-                "arcs": [
-                    [128, 129]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "校外道路" },
-                "arcs": [
-                    [130]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "校外道路" },
-                "arcs": [
-                    [131]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝利校區道路" },
-                "arcs": [
-                    [132]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "勝利校區道路" },
-                "arcs": [
-                    [133]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成功校區道路" },
-                "arcs": [
-                    [134, 135, 136, 137, 138]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成功校區道路" },
-                "arcs": [
-                    [137, 139]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成功校區道路" },
-                "arcs": [
-                    [140]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成功校區道路" },
-                "arcs": [
-                    [141, 142, -136]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區道路" },
-                "arcs": [
-                    [143, 144, 145, 146]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區道路" },
-                "arcs": [
-                    [147, 148]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區道路" },
-                "arcs": [
-                    [149, 150, 151, 152]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區道路" },
-                "arcs": [
-                    [153, -150, 154]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "自強校區道路" },
-                "arcs": [
-                    [155]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "校外道路" },
-                "arcs": [
-                    [156]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "校外道路" },
-                "arcs": [
-                    [157]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業校區道路" },
-                "arcs": [
-                    [158]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業校區道路" },
-                "arcs": [
-                    [159]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業校區道路" },
-                "arcs": [
-                    [160]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "敬業校區道路" },
-                "arcs": [
-                    [161]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成杏校區道路" },
-                "arcs": [
-                    [162, 163, 164]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成杏校區道路" },
-                "arcs": [
-                    [165]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "成杏校區道路" },
-                "arcs": [
-                    [166, 167]
-                ]
-            }, {
-                "type": "GeometryCollection",
-                "properties": { "name": "成杏校區道路" },
-                "geometries": [{
-                    "type": "Polygon",
-                    "arcs": [
-                        [168]
-                    ]
-                }, {
-                    "type": "Polygon",
-                    "arcs": [
-                        [169]
-                    ]
-                }, {
-                    "type": "Polygon",
-                    "arcs": [
-                        [170]
-                    ]
-                }]
-            }, {
-                "type": "Polygon",
-                "properties": { "name": "力行校區道路" },
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
                 "arcs": [
                     [171, 172, 173]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "力行校區道路" },
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
                 "arcs": [
                     [174, 175, 176]
                 ]
             }, {
                 "type": "GeometryCollection",
-                "properties": { "name": "力行校區道路" },
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
                 "geometries": [{
                     "type": "Polygon",
                     "arcs": [
@@ -896,9 +768,215 @@
                 }]
             }, {
                 "type": "Polygon",
-                "properties": { "name": "力行校區道路" },
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
                 "arcs": [
                     [178, 183]
+                ]
+            }]
+        },
+        "road_2": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [162, 163, 164]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [165]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [166, 167]
+                ]
+            }, {
+                "type": "GeometryCollection",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "geometries": [{
+                    "type": "Polygon",
+                    "arcs": [
+                        [168]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [169]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [170]
+                    ]
+                }]
+            }]
+        },
+        "road_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [158]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [159]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [160]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [161]
+                ]
+            }]
+        },
+        "road_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "自強校區道路" },
+                "arcs": [
+                    [143, 144, 145, 146]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [147, 148]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [149, 150, 151, 152]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [153, -150, 154]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [155]
+                ]
+            }]
+        },
+        "road_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "校外道路" },
+                "arcs": [
+                    [156]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "校外道路" },
+                "arcs": [
+                    [157]
+                ]
+            }]
+        },
+        "road_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [121]
+                ]
+            }, {
+                "type": "GeometryCollection",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "geometries": [{
+                    "type": "Polygon",
+                    "arcs": [
+                        [122, 123, 124]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [125, 126]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [127]
+                    ]
+                }]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [128, 129]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "校外道路" },
+                "arcs": [
+                    [130]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "校外道路" },
+                "arcs": [
+                    [131]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [132]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [133]
+                ]
+            }]
+        },
+        "road_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [134, 135, 136, 137, 138]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [137, 139]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [140]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [141, 142, -136]
                 ]
             }]
         }

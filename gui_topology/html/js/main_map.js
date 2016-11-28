@@ -8,11 +8,12 @@ d3.select(window)
 //set the projection of the map
 var projection = d3.geo.mercator()
     .center([120.2175, 23.0007])
-    .scale(4000000);
+    .scale(3900000);
 
 var path = d3.geo.path()
     .projection(projection);
 
+//initialize the map
 var svg = d3.select('body').append('svg')
     .attr('width', width)
     .attr('height', height);
@@ -21,122 +22,91 @@ svg.append("rect")
     .attr('class', 'background')
     .attr('width', width)
     .attr('height', height)
-    .on('click', zoom_reset);
+    .on('click', zoomOut);
 
 var g = svg.append('g')
     .style('stroke-width', '0.5px');
 
-var region = svg.append('g'),
-    road = svg.append('g'),
-    water = svg.append('g'),
-    dept = svg.append('g');
-
+//tooltip for hover
 var tooltip = d3.select('body')
     .append('div')
     .attr('class', 'hidden tooltip');
 
+//construct the map.
+var region = new Array(8),
+    dept = new Array(8),
+    road = svg.append('g'),
+    water = svg.append('g');
+
+for (i = 0; i < 9; ++i) {
+    region[i] = svg.append('g');
+    dept[i] = svg.append('g');
+}
+
 //draw map with toopojson
-d3.json('topojson/ncku.json', function(error, ncku) {
+d3.json('topojson/ncku.json', function(error, map) {
     if (error)
         return console.error(error);
 
-    var a = topojson.feature(ncku, ncku.objects.region),
-        b = topojson.feature(ncku, ncku.objects.department),
-        c = topojson.feature(ncku, ncku.objects.water),
-        d = topojson.feature(ncku, ncku.objects.road);
+    for (i = 0; i < 8; ++i) {
+        region[i].selectAll('path')
+            .data(topojson.feature(map, map.objects['reg_' + i]).features)
+            .enter()
+            .append('path')
+            .attr('d', path)
+            .attr('class', 'reg_' + i)
+            .on('click', zoomIn_reg)
+            .on('mousemove', hover_show)
+            .on('mouseout', hover_reset);
 
-    //display all regions.
-    region.selectAll('path')
-        .data(a.features)
-        .enter()
-        .append('path')
-        .attr('d', path)
-        .attr('class', 'region')
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0] + 15) + 'px; top:' + (mouse[1] - 35) + 'px')
-                .html(d.properties.name);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });
-
-    //display the water
-    water.selectAll('path')
-        .data(c.features)
-        .enter()
-        .append('path')
-        .attr('d', path)
-        .attr('class', 'water')
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0] + 15) + 'px; top:' + (mouse[1] - 35) + 'px')
-                .html(d.properties.name);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });
-
-    //display all roads
-    road.selectAll('path')
-        .data(d.features)
-        .enter()
-        .append('path')
-        .attr('d', path)
-        .attr('class', 'road')
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0] + 15) + 'px; top:' + (mouse[1] - 35) + 'px')
-                .html(d.properties.name);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });
-
-    //display all departments
-    dept.selectAll('path')
-        .data(topojson.feature(ncku, ncku.objects.department).features)
-        .enter()
-        .append('path')
-        .attr('d', path)
-        .attr('class', 'department')
-        .on('click', zoom_in)
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0] + 15) + 'px; top:' + (mouse[1] - 35) + 'px')
-                .html(d.properties.name);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });
-
-    dept.append('path')
-        .datum(topojson.mesh(ncku, ncku.objects.department, function(a, b) {
-            return a !== b;
-        }))
-        .attr('d', path)
-        .attr('class', 'mesh_dept');
+        region[i].append('path')
+            //.datum(topojson.mesh(map, map.objects['reg_' + i], zoomDiff_reg))
+            .attr('d', path)
+            .attr('class', 'mesh_reg');
+    }
 });
 
+//hover to show tooltip
+function hover_show(d) {
+    var mouse = d3.mouse(svg.node()).map(function(d) {
+        return parseInt(d);
+    });
+
+    tooltip.classed('hidden', false)
+        .attr('style', 'left:' + (mouse[0] + 15) + 'px; top:' + (mouse[1] - 35) + 'px')
+        .html(d.properties.name);
+}
+
+//hover to hiddent tooltip
+function hover_reset() {
+    tooltip.classed('hidden', true);
+}
+
+//click to reset zoom
+function zoomOut() {
+    active.classed('active', false);
+    active = d3.select(null);
+
+    for (i = 0; i < 8; ++i) {
+        dept[i].selectAll('path')
+            .remove();
+
+        region[i].transition()
+            .duration(750)
+            .style('stroke-width', '1.5px')
+            .attr('transform', '');
+    }
+}
+
 //click to zoom in
-function zoom_in(d) {
+function zoomIn_reg(d) {
     if (active.node() === this)
-        return zoom_reset();
+        return zoomOut_reg(d);
 
     active.classed('active', false);
     active = d3.select(this).classed('active', true);
+
+    console.log()
 
     var bounds = path.bounds(d),
         dx = bounds[1][0] - bounds[0][0],
@@ -146,12 +116,42 @@ function zoom_in(d) {
         scale = .9 / Math.max(dx / width, dy / height),
         translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-    region.transition()
+    d3.json('topojson/ncku.json', function(error, map) {
+        if (error)
+            return console.error(error);
+
+        dept[d.properties.reg].selectAll('path')
+            .data(topojson.feature(map, map.objects['dept_' + d.properties.reg]).features)
+            .enter()
+            .append('path')
+            .attr('d', path)
+            .attr('class', 'dept_' + d.properties.reg)
+            //.on('click', zoom_in)
+            .on('mousemove', hover_show)
+            .on('mouseout', hover_reset);
+
+        dept[d.properties.reg].append('path')
+            //.datum(topojson.mesh(map, map.objects['dept_' + d.properties.reg], zoom_diff))
+            .attr('d', path)
+            .attr('class', 'mesh_reg');
+
+    });
+
+    for (i = 0; i < 8; ++i) {
+        region[i].transition()
+            .duration(750)
+            .style('stroke-width', 1.5 / scale + 'px')
+            .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
+    }
+
+    dept[d.properties.reg].transition()
         .duration(750)
         .style('stroke-width', 1.5 / scale + 'px')
         .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
 
-    water.transition()
+    console.log(d.properties.name);
+
+    /*water.transition()
         .duration(750)
         .style('stroke-width', 1.5 / scale + 'px')
         .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
@@ -164,20 +164,24 @@ function zoom_in(d) {
     dept.transition()
         .duration(750)
         .style('stroke-width', 1.5 / scale + 'px')
-        .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
+        .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');*/
 }
 
 //click to reset zoom
-function zoom_reset() {
+function zoomOut_reg(d) {
     active.classed('active', false);
     active = d3.select(null);
 
-    region.transition()
-        .duration(750)
-        .style('stroke-width', '1.5px')
-        .attr('transform', '');
+    dept[d.properties.reg].selectAll('path').remove();
 
-    water.transition()
+    for (i = 0; i < 8; ++i) {
+        region[i].transition()
+            .duration(750)
+            .style('stroke-width', '1.5px')
+            .attr('transform', '');
+    }
+
+    /*water.transition()
         .duration(750)
         .style('stroke-width', '1.5px')
         .attr('transform', '');
@@ -190,10 +194,19 @@ function zoom_reset() {
     dept.transition()
         .duration(750)
         .style('stroke-width', '1.5px')
-        .attr('transform', '');
+        .attr('transform', '');*/
 }
 
+//click to zoom the different one
+function zoomDiff_reg(a, b) {
+    return a !== b;
+}
+
+//change the size of the view
 function sizeChange() {
-    d3.select("g").attr("transform", "scale(" + $(".container-map").width() / 900 + ")");
-    $("svg").height($(".container-map").width() * 0.618);
+    d3.select("g")
+        .attr("transform", "scale(" + $(".container-map").width() / 900 + ")");
+
+    $("svg").height($(".container-map")
+        .width() * 0.618);
 }
