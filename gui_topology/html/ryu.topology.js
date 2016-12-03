@@ -215,7 +215,8 @@ var rpc = {
 		// TEST - LIVE DPI EXAMPLE
 		if(live_dpi_chart && !init_flag) {
 			init_flag = true;
-			c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
+			// XXX: test connect in c3_wapper.js -> demo()
+			//c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
 		}
 
 		// TEST - LIVE CHART EXAMPLE
@@ -234,6 +235,10 @@ function testOnNodeClick(data) {
 	console.log(data);
 }
 
+function testOnLinkClick(data) {
+	console.log(data);
+}
+
 function initialize_topology(callback) {
     d3.json("/v1.0/topology/switches", function(error, switches) {
         d3.json("/v1.0/topology/links", function(error, links) {
@@ -247,7 +252,7 @@ function initialize_topology(callback) {
                 netdata.update(hosts);
                 //console.log("init netdata => callback netJsonGraph");
                 console.log(JSON.stringify(netdata));
-                callback(netdata, {el: "#left", onClickNode: testOnNodeClick}); // callback netJsonGraph
+                callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
             });
         });
     });

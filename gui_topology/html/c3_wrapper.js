@@ -27,6 +27,7 @@
  *      else if size is less than that of present, only keep the latest number of data.
  *
  *  XXX: after reset showFilter, remember "unload() the chart"
+ *  XXX: unstable...
  *  setShowFilter(showFilter, conn):
  *      reset showFilter in the connection.
  *
@@ -43,6 +44,8 @@
  *
  *  XXX: BUG in tot_xxx field... 
  *  Do not use it.
+ *
+ *  XXX: host port info. => info. contain in port 1.
  *
  * */
 
@@ -600,7 +603,7 @@ c3_wrapper.prototype.destroy = function(chart) {
  * show data on chart 
  * data_type: dpi or port
  * rt_rank: 
- *      port => 1: rx, 2: tx
+ *      port => 0: both, 1: rx, 2: tx
  *      dpi => only show top rank
  * return: false => not start successfully
  * */
@@ -671,9 +674,9 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             var flag = conn.showFilter['bp_flag'];
             for(var x in conn.showFilter['port']) {
                 var fieldName = conn.showFilter['port'][x];
-                if(rt_flag==1 && fieldName.charAt(0)!='r') // rx
+                if((rt_flag&1)>0 && fieldName.charAt(0)!='r') // rx
                     continue;
-                if(rt_flag==2 && fieldName.charAt(0)!='t') // tx
+                if((rt_flag&2)>0 && fieldName.charAt(0)!='t') // tx
                     continue;
 
                 if(fieldName.substring(0, 3)=='tot') { // tot_xxx
@@ -839,7 +842,7 @@ c3_wrapper.prototype.clearData = function(chart) {
         conn['data'] = {'dpi': {}, 'port': {}};
         conn['port_data_ready'] = false;
         conn['dpi_rank'] = {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}};
-        chart.unload();
+        chart.unload_flag = true;
     }
 }
 
@@ -1058,30 +1061,62 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000
     return true;
 }
 
-/*  */
-c3_wrapper.prototype.showLinkGuage = function(chart, ids, type='byte', interval=2000) {
-    if(chart.hasOwnProperty('intervalId')) {
-        console.log("chart already showed");
+/* 
+ * show link gauge on two chart
+ * use src port data to prepare columns
+ * ids: [src_id, dst_id] // src_id must be dpid
+ * port_no: src_id's port_no => dst_id
+ * */
+c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=null, shareChart=null, interval=1000) {
+    if(shareChart==null || port_no==null) {
+        console.log("shareChart or port_no is null");
         return false;
     }
-    if(type!='byte' && type!='pkt') {
-        console.log("unknown type in showProtoPie");
+    if(chart_st.hasOwnProperty('intervalId')) {
+        console.log("chart_st already showed");
         return false;
     }
+    if(chart_ts.hasOwnProperty('intervalId')) {
+        console.log("chart_ts already showed");
+        return false;
+    }
+
+    // byte and pkt flag define in line chart 
+    var shareConn = this.chart2conn(shareChart);
+    var bp_flag = shareConn.showFilter['bp_flag'];
 
     var _this = this;
     var dpi = this.dpi_oper; 
-    var myfunc;
-    myfunc = function() {
-        var columns = [['ts', 0]];
 
+    var st_func;
+    st_func = function() {
+        if(!shareConn.port_data_ready || !shareConn['port_sts'])
+            return;
 
-        chart.transform('guage');
+        var columns = [];
+        var db = shareConn.data['port'];
+        var data = db[port_no];
+
+        var len = data['tx_byte'].length;
+        if(bp_flag==1) { // byte
+            columns.push(['data', Math.floor(data['tx_byte'][len-2]/1024)]);
+        }
+        else { // pkt
+            columns.push(['data', Math.floor(data['tx_pkt'][len-2]/1024)]);
+        }
+
+        console.log(JSON.stringify(columns));
+
+        //chart_st.transform('guage');
+        /* update c3 chart */
+        chart_st.load({
+            columns: columns
+        });
     };
-    myfunc();
-    var intervalId = setInterval(myfunc, interval);
-    chart.show_type = "pie";
-    chart.intervalId = intervalId;
+    var st_intervalId = setInterval(st_func, interval);
+    chart_st.show_type = "gauge";
+    chart_st.intervalId = st_intervalId;
+
     return true;
 }
 
@@ -1109,13 +1144,47 @@ c3_wrapper.prototype.changeBP_FLAG = function(chart, bp_flag) {
 }
 
 /* dpi demo */
+// connectData = function(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, bp_flag: null, port_no: null}, size=10, failTime=0)
+
 function demo() {
+    c3w.connectData(live_dpi_chart, "10.0.0.1", null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
     c3w.startShowLine(live_dpi_chart, 'dpi', 3);
     c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
     c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
 }
 
-/* port demo */
-function demo2() {
-    c3w.startShowLine(live_dpi_chart, 'port', 2); // chart, type, bp_flag
+/* link demo */
+function demo2(ids) {
+    // data.properties.src_port
+    
+    //var ids = [1, "10.0.0.1"];
+    var sw_or_host = [];
+    sw_or_host.push(dpi.checkIPv4(ids[0]));
+    sw_or_host.push(dpi.checkIPv4(ids[1]));
+
+    /* link check */
+    if(sw_or_host[0] && sw_or_host[1]) {
+        console.log("two hosts?");
+        return false;
+    }
+    else if(sw_or_host[0] || sw_or_host[1]) { // one is host
+        if(sw_or_host[0]) {
+            var tmp = ids[0];
+            ids[0] = ids[1];
+            ids[1] = tmp;
+        }
+    }
+    // TODO: validate link
+    //console.log(ids);
+
+    /* show line chart */
+    // TODO: variable => port_no, src, dst
+    // ids[0] => sw
+    var port_no = 1; // 1 - 2 dpid
+    c3w.connectData(live_dpi_chart, ids[0], {dpi: [], port: null}, {bp_flag: 1, port_no: port_no}); // bp_flag==2 -> show pkt info
+    c3w.startShowLine(live_dpi_chart, 'port', 0); // chart, type, bp_flag==0 -> show both rx and tx
+    c3w.showLinkGuage(pie_chart, {}, ids, port_no, live_dpi_chart);
+
+    /* gauge chart */
+
 }

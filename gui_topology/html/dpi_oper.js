@@ -736,7 +736,7 @@ dpi_oper.prototype.getHostPort = function(hostName) {
     if(this.hasOwnProperty('host_data')) {
         if(this.host_data.hasOwnProperty(hostName)) {
             if(this.host_data[hostName].hasOwnProperty('port_data')) {
-                return this.host_data[hostName]['port_data'];
+                return {1: this.host_data[hostName]['port_data']}; // host only one port
             }
         }   
     }
