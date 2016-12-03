@@ -6,7 +6,7 @@
  * Notice:
  *  Only allow to use data.columns() format currently.
  *
- *  connectData(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, dpi_flag: null, port_no: null}, size=10)
+ *  connectData(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, bp_flag: null, port_no: null}, size=10)
  *      chart: chart object created by c3.js
  *      id: ipv4 or dpid
  *      connFilter: only connect these data
@@ -40,6 +40,9 @@
  *
  *  clearData(chart):
  *      clear all records
+ *
+ *  XXX: BUG in tot_xxx field... 
+ *  Do not use it.
  *
  * */
 
@@ -129,7 +132,10 @@ c3_wrapper.prototype.setConnFilter = function(filter, conn) {
 
     /* set port filter */
     if(filter['port'] == null) {
-        conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte', 'tot_pkt', 'tot_byte'];
+        //conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte', 'tot_pkt', 'tot_byte'];
+        
+        // Some bugs in tot_xxx
+        conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte'];
     }
     else if(typeof filter['port'] === 'string') {
         // one param
@@ -234,14 +240,14 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         else
             throw "wrong dpi type";
 
-        if(!showFilter.hasOwnProperty('dpi_flag') || showFilter['dpi_flag']==null) {
-            conn['showFilter']['dpi_flag'] = 3; // show both port and byte
+        if(!showFilter.hasOwnProperty('bp_flag') || showFilter['bp_flag']==null) {
+            conn['showFilter']['bp_flag'] = 3; // show both port and byte
         }
-        else if(Number.isInteger(showFilter['dpi_flag'])) {
-            conn['showFilter']['dpi_flag'] = showFilter['dpi_flag'];
+        else if(Number.isInteger(showFilter['bp_flag'])) {
+            conn['showFilter']['bp_flag'] = showFilter['bp_flag'];
         }
         else
-            throw " dpi_flag not integer in showFilter";
+            throw " bp_flag not integer in showFilter";
     }
     catch(err) {
         console.log(err);
@@ -398,7 +404,25 @@ c3_wrapper.prototype.rmOldData = function(arr, size) {
     }
 }
 
+/* 
+ * unload old legend and update new data
+ * if chart.unload_flag is true, unload all, set the flag false and reload columns
+ * */
 c3_wrapper.prototype.checkUnload = function(chart, columns) {
+    if(chart.hasOwnProperty('unload_flag') && chart.unload_flag) {
+        chart.unload({
+            done: function() {
+                /* update c3 chart */
+                chart.unload_flag = false;
+                chart.load({
+                    x: 'ts',
+                    columns: columns
+                });
+            }
+        });
+        return false;
+    }
+
     var unload_list = [];
     for(var x in chart.internal.legend[0][0].childNodes) { // all legends
         var name = chart.internal.legend[0][0].childNodes[x].__data__;
@@ -438,9 +462,9 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
 
 /*
  * XXX: not allow duplicated field in filter
- * dpi_flag: 1=>byte, 2=>pkt
+ * bp_flag: 1=>byte, 2=>pkt
  * */
-c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, dpi_flag: null, port_no: null}, size=10, failTime=0) {
+c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, bp_flag: null, port_no: null}, size=10, failTime=0) {
 
 	if(failTime==this.tryLimit) {
 		throw "can not connect dpi_oper";
@@ -456,7 +480,7 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
     if(connFilter == null)
         connFilter = {dpi: null, port: null};
     if(showFilter == null)
-        showFilter = {dpi: null, port: null, dpi_flag: null, port_no: null};
+        showFilter = {dpi: null, port: null, bp_flag: null, port_no: null};
 
     var conn = this.genConnection(chart, id, connFilter, showFilter, size);
 
@@ -551,6 +575,7 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
     }
 
     this.manager.push(conn);
+    chart.unload_flag = false;
 
     return conn;
 }
@@ -574,10 +599,14 @@ c3_wrapper.prototype.destroy = function(chart) {
 /* 
  * show data on chart 
  * data_type: dpi or port
- * rank: only show top rank
+ * rt_rank: 
+ *      port => 1: rx, 2: tx
+ *      dpi => only show top rank
  * return: false => not start successfully
  * */
-c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
+c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
+    chart.unload_flag = true; // force reunload all
+
     var conn = this.chart2conn(chart);
     if(chart.hasOwnProperty("intervalId")) {
         console.log("The chart is showed as proto pie");
@@ -592,39 +621,79 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
         console.log("already start show: "+conn.intervalId.toString());
         return false;
     }
-    else if(rank!=null && !Number.isInteger(rank)) {
-        console.log("rank isn't integer");
-        return false;
-    }
-    else if(rank!=null && data_type=='port') {
-        console.log("rank only for dpi data_type");
+    else if(rt_rank!=null && !Number.isInteger(rt_rank)) {
+        console.log("rt_rank isn't integer");
         return false;
     }
     var _this = this;
     var setId;
 
+    if(rt_rank==null) {
+        if(data_type=='port') {
+            chart.rt_rank = 1; // default show byte port info.
+        }
+        else {
+            chart.rt_rank = 3; // default show top 3 protocols
+        }
+    }
+    else
+        chart.rt_rank = rt_rank;
+
     chart.transform('line');
     if(data_type=='port') {
         setId = setInterval(function(){
             var db = conn.data['port'];
+            var rt_flag = chart.rt_rank;
 
             /* prepare columns */
             var columns = [];
             columns.push(conn['port_ts']);
+            //for(var x in conn.showFilter['port']) {
+                //var fieldName = conn.showFilter['port'][x];
+                //if(fieldName.substring(0, 3)=='tot') { // tot_xxx
+                    //if(typeof db[fieldName] != 'undefined') {
+                        //columns.push(db[fieldName].slice(0, -1));
+                    //}
+                //}
+                //else {
+                    //for(var x in db) {
+                        //var port = parseInt(x);
+                        //// check show port_no
+                        //if(!isNaN(port) && (conn.showFilter['port_no']==null || _this.inArray(port, conn.showFilter['port_no']))) { 
+                            //if(typeof db[x][fieldName] != 'undefined') {
+                                //columns.push(db[x][fieldName].slice(0, -1));
+                            //}
+                        //}
+                    //}
+                //}
+            //}
+
+            var flag = conn.showFilter['bp_flag'];
             for(var x in conn.showFilter['port']) {
                 var fieldName = conn.showFilter['port'][x];
+                if(rt_flag==1 && fieldName.charAt(0)!='r') // rx
+                    continue;
+                if(rt_flag==2 && fieldName.charAt(0)!='t') // tx
+                    continue;
+
                 if(fieldName.substring(0, 3)=='tot') { // tot_xxx
-                    if(typeof db[fieldName] != 'undefined') {
-                        columns.push(db[fieldName].slice(0, -1));
-                    }
+                    continue; // not show tot_xxx because of bug
                 }
                 else {
                     for(var x in db) {
                         var port = parseInt(x);
                         // check show port_no
+                        if(port == 4294967294) // exclude controller port
+                            continue;
+                        
                         if(!isNaN(port) && (conn.showFilter['port_no']==null || _this.inArray(port, conn.showFilter['port_no']))) { 
                             if(typeof db[x][fieldName] != 'undefined') {
-                                columns.push(db[x][fieldName].slice(0, -1));
+                                if((fieldName=='rx_byte'||fieldName=='tx_byte') && (1&flag)>0) { // byte
+                                    columns.push(db[x][fieldName].slice(0, -1));
+                                }
+                                else if((fieldName=='rx_pkt'||fieldName=='tx_pkt') && (2&flag)>0) { // pkt
+                                    columns.push(db[x][fieldName].slice(0, -1));
+                                }
                             }
                         }
                     }
@@ -634,16 +703,21 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
             console.log(JSON.stringify(columns));
             /* update c3 chart */
             if(conn.port_data_ready && conn['port_sts']) {
-                chart.load({
-                    x: 'ts',
-                    columns: columns
-                });
+                var same = _this.checkUnload(chart, columns);
+                if(same) {
+                    /* update c3 chart */
+                    chart.load({
+                        x: 'ts',
+                        columns: columns
+                    });
+                }
             }
         }, 1000);
     }
     else if(data_type=='dpi') {
         setId = setInterval(function(){
             var db = conn.data['dpi'];
+            var rank = chart.rt_rank;
 
             /* prepare columns */
             var columns = [];
@@ -666,14 +740,14 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rank=null) {
                 //}
 
                 //if(conn.showFilter['dpi']==null || _this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
-                    //var flag = conn.showFilter['dpi_flag'];
+                    //var flag = conn.showFilter['bp_flag'];
                     //if((byteORpkt&flag)>0) { // check byte and pkt flag
                         //columns.push(db[x]);
                     //}
                 //}
             //}
             
-            var flag = conn.showFilter['dpi_flag'];
+            var flag = conn.showFilter['bp_flag'];
             // XXX: because of protocol tag, flag==3 => show only byte
             if((1&flag)>0) { // byte
                 addDPIcolumn.call(_this, conn, columns, 'byte', rank);
@@ -740,7 +814,7 @@ c3_wrapper.prototype.stopShow = function(chart) {
         if(conn) {
             if(conn.intervalId) {
                 clearInterval(conn.intervalId);
-                conn.intervalId = null;
+                delete conn.intervalId;
                 return true;
             }
         }
@@ -892,15 +966,16 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
 
 /*
  * If shareChart is not set, show this id's percentage of protocols.
- * If set, show percentage of conn data // including rank and showFilter
+ * If set, sync type, data, legend of line chart // including rank and showFilter
+ * bp_flag: 1=> byte, 2=>pkt
  * */
-c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=2000, shareChart=null, rank) {
+c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000, shareChart=null) {
     if(chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
         return false;
     }
-    if(type!='byte' && type!='pkt') {
-        console.log("unknown type in showProtoPie");
+    if(shareChart==null && bp_flag!=1 && bp_flag!=2) {
+        console.log("unknown bp_flag in showProtoPie");
         return false;
     }
 
@@ -913,10 +988,10 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=20
             var columns = [['ts', 0]];
             for(var x in data) {
                 var entry = data[x];
-                if(type=='byte') {
+                if(bp_flag==1) {
                     columns.push([entry['protoName'], entry['bytes']]);
                 }
-                else if(type=='pkt') {
+                else if(bp_flag==2) {
                     columns.push([entry['protoName'], entry['packets']]);
                 }
             }
@@ -933,18 +1008,16 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=20
     }
     else {
         var shareConn = this.chart2conn(shareChart);
-        // XXX: not validate yet...
-        if(typeof rank == 'undefined') {
-            throw "rank undefined";
-        }
         myfunc = function(){
             var columns = [];
+            var rt_rank = shareChart.internal.legend[0][0].childNodes.length;
             columns.push(shareConn['dpi_ts']);
-            if(type=='byte') { // byte
-                addDPIcolumn.call(_this, shareConn, columns, 'byte', rank);
+            var bp_flag = shareConn.showFilter['bp_flag'];
+            if(bp_flag==1) { // byte
+                addDPIcolumn.call(_this, shareConn, columns, 'byte', rt_rank);
             }
-            else if(type=='pkt') { // pkt
-                addDPIcolumn.call(_this, shareConn, columns, 'pkt', rank);
+            else if(bp_flag==2) { // pkt
+                addDPIcolumn.call(_this, shareConn, columns, 'pkt', rt_rank);
             }
 
             chart.transform('pie');
@@ -985,8 +1058,64 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, type='byte', interval=20
     return true;
 }
 
+/*  */
+c3_wrapper.prototype.showLinkGuage = function(chart, ids, type='byte', interval=2000) {
+    if(chart.hasOwnProperty('intervalId')) {
+        console.log("chart already showed");
+        return false;
+    }
+    if(type!='byte' && type!='pkt') {
+        console.log("unknown type in showProtoPie");
+        return false;
+    }
+
+    var _this = this;
+    var dpi = this.dpi_oper; 
+    var myfunc;
+    myfunc = function() {
+        var columns = [['ts', 0]];
+
+
+        chart.transform('guage');
+    };
+    myfunc();
+    var intervalId = setInterval(myfunc, interval);
+    chart.show_type = "pie";
+    chart.intervalId = intervalId;
+    return true;
+}
+
+c3_wrapper.prototype.changeRT_RANK = function(chart, rt_rank) {
+    if(chart.hasOwnProperty('rt_rank')) {
+        chart.rt_rank = rt_rank;
+        chart.unload_flag = true;
+        return true;
+    }
+    else {
+        console.log("line chart must be started first");
+        return false;
+    }
+}
+
+c3_wrapper.prototype.changeBP_FLAG = function(chart, bp_flag) {
+    var conn = this.chart2conn(chart);
+    if(bp_flag>3 || bp_flag<=0) {
+        console.log("bp_flag error");
+        return false;
+    }
+    conn['showFilter']['bp_flag'] = bp_flag; // show both port and byte
+    chart.unload_flag = true;
+    return true;
+}
+
+/* dpi demo */
 function demo() {
-    c3w.startShowLine(live_dpi_chart, 'dpi', 3)
-    c3w.showProtoPie(pie_chart, 1, 'byte', 2000, live_dpi_chart, 3)
-    c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt')
+    c3w.startShowLine(live_dpi_chart, 'dpi', 3);
+    c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
+    c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
+}
+
+/* port demo */
+function demo2() {
+    c3w.startShowLine(live_dpi_chart, 'port', 2); // chart, type, bp_flag
 }
