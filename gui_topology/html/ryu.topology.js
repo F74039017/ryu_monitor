@@ -220,6 +220,8 @@ var init_flag = false; // TEST - LIVE DPI EXAMPLE
 /* define netjsongraph's node and link event */
 function testOnNodeClick(data) {
 	console.log(data);
+	reconstruct();
+	demo4(data);
 }
 
 function testOnLinkClick(data) {

@@ -599,6 +599,9 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
     return conn;
 }
 
+/*
+ * clear dpi_oper callback and remove connection from manager
+ * */
 c3_wrapper.prototype.destroy = function(chart, callback=null, tryCnt=0) {
     // delay and try
     //console.log(chart.loading);
@@ -1129,7 +1132,7 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000
  * ids: [src_id, dst_id] // src_id must be dpid
  * port_no: src_id's port_no => dst_id
  * */
-c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=null, shareChart=null, interval=1000) {
+c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=null, shareChart=null, interval=1000) {
     if(shareChart==null || port_no==null) {
         console.log("shareChart or port_no is null");
         return false;
@@ -1149,7 +1152,6 @@ c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=n
         console.log("null conn");
         return false;
     }
-    var bp_flag = shareConn.showFilter['bp_flag'];
 
     var _this = this;
     var dpi = this.dpi_oper; 
@@ -1164,6 +1166,7 @@ c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=n
         var data = db[port_no];
 
         var len = data['tx_byte'].length;
+        var bp_flag = shareConn.showFilter['bp_flag'];
         if(bp_flag==1) { // byte
             columns.push(['data', Math.floor(data['tx_byte'][len-2]/1024)]);
         }
@@ -1195,6 +1198,7 @@ c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=n
         var data = db[port_no];
 
         var len = data['rx_byte'].length;
+        var bp_flag = shareConn.showFilter['bp_flag'];
         if(bp_flag==1) { // byte
             columns.push(['data', Math.floor(data['rx_byte'][len-2]/1024)]);
         }
@@ -1215,6 +1219,107 @@ c3_wrapper.prototype.showLinkGuage = function(chart_st, chart_ts, ids, port_no=n
     chart_ts.show_type = "gauge";
     chart_ts.unload_flag = true;
     chart_ts.intervalId = ts_intervalId;
+
+    return true;
+}
+
+c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null, interval=1000) {
+    if(shareChart==null) {
+        console.log("shareChart is null");
+        return false;
+    }
+    if(chart_rx.hasOwnProperty('intervalId')) {
+        console.log("chart_rx already showed");
+        return false;
+    }
+    if(chart_tx.hasOwnProperty('intervalId')) {
+        console.log("chart_tx already showed");
+        return false;
+    }
+
+    // byte and pkt flag define in line chart 
+    var shareConn = this.chart2conn(shareChart);
+    if(shareConn==null) {
+        console.log("null conn");
+        return false;
+    }
+
+    var _this = this;
+    var dpi = this.dpi_oper; 
+
+    var tx_func;
+    tx_func = function() {
+        if(!shareConn.port_data_ready || !shareConn['port_sts'])
+            return;
+
+        var columns = [];
+        var db = shareConn.data['port'];
+    
+        var sum = 0;
+        for(var port_no in db) {
+            // XXX: suppose no tot_xxx fields
+            var data = db[port_no];
+            var len = data['tx_byte'].length;
+            var bp_flag = shareConn.showFilter['bp_flag'];
+            if(bp_flag==1) { // byte
+                sum += data['tx_byte'][len-2]/1024;
+            }
+            else { // pkt
+                sum += data['tx_pkt'][len-2]/1024;
+            }
+        }
+        columns.push(['data', Math.floor(sum)]);
+
+        /* update c3 chart */
+        chart_tx.loading = true;
+        chart_tx.load({
+            columns: columns,
+            done: function() {
+                setTimeout(function(){chart_tx.loading = false;}, c3_wrapper.prototype.destroy_delay);
+            }
+        });
+    };
+    var tx_intervalId = setInterval(tx_func, interval);
+    chart_tx.show_type = "gauge";
+    chart_tx.unload_flag = true;
+    chart_tx.intervalId = tx_intervalId;
+
+    var rx_func;
+    rx_func = function() {
+        if(!shareConn.port_data_ready || !shareConn['port_sts'])
+            return;
+
+        var columns = [];
+        var db = shareConn.data['port'];
+
+        var sum = 0;
+        for(var port_no in db) {
+            // XXX: suppose no tot_xxx fields
+            var data = db[port_no];
+            var len = data['rx_byte'].length;
+            var bp_flag = shareConn.showFilter['bp_flag'];
+            if(bp_flag==1) { // byte
+                sum += data['rx_byte'][len-2]/1024;
+            }
+            else { // pkt
+                sum += data['rx_pkt'][len-2]/1024;
+            }
+        }
+        columns.push(['data', Math.floor(sum)]);
+
+        /* update c3 chart */
+        chart_rx.loading = true;
+        chart_rx.load({
+            columns: columns,
+            done: function() {
+                setTimeout(function(){chart_rx.loading = false;}, c3_wrapper.prototype.destroy_delay);
+            }
+        });
+    };
+    var rx_intervalId = setInterval(rx_func, interval);
+    chart_rx.show_type = "gauge";
+    chart_rx.unload_flag = true;
+    chart_rx.intervalId = rx_intervalId;
 
     return true;
 }
@@ -1356,7 +1461,7 @@ function demo2(link) {
     c3w.startShowLine(live_dpi_chart, 'port', 0); // chart, type, bp_flag==0 -> show both rx and tx
 
     /* gauge chart */
-    c3w.showLinkGuage(pie_chart, contribute_chart, ids, port_no, live_dpi_chart);
+    c3w.showLinkGauge(pie_chart, contribute_chart, ids, port_no, live_dpi_chart);
 
     /* change title */
     $("#tx_title").text(ids[0].toString()+"  =>  "+ids[1].toString());
@@ -1373,8 +1478,27 @@ function reconstruct() {
     //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
 }
 
+/*
+ * XXX: init without delay will make the chart broken
+ * */
 function initChart() {
     window.live_dpi_chart = c3w.genSimpleChart([300, 520], 'line',"#line_chart");
     window.pie_chart = c3w.genSimpleChart([225, 275], 'gauge',"#proto_pie_chart");
     window.contribute_chart = c3w.genSimpleChart([225, 275], 'gauge',"#contribute_pie_chart");
+}
+
+/******   NODE DEMO   ********/
+function demo3() {
+    c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
+    c3w.startShowLine(live_dpi_chart, 'dpi', 3);
+    //c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
+    //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
+}
+
+function demo4(node) {
+    var id = node.id;
+    c3w.connectData(live_dpi_chart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
+    //c3w.stopShow(live_dpi_chart);
+    c3w.startShowLine(live_dpi_chart, 'port', 1);
+    c3w.showSwGauge(pie_chart, contribute_chart, live_dpi_chart);
 }
