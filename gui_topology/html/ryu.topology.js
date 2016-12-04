@@ -212,19 +212,6 @@ var rpc = {
 
 		dpi.updateDPI(data[0]);
 
-		// TEST - LIVE DPI EXAMPLE
-		if(live_dpi_chart && !init_flag) {
-			init_flag = true;
-			// XXX: test connect in c3_wapper.js -> demo()
-			//c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
-		}
-
-		// TEST - LIVE CHART EXAMPLE
-		if(dv_oper.live_chart && dv_oper.live_chart.livedpi) {
-			//console.log("send dpi");
-			//dv_oper.live_chart.livedpi(data[0]);
-		}
-
 		return "";
 	},
 }
@@ -237,6 +224,8 @@ function testOnNodeClick(data) {
 
 function testOnLinkClick(data) {
 	console.log(data);
+	reconstruct();
+	console.log(demo2(data));
 }
 
 function initialize_topology(callback) {

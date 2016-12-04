@@ -135,6 +135,7 @@ main({"netjsongraph": d3.netJsonGraph});
                 units: 'K bits'
             }
         });
+        /*
         window.contribute_chart = c3.generate({
             bindto: "#contribute_pie_chart",
             size: {
@@ -146,6 +147,28 @@ main({"netjsongraph": d3.netJsonGraph});
                 type: 'pie',
                 columns: []
             },
+        });
+        */
+        window.contribute_chart = c3.generate({
+            bindto: "#contribute_pie_chart",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                type: 'gauge',
+                columns: []
+            },
+            gauge: {
+                label: {
+                    format: function(value, ratio) {
+                        return value;
+                    },
+                },
+                min: 0,
+                max: 1000,
+                units: 'K bits'
+            }
         });
         window.live_dpi_chart = c3.generate({
             bindto: "#line_chart",
@@ -168,15 +191,15 @@ main({"netjsongraph": d3.netJsonGraph});
         </div>
         <div id="right">
             <div id=basic_info>
-                <p id="device_id">Dpid: 1</p>
+                <p id="device_id">Link info. demo</p>
             </div>
             <div id="right_top">
                 <div id="proto_pie" class="pie_chart_container">
-                    <p class="chart_title">Protocols</p>
+                    <p class="chart_title" id="tx_title">TX</p>
                     <div id="proto_pie_chart" class="pie_chart">chart</div>
                 </div>
                 <div id="contribute_pie" class="pie_chart_container">
-                    <p class="chart_title">HTTP</p>
+                    <p class="chart_title" id="rx_title">RX</p>
                     <div id="contribute_pie_chart" class="pie_chart">chart</div>
                 </div>
                 <div>
