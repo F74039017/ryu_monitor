@@ -260,13 +260,15 @@ function main(callback) { // pass callbacks
 	}
 }
 
-//main(); // to conbime netJsonGraph and topo data => call in index.html js with callback
+//main(); // to combine netJsonGraph and topo data => call in index.html js with callback
 
 /* helper function for netdata */
 function trimInt(x) {
 	return parseInt(trim_zero(x));
 }
 /* netjson */
+// {dpid: port: dpid}
+window.sw_port_table = {};
 var netdata = {
 	update: function(hosts) {
 		topo.nodes.forEach( function(x) {
@@ -274,9 +276,21 @@ var netdata = {
 		});
 		topo.links.forEach( function(x) {
 			// put links between switches
-			netdata.links.push({source: parseInt(trim_zero(x.port.src.dpid)), target: trimInt(x.port.dst.dpid),
-				properties: {src_mac: x.port.src.hw_addr, src_port: trimInt(x.port.src.port_no),
-							dst_mac: x.port.dst.hw_addr, dst_port: trimInt(x.port.dst.port_no)}});
+			var src_dpid = trimInt(x.port.src.dpid);
+			var dst_dpid = trimInt(x.port.dst.dpid);
+			var src_port = trimInt(x.port.src.port_no);
+			var dst_port = trimInt(x.port.dst.port_no);
+			netdata.links.push({source: src_dpid, target: dst_dpid,
+				properties: {src_mac: x.port.src.hw_addr, src_port: src_port,
+							dst_mac: x.port.dst.hw_addr, dst_port: dst_port}});
+			if(!window.sw_port_table.hasOwnProperty(src_dpid)) {
+				window.sw_port_table[src_dpid] = {};
+			}
+			window.sw_port_table[src_dpid][src_port] = dst_dpid;
+			if(!window.sw_port_table.hasOwnProperty(dst_dpid)) {
+				window.sw_port_table[dst_dpid] = {};
+			}
+			window.sw_port_table[dst_dpid][dst_port] = src_dpid;
 		});
 		hosts.forEach(function(host) {
 			netdata.nodes.push({id: host.ipv4[0], properties: {type: "host"}});

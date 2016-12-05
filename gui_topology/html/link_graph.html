@@ -184,14 +184,44 @@ main({"netjsongraph": d3.netJsonGraph});
     });
  })(window);
 </script>
+<script>
+    function bp_btn_func() {
+        if(window.bp_stat==1) {
+            window.bp_stat = 2;
+            pie_chart.internal.config.gauge_max = 3000;
+            contribute_chart.internal.config.gauge_max = 3000;
+            pie_chart.internal.config.gauge_units = "Packets";
+            contribute_chart.internal.config.gauge_units = "Packets";
+        }
+        else {
+            window.bp_stat = 1;
+            pie_chart.internal.config.gauge_max = 5000;
+            contribute_chart.internal.config.gauge_max = 5000;
+            pie_chart.internal.config.gauge_units = "K bits";
+            contribute_chart.internal.config.gauge_units = "K bits";
+        }
+        c3w.changeBP_FLAG(live_dpi_chart, window.bp_stat);
+    }
 
+    function rt_btn_func() {
+        if(window.rt_stat==1) {
+            window.rt_stat = 2;
+        }
+        else {
+            window.rt_stat = 1;
+        }
+        c3w.changeRT_RANK(live_dpi_chart, window.rt_stat);
+    }
+</script>
     <div id="container">
         <!--for netjson-->
         <div id="left">
         </div>
         <div id="right">
             <div id=basic_info>
-                <p id="device_id">Link info. demo</p>
+                <!--<p id="device_id">Link info. demo</p>-->
+                <button type="button" id="bp_btn" onclick="bp_btn_func()">BP button</button>
+                <button type="button" id="rt_btn" onclick="rt_btn_func()">RT button</button>
             </div>
             <div id="right_top">
                 <div id="proto_pie" class="pie_chart_container">

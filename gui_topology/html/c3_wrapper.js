@@ -365,7 +365,8 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
 }
 
 /* process one kind of field. e.g rx_pkt */
-c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data, size) {
+c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size, dpi) {
+    var db = conn.data['port'];
     if(!this.isPortInfo(fieldName))
         throw "error port field";
 
@@ -384,12 +385,16 @@ c3_wrapper.prototype.appendPortData = function(db, fieldName, port_data, size) {
         for(var x in port_data) {
             if(!isNaN(parseInt(x))) {
                 var port_no = x;
+                var dst_id = dpi.idPort2id(conn.id, port_no);
+                if(dst_id==null)
+                    continue;
                 if(!db.hasOwnProperty(port_no)) {
                     db[port_no] = {};
                 }
 
                 if(!db[port_no].hasOwnProperty(fieldName)) {
-                    db[port_no][fieldName] = [port_no+"_"+fieldName, port_data[port_no][fieldName]];
+                    //db[port_no][fieldName] = [port_no+"_"+fieldName, port_data[port_no][fieldName]];
+                    db[port_no][fieldName] = [dst_id[1].toString()+"_"+fieldName, port_data[port_no][fieldName]];
                 }
                 else {
                     var last = db[port_no][fieldName].pop();
@@ -547,7 +552,6 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 
         /* Register port data */
         this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data){
-            // this is chart, _this is c3_wrapper
             
             /* add ts */
             if(conn.port_data_ready) {
@@ -555,10 +559,9 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             }
 
             /* add port data */
-            var db = conn.data['port'];
             for(var x in conn.connFilter['port']) { // try to add all field in connFilter
                 var fieldName = conn.connFilter['port'][x];
-                _this.appendPortData(db, fieldName, port_data, conn.size); // port_data = {port_no: {} || tot_xxx: int}
+                _this.appendPortData(conn, fieldName, port_data, conn.size, this.dpi_oper); // port_data = {port_no: {} || tot_xxx: int}
             }
             this.rmOldData(conn['port_ts'], conn.size);
 
@@ -688,6 +691,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
         setId = setInterval(function(){
             var db = conn.data['port'];
             var rt_flag = chart.rt_rank;
+            window.rt_stat = rt_flag;
 
             /* prepare columns */
             var columns = [];
@@ -713,6 +717,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             //}
 
             var flag = conn.showFilter['bp_flag'];
+            window.bp_stat = flag;
             for(var x in conn.showFilter['port']) {
                 var fieldName = conn.showFilter['port'][x];
                 if((rt_flag&1)>0 && fieldName.charAt(0)!='r') // rx
@@ -796,6 +801,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             //}
             
             var flag = conn.showFilter['bp_flag'];
+            window.bp_stat = flag;
             // XXX: because of protocol tag, flag==3 => show only byte
             if((1&flag)>0) { // byte
                 addDPIcolumn.call(_this, conn, columns, 'byte', rank);
@@ -1171,7 +1177,7 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
             columns.push(['data', Math.floor(data['tx_byte'][len-2]/1024)]);
         }
         else { // pkt
-            columns.push(['data', Math.floor(data['tx_pkt'][len-2]/1024)]);
+            columns.push(['data', Math.floor(data['tx_pkt'][len-2])]);
         }
 
         /* update c3 chart */
@@ -1203,7 +1209,7 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
             columns.push(['data', Math.floor(data['rx_byte'][len-2]/1024)]);
         }
         else { // pkt
-            columns.push(['data', Math.floor(data['rx_pkt'][len-2]/1024)]);
+            columns.push(['data', Math.floor(data['rx_pkt'][len-2])]);
         }
 
         /* update c3 chart */
@@ -1265,7 +1271,7 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
                 sum += data['tx_byte'][len-2]/1024;
             }
             else { // pkt
-                sum += data['tx_pkt'][len-2]/1024;
+                sum += data['tx_pkt'][len-2];
             }
         }
         columns.push(['data', Math.floor(sum)]);
@@ -1302,7 +1308,7 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
                 sum += data['rx_byte'][len-2]/1024;
             }
             else { // pkt
-                sum += data['rx_pkt'][len-2]/1024;
+                sum += data['rx_pkt'][len-2];
             }
         }
         columns.push(['data', Math.floor(sum)]);
@@ -1502,3 +1508,6 @@ function demo4(node) {
     c3w.startShowLine(live_dpi_chart, 'port', 1);
     c3w.showSwGauge(pie_chart, contribute_chart, live_dpi_chart);
 }
+
+window.bp_stat = 1;
+window.rt_stat = 1; // only node need

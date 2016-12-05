@@ -37,6 +37,7 @@ function dpi_oper(dpid=null, period=null) {
     this.period;
     this.dpi_info;
     this.sw_host_table;
+    this.sw_port_table;
     this.tree;
     this.host_data;
     this.dpi_callbacks;
@@ -47,6 +48,7 @@ function dpi_oper(dpid=null, period=null) {
     this.dpi_info = null;
     this.dpi_port = null;
     this.sw_host_table = null; // {dpid: port_no: {host_ipv4}, dpid2: {...}}
+    this.sw_port_table = window.sw_port_table;
         // tree = {rdpid: {'parent': None, 'child': [], 'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': port_no: {rx_pkt, rx_byte, tx_pkt, tx_byte}} }
     this.tree = null; // contain parent and child info. update this with updateTree() method  
     this.host_data = {}; // dpi_info => host_data by ip {hostname: {'dpi_data': {protocol_name: {bytes, packets}}, 'port_data': {...}}}
@@ -227,6 +229,24 @@ dpi_oper.prototype.removeCallback = function(type, cb_name) {
 /**********************************
  *  Helper function
  **********************************/
+
+/* return array ['sw / host', id] */
+dpi_oper.prototype.idPort2id = function(id, port) {
+    // check sw first 
+    var dpid = this.sw_port_table[id][port];
+    if(typeof dpid == "undefined") {
+        var host = this.sw_host_table[id][port];
+        if(typeof host == "undefined") {
+            return null;
+        }
+        else {
+            return ['host', host];
+        }
+    }
+    else {
+        return ['sw', dpid];
+    }
+}
 
 dpi_oper.prototype.isReady = function() {
     if((this.ready&7)==7) {
