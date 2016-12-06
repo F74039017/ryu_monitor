@@ -220,13 +220,26 @@ var init_flag = false; // TEST - LIVE DPI EXAMPLE
 /* define netjsongraph's node and link event */
 function testOnNodeClick(data) {
 	console.log(data);
-	reconstruct();
-	demo4(data);
+	if(window.dp_stat == 1) {
+		reconstructDPI();
+	}
+	else {
+		reconstructPort();
+	}
+	dp_changePage();
+	contribute_chart.unload();
+	//demo4(data);
+	demo(data);
 }
 
 function testOnLinkClick(data) {
 	console.log(data);
-	reconstruct();
+	if(window.dp_stat == 1) {
+		reconstructDPI();
+	}
+	else {
+		reconstructPort();
+	}
 	console.log(demo2(data));
 }
 

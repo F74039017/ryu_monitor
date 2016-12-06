@@ -836,6 +836,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             var same = _this.checkUnload(chart, columns);
             if(same) {
                 /* update c3 chart */
+                console.log(JSON.stringify(columns));
                 chart.loading = true;
                 chart.load({
                     x: 'ts',
@@ -937,7 +938,7 @@ c3_wrapper.prototype.removeConnByChart = function(chart) {
  * XXX: For convenience, does not use connection conception...
  * Instead, record show_type and intervalId in chart
  * */
-c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, type='byte', interval=2000) {
+c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, shareChart=null, interval=2000) {
     if(chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
         return false;
@@ -946,8 +947,8 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
         console.log("undefined protoName");
         return false;
     }
-    if(type!='byte' && type!='pkt') {
-        console.log("unknown type in showProtoPie");
+    if(shareChart==null) {
+        console.log("null shareChart");
         return false;
     }
 
@@ -963,6 +964,8 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
             return;
         }
 
+        var shareConn = _this.chart2conn(shareChart);
+        var bp_flag = shareConn.showFilter['bp_flag']; // bp depends on line chart
         var data = dpi.getDPIById(child_list);
         var columns = [['ts', 0]];
         for(var x in data) {
@@ -973,10 +976,10 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
                 var entry = dpi_list[i];
                 if(entry['protoName']==protoName) {
                     found = true;
-                    if(type=='byte') {
+                    if(bp_flag==1) {
                         columns.push([cdpid_str, entry['bytes']]);
                     }
-                    else if(type=='pkt') {
+                    else if(bp_flag==2) {
                         columns.push([cdpid_str, entry['packets']]);
                     }
                     break;
@@ -997,10 +1000,10 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
                 var entry = host_data[i];
                 if(entry['protoName']==protoName) {
                     found = true;
-                    if(type=='byte') {
+                    if(bp_flag==1) {
                         columns.push([host_name, entry['bytes']]);
                     }
-                    else if(type=='pkt') {
+                    else if(bp_flag==2) {
                         columns.push([host_name, entry['packets']]);
                     }
                     break;
@@ -1011,15 +1014,18 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, t
             }
         }
 
-        console.log(JSON.stringify(columns));
+        //console.log(JSON.stringify(columns));
         chart.transform('pie');
-        chart.loading = true;
-        chart.load({
-            columns: columns,
-            done: function() {
-                setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
-            }
-        });
+        var same = _this.checkUnload(chart, columns);
+        if(same) {
+            chart.loading = true;
+            chart.load({
+                columns: columns,
+                done: function() {
+                    setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
+                }
+            });
+        }
     };
     chart.unload_flag = true;
     myfunc();
@@ -1424,11 +1430,12 @@ c3_wrapper.prototype.genSimpleChart = function(dimension=null, type=null, bind=n
 /* dpi demo */
 // connectData = function(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, bp_flag: null, port_no: null}, size=10, failTime=0)
 
-function demo() {
-    c3w.connectData(live_dpi_chart, "10.0.0.1", null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
+function demo(node) {
+    var id = node.id;
+    c3w.connectData(live_dpi_chart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
     c3w.startShowLine(live_dpi_chart, 'dpi', 3);
     c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
-    c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
+    //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
 }
 
 /******   LINK DEMO   ********/
@@ -1467,7 +1474,7 @@ function demo2(link) {
     c3w.startShowLine(live_dpi_chart, 'port', 0); // chart, type, bp_flag==0 -> show both rx and tx
 
     /* gauge chart */
-    c3w.showLinkGauge(pie_chart, contribute_chart, ids, port_no, live_dpi_chart);
+    c3w.showLinkGauge(rx_gauge, tx_gauge, ids, port_no, live_dpi_chart);
 
     /* change title */
     $("#tx_title").text(ids[0].toString()+"  =>  "+ids[1].toString());
@@ -1477,11 +1484,19 @@ function demo2(link) {
     return ids;
 }
 
-function reconstruct() {
+function reconstructPort() {
+	window.dp_stat = 1; // default dpi mode
+    c3w.destroy(window.live_dpi_chart);
+    c3w.destroy(window.rx_gauge);
+    c3w.destroy(window.tx_gauge);
+    //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
+}
+
+function reconstructDPI() {
+	window.dp_stat = 1; // default dpi mode
     c3w.destroy(window.live_dpi_chart);
     c3w.destroy(window.pie_chart);
     c3w.destroy(window.contribute_chart);
-    //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
 }
 
 /*
@@ -1489,15 +1504,15 @@ function reconstruct() {
  * */
 function initChart() {
     window.live_dpi_chart = c3w.genSimpleChart([300, 520], 'line',"#line_chart");
-    window.pie_chart = c3w.genSimpleChart([225, 275], 'gauge',"#proto_pie_chart");
-    window.contribute_chart = c3w.genSimpleChart([225, 275], 'gauge',"#contribute_pie_chart");
+    window.rx_gauge = c3w.genSimpleChart([225, 275], 'gauge',"#rx_gauge");
+    window.tx_gauge = c3w.genSimpleChart([225, 275], 'gauge',"#tx_gauge");
 }
 
 /******   NODE DEMO   ********/
 function demo3() {
     c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
     c3w.startShowLine(live_dpi_chart, 'dpi', 3);
-    //c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
+    c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
     //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
 }
 
@@ -1506,8 +1521,25 @@ function demo4(node) {
     c3w.connectData(live_dpi_chart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
     //c3w.stopShow(live_dpi_chart);
     c3w.startShowLine(live_dpi_chart, 'port', 1);
-    c3w.showSwGauge(pie_chart, contribute_chart, live_dpi_chart);
+    c3w.showSwGauge(rx_gauge, tx_gauge, live_dpi_chart);
 }
 
 window.bp_stat = 1;
 window.rt_stat = 1; // only node need
+window.dp_stat = 1; // 1: dpi, 2: port
+window.cur_id = null;
+
+function dp_changePage() {
+    if(window.dp_stat == 1) {
+        $("#rx_gauge").hide();
+        $("#tx_gauge").hide();
+        $("#proto_pie_chart").show();
+        $("#contribute_pie_chart").show();
+    }
+    else {
+        $("#rx_gauge").show();
+        $("#tx_gauge").show();
+        $("#proto_pie_chart").hide();
+        $("#contribute_pie_chart").hide();
+    }
+}
