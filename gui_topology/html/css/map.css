@@ -1,5 +1,4 @@
 .background {
-    fill: none;
     pointer-events: all;
 }
 
@@ -116,18 +115,42 @@ div.tooltip {
     fill: #90E0F9;
 }
 
-.department {
+.dept_0,
+.dept_1,
+.dept_2,
+.dept_3,
+.dept_4,
+.dept_5,
+.dept_6,
+.dept_7,
+.dept_8 {
     fill: #F05F40;
     stroke: #541C0E;
     stroke-width: 1.0px;
     cursor: pointer;
 }
 
-.department:hover {
+.dept_0:hover,
+.dept_1:hover,
+.dept_2:hover,
+.dept_3:hover,
+.dept_4:hover,
+.dept_5:hover,
+.dept_6:hover,
+.dept_7:hover,
+.dept_8:hover  {
     fill: #FF886A;
 }
 
-.department.active {
+.dept_0.active,
+.dept_1.active,
+.dept_2.active,
+.dept_3.active,
+.dept_4.active,
+.dept_5.active,
+.dept_6.active,
+.dept_7.active,
+.dept_8.active  {
     fill: orange;
 }
 

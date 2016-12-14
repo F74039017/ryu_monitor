@@ -8,101 +8,168 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Network Visualization</title>
-    <!-- Bootstrap Core CSS -->
+    <!-- Plugin CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Plugin Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- Custom Fonts -->
-    <link href="css/fonts/Open_Sans.css" rel="stylesheet" type="text/css">
-    <link href="css/fonts/Merriwesther.css" rel="stylesheet" type="text/css">
-    <link href="css/fonts/Josefin_Sans.css" rel="stylesheet" type="text/css">
-    <link href="css/fonts/Roboto.css" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
     <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link href="css/sidebar.css" rel="stylesheet" type="text/css">
-    <link href="css/topology.css" rel="stylesheet" type="text/css">
     <link href="css/map.css" rel="stylesheet" type="text/css">
     <!-- JQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/jquery/jquery.metisMenu.js"></script>
-    <script src="vendor/jquery/jquery.nicescroll.js"></script>
-    <!-- Bootstrap Core JavaScript -->
+    <!-- Plugin JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!-- D3.js -->
-    <script src="vendor/d3/d3.min.js"></script>
-    <script src="netjson_src/netjsongraph.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="vendor/d3/d3.v3.min.js"></script>
+    <script src="vendor/topojson/topojson.v1.min.js"></script>
     <!-- Custom JavaScript -->
-    <script src="js/main_sidebar.js"></script>
+    <script src="js/main_navbar.js"></script>
+    <script src="js/d3/guage.js"></script>
 </head>
 
-<body onload="sizeChange()">
-    <!-- Map if NCKU campus -->
-    <div class="container-map">
-        <script src="js/main_map.js"></script>
-    </div>
-    <!-- Map of NCKU campus -->
-    <nav class="main-menu">
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="#" class="hvr-bounce-to-right">
-                            <i class="fa fa-map-o fa-lg"></i>
-                            <span class="nav-text">Topology</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hvr-bounce-to-right">
-                            <i class="fa fa-building-o fa-lg"></i>
-                            <span class="nav-text">Floor Plan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hvr-bounce-to-right">
-                            <i class="fa fa-area-chart fa-lg"></i>
-                            <span class="nav-text">Statistics</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li class="darkerlishadow">
-                                <a href="#" class="hvr-bounce-to-right">
-                                    <i class="fa fa-tachometer fa-lg"></i>
-                                    <span class="nav-text">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="darkerli">
-                                <a href="#" class="hvr-bounce-to-right">
-                                    <i class="fa fa-pie-chart fa-lg"></i>
-                                    <span class="nav-text">Charts</span>
-                                </a>
-                            </li>
-                            <li class="darkerli">
-                                <a href="#" class="hvr-bounce-to-right">
-                                    <i class="fa fa-table fa-lg"></i>
-                                    <span class="nav-text">Tables</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="hvr-bounce-to-right">
-                            <i class="fa fa-cogs fa-lg"></i>
-                            <span class="nav-text">Optiion</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hvr-bounce-to-right">
-                            <i class="fa fa-question-circle fa-lg"></i>
-                            <span class="nav-text">Help</span>
-                        </a>
-                    </li>
-                </ul>
+<body>
+    <!-- right-side nav -->
+    <div class="container container-navbar">
+        <!-- sidetab -->
+        <div class="sidetab">
+            <div class="sidetab-tab sidetab-info" id="tab-info">
+                <!-- info-content -->
+                <div class="info-content">
+                    <!-- content-top -->
+                    <div class="content-top">
+                        <div class="info-back">
+                            <a href="#" class="top-icon hvr-btr" id="icon-back"><i class="fa fa-chevron-left"></i></a>
+                        </div>
+                        <div class="info-title">
+                            <p class="title-top">Basic Information</p>
+                        </div>
+                    </div>
+                    <!-- content-main -->
+                    <div class="content-main">
+                        <div class="info-basic">
+                            <div class="info-addr">
+                                <p class="detail-ip">100.0.0.1</p>
+                                <p class="detail-mac">00-90-27-10-60-53</p>
+                            </div>
+                            <div class="info-pos">
+                                <p class="detail-camp">成功校區</p>
+                                <p class="detail-dept">資訊系館</p>
+                            </div>
+                            <div class="info-status">
+                                <div class="info-col">
+                                    <p class="col col-status"><span>Status</span></p>
+                                </div>
+                                <p class="detail-status">NORMAL</p>
+                            </div>
+                            <div class="info-traffin">
+                                <div class="info-col">
+                                    <p class="col col-traffin"><span>Traffic-in</span></p>
+                                </div>
+                                <p class="detail-traffin">300 MB/sec</p>
+                            </div>
+                            <div class="info-traffout">
+                                <div class="info-col">
+                                    <p class="col col-traffout"><span>Traffic-out</span></p>
+                                </div>
+                                <p class="detail-traffout">300 MB/sec</p>
+                            </div>
+                        </div>
+                        <div class="info-optn">
+                            <div class="optn-mark">
+                                <span class="tooltip">Mark</span>
+                                <a href="" class="optn-icon hvr-btr" id="icon-mark"><i class="fa fa-tag" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="optn-focus">
+                                <span class="tooltip">Focus</span>
+                                <a href="" class="optn-icon hvr-btr" id="icon-focus"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="optn-near">
+                                <span class="tooltip">Nearby</span>
+                                <a href="" class="optn-icon hvr-btr" id="icon-near"><i class="fa fa-bullseye" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="optn-flow">
+                                <span class="tooltip">Flow</span>
+                                <a href="" class="optn-icon hvr-btr" id="icon-flow"><i class="fa fa-random" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="chart-top">
+                            <div class="chart-block-left">
+                                <div class="chart-title">
+                                    <p class="">Gauge</p>
+                                </div>
+                                <div class="chart-main"></div>
+                            </div>
+                            <div class="chart-block-right">
+                                <div class="chart-title">
+                                    <p class="">Gauge</p>
+                                </div>
+                                <div class="chart-main"></div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="chart-mid">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Chart title</p>
+                                </div>
+                                <div class="chart-main"></div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="chart-btm">
+                            <div class="chart-block-left">
+                                <div class="chart-title">
+                                    <p class="">Pie Chart title</p>
+                                </div>
+                                <div class="chart-main"></div>
+                            </div>
+                             <div class="chart-block-right">
+                                <div class="chart-title">
+                                    <p class="">Pie Chart title</p>
+                                </div>
+                                <div class="chart-main"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- stat-content -->
             </div>
         </div>
-    </nav>
-    <!-- netJSONGraph -->
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-default sidebar-collapse" role="navigation">
+                <div class="sidebar-nav">
+                    <!-- nav-menu -->
+                    <ul class="nav-menu" id="menu">
+                        <li>
+                            <a href="#topo" class="nav-icon hvr-btr" id="icon-topo"><i class="fa fa-map-o fa-lg"></i></a>
+                        </li>
+                        <li>
+                            <a href="#info" class="nav-icon hvr-btr" id="icon-info"><i class="fa fa-info-circle"></i></a>
+                        </li>
+                        <li>
+                            <a href="#stat" class="nav-icon hvr-btr" id="icon-stat"><i class="fa fa-area-chart"></i></a>
+                        </li>
+                    </ul>
+                    <!-- nav-hint -->
+                    <ul class="nav-hint" id="hint">
+                        <li>
+                            <a href="#home" class="nav-icon hvr-btr" id="icon-home"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li>
+                            <a href="#optn" class="nav-icon hvr-btr" id="icon-optn"><i class="fa fa-cogs fa-lg"></i></a>
+                        </li>
+                        <li>
+                            <a href="#help" class="nav-icon hvr-btr" id="icon-help"><i class="fa fa-question-circle fa-lg"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- left-sdie map -->
+    <div class="container container-main">
+    	<!-- map -->
+        <div class="map">
+        	<div class="map-demo"></div>
+        	<script src="js/main_map.js"></script>
+        </div>
+    </div>
 </body>
-
-</html>
