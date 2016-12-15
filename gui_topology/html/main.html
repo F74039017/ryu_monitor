@@ -23,6 +23,23 @@
     <script src="vendor/topojson/topojson.v1.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="js/main_navbar.js"></script>
+    <!--Create websocekt to ryu-->
+    <script src="/static/ryu.topology.js" charset="utf-8"></script>
+    <!--dpi_oper.js-->
+    <script src="/static/dpi_oper.js" charset="utf-8"></script>
+    <!-- Load c3.css -->
+    <link href="/static/c3_lib/c3.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .c3-grid .c3-xgrid-focus {
+           visibility : hidden !important;
+        }
+    </style>
+    <!--load c3.js-->
+    <script src="/static/c3_lib/c3.min.js"></script>
+    <!--c3_wrapper.js-->
+    <script src="/static/c3_wrapper.js" charset="utf-8"></script>
+    <!--ui_oper-->
+    <script src="/static/ui_oper.js"></script>
 </head>
 
 <body onload="sizeChange();">
@@ -75,7 +92,7 @@
                                 <span class="tooltip">History Length</span>
                                 <form class="form-inline">
                                     <div class="input-info_hislen">
-                                        <input type="text" class="form-control form-info_hislen" placeholder="Interval">
+                                        <input type="text" class="form-control form-info_hislen" placeholder="History">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-info_hislen" id="btn-info_hislen">Submit</button>
                                 </form>
@@ -87,15 +104,15 @@
                                     <p class="">Protocols</p>
                                 </div>
                                 <div class="chart-main" id="protos_pie">
-                                    <img src="img/protos_pie.png">
+                                    <!--<img src="img/protos_pie.png">-->
                                 </div>
                             </div>
                             <div class="chart-block-right">
                                 <div class="chart-title">
                                     <p class="">Source of HTTP</p>
                                 </div>
-                                <div class="chart-main" id="proto_souce">
-                                    <img src="img/proto_source.png">
+                                <div class="chart-main" id="proto_source">
+                                    <!--<img src="img/proto_source.png">-->
                                 </div>
                             </div>
                         </div>
@@ -169,8 +186,8 @@
                                 <div class="chart-title">
                                     <p class="">Protocol info.</p>
                                 </div>
-                                <div class="chart-main">
-                                    <img src="img/dpi_chart.png">
+                                <div class="chart-main" id="out_dpi_chart">
+                                    <!--<img src="img/dpi_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -179,8 +196,8 @@
                                 <div class="chart-title">
                                     <p class="">Port info.</p>
                                 </div>
-                                <div class="chart-main">
-                                    <img src="img/port_chart.png">
+                                <div class="chart-main" id="out_port_chart">
+                                    <!--<img src="img/port_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -227,6 +244,17 @@
             <div class="map-demo"></div>
             <script src="js/main_map.js"></script>
         </div>
-        <div id="left">hello</div>
+        <div id="left"></div>
     </div>
+
+    <!--netjsongraph css-->
+    <link href="/static/netjsongraph.css" rel="stylesheet">
+    <!--<link href="/static/netjsongraph-theme.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="/static/css/netjson-dark.css" type="text/css">
+    <script src="/static/netjsongraph.js"></script>
+    <script>
+        main({"netjsongraph": d3.netJsonGraph}); // disable initialize_topology()
+        /* XXX: testing for netjsongraph */
+        //$(".map").hide();
+    </script>
 </body>
