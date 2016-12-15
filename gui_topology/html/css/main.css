@@ -33,14 +33,15 @@ body {
     width: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    left: ;
 }
+
 
 /* nav - sidetab */
 
 .sidetab {
     height: 100%;
-    width: 355px;
+    width: 400px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -65,7 +66,7 @@ body {
     opacity: 1;
 }
 
-.sidetab-tab .info-content {
+.sidetab-tab .tab-content {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -90,8 +91,10 @@ body {
     //overflow-y: scroll;
 }
 
+
 /* content-top */
-.content-top .info-back {
+
+.content-top .content-back {
     height: 100%;
     width: 255px;
     position: absolute;
@@ -100,7 +103,7 @@ body {
     outline: 0;
 }
 
-.content-top .info-back > .top-icon {
+.content-top .content-back > .top-icon {
     display: table-cell;
     height: 100%;
     width: 250px;
@@ -112,7 +115,7 @@ body {
     background-color: #0C2A44;
 }
 
-.content-top .info-back > .top-icon i {
+.content-top .content-back > .top-icon i {
     display: table-cell;
     height: 100%;
     position: absolute;
@@ -120,16 +123,15 @@ body {
     font-size: 25px;
 }
 
-.content-top .info-back:hover > .top-icon {
+.content-top .content-back:hover > .top-icon {
     color: #ffffff;
 }
 
-.content-top .info-title {
+.content-top .content-title {
     height: 100%;
-    width: 300px;
+    width: 80%;
     position: absolute;
-    left: 55px;
-    padding-left: 10px;
+    right: 0;
     background-color: #0C2A44;
 }
 
@@ -141,7 +143,356 @@ body {
     line-height: 55px;
 }
 
+/* topo-basic */
+
+.content-main .topo-basic {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: #e0e0e0;
+}
+
+.topo-basic .topo-addr {
+    height: 75px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 15px;
+    padding-left: 10px;
+    background-color: #b6aca2;
+}
+
+.topo-basic .topo-addr .detail-ip {
+    margin-top: 5px;
+    color: #001933;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.topo-basic .topo-addr .detail-mac {
+    margin-top: -5px;
+    padding-left: 1px;
+    color: #003366;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 15px;
+}
+
+.topo-basic .topo-pos {
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+    left: 55%;
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+.topo-basic .topo-pos .detail-camp {
+    height: 100%;
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.topo-basic .topo-pos .detail-dept {
+    height: 100%;
+    position: absolute;
+    left: 20%;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.topo-basic .topo-status {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 105px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #006600;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.topo-basic .topo-status .detail-status {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.topo-basic .topo-traffin {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 125px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #99ff99;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.topo-basic .topo-traffin .detail-traffin {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #006600;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.topo-basic .topo-traffout {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 145px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #99ff99;
+    border-bottom: 1.2px solid ##a0a0a0;
+}
+
+.topo-basic .topo-traffout .detail-traffout {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #006600;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.topo-basic .topo-col {
+    height: 20px;
+    width: 96px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.topo-basic .col {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #b6aca2;
+    border-bottom: 1.2px solid #e0e0e0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.topo-basic .col:before,
+.topo-basic .col:after {
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-bottom: 10px solid transparent;
+    border-top: 10px solid transparent;
+}
+
+.topo-basic .col:after {
+    margin-left: 96px;
+    border-left: 9px solid #b6aca2;
+}
+
+.topo-basic .col span {
+    width: 96px;
+    position: absolute;
+    padding-left: 8px;
+    font-size: 12px;
+    text-align: left;
+    text-transform: uppercase;
+    line-height: 20px;
+}
+
+
+/* topo-optn */
+
+.content-main .topo-optn {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 165px;
+    left: 0;
+    margin-top: 30px;
+}
+
+.topo-optn .optn-icon {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 10px;
+    padding-left: 40px;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: left;
+    line-height: 10px;
+    border: 1.5px solid #e0e0e0;
+}
+
+.topo-optn .optn-bp {
+    height: 100%;
+    width: 25%;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    background-color: #003366;
+}
+
+.topo-optn .optn-hislen {
+    height: 100%;
+    width: 75%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 25%;
+    padding-left: 5px;
+}
+
+.topo-optn .optn-hislen .input-group {
+    height: 100%;
+    width: 70%;
+    position: absolute;
+    top: 0;
+}
+
+.topo-optn .optn-hislen .form-text {
+    height: 140%;
+    width: 100%;
+    top: 0;
+    border: 2px solid #2A76B9;
+    border-radius: 0;
+}
+
+.topo-optn .optn-hislen .form-addon {
+    height: 100%;
+    width: 25%;
+    top: 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #2A76B9;
+    border: 0;
+    border-radius: 0;
+}
+
+.topo-optn .optn-hislen .form-btn {
+    height: 100%;
+    width: 25%;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 0;
+}
+
+.topo-optn .optn-bp .tooltip,
+.topo-optn .optn-hislen .tooltip {
+    visibility: hidden;
+    width: 120px;
+    position: absolute;
+    z-index: 1000;
+    padding: 5px 0;
+    background-color: black;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.topo-optn .optn-bp:hover .tooltip,
+.topo-optn .optn-hislen:hover .tooltip {
+    visibility: visible;
+}
+
+
+/* topo-chart */
+
+.content-main .topo-chart .chart-title {
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 10px;
+}
+
+.content-main #topo-chart-top {
+    height: 225px;
+    width: 95%;
+    position: absolute;
+    top: 250px;
+    left: 0;
+    right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#topo-chart-top .chart-block {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#topo-chart-top .chart-main {
+    height: 80%;
+    top: 20px;
+    background-color: #f6f6f6;
+    border: 2px groove #c0c0c0;
+    border-radius: 5px;
+}
+
+.content-main #topo-chart-btm {
+    height: 225px;
+    width: 95%;
+    position: absolute;
+    top: 475px;
+    left: 0;
+    right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#topo-chart-btm .chart-block {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#topo-chart-btm .chart-main {
+    height: 85%;
+    top: 20px;
+    background-color: #f6f6f6;
+    border: 2px groove #c0c0c0;
+    border-radius: 5px;
+}
+
+
 /* info-basic */
+
 .content-main .info-basic {
     height: 100%;
     width: 100%;
@@ -186,8 +537,8 @@ body {
     position: absolute;
     top: 75px;
     left: 55%;
+    margin-left: 20px;
     padding-top: 10px;
-    padding-left: 10px;
 }
 
 .info-basic .info-pos .detail-camp {
@@ -201,7 +552,7 @@ body {
 .info-basic .info-pos .detail-dept {
     height: 100%;
     position: absolute;
-    left: 22%;
+    left: 20%;
     font-size: 16px;
     font-weight: bold;
     line-height: 10px;
@@ -321,7 +672,9 @@ body {
     line-height: 20px;
 }
 
+
 /* info-optn */
+
 .content-main .info-optn {
     height: 40px;
     width: 100%;
@@ -351,6 +704,7 @@ body {
     width: 25%;
     top: 0;
     left: 0;
+    margin-left: 0px;
 }
 
 .info-optn .optn-focus {
@@ -399,7 +753,9 @@ body {
     visibility: visible;
 }
 
+
 /* info-chart */
+
 .content-main .info-chart .chart-title {
     width: 100%;
     font-size: 15px;
@@ -409,7 +765,7 @@ body {
     line-height: 10px;
 }
 
-.content-main #chart-top {
+.content-main #info-chart-top {
     height: 130px;
     width: 95%;
     position: absolute;
@@ -420,14 +776,14 @@ body {
     margin-right: 10px;
 }
 
-#chart-top .chart-block-left {
+#info-chart-top .chart-block-left {
     height: 100%;
     width: 50%;
     position: absolute;
     top: 0;
 }
 
-#chart-top .chart-block-right {
+#info-chart-top .chart-block-right {
     height: 100%;
     width: 50%;
     position: absolute;
@@ -435,7 +791,7 @@ body {
     left: 50%;
 }
 
-#chart-top .chart-main {
+#info-chart-top .chart-main {
     height: 80%;
     top: 20px;
     background-color: #f6f6f6;
@@ -443,7 +799,7 @@ body {
     border-radius: 5px;
 }
 
-.content-main #chart-mid {
+.content-main #info-chart-mid {
     height: 205px;
     width: 95%;
     position: absolute;
@@ -454,14 +810,14 @@ body {
     margin-right: 10px;
 }
 
-#chart-mid .chart-block {
+#info-chart-mid .chart-block {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
 }
 
-#chart-mid .chart-main {
+#info-chart-mid .chart-main {
     height: 90%;
     width: 100%;
     position: absolute;
@@ -471,7 +827,7 @@ body {
     border-radius: 5px;
 }
 
-.content-main #chart-btm {
+.content-main #info-chart-btm {
     height: 190px;
     width: 95%;
     position: absolute;
@@ -482,14 +838,14 @@ body {
     margin-right: 10px;
 }
 
-#chart-btm .chart-block-left {
+#info-chart-btm .chart-block-left {
     height: 100%;
     width: 50%;
     position: absolute;
     top: 0;
 }
 
-#chart-btm .chart-block-right {
+#info-chart-btm .chart-block-right {
     height: 100%;
     width: 50%;
     position: absolute;
@@ -497,13 +853,14 @@ body {
     left: 50%;
 }
 
-#chart-btm .chart-main {
+#info-chart-btm .chart-main {
     height: 85%;
     top: 20px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
 }
+
 
 /* nav - sidebar */
 
