@@ -256,7 +256,9 @@ function initialize_topology(callback) {
                 netdata.update(hosts);
                 //console.log("init netdata => callback netJsonGraph");
                 console.log(JSON.stringify(netdata));
-                callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
+				if(callback) {
+					callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
+				}
             });
         });
     });
@@ -281,7 +283,7 @@ function trimInt(x) {
 }
 /* netjson */
 // {dpid: port: dpid}
-window.sw_port_table = {};
+window.sw_port_table = {}; // XXX: del in future
 var netdata = {
 	update: function(hosts) {
 		topo.nodes.forEach( function(x) {
