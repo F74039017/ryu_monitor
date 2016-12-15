@@ -92,7 +92,7 @@
                                 <span class="tooltip">History Length</span>
                                 <form class="form-inline">
                                     <div class="input-info_hislen">
-                                        <input type="text" class="form-control form-info_hislen" placeholder="Interval">
+                                        <input type="text" class="form-control form-info_hislen" placeholder="History">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-info_hislen" id="btn-info_hislen">Submit</button>
                                 </form>
@@ -104,15 +104,15 @@
                                     <p class="">Protocols</p>
                                 </div>
                                 <div class="chart-main" id="protos_pie">
-                                    <img src="img/protos_pie.png">
+                                    <!--<img src="img/protos_pie.png">-->
                                 </div>
                             </div>
                             <div class="chart-block-right">
                                 <div class="chart-title">
                                     <p class="">Source of HTTP</p>
                                 </div>
-                                <div class="chart-main" id="proto_souce">
-                                    <img src="img/proto_source.png">
+                                <div class="chart-main" id="proto_source">
+                                    <!--<img src="img/proto_source.png">-->
                                 </div>
                             </div>
                         </div>
@@ -186,8 +186,8 @@
                                 <div class="chart-title">
                                     <p class="">Protocol info.</p>
                                 </div>
-                                <div class="chart-main">
-                                    <img src="img/dpi_chart.png">
+                                <div class="chart-main" id="out_dpi_chart">
+                                    <!--<img src="img/dpi_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -196,8 +196,8 @@
                                 <div class="chart-title">
                                     <p class="">Port info.</p>
                                 </div>
-                                <div class="chart-main">
-                                    <img src="img/port_chart.png">
+                                <div class="chart-main" id="out_port_chart">
+                                    <!--<img src="img/port_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -255,6 +255,6 @@
     <script>
         main({"netjsongraph": d3.netJsonGraph}); // disable initialize_topology()
         /* XXX: testing for netjsongraph */
-        $(".map").hide();
+        //$(".map").hide();
     </script>
 </body>

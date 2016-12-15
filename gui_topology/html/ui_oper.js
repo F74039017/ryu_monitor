@@ -4,12 +4,12 @@
 (function() {
 
     $(document).ready(function(){
-        initialize_topology(); // init topology
+        //initialize_topology(); // init topology
 
         /** OUTER **/
 
         var dpi_lineChart_sel = "#out_dpi_chart"; // TODO
-        var dpi_lineChart_dimen = [370, 185];
+        var dpi_lineChart_dimen = [415, 180];
         window.dpi_lineChart = c3.generate({
             bindto: dpi_lineChart_sel,
             size: {
@@ -23,7 +23,7 @@
         });
 
         var port_lineChart_sel = "#out_port_chart"; // TODO
-        var port_lineChart_dimen = [370, 185];
+        var port_lineChart_dimen = [415, 180];
         window.port_lineChart = c3.generate({
             bindto: port_lineChart_sel,
             size: {
@@ -39,7 +39,7 @@
         /** INNER **/
 
         var in_lineChart_sel = "#in_line_chart"; // TODO
-        var in_lineChart_dimen = [370, 185];
+        var in_lineChart_dimen = [415, 180];
         window.in_lineChart = c3.generate({
             bindto: in_lineChart_sel,
             size: {
@@ -53,7 +53,7 @@
         });
 
         var pie_chart_sel = "#protos_pie"; // TODO
-        var pie_chart_dimen = [180, 180];
+        var pie_chart_dimen = [210, 175];
         window.pie_chart = c3.generate({
             bindto: pie_chart_sel,
             size: {
@@ -69,7 +69,7 @@
         });
 
         var con_pie_chart_sel = "#proto_source"; // TODO
-        var con_pie_chart_dimen = [180, 180];
+        var con_pie_chart_dimen = [210, 175];
         window.contribute_chart = c3.generate({
             bindto: con_pie_chart_sel,
             size: {
@@ -83,6 +83,7 @@
             },
         });
 
+        /*
         var tx_gauge_sel = "#line_chart"; // TODO
         var tx_gauge_dimen = [380, 190];
         window.tx_gauge = c3.generate({
@@ -130,6 +131,7 @@
                 units: 'K bits'
             }
         });
+        */
     });
 
 })();
