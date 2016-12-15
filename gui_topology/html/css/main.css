@@ -41,7 +41,7 @@ body {
 
 .sidetab {
     height: 100%;
-    width: 400px;
+    width: 450px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -156,18 +156,19 @@ body {
     background-color: #e0e0e0;
 }
 
-.info-basic .info-addr {
+.info-basic .info-pos {
     height: 75px;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    padding-top: 15px;
+    padding-top: 12.5px;
     padding-left: 10px;
     background-color: #b6aca2;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.info-basic .info-addr .detail-ip {
+.info-basic .info-pos .detail-dept {
     margin-top: 5px;
     color: #001933;
     font-size: 30px;
@@ -175,8 +176,8 @@ body {
     line-height: 25px;
 }
 
-.info-basic .info-addr .detail-mac {
-    margin-top: -5px;
+.info-basic .info-pos .detail-camp {
+    margin-top: -2px;
     padding-left: 1px;
     color: #003366;
     font-size: 18px;
@@ -184,120 +185,93 @@ body {
     line-height: 15px;
 }
 
-.info-basic .info-pos {
-    height: 30px;
-    width: 100%;
-    position: absolute;
-    top: 75px;
-    left: 55%;
-    margin-left: 20px;
-    padding-top: 10px;
-}
-
-.info-basic .info-pos .detail-camp {
-    height: 100%;
-    position: absolute;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 10px;
-}
-
-.info-basic .info-pos .detail-dept {
-    height: 100%;
-    position: absolute;
-    left: 20%;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 10px;
-}
-
-.info-basic .info-status {
-    height: 20px;
-    width: 100%;
-    position: absolute;
-    top: 105px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: #006600;
-    border-bottom: 1.2px solid #a0a0a0;
-}
-
-.info-basic .info-status .detail-status {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 40%;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-}
-
-.info-basic .info-traffin {
-    height: 20px;
-    width: 100%;
-    position: absolute;
-    top: 125px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: #99ff99;
-    border-bottom: 1.2px solid #a0a0a0;
-}
-
-.info-basic .info-traffin .detail-traffin {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 40%;
-    color: #006600;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-}
-
-.info-basic .info-traffout {
-    height: 20px;
-    width: 100%;
-    position: absolute;
-    top: 145px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: #99ff99;
-    border-bottom: 1.2px solid ##a0a0a0;
-}
-
-.info-basic .info-traffout .detail-traffout {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 40%;
-    color: #006600;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-}
-
 .info-basic .info-dpid {
     height: 20px;
     width: 100%;
     position: absolute;
-    top: 145px;
+    top: 75px;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #99ff99;
-    border-bottom: 1.2px solid ##a0a0a0;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
 }
 
-.info-basic .info-dpid .detail-infodpid {
+.info-basic .info-dpid .detail-info_dpid {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 40%;
-    color: #006600;
+    color: #003366;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.info-basic .info-2 {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 95px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.info-basic .info-2 .detail-info2 {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #003366;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.info-basic .info-3 {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 115px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.info-basic .info-3 .detail-info3 {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #003366;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.info-basic .info-4 {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 135px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.info-basic .info-4 .detail-info4 {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #003366;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
@@ -315,7 +289,8 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
-    background-color: #b6aca2;
+    color: #ffffff;
+    background-color: #003366;
     border-bottom: 1.2px solid #e0e0e0;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -335,7 +310,7 @@ body {
 
 .info-basic .col:after {
     margin-left: 96px;
-    border-left: 9px solid #b6aca2;
+    border-left: 9px solid #003366;
 }
 
 .info-basic .col span {
@@ -352,65 +327,117 @@ body {
 /* info-optn */
 
 .content-main .info-optn {
-    height: 40px;
+    height: 60px;
     width: 100%;
     position: absolute;
-    top: 165px;
+    top: 163px;
     left: 0;
-    margin-top: 30px;
 }
 
 .info-optn .optn-icon {
     height: 100%;
-    width: 100%;
+    width: 26%;
     position: absolute;
     top: 0;
-    padding-top: 10px;
-    padding-left: 35px;
+    padding-top: 22px;
     color: #ffffff;
-    font-size: 20px;
-    text-align: left;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
     line-height: 10px;
     background-color: #003366;
-    border: 1.5px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
 }
 
-.info-optn .optn-mark {
+.info-optn .optn-info_bp {
     height: 100%;
-    width: 25%;
+    width: 100%;
     top: 0;
     left: 0;
-    margin-left: 0px;
+    margin-left: 5px;
 }
 
-.info-optn .optn-focus {
-    height: 100%;
-    width: 25%;
+.info-optn .optn-info_bp .optn-icon:hover {
+    background-color: #2A76B9;
+}
+
+.info-optn .optn-top {
+    height: 27px;
+    width: 70%;
+    position: absolute;
     top: 0;
     left: 0;
-    margin-left: 25%;
+    margin-left: 29%;
 }
 
-.info-optn .optn-near {
-    height: 100%;
-    width: 25%;
+.info-optn .optn-top .input-top {
+    height: 27px;
+    width: 70%;
     top: 0;
-    left: 0;
-    margin-left: 50%;
 }
 
-.info-optn .optn-flow {
-    height: 100%;
-    width: 25%;
+.info-optn .optn-top .form-top {
+    height: 27px;
+    width: 70%;
+    position: absolute;
     top: 0;
-    left: 0;
-    margin-left: 75%;
+    border: 2px solid #2A76B9;
+    border-radius: 0;
 }
 
-.info-optn .optn-mark .tooltip,
-.info-optn .optn-focus .tooltip,
-.info-optn .optn-near .tooltip,
-.info-optn .optn-flow .tooltip {
+.info-optn .optn-top .btn-top {
+    height: 25px;
+    width: 25%;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding-top: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 0;
+}
+
+.info-optn .optn-info_hislen {
+    height: 27px;
+    width: 70%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 29%;
+}
+
+.info-optn .optn-info_hislen .input-info_hislen {
+    height: 27px;
+    width: 70%;
+    bottom: 0;
+}
+
+.info-optn .optn-info_hislen .form-info_hislen {
+    height: 27px;
+    width: 100%;
+    bottom: 0;
+    border: 2px solid #2A76B9;
+    border-radius: 0;
+}
+
+.info-optn .optn-info_hislen .btn-info_hislen {
+    height: 25px;
+    width: 25%;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    padding-top: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 0;
+}
+
+.info-optn .optn-info_bp .tooltip,
+.info-optn .optn-top .tooltip,
+.info-optn .optn-info_hislen .tooltip {
     visibility: hidden;
     width: 120px;
     position: absolute;
@@ -422,10 +449,9 @@ body {
     border-radius: 6px;
 }
 
-.info-optn .optn-mark:hover .tooltip,
-.info-optn .optn-focus:hover .tooltip,
-.info-optn .optn-near:hover .tooltip,
-.info-optn .optn-flow:hover .tooltip {
+.info-optn .optn-info_bp:hover .tooltip,
+.info-optn .optn-top:hover .tooltip,
+.info-optn .optn-info_hislen:hover .tooltip {
     visibility: visible;
 }
 
@@ -442,10 +468,10 @@ body {
 }
 
 .content-main #info-chart-top {
-    height: 130px;
+    height: 190px;
     width: 95%;
     position: absolute;
-    top: 245px;
+    top: 240px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -469,7 +495,7 @@ body {
 
 #info-chart-top .chart-main {
     height: 80%;
-    top: 20px;
+    top: 15px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
@@ -481,10 +507,10 @@ body {
 }
 
 .content-main #info-chart-mid {
-    height: 205px;
+    height: 180px;
     width: 95%;
     position: absolute;
-    top: 385px;
+    top: 430px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -502,7 +528,7 @@ body {
     height: 90%;
     width: 100%;
     position: absolute;
-    top: 20px;
+    top: 15px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
@@ -512,7 +538,7 @@ body {
     height: 190px;
     width: 95%;
     position: absolute;
-    top: 610px;
+    top: 620px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -526,11 +552,6 @@ body {
     top: 0;
 }
 
-#info-chart-btm .chart-block-left img {
-    height: 100%;
-    width: 95%;
-}
-
 #info-chart-btm .chart-block-right {
     height: 100%;
     width: 50%;
@@ -539,9 +560,12 @@ body {
     left: 50%;
 }
 
-#info-chart-btm .chart-block-right img {
-    height: 100%;
-    width: 100%;
+#info-chart-btm .chart-main {
+    height: 80%;
+    top: 15px;
+    background-color: #f6f6f6;
+    border: 2px groove #c0c0c0;
+    border-radius: 5px;
 }
 
 
@@ -557,18 +581,19 @@ body {
     background-color: #e0e0e0;
 }
 
-.topo-basic .topo-addr {
+.topo-basic .topo-pos {
     height: 75px;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    padding-top: 15px;
+    padding-top: 12.5px;
     padding-left: 10px;
     background-color: #b6aca2;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.topo-basic .topo-addr .detail-ip {
+.topo-basic .topo-pos .detail-dept {
     margin-top: 5px;
     color: #001933;
     font-size: 30px;
@@ -576,8 +601,8 @@ body {
     line-height: 25px;
 }
 
-.topo-basic .topo-addr .detail-mac {
-    margin-top: -5px;
+.topo-basic .topo-pos .detail-camp {
+    margin-top: -2px;
     padding-left: 1px;
     color: #003366;
     font-size: 18px;
@@ -585,74 +610,24 @@ body {
     line-height: 15px;
 }
 
-.topo-basic .topo-pos {
-    height: 30px;
-    width: 100%;
-    position: absolute;
-    top: 75px;
-    left: 55%;
-    margin-left: 20px;
-    padding-top: 10px;
-}
-
-.topo-basic .topo-pos .detail-camp {
-    height: 100%;
-    position: absolute;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 10px;
-}
-
-.topo-basic .topo-pos .detail-dept {
-    height: 100%;
-    position: absolute;
-    left: 20%;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 10px;
-}
-
-.topo-basic .topo-status {
-    height: 20px;
-    width: 100%;
-    position: absolute;
-    top: 105px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: #006600;
-    border-bottom: 1.2px solid #a0a0a0;
-}
-
-.topo-basic .topo-status .detail-status {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 40%;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-}
-
 .topo-basic .topo-dpid {
     height: 20px;
     width: 100%;
     position: absolute;
-    top: 125px;
+    top: 75px;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #99ff99;
+    background-color: #A9E3FF;
     border-bottom: 1.2px solid #a0a0a0;
 }
 
-.topo-basic .topo-dpid .detail-topodpid {
+.topo-basic .topo-dpid .detail-topo_dpid {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 40%;
-    color: #006600;
+    color: #003366;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
@@ -662,10 +637,10 @@ body {
     height: 20px;
     width: 100%;
     position: absolute;
-    top: 145px;
+    top: 95px;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #99ff99;
+    background-color: #A9E3FF;
     border-bottom: 1.2px solid #a0a0a0;
 }
 
@@ -675,7 +650,7 @@ body {
     position: absolute;
     top: 0;
     left: 40%;
-    color: #006600;
+    color: #003366;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
@@ -685,11 +660,11 @@ body {
     height: 20px;
     width: 100%;
     position: absolute;
-    top: 165px;
+    top: 115px;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #99ff99;
-    //border-bottom: 1.2px solid #a0a0a0;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
 }
 
 .topo-basic .topo-hosts .detail-hosts {
@@ -698,7 +673,30 @@ body {
     position: absolute;
     top: 0;
     left: 40%;
-    color: #006600;
+    color: #003366;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.topo-basic .topo-4 {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 135px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #A9E3FF;
+    border-bottom: 1.2px solid #a0a0a0;
+}
+
+.topo-basic .topo-4 .detail-topo4 {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    color: #003366;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
@@ -716,7 +714,8 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
-    background-color: #b6aca2;
+    color: #ffffff;
+    background-color: #003366;
     border-bottom: 1.2px solid #e0e0e0;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -736,7 +735,7 @@ body {
 
 .topo-basic .col:after {
     margin-left: 96px;
-    border-left: 9px solid #b6aca2;
+    border-left: 9px solid #003366;
 }
 
 .topo-basic .col span {
@@ -753,88 +752,79 @@ body {
 /* topo-optn */
 
 .content-main .topo-optn {
-    height: 40px;
+    height: 60px;
     width: 100%;
     position: absolute;
-    top: 165px;
+    top: 163px;
     left: 0;
-    margin-top: 30px;
 }
 
 .topo-optn .optn-icon {
     height: 100%;
-    width: 100%;
+    width: 26%;
     position: absolute;
     top: 0;
-    left: 0;
-    padding-top: 10px;
-    padding-left: 40px;
+    padding-top: 22px;
     color: #ffffff;
-    font-size: 20px;
-    text-align: left;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
     line-height: 10px;
-    border: 1.5px solid #e0e0e0;
-}
-
-.topo-optn .optn-bp {
-    height: 100%;
-    width: 25%;
-    top: 0;
-    left: 0;
-    margin-left: 0;
     background-color: #003366;
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
 }
 
-.topo-optn .optn-hislen {
+.topo-optn .optn-topo_bp {
     height: 100%;
-    width: 75%;
-    position: absolute;
+    width: 100%;
     top: 0;
     left: 0;
-    margin-left: 25%;
-    padding-left: 5px;
+    margin-left: 5px;
 }
 
-.topo-optn .optn-hislen .input-group {
-    height: 100%;
+.topo-optn .optn-topo_bp .optn-icon:hover {
+    background-color: #2A76B9;
+}
+
+.topo-optn .optn-topo_hislen {
+    height: 27px;
     width: 70%;
     position: absolute;
+    top: 30%;
+    left: 0;
+    margin-left: 29%;
+}
+
+.topo-optn .optn-topo_hislen .input-topo_hislen {
+    height: 27px;
+    width: 70%;
     top: 0;
 }
 
-.topo-optn .optn-hislen .form-text {
-    height: 140%;
+.topo-optn .optn-topo_hislen .form-topo_hislen {
+    height: 27px;
     width: 100%;
     top: 0;
     border: 2px solid #2A76B9;
     border-radius: 0;
 }
 
-.topo-optn .optn-hislen .form-addon {
-    height: 100%;
-    width: 25%;
-    top: 0;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
-    background-color: #2A76B9;
-    border: 0;
-    border-radius: 0;
-}
-
-.topo-optn .optn-hislen .form-btn {
-    height: 100%;
+.topo-optn .optn-topo_hislen .btn-topo_hislen {
+    height: 25px;
     width: 25%;
     position: absolute;
     top: 0;
     right: 5px;
+    padding-top: 3px;
+    font-size: 14px;
     font-weight: bold;
     border: 0;
     border-radius: 0;
 }
 
-.topo-optn .optn-bp .tooltip,
-.topo-optn .optn-hislen .tooltip {
+.topo-optn .optn-topo_bp .tooltip,
+.topo-optn .optn-topo_hislen .tooltip {
     visibility: hidden;
     width: 120px;
     position: absolute;
@@ -846,8 +836,8 @@ body {
     border-radius: 6px;
 }
 
-.topo-optn .optn-bp:hover .tooltip,
-.topo-optn .optn-hislen:hover .tooltip {
+.topo-optn .optn-topo_bp:hover .tooltip,
+.topo-optn .optn-topo_hislen:hover .tooltip {
     visibility: visible;
 }
 

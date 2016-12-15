@@ -31,7 +31,7 @@
         <!-- sidetab -->
         <div class="sidetab">
             <!-- tab-topo -->
-            <div class="sidetab-tab sidetab-info" id="tab-topo">
+            <div class="sidetab-tab sidetab-info hidden" id="tab-topo">
                 <!-- info-content -->
                 <div class="tab-content">
                     <!-- content-top -->
@@ -46,85 +46,65 @@
                     <!-- content-main -->
                     <div class="content-main">
                         <div class="info-basic">
-                            <div class="info-addr">
-                                <p class="detail-ip">100.0.0.1</p>
-                                <p class="detail-mac">00-90-27-10-60-53</p>
-                            </div>
                             <div class="info-pos">
-                                <p class="detail-camp">成功校區</p>
-                                <p class="detail-dept">資訊系館</p>
-                            </div>
-                            <div class="info-status">
-                                <div class="info-col">
-                                    <p class="col col-status"><span>Status</span></p>
-                                </div>
-                                <p class="detail-status">NORMAL</p>
-                            </div>
-                            <div class="info-traffin">
-                                <div class="info-col">
-                                    <p class="col col-traffin"><span>Traffic-in</span></p>
-                                </div>
-                                <p class="detail-traffin">300 MB/sec</p>
-                            </div>
-                            <div class="info-traffout">
-                                <div class="info-col">
-                                    <p class="col col-traffout"><span>Traffic-out</span></p>
-                                </div>
-                                <p class="detail-traffout">300 MB/sec</p>
+                                <p class="detail-dept">成功校區</p>
+                                <p class="detail-camp">資訊系館</p>
                             </div>
                             <div class="info-dpid">
                                 <div class="info-col">
-                                    <p class="col col-infodpid"><span>DPID</span></p>
+                                    <p class="col col-info_dpid"><span>DPID</span></p>
                                 </div>
-                                <p class="detail-infodpid">1</p>
+                                <p class="detail-info_dpid">1</p>
+                            </div>
+                            <div class="info-2">
+                                <div class="info-col">
+                                    <p class="col col-info2"><span>title</span></p>
+                                </div>
+                                <p class="detail-info2">data</p>
+                            </div>
+                            <div class="info-3">
+                                <div class="info-col">
+                                    <p class="col col-info3"><span>title</span></p>
+                                </div>
+                                <p class="detail-info3">data</p>
+                            </div>
+                            <div class="info-4">
+                                <div class="info-col">
+                                    <p class="col col-info4"><span>title</span></p>
+                                </div>
+                                <p class="detail-info4">data</p>
                             </div>
                         </div>
                         <div class="info-optn">
-                            <div class="optn-mark">
-                                <span class="tooltip">Mark</span>
-                                <a href="" class="optn-icon hvr-btr" id="icon-mark"><i class="fa fa-tag" aria-hidden="true"></i></a>
+                            <div class="optn-info_bp">
+                                <span class="tooltip">Byte/Packet</span>
+                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
                             </div>
-                            <div class="optn-focus">
-                                <span class="tooltip">Focus</span>
-                                <a href="" class="optn-icon hvr-btr" id="icon-focus"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                            <div class="optn-top">
+                                <span class="tooltip">Top</span>
+                                <form class="form-inline">
+                                    <div class="input-top">
+                                        <input type="text" class="form-control form-top" placeholder="Top">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-top" id="btn-top">Submit</button>
+                                </form>
                             </div>
-                            <div class="optn-near">
-                                <span class="tooltip">Nearby</span>
-                                <a href="" class="optn-icon hvr-btr" id="icon-near"><i class="fa fa-bullseye" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="optn-flow">
-                                <span class="tooltip">Flow</span>
-                                <a href="" class="optn-icon hvr-btr" id="icon-flow"><i class="fa fa-random" aria-hidden="true"></i></a>
+                            <div class="optn-info_hislen">
+                                <span class="tooltip">History Length</span>
+                                <form class="form-inline">
+                                    <div class="input-info_hislen">
+                                        <input type="text" class="form-control form-info_hislen" placeholder="Interval">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-info_hislen" id="btn-info_hislen">Submit</button>
+                                </form>
                             </div>
                         </div>
                         <div class="info-chart" id="info-chart-top">
                             <div class="chart-block-left">
                                 <div class="chart-title">
-                                    <p class="">Gauge</p>
-                                </div>
-                                <div class="chart-main"></div>
-                            </div>
-                            <div class="chart-block-right">
-                                <div class="chart-title">
-                                    <p class="">Gauge</p>
-                                </div>
-                                <div class="chart-main"></div>
-                            </div>
-                        </div>
-                        <div class="info-chart" id="info-chart-mid">
-                            <div class="chart-block">
-                                <div class="chart-title">
-                                    <p class="">Chart title</p>
-                                </div>
-                                <div class="chart-main"></div>
-                            </div>
-                        </div>
-                        <div class="info-chart" id="info-chart-btm">
-                            <div class="chart-block-left">
-                                <div class="chart-title">
                                     <p class="">Protocols</p>
                                 </div>
-                                <div class="chart-main">
+                                <div class="chart-main" id="protos_pie">
                                     <img src="img/protos_pie.png">
                                 </div>
                             </div>
@@ -132,8 +112,34 @@
                                 <div class="chart-title">
                                     <p class="">Source of HTTP</p>
                                 </div>
-                                <div class="chart-main">
+                                <div class="chart-main" id="proto_souce">
                                     <img src="img/proto_source.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="info-chart-mid">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Chart title</p>
+                                </div>
+                                <div class="chart-main" id="in_line_chart"></div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="info-chart-btm">
+                            <div class="chart-block-left">
+                                <div class="chart-title">
+                                    <p class="">Protocols</p>
+                                </div>
+                                <div class="chart-main" id="protos_pie">
+                                    <!-- <img src="img/protos_pie.png"> -->
+                                </div>
+                            </div>
+                            <div class="chart-block-right">
+                                <div class="chart-title">
+                                    <p class="">Source of HTTP</p>
+                                </div>
+                                <div class="chart-main" id="proto_souce">
+                                    <!-- <img src="img/proto_source.png"> -->
                                 </div>
                             </div>
                         </div>
@@ -141,7 +147,7 @@
                 </div>
             </div>
             <!-- tab-info -->
-            <div class="sidetab-tab sidetab-topo" id="tab-info">
+            <div class="sidetab-tab sidetab-topo hidden" id="tab-info">
                 <!-- topo-content -->
                 <div class="tab-content">
                     <!-- content-top -->
@@ -150,31 +156,21 @@
                             <a href="#" class="top-icon hvr-btr" id="topo-back"><i class="fa fa-chevron-left"></i></a>
                         </div>
                         <div class="content-title" id="topo-title">
-                            <p class="title-top">CBasic Information</p>
+                            <p class="title-top"> Basic Information</p>
                         </div>
                     </div>
                     <!-- content-main -->
                     <div class="content-main">
                         <div class="topo-basic">
-                            <div class="topo-addr">
-                                <p class="detail-ip">100.0.0.1</p>
-                                <p class="detail-mac">00-90-27-10-60-53</p>
-                            </div>
                             <div class="topo-pos">
-                                <p class="detail-camp">成功校區</p>
-                                <p class="detail-dept">資訊系館</p>
-                            </div>
-                            <div class="topo-status">
-                                <div class="topo-col">
-                                    <p class="col col-status"><span>Status</span></p>
-                                </div>
-                                <p class="detail-status">NORMAL</p>
+                                <p class="detail-dept">成功校區</p>
+                                <p class="detail-camp">資訊系館</p>
                             </div>
                             <div class="topo-dpid">
                                 <div class="topo-col">
-                                    <p class="col col-topodpid"><span>DPID</span></p>
+                                    <p class="col col-topo_dpid"><span>DPID</span></p>
                                 </div>
-                                <p class="detail-topodpid">1</p>
+                                <p class="detail-topo_dpid">1</p>
                             </div>
                             <div class="topo-switches">
                                 <div class="topo-col">
@@ -188,20 +184,25 @@
                                 </div>
                                 <p class="detail-hosts">6</p>
                             </div>
+                            <div class="topo-4">
+                                <div class="topo-col">
+                                    <p class="col col-topo4"><span>Title</span></p>
+                                </div>
+                                <p class="detail-topo4">data</p>
+                            </div>
                         </div>
                         <div class="topo-optn">
-                            <div class="optn-bp">
+                            <div class="optn-topo_bp">
                                 <span class="tooltip">bp</span>
-                                <a href="" class="optn-icon hvr-btr" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"></i></a>
+                                <a href="" class="optn-icon hvr-btr" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
                             </div>
-                            <div class="optn-hislen">
+                            <div class="optn-topo_hislen">
                                 <span class="tooltip">hislen</span>
                                 <form class="form-inline">
                                     <div class="input-group">
-                                        <input type="text" class="form-control form-text" placeholder="Interval">
-                                        <div class="input-group-addon form-addon">(1 - 99)</div>
+                                        <input type="text" class="form-control form-topo_hislen" placeholder="Interval">
                                     </div>
-                                    <button type="submit" class="btn btn-primary form-btn" id="btn-hislen">Change</button>
+                                    <button type="submit" class="btn btn-primary btn-topo_hislen" id="btn-topo_hislen">Submit</button>
                                 </form>
                             </div>
                         </div>
