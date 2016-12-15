@@ -1,9 +1,5 @@
-var width = 1366,
-    height = 768,
-    active = d3.select(null);
-
 d3.select(window)
-    .on("resize", sizeChange);
+    .on('resize', sizeChange);
 
 //set the projection of the map
 var projection = d3.geo.mercator()
@@ -16,10 +12,9 @@ var path = d3.geo.path()
 //initialize the map
 var svg = d3.select('.map-demo')
     .append('svg')
-    .attr('width', width)
-    .attr('height', height);
+    .attr('width', '100%');
 
-svg.append("rect")
+svg.append('rect')
     .attr('class', 'background')
     .on('click', zoom_reset);
 
@@ -42,6 +37,8 @@ for (i = 0; i < 9; ++i) {
     dept[i] = svg.append('g');
 }
 
+var active = d3.select(null);
+
 /* Draw map with TopoJSON */
 d3.json('data/topojson/ncku.json', function(error, map) {
     if (error)
@@ -55,7 +52,7 @@ d3.json('data/topojson/ncku.json', function(error, map) {
             .attr('d', path)
             .attr('class', 'reg_' + i)
             .on('click', zoomReg)
-            .on("dblclick", function(e) {
+            .on('dblclick', function(e) {
                 e.preventDefault();
             })
             .on('mousemove', hover_show)
@@ -84,7 +81,7 @@ d3.json('data/topojson/ncku.json', function(error, map) {
             .attr('d', path)
             .attr('class', 'dept_' + i)
             //.on('click', zoom_in)
-            //.on("dblclick", function(e) {
+            //.on('dblclick', function(e) {
             //    e.preventDefault();
             //})
             .on('mousemove', hover_show)
@@ -144,22 +141,22 @@ function zoomReg(d) {
     if (clicks === 1) {
         timer = setTimeout(function() {
             if ($('#tab-info').hasClass('visible')) {
-                $('#tab-info').animate({ "right": "-1000px" }, 400).addClass('visible');
+                $('#tab-info').animate({ 'right': '-1000px' }, 400).addClass('visible');
             }
 
             if ($('#tab-topo').hasClass('visible')) {
-                $('#tab-topo').animate({ "right": "-1000px" }, 400).addClass('visible');
+                $('#tab-topo').animate({ 'right': '-1000px' }, 400).addClass('visible');
             }
 
-            $('#tab-topo').animate({ "right": "0px" }, 400).addClass('visible');
+            $('#tab-topo').animate({ 'right': '0px' }, 400).addClass('visible');
             clicks = 0;
         }, DELAY);
     } /*else {
         clearTimeout(timer); //prevent single-click action
         if ($('#tab-topo').hasClass('visible')) {
-            $('#tab-topo').animate({ "right": "-1000px" }, 500).addClass('visible');
+            $('#tab-topo').animate({ 'right': '-1000px' }, 500).addClass('visible');
         }
-        $('#tab-info').animate({ "right": "0px" }, 500).addClass('visible');
+        $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
         console.log('Double');
         clicks = 0;
     }*/
@@ -170,8 +167,8 @@ function zoomReg(d) {
         dy = bounds[1][1] - bounds[0][1],
         x = (bounds[0][0] + bounds[1][0]) / 2,
         y = (bounds[0][1] + bounds[1][1]) / 2,
-        scale = 0.75 / Math.max(dx / width, dy / height),
-        translate = [width / 2 - scale * x, height / 2 - scale * y];
+        scale = 0.75 / Math.max(dx / $('svg').width(), dy / $('svg').height()),
+        translate = [$('svg').width() / 2 - scale * x, $('svg').height() / 2 - scale * y];
 
     for (i = 0; i < 8; ++i) {
         dept[i].attr('visibility', 'hidden')
@@ -237,8 +234,8 @@ function zoomReg_reset(d) {
 
 /* Change the size view of the window */
 function sizeChange() {
-    d3.select("g")
-        .attr("transform", "scale(" + $(".map-demo").width() / 900 + ")");
+    d3.select('g')
+        .attr('transform', 'scale(' + $('.map-demo').width() / 900 + ')');
 
-    $("svg").height($(".map-demo").width() * 0.618);
+    $('svg').height($('.map-demo').width() * 0.618);
 }
