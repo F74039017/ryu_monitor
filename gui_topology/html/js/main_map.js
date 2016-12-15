@@ -141,14 +141,14 @@ function zoomReg(d) {
     if (clicks === 1) {
         timer = setTimeout(function() {
             if ($('#tab-info').hasClass('visible')) {
-                $('#tab-info').animate({ 'right': '-1000px' }, 400).removeClass('hidden').addClass('visible');
+                $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('hidden').addClass('visible');
             }
 
             if ($('#tab-topo').hasClass('visible')) {
-                $('#tab-topo').animate({ 'right': '-1000px' }, 400).removeClass('hidden').addClass('visible');
+                $('#tab-topo').animate({ 'right': '-1000px' }, 500).removeClass('hidden').addClass('visible');
             }
 
-            $('#tab-topo').animate({ 'right': '0px' }, 400).removeClass('hidden').addClass('visible');
+            $('#tab-topo').animate({ 'right': '0px' }, 500).removeClass('hidden').addClass('visible');
             clicks = 0;
         }, DELAY);
     } /*else {

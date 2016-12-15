@@ -208,7 +208,7 @@ body {
     line-height: 20px;
 }
 
-.info-basic .info-2 {
+/*.info-basic .info-2 {
     height: 20px;
     width: 100%;
     position: absolute;
@@ -275,7 +275,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
-}
+}*/
 
 .info-basic .info-col {
     height: 20px;
@@ -330,7 +330,7 @@ body {
     height: 60px;
     width: 100%;
     position: absolute;
-    top: 163px;
+    top: 105px;
     left: 0;
 }
 
@@ -471,7 +471,7 @@ body {
     height: 190px;
     width: 95%;
     position: absolute;
-    top: 240px;
+    top: 190px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -510,7 +510,7 @@ body {
     height: 180px;
     width: 95%;
     position: absolute;
-    top: 430px;
+    top: 385px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -679,7 +679,7 @@ body {
     line-height: 20px;
 }
 
-.topo-basic .topo-4 {
+/*.topo-basic .topo-4 {
     height: 20px;
     width: 100%;
     position: absolute;
@@ -700,7 +700,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
-}
+}*/
 
 .topo-basic .topo-col {
     height: 20px;
@@ -755,7 +755,7 @@ body {
     height: 60px;
     width: 100%;
     position: absolute;
-    top: 163px;
+    top: 145px;
     left: 0;
 }
 
@@ -857,7 +857,7 @@ body {
     height: 225px;
     width: 95%;
     position: absolute;
-    top: 250px;
+    top: 225px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -889,7 +889,7 @@ body {
     height: 225px;
     width: 95%;
     position: absolute;
-    top: 475px;
+    top: 445px;
     left: 0;
     right: 0;
     margin-left: 10px;

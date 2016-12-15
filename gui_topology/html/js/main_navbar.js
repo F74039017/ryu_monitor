@@ -1,14 +1,13 @@
-$(document).ready(function() {
+$(function() {
     $('#icon-info').click(function() {
         $('#tab-info').animate({ "right": "0px" }, 500).removeClass('hidden').addClass('visible');
     });
 
     $('#info-back').click(function() {
-    	console.log('tab-info: ' + $('#tab-info').hasClass('visible'));	//test
         if ($('#tab-info').hasClass("visible")) {
             $('#tab-info').animate({ "right": "-1000px" }, 500).removeClass('visible').addClass('hidden');
         } else {
-            $('#tab-info').animate({ "right": "-1000px" }, 500).removeClass('hidden').addClass('visible');
+            $('#tab-info').animate({ "right": "0px" }, 500).removeClass('hidden').addClass('visible');
         }
     });
 
@@ -17,11 +16,10 @@ $(document).ready(function() {
     });
 
     $('#topo-back').click(function() {
-        console.log('tab-topo: ' + $('#tab-topo').hasClass('visible'));	//test
         if ($('#tab-topo').hasClass("visible")) {
             $('#tab-topo').animate({ "right": "-1000px" }, 500).removeClass('visible').addClass('hidden');
         } else {
-            $('#tab-topo').animate({ "right": "-1000px" }, 500).removeClass('hidden').addClass('visible');
+            $('#tab-topo').animate({ "right": "0px" }, 500).removeClass('hidden').addClass('visible');
         }
     });
 });
