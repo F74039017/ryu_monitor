@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Load c3.css -->
+		<link href="/static/c3_lib/c3.min.css" rel="stylesheet" type="text/css">
+		<style>
+			.c3-grid .c3-xgrid-focus {
+			   visibility : hidden !important;
+			}
+		</style>
+
+		<!-- Load d3.js and c3.js -->
+		<script src="/static/d3.min.js" charset="utf-8"></script>
+		<script src="/static/c3_lib/c3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!--Create websocekt to ryu-->
+		<script src="/static/ryu.topology.js" charset="utf-8"></script>
+
+        <!--Test dpi_oper.js-->
+		<script src="/static/dpi_oper.js" charset="utf-8"></script>
+
+        <!--Test c3_wrapper.js-->
+		<script src="/static/c3_wrapper.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="chart"></div>
+		<div id="chart2"></div>
+
+
+        <!--javascript definition-->
+
+        <!--create c3 chart-->
+		<script>
+            (function(window){
+                var data = {'Google': ['Google'], 'Yahoo': ['Yahoo'], 'Facebook': ['Facebook'], 'ts': ['ts']};
+                var cnt = 0;
+                window.dv_oper.live_chart = {};
+
+                /* Init the c3 chart */
+                window.live_dpi_chart = null;
+                window.pie_chart = null;
+                $(document).ready(function(){
+                    window.live_dpi_chart = c3.generate({
+                        bindto: "#chart",
+                        data: {
+                            x: 'ts',
+                            columns: []
+                        },
+                    });
+                    window.pie_chart = c3.generate({
+                        bindto: "#chart2",
+                        data: {
+                            x: 'ts',
+                            columns: []
+                        },
+                    });
+
+                    /*
+                    window.dv_oper.live_chart.livedpi = function(dpi_data) {
+                        var res_info = {Yahoo: 0, Facebook: 0, Google: 0}
+                        // console.log(dpi_data);
+                        if(!dpi_data["detected.protos"])
+                            return;
+                        for(var x in dpi_data["detected.protos"]) {
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Yahoo' ) {
+                                res_info['Yahoo'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Facebook' ) {
+                                res_info['Facebook'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                            if ( dpi_data["detected.protos"][x]['name'] == 'Google' ) {
+                                res_info['Google'] = dpi_data["detected.protos"][x]['bytes'];
+                            }
+                        }
+                        // console.log(res_info);
+
+                        // collect dpi data 
+                        data.Google.push(res_info['Google']);
+                        data.Yahoo.push(res_info['Yahoo']);
+                        data.Facebook.push(res_info['Facebook']);
+                        data.ts.push(cnt);
+                        cnt = cnt+1;
+                        // console.log(data);
+
+                        // update the chart
+                        chart.load({
+                            x: 'ts',
+                            columns: [
+                                data.Google,
+                                data.Yahoo,
+                                data.Facebook,
+                                data.ts
+                            ]	
+                        });
+
+                    };
+                    */
+
+                    /* protocol data for testing */
+                    /*
+                    setInterval(function(){
+                        var value = Math.round(Math.random()*100);
+                        data.Google.push(value);
+                        value = Math.round(Math.random()*100);
+                        data.Yahoo.push(value);
+                        value = Math.round(Math.random()*100);
+                        data.Facebook.push(value);
+
+                        data.ts.push(cnt);
+                        cnt = cnt+10;
+
+                        chart.load({
+                            x: 'ts',
+                            columns: [
+                                data.Google,
+                                data.Yahoo,
+                                data.Facebook,
+                                data.ts
+                            ]	
+                        });
+
+                    }, 1000);
+                    */
+                });
+             })(window);
+
+		</script>
+	</body>
+</html>

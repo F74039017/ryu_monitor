@@ -1,0 +1,1641 @@
+Protocol	Bytes		2016-10-07 14:41:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:12
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:41:57
+Yahoo	Facebook	Google
+0	0	108357
+Protocol	Bytes		2016-10-07 14:42:02
+Yahoo	Facebook	Google
+0	0	6979
+Protocol	Bytes		2016-10-07 14:42:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:12
+Yahoo	Facebook	Google
+0	0	33454
+Protocol	Bytes		2016-10-07 14:42:17
+Yahoo	Facebook	Google
+0	0	1188
+Protocol	Bytes		2016-10-07 14:42:22
+Yahoo	Facebook	Google
+0	0	44411
+Protocol	Bytes		2016-10-07 14:42:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:42:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:12
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:17
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 14:43:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:43:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:12
+Yahoo	Facebook	Google
+0	0	290
+Protocol	Bytes		2016-10-07 14:44:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:44:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:13
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 14:45:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:45:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:46:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:08
+Yahoo	Facebook	Google
+0	0	2728
+Protocol	Bytes		2016-10-07 14:47:13
+Yahoo	Facebook	Google
+0	0	37953
+Protocol	Bytes		2016-10-07 14:47:18
+Yahoo	Facebook	Google
+0	0	424
+Protocol	Bytes		2016-10-07 14:47:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:43
+Yahoo	Facebook	Google
+0	0	462
+Protocol	Bytes		2016-10-07 14:47:48
+Yahoo	Facebook	Google
+0	0	462
+Protocol	Bytes		2016-10-07 14:47:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:47:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:08
+Yahoo	Facebook	Google
+0	0	500
+Protocol	Bytes		2016-10-07 14:48:13
+Yahoo	Facebook	Google
+0	0	4550
+Protocol	Bytes		2016-10-07 14:48:18
+Yahoo	Facebook	Google
+0	0	789
+Protocol	Bytes		2016-10-07 14:48:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:48:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:49:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:50:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:51:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:52:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:53:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:54:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:51
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:55:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:01
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:11
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:16
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:21
+Yahoo	Facebook	Google
+0	0	153332
+Protocol	Bytes		2016-10-07 14:56:26
+Yahoo	Facebook	Google
+0	0	6978
+Protocol	Bytes		2016-10-07 14:56:31
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:56:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:41
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:56:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:56:51
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:56:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:01
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:11
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:16
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:21
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:26
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:31
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:41
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:57:51
+Yahoo	Facebook	Google
+0	0	264
+Protocol	Bytes		2016-10-07 14:57:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:58:01
+Yahoo	Facebook	Google
+0	0	616
+Protocol	Bytes		2016-10-07 14:58:06
+Yahoo	Facebook	Google
+0	0	49270
+Protocol	Bytes		2016-10-07 14:58:11
+Yahoo	Facebook	Google
+0	0	10649
+Protocol	Bytes		2016-10-07 14:58:16
+Yahoo	Facebook	Google
+0	0	198
+Protocol	Bytes		2016-10-07 14:58:21
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:58:26
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:58:31
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:58:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:58:41
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:58:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:58:51
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:58:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:01
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:11
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:16
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:21
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:26
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:31
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:41
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 14:59:51
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 14:59:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:01
+Yahoo	Facebook	Google
+0	0	132
+Protocol	Bytes		2016-10-07 15:00:06
+Yahoo	Facebook	Google
+0	0	528
+Protocol	Bytes		2016-10-07 15:00:11
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:16
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:21
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:26
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:31
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:41
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:51
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:00:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:01
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:11
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:16
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:21
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:26
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:31
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:41
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:51
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:01:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:01
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:11
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:34
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:39
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:44
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:49
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:54
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:02:59
+Yahoo	Facebook	Google
+0	0	32678
+Protocol	Bytes		2016-10-07 15:03:04
+Yahoo	Facebook	Google
+0	0	148511
+Protocol	Bytes		2016-10-07 15:03:09
+Yahoo	Facebook	Google
+0	0	6980
+Protocol	Bytes		2016-10-07 15:03:14
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:19
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:24
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:29
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:34
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:39
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:44
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:49
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:54
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:03:59
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:04
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:09
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:14
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:19
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:24
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:29
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:34
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:39
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:44
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:49
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:54
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:04:59
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:04
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:09
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:14
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:19
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:24
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:29
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:34
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:39
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:44
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:49
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:54
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:05:59
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:04
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:09
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:14
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:19
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:24
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:29
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:34
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:39
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:44
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:49
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:54
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:06:59
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:04
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:07:53
+Yahoo	Facebook	Google
+0	0	81172
+Protocol	Bytes		2016-10-07 15:07:58
+Yahoo	Facebook	Google
+0	0	13371
+Protocol	Bytes		2016-10-07 15:08:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:08:53
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 15:08:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:09:53
+Yahoo	Facebook	Google
+0	0	290
+Protocol	Bytes		2016-10-07 15:09:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:33
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:38
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:10:53
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 15:10:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:33
+Yahoo	Facebook	Google
+0	0	36225
+Protocol	Bytes		2016-10-07 15:11:38
+Yahoo	Facebook	Google
+0	0	1404785
+Protocol	Bytes		2016-10-07 15:11:43
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:48
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:53
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:11:58
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:03
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:08
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:13
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:18
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:23
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:28
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:12:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:12
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:17
+Yahoo	Facebook	Google
+0	0	356683
+Protocol	Bytes		2016-10-07 15:13:22
+Yahoo	Facebook	Google
+0	0	38056
+Protocol	Bytes		2016-10-07 15:13:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:13:42
+Yahoo	Facebook	Google
+0	0	8033
+Protocol	Bytes		2016-10-07 15:13:47
+Yahoo	Facebook	Google
+0	939174	998
+Protocol	Bytes		2016-10-07 15:13:52
+Yahoo	Facebook	Google
+802600	15122	2518
+Protocol	Bytes		2016-10-07 15:13:57
+Yahoo	Facebook	Google
+169024	812	32758
+Protocol	Bytes		2016-10-07 15:14:02
+Yahoo	Facebook	Google
+207496	406	462
+Protocol	Bytes		2016-10-07 15:14:07
+Yahoo	Facebook	Google
+2364	856	1598
+Protocol	Bytes		2016-10-07 15:14:12
+Yahoo	Facebook	Google
+130443	406	205218
+Protocol	Bytes		2016-10-07 15:14:17
+Yahoo	Facebook	Google
+92672	812	12387
+Protocol	Bytes		2016-10-07 15:14:22
+Yahoo	Facebook	Google
+0	14153	12083
+Protocol	Bytes		2016-10-07 15:14:27
+Yahoo	Facebook	Google
+2743	0	5780
+Protocol	Bytes		2016-10-07 15:14:32
+Yahoo	Facebook	Google
+476	0	1065
+Protocol	Bytes		2016-10-07 15:14:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:14:42
+Yahoo	Facebook	Google
+0	7139	0
+Protocol	Bytes		2016-10-07 15:14:47
+Yahoo	Facebook	Google
+9080	13537	5336
+Protocol	Bytes		2016-10-07 15:14:52
+Yahoo	Facebook	Google
+641	0	20325
+Protocol	Bytes		2016-10-07 15:14:57
+Yahoo	Facebook	Google
+1904	0	2096
+Protocol	Bytes		2016-10-07 15:15:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:15:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:15:12
+Yahoo	Facebook	Google
+14617	0	5932
+Protocol	Bytes		2016-10-07 15:15:17
+Yahoo	Facebook	Google
+952	1258	2462
+Protocol	Bytes		2016-10-07 15:15:22
+Yahoo	Facebook	Google
+0	406	3415
+Protocol	Bytes		2016-10-07 15:15:27
+Yahoo	Facebook	Google
+0	0	2182
+Protocol	Bytes		2016-10-07 15:15:32
+Yahoo	Facebook	Google
+0	0	2505
+Protocol	Bytes		2016-10-07 15:15:37
+Yahoo	Facebook	Google
+0	812	1064
+Protocol	Bytes		2016-10-07 15:15:42
+Yahoo	Facebook	Google
+9202	428	5907
+Protocol	Bytes		2016-10-07 15:15:47
+Yahoo	Facebook	Google
+476	820	30527
+Protocol	Bytes		2016-10-07 15:15:52
+Yahoo	Facebook	Google
+0	1668	5230
+Protocol	Bytes		2016-10-07 15:15:57
+Yahoo	Facebook	Google
+5685	406	15815
+Protocol	Bytes		2016-10-07 15:16:02
+Yahoo	Facebook	Google
+1018	3270	2184
+Protocol	Bytes		2016-10-07 15:16:07
+Yahoo	Facebook	Google
+109791	0	21325
+Protocol	Bytes		2016-10-07 15:16:12
+Yahoo	Facebook	Google
+20151	406	2481
+Protocol	Bytes		2016-10-07 15:16:17
+Yahoo	Facebook	Google
+1897	834	4496
+Protocol	Bytes		2016-10-07 15:16:22
+Yahoo	Facebook	Google
+476	802	0
+Protocol	Bytes		2016-10-07 15:16:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:16:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:16:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:16:42
+Yahoo	Facebook	Google
+571	406	0
+Protocol	Bytes		2016-10-07 15:16:47
+Yahoo	Facebook	Google
+0	406	356
+Protocol	Bytes		2016-10-07 15:16:52
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 15:16:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:12
+Yahoo	Facebook	Google
+0	406	356
+Protocol	Bytes		2016-10-07 15:17:17
+Yahoo	Facebook	Google
+0	428	546
+Protocol	Bytes		2016-10-07 15:17:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:42
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 15:17:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:17:52
+Yahoo	Facebook	Google
+0	0	290
+Protocol	Bytes		2016-10-07 15:17:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:12
+Yahoo	Facebook	Google
+0	406	290
+Protocol	Bytes		2016-10-07 15:18:17
+Yahoo	Facebook	Google
+0	0	480
+Protocol	Bytes		2016-10-07 15:18:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:42
+Yahoo	Facebook	Google
+0	428	0
+Protocol	Bytes		2016-10-07 15:18:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:18:52
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 15:18:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:07
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 15:19:12
+Yahoo	Facebook	Google
+0	406	807
+Protocol	Bytes		2016-10-07 15:19:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:32
+Yahoo	Facebook	Google
+0	802	0
+Protocol	Bytes		2016-10-07 15:19:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:19:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:12
+Yahoo	Facebook	Google
+0	406	0
+Protocol	Bytes		2016-10-07 15:20:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:22
+Yahoo	Facebook	Google
+0	428	0
+Protocol	Bytes		2016-10-07 15:20:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:20:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:02
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:12
+Yahoo	Facebook	Google
+0	812	0
+Protocol	Bytes		2016-10-07 15:21:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:37
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:42
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:47
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:52
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:21:57
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:02
+Yahoo	Facebook	Google
+0	1230	0
+Protocol	Bytes		2016-10-07 15:22:07
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:12
+Yahoo	Facebook	Google
+0	406	0
+Protocol	Bytes		2016-10-07 15:22:17
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:22
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:27
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:32
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:22:55
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:00
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:05
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:10
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:15
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:20
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:23:25
+Yahoo	Facebook	Google
+213730	406	23203
+Protocol	Bytes		2016-10-07 15:23:30
+Yahoo	Facebook	Google
+97487	10482	134555
+Protocol	Bytes		2016-10-07 15:23:35
+Yahoo	Facebook	Google
+143723	19962	50488
+Protocol	Bytes		2016-10-07 15:23:40
+Yahoo	Facebook	Google
+89563	26158	87250
+Protocol	Bytes		2016-10-07 15:23:45
+Yahoo	Facebook	Google
+39180	38498	43887
+Protocol	Bytes		2016-10-07 15:23:50
+Yahoo	Facebook	Google
+66028	0	6114
+Protocol	Bytes		2016-10-07 15:23:55
+Yahoo	Facebook	Google
+0	0	136964
+Protocol	Bytes		2016-10-07 15:24:00
+Yahoo	Facebook	Google
+0	0	1676
+Protocol	Bytes		2016-10-07 15:24:05
+Yahoo	Facebook	Google
+0	0	660
+Protocol	Bytes		2016-10-07 15:24:10
+Yahoo	Facebook	Google
+67231	2030	1001
+Protocol	Bytes		2016-10-07 15:24:15
+Yahoo	Facebook	Google
+0	1668	0
+Protocol	Bytes		2016-10-07 15:24:20
+Yahoo	Facebook	Google
+0	2030	1531
+Protocol	Bytes		2016-10-07 15:24:25
+Yahoo	Facebook	Google
+576	2270	0
+Protocol	Bytes		2016-10-07 15:24:30
+Yahoo	Facebook	Google
+0	254	0
+Protocol	Bytes		2016-10-07 15:24:35
+Yahoo	Facebook	Google
+0	0	2060
+Protocol	Bytes		2016-10-07 15:24:40
+Yahoo	Facebook	Google
+0	0	17176
+Protocol	Bytes		2016-10-07 15:24:45
+Yahoo	Facebook	Google
+0	864450	1000
+Protocol	Bytes		2016-10-07 15:24:50
+Yahoo	Facebook	Google
+0	834	424
+Protocol	Bytes		2016-10-07 15:24:55
+Yahoo	Facebook	Google
+31293	834	2245
+Protocol	Bytes		2016-10-07 15:25:00
+Yahoo	Facebook	Google
+0	1690	462
+Protocol	Bytes		2016-10-07 15:25:05
+Yahoo	Facebook	Google
+0	1624	2452
+Protocol	Bytes		2016-10-07 15:25:10
+Yahoo	Facebook	Google
+0	6690	1000
+Protocol	Bytes		2016-10-07 15:25:16
+Yahoo	Facebook	Google
+47125	1240	528
+Protocol	Bytes		2016-10-07 15:25:21
+Yahoo	Facebook	Google
+44691	0	4624
+Protocol	Bytes		2016-10-07 15:25:26
+Yahoo	Facebook	Google
+81995	0	1463
+Protocol	Bytes		2016-10-07 15:25:31
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:25:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:25:41
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:25:46
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:25:51
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:25:56
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 15:26:01
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:26:06
+Yahoo	Facebook	Google
+0	406	0
+Protocol	Bytes		2016-10-07 15:26:11
+Yahoo	Facebook	Google
+0	1982	0
+Protocol	Bytes		2016-10-07 15:26:16
+Yahoo	Facebook	Google
+0	428	0
+Protocol	Bytes		2016-10-07 15:26:21
+Yahoo	Facebook	Google
+0	0	712
+Protocol	Bytes		2016-10-07 15:26:26
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 15:26:31
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:26:36
+Yahoo	Facebook	Google
+0	812	6727
+Protocol	Bytes		2016-10-07 15:26:41
+Yahoo	Facebook	Google
+31049	1268	19754
+Protocol	Bytes		2016-10-07 15:26:46
+Yahoo	Facebook	Google
+7526	428	8956
+Protocol	Bytes		2016-10-07 15:26:51
+Yahoo	Facebook	Google
+8313	0	2103
+Protocol	Bytes		2016-10-07 15:26:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:27:01
+Yahoo	Facebook	Google
+0	7966	1464
+Protocol	Bytes		2016-10-07 15:27:06
+Yahoo	Facebook	Google
+0	7399	0
+Protocol	Bytes		2016-10-07 15:27:11
+Yahoo	Facebook	Google
+0	1538	0
+Protocol	Bytes		2016-10-07 15:27:16
+Yahoo	Facebook	Google
+0	0	462
+Protocol	Bytes		2016-10-07 15:27:21
+Yahoo	Facebook	Google
+0	0	3077
+Protocol	Bytes		2016-10-07 15:27:26
+Yahoo	Facebook	Google
+0	1262	1463
+Protocol	Bytes		2016-10-07 15:27:31
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:27:36
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:27:41
+Yahoo	Facebook	Google
+0	0	356
+Protocol	Bytes		2016-10-07 15:27:46
+Yahoo	Facebook	Google
+0	0	290
+Protocol	Bytes		2016-10-07 15:27:51
+Yahoo	Facebook	Google
+0	0	807
+Protocol	Bytes		2016-10-07 15:27:56
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:28:01
+Yahoo	Facebook	Google
+0	406	0
+Protocol	Bytes		2016-10-07 15:28:06
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:28:11
+Yahoo	Facebook	Google
+0	0	0
+Protocol	Bytes		2016-10-07 15:28:16
+Yahoo	Facebook	Google
+0	0	0

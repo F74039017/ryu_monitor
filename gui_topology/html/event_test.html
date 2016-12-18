@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="/static/netjsongraph.css" rel="stylesheet">
+<link href="/static/netjsongraph-theme.css" rel="stylesheet">
+<style>body {overflow: hidden}</style>
+		<style>
+			#container {
+				width: 1300px;
+				height: 750px;
+			}
+
+			#left {
+				width: 750px;
+				height: 750px;
+				float: left;
+			}
+
+			#right {
+				margin-left: 750px;
+				height: 750px;
+			}
+
+			#right_top {
+				height: 200px;
+			}
+
+            #basic_info {
+                width: 500px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            .pie_chart_container {
+                float: left;
+                width: 275px;
+                height: 250px;
+            }
+            .chart_title {
+                font-size: 1.2em;
+                height: 25px;
+                margin: 0px;
+            }
+            .pie_chart {
+                width: 275px;
+                height: 225px;
+            }
+
+			#right_down {
+				height: 300px;
+			}
+
+            .hide_default {
+                display: none;
+            }
+
+            #show_btn {
+                margin-left: 490px;
+            }
+		</style>
+
+		<!-- Load c3.css -->
+		<link href="/static/c3_lib/c3.min.css" rel="stylesheet" type="text/css">
+		<style>
+			.c3-grid .c3-xgrid-focus {
+			   visibility : hidden !important;
+			}
+		</style>
+
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+		<!-- Load d3.js and c3.js -->
+		<script src="/static/d3.min.js" charset="utf-8"></script>
+		<script src="/static/c3_lib/c3.min.js"></script>
+
+        <!--jquery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!--Create websocekt to ryu-->
+		<script src="/static/ryu.topology.js" charset="utf-8"></script>
+
+        <!--Test dpi_oper.js-->
+		<script src="/static/dpi_oper.js" charset="utf-8"></script>
+
+        <!--Test c3_wrapper.js-->
+		<script src="/static/c3_wrapper.js" charset="utf-8"></script>
+</head>
+<body>
+<script src="/static/netjsongraph.js"></script>
+<script>
+	var test = {};
+		test['type'] = "NetworkGraph";
+		test['label'] = "SDN topo";
+		test['protocol'] = "OpenFlow";
+		test['version'] = "1.0";
+		test['metric'] = "ETX";
+		test['nodes'] = [];
+		test['links'] = [];
+		test.nodes.push({id: 1});
+		test.nodes.push({id: 2});
+</script>
+<script>console.log(test)</script>
+<script>
+main({"netjsongraph": d3.netJsonGraph});
+(function(window){
+    $(document).ready(function(){
+        /* Init the c3 chart */
+        window.pie_chart = null;
+        window.contribute_chart = null;
+        window.live_dpi_chart = null;
+
+        window.pie_chart = c3.generate({
+            bindto: "#proto_pie_chart",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                x: 'ts',
+                type: 'pie',
+                columns: [],
+                onclick: pie_click
+            },
+        });
+        window.tx_gauge = c3.generate({
+            bindto: "#tx_gauge",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                type: 'gauge',
+                columns: []
+            },
+            gauge: {
+                label: {
+                    format: function(value, ratio) {
+                        return value;
+                    },
+                },
+                min: 0,
+                max: 5000,
+                units: 'K bits'
+            }
+        });
+        window.contribute_chart = c3.generate({
+            bindto: "#contribute_pie_chart",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                x: 'ts',
+                type: 'pie',
+                columns: []
+            },
+        });
+        window.rx_gauge = c3.generate({
+            bindto: "#rx_gauge",
+            size: {
+                height: 225,
+                width: 275
+            },
+            data: {
+                type: 'gauge',
+                columns: []
+            },
+            gauge: {
+                label: {
+                    format: function(value, ratio) {
+                        return value;
+                    },
+                },
+                min: 0,
+                max: 5000,
+                units: 'K bits'
+            }
+        });
+        window.live_dpi_chart = c3.generate({
+            bindto: "#line_chart",
+            size: {
+                height: 300,
+                width: 520
+            },
+            data: {
+                x: 'ts',
+                columns: []
+            },
+        });
+    });
+ })(window);
+</script>
+<script>
+    function bp_btn_func() {
+        if(window.bp_stat==1) {
+            window.bp_stat = 2;
+            rx_gauge.internal.config.gauge_max = 3000;
+            tx_gauge.internal.config.gauge_max = 3000;
+            rx_gauge.internal.config.gauge_units = "Packets";
+            tx_gauge.internal.config.gauge_units = "Packets";
+        }
+        else {
+            window.bp_stat = 1;
+            rx_gauge.internal.config.gauge_max = 5000;
+            tx_gauge.internal.config.gauge_max = 5000;
+            rx_gauge.internal.config.gauge_units = "K bits";
+            tx_gauge.internal.config.gauge_units = "K bits";
+        }
+        c3w.changeBP_FLAG(live_dpi_chart, window.bp_stat);
+    }
+
+    function rt_btn_func() {
+        // hide and show test
+        /*
+        $("#tx_gauge").hide();
+        $("#proto_pie_chart").show();
+        */
+
+        if(window.rt_stat==1) {
+            window.rt_stat = 2;
+        }
+        else {
+            window.rt_stat = 1;
+        }
+        c3w.changeRT_RANK(live_dpi_chart, window.rt_stat);
+    }
+
+    // dp toggle func
+    function dp_btn_func() {
+        c3w.stopShow(live_dpi_chart);
+        if(window.dp_stat==1) {
+            window.dp_stat = 2;
+            c3w.stopShow(pie_chart);
+            c3w.stopShow(contribute_pie_chart);
+            c3w.startShowLine(live_dpi_chart, 'port', 1);
+            c3w.showSwGauge(rx_gauge, tx_gauge, live_dpi_chart);
+        }
+        else {
+            window.dp_stat = 1;
+            c3w.stopShow(rx_gauge);
+            c3w.stopShow(tx_gauge);
+            c3w.startShowLine(live_dpi_chart, 'dpi', 3);
+            c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
+            //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
+        }
+        dp_changePage();
+    }
+
+    function pie_click(d, i) {
+        c3w.destroy(window.contribute_chart);
+        console.log(d.name);
+        var shareChart = live_dpi_chart;
+        var shareConn= c3w.chart2conn(shareChart);
+        var id = shareConn.id;
+        c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
+    }
+
+    function hide_side() {
+        $("#right").hide("slide",
+            { direction: "right" },
+            500,
+            function(){ // callback function
+                $("#show_btn").show();
+            }
+        );
+    }
+
+    function show_side() {
+        $("#show_btn").hide();
+        $("#right").show("slide",
+            { direction: "right" },
+            500
+        );
+    }
+</script>
+    <div id="container">
+        <!--for netjson-->
+        <div id="left">
+        </div>
+        <button id="show_btn" class="hide_default" onclick="show_side()">Show</button>
+        <div id="right">
+            <div id=basic_info>
+                <!--<p id="device_id">Link info. demo</p>-->
+                <button type="button" id="bp_btn" onclick="bp_btn_func()">BP button</button>
+                <button type="button" id="rt_btn" onclick="rt_btn_func()">RT button</button>
+                <button type="button" id="dp_btn" onclick="dp_btn_func()">DP button</button>
+                <button type="button" id="hide_btn" onclick="hide_side()">Hide</button>
+            </div>
+            <div id="right_top">
+                <div id="proto_pie" class="pie_chart_container">
+                    <p class="chart_title" id="tx_title">TX</p>
+                    <div id="proto_pie_chart" class="pie_chart">chart</div>
+                    <div id="tx_gauge" class="pie_chart hide_default"></div>
+                </div>
+                <div id="contribute_pie" class="pie_chart_container">
+                    <p class="chart_title" id="rx_title">RX</p>
+                    <div id="contribute_pie_chart" class="pie_chart">chart</div>
+                    <div id="rx_gauge" class="pie_chart hide_default"></div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div id="right_down">
+                <div id="line_chart">
+                    line_chart
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

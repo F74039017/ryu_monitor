@@ -1,0 +1,162 @@
+.background {
+    pointer-events: all;
+}
+
+.hidden {
+    display: none;
+}
+
+.tooltip {
+    color: #222;
+    background-color: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px;
+    opacity: 0.9;
+    position: absolute;
+}
+
+.reg_0,
+.reg_1,
+.reg_2,
+.reg_3,
+.reg_4,
+.reg_5,
+.reg_6,
+.reg_7 {
+    fill: #DDDFDF;
+    cursor: pointer;
+    display: inline-block;
+    z-index: 1;
+    -webkit-transition: 200ms ease-in-out;
+    -ms-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.reg_0:hover,
+.reg_1:hover,
+.reg_2:hover,
+.reg_3:hover,
+.reg_4:hover,
+.reg_5:hover,
+.reg_6:hover,
+.reg_7:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 150px #000000;
+    -webkit-transition: 200ms ease-in-out;
+    -ms-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.reg_0:hover {
+    fill: #2BFFA4;
+}
+
+.reg_1:hover {
+    fill: #5DDDFD;
+}
+
+.reg_2:hover {
+    fill: #FDE87C;
+}
+
+.reg_3:hover {
+    fill: #FF8783;
+}
+
+.reg_4:hover {
+    fill: #A9FF98;
+}
+
+.reg_5:hover {
+    fill: #E7ACFF;
+}
+
+.reg_6:hover {
+    fill: #968EFF;
+}
+
+.reg_7:hover {
+    fill: #FFBAD2;
+}
+
+.reg_0.active,
+.reg_1.active,
+.reg_2.active,
+.reg_3.active,
+.reg_4.active,
+.reg_5.active,
+.reg_6.active,
+.reg_7.active {
+    fill: orange;
+}
+
+.mesh_reg {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.road {
+    fill: #4D4D4D;
+}
+
+.water {
+    fill: #5BC0DE;
+    stroke: #428BCA;
+    stroke-width: 1.0px;
+    cursor: pointer;
+}
+
+.water:hover {
+    fill: #90E0F9;
+}
+
+.dept_0,
+.dept_1,
+.dept_2,
+.dept_3,
+.dept_4,
+.dept_5,
+.dept_6,
+.dept_7,
+.dept_8 {
+    fill: #F05F40;
+    stroke: #541C0E;
+    stroke-width: 1.0px;
+    cursor: pointer;
+}
+
+.dept_0:hover,
+.dept_1:hover,
+.dept_2:hover,
+.dept_3:hover,
+.dept_4:hover,
+.dept_5:hover,
+.dept_6:hover,
+.dept_7:hover,
+.dept_8:hover  {
+    fill: #FF886A;
+}
+
+.dept_0.active,
+.dept_1.active,
+.dept_2.active,
+.dept_3.active,
+.dept_4.active,
+.dept_5.active,
+.dept_6.active,
+.dept_7.active,
+.dept_8.active  {
+    fill: orange;
+}
+
+.mesh_dept {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

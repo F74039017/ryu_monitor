@@ -1,0 +1,4044 @@
+{
+    "type": "Topology",
+    "objects": {
+        "reg_0": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 0, "name": "光復校區" },
+                "arcs": [
+                    [7]
+                ]
+            }]
+        },
+        "reg_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 1, "name": "力行校區" },
+                "arcs": [
+                    [8]
+                ]
+            }]
+        },
+        "reg_2": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 2, "name": "成杏校區" },
+                "arcs": [
+                    [0]
+                ]
+            }]
+        },
+        "reg_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 3, "name": "敬業校區" },
+                "arcs": [
+                    [1, 2]
+                ]
+            }]
+        },
+        "reg_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 4, "name": "自強校區" },
+                "arcs": [
+                    [5]
+                ]
+            }]
+        },
+        "reg_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 5, "name": "東寧校區" },
+                "arcs": [
+                    [6]
+                ]
+            }]
+        },
+        "reg_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 6, "name": "勝利校區" },
+                "arcs": [
+                    [4]
+                ]
+            }]
+        },
+        "reg_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": 7, "name": "成功校區" },
+                "arcs": [
+                    [3]
+                ]
+            }]
+        },
+        "dept_0": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "修齊大樓" },
+                "arcs": [
+                    [9]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "中文系館" },
+                "arcs": [
+                    [10]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "歷史系館" },
+                "arcs": [
+                    [11]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "都計系館" },
+                "arcs": [
+                    [12]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "建築系館" },
+                "arcs": [
+                    [13]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "空中大學" },
+                "arcs": [
+                    [14]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "工設系館" },
+                "arcs": [
+                    [15]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "唯農大樓" },
+                "arcs": [
+                    [16]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "軍訓室" },
+                "arcs": [
+                    [17]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "建築研究大樓" },
+                "arcs": [
+                    [18]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "禮賢樓" },
+                "arcs": [
+                    [19]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "耐震教學大樓" },
+                "arcs": [
+                    [20]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光三舍" },
+                "arcs": [
+                    [21]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光一舍" },
+                "arcs": [
+                    [22]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光二舍" },
+                "arcs": [
+                    [23]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "成功廳" },
+                "arcs": [
+                    [24]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "國際會議廳" },
+                "arcs": [
+                    [25]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "學生第一活動中心" },
+                "arcs": [
+                    [26]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "郵局" },
+                "arcs": [
+                    [27]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "管理學院" },
+                "arcs": [
+                    [28]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "雲平大樓" },
+                "arcs": [
+                    [29]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "歷史文物館" },
+                "arcs": [
+                    [30]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "中正堂" },
+                "arcs": [
+                    [31]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復體育室" },
+                "arcs": [
+                    [32]
+                ]
+            }]
+        },
+        "dept_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "綠建築" },
+                "arcs": [
+                    [96]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "公衛大樓" },
+                "arcs": [
+                    [97]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "社科院大樓" },
+                "arcs": [
+                    [98]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "臺文系館" },
+                "arcs": [
+                    [101]
+                ]
+            }]
+        },
+        "dept_2": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏廳" },
+                "arcs": [
+                    [85]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫技系館" },
+                "arcs": [
+                    [86]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "護理系館" },
+                "arcs": [
+                    [87]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成大醫院" },
+                "arcs": [
+                    [88, 89]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫學院" },
+                "arcs": [
+                    [-90, 90]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成大醫院門診大樓" },
+                "arcs": [
+                    [91, 92]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "統一健康大樓" },
+                "arcs": [
+                    [93]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "心理健康中心" },
+                "arcs": [
+                    [94]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "醫護大樓" },
+                "arcs": [
+                    [95]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "職治系館" },
+                "arcs": [
+                    [99]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "物治系館" },
+                "arcs": [
+                    [100]
+                ]
+            }]
+        },
+        "dept_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬一舍" },
+                "arcs": [
+                    [80]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬二舍" },
+                "arcs": [
+                    [81]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬三舍" },
+                "arcs": [
+                    [82]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業教職員宿舍" },
+                "arcs": [
+                    [83]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "醫師宿舍" },
+                "arcs": [
+                    [84]
+                ]
+            }]
+        },
+        "dept_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "化工系館" },
+                "arcs": [
+                    [57]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "電機系館" },
+                "arcs": [
+                    [58]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "儀器設備大樓" },
+                "arcs": [
+                    [59]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "機械系館" },
+                "arcs": [
+                    [60]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "系統系館" },
+                "arcs": [
+                    [61]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "奇美大樓" },
+                "arcs": [
+                    [62]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "科技大樓" },
+                "arcs": [
+                    [63]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "航太系館" },
+                "arcs": [
+                    [64]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "航太宿舍" },
+                "arcs": [
+                    [65]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強教職員宿舍" },
+                "arcs": [
+                    [78]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強體育室" },
+                "arcs": [
+                    [79]
+                ]
+            }]
+        },
+        "dept_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "學人學舍" },
+                "arcs": [
+                    [77]
+                ]
+            }]
+        },
+        "dept_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "太子學舍" },
+                "arcs": [
+                    [66]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "成大圖書部" },
+                "arcs": [
+                    [67]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "學生第二活動中心" },
+                "arcs": [
+                    [68]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝三舍" },
+                "arcs": [
+                    [69]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝二舍" },
+                "arcs": [
+                    [70]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝八舍" },
+                "arcs": [
+                    [71]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝九舍" },
+                "arcs": [
+                    [72]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝六舍" },
+                "arcs": [
+                    [73]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝四舍" },
+                "arcs": [
+                    [74]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝一舍" },
+                "arcs": [
+                    [75]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "游泳池" },
+                "arcs": [
+                    [76]
+                ]
+            }]
+        },
+        "dept_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "綜合大樓" },
+                "arcs": [
+                    [34]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "物理二館" },
+                "arcs": [
+                    [35]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "地科系館" },
+                "arcs": [
+                    [36]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "理化大樓" },
+                "arcs": [
+                    [37]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資訊大樓" },
+                "arcs": [
+                    [38]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "格致堂" },
+                "arcs": [
+                    [39]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成大博物館" },
+                "arcs": [
+                    [40]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "物理系館" },
+                "arcs": [
+                    [41]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "化學系館" },
+                "arcs": [
+                    [42]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "數學系館" },
+                "arcs": [
+                    [43]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "測量系館" },
+                "arcs": [
+                    [44]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "總圖書館" },
+                "arcs": [
+                    [45]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "生科系館" },
+                "arcs": [
+                    [46]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "水利系館" },
+                "arcs": [
+                    [47]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "海工大樓" },
+                "arcs": [
+                    [48]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "環工系館" },
+                "arcs": [
+                    [49]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "卓羣大樓" },
+                "arcs": [
+                    [50]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "土木系館" },
+                "arcs": [
+                    [51]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "材料系館" },
+                "arcs": [
+                    [52]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資源系館" },
+                "arcs": [
+                    [53]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "資訊系館" },
+                "arcs": [
+                    [54]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "工科系館" },
+                "arcs": [
+                    [55]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "測量系教室" },
+                "arcs": [
+                    [56]
+                ]
+            }]
+        },
+        "water": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "成功湖" },
+                "arcs": [
+                    [102]
+                ]
+            }]
+        },
+        "road_0": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [103, 104]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [105]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [106]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [107, 108, 109, 110]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [111]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [112]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [113, 114, 115]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [116, 117]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [118]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [119]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "光復校區", "name": "光復校區道路" },
+                "arcs": [
+                    [120]
+                ]
+            }]
+        },
+        "road_1": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
+                "arcs": [
+                    [171, 172, 173]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
+                "arcs": [
+                    [174, 175, 176]
+                ]
+            }, {
+                "type": "GeometryCollection",
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
+                "geometries": [{
+                    "type": "Polygon",
+                    "arcs": [
+                        [177, 178, 179]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [180, 181]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [182]
+                    ]
+                }]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "力行校區", "name": "力行校區道路" },
+                "arcs": [
+                    [178, 183]
+                ]
+            }]
+        },
+        "road_2": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [162, 163, 164]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [165]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "arcs": [
+                    [166, 167]
+                ]
+            }, {
+                "type": "GeometryCollection",
+                "properties": { "reg": "成杏校區", "name": "成杏校區道路" },
+                "geometries": [{
+                    "type": "Polygon",
+                    "arcs": [
+                        [168]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [169]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [170]
+                    ]
+                }]
+            }]
+        },
+        "road_3": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [158]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [159]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [160]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "敬業校區", "name": "敬業校區道路" },
+                "arcs": [
+                    [161]
+                ]
+            }]
+        },
+        "road_4": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "自強校區道路" },
+                "arcs": [
+                    [143, 144, 145, 146]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [147, 148]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [149, 150, 151, 152]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [153, -150, 154]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "自強校區", "name": "自強校區道路" },
+                "arcs": [
+                    [155]
+                ]
+            }]
+        },
+        "road_5": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "校外道路" },
+                "arcs": [
+                    [156]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "東寧校區", "name": "校外道路" },
+                "arcs": [
+                    [157]
+                ]
+            }]
+        },
+        "road_6": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [121]
+                ]
+            }, {
+                "type": "GeometryCollection",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "geometries": [{
+                    "type": "Polygon",
+                    "arcs": [
+                        [122, 123, 124]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [125, 126]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "arcs": [
+                        [127]
+                    ]
+                }]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [128, 129]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "校外道路" },
+                "arcs": [
+                    [130]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "校外道路" },
+                "arcs": [
+                    [131]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [132]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "勝利校區", "name": "勝利校區道路" },
+                "arcs": [
+                    [133]
+                ]
+            }]
+        },
+        "road_7": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [134, 135, 136, 137, 138]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [137, 139]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [140]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": { "reg": "成功校區", "name": "成功校區道路" },
+                "arcs": [
+                    [141, 142, -136]
+                ]
+            }]
+        }
+    },
+    "arcs": [
+        [
+            [4616, 9520, 0],
+            [-103, -1613],
+            [3289, -222],
+            [139, 1429],
+            [-791, 110],
+            [-839, 98],
+            [-598, 83],
+            [-72, 10],
+            [-177, 25],
+            [-846, 88],
+            [-2, -8]
+        ],
+        [
+            [8717, 7611, 0],
+            [422, -33],
+            [261, -9],
+            [205, -8],
+            [228, 1],
+            [166, 1261],
+            [-371, 54],
+            [-211, 29],
+            [-244, 33],
+            [-77, 9]
+        ],
+        [
+            [9096, 8948, 0],
+            [-494, 78],
+            [-499, 71],
+            [-128, -1434],
+            [742, -52]
+        ],
+        [
+            [4488, 7683, 0],
+            [-204, -2543],
+            [-38, -494],
+            [-68, -672],
+            [1221, -82],
+            [1186, -90],
+            [857, -46],
+            [18, 313],
+            [324, 3430],
+            [-1617, 101],
+            [-1679, 83]
+        ],
+        [
+            [4178, 3325, 0],
+            [-37, -486],
+            [-44, -487],
+            [-153, -1550],
+            [1879, -164],
+            [1304, -116],
+            [118, 1349],
+            [187, 1837],
+            [-3265, 209],
+            [15, -302],
+            [3, -167],
+            [-7, -123]
+        ],
+        [
+            [8552, 7438, 0],
+            [-575, 39],
+            [-385, -3780],
+            [-155, -1778],
+            [537, -36],
+            [286, -33],
+            [266, -64],
+            [231, -4],
+            [532, -31],
+            [148, 1848],
+            [66, 943],
+            [107, 904],
+            [135, 1348],
+            [72, 568],
+            [-1265, 76]
+        ],
+        [
+            [7422, 1854, 0],
+            [-18, -336],
+            [-34, -344],
+            [-41, -672],
+            [849, -257],
+            [865, -245],
+            [84, 413],
+            [69, 117],
+            [84, 1171],
+            [-481, 20],
+            [-260, 12],
+            [-250, 45],
+            [-83, 12],
+            [-301, 38],
+            [-483, 26]
+        ],
+        [
+            [2995, 7815, 0],
+            [-1613, 225],
+            [-87, -12],
+            [-108, 3],
+            [-340, 20],
+            [-847, -3578],
+            [1042, -116],
+            [505, -54],
+            [505, -70],
+            [1013, -128],
+            [1014, -133],
+            [63, 542],
+            [32, 429],
+            [129, 1629],
+            [104, 1119],
+            [-1412, 124]
+        ],
+        [
+            [4544, 9538, 0],
+            [-1611, 232],
+            [-869, 120],
+            [-862, 109],
+            [-52, -406],
+            [-61, -431],
+            [-197, -827],
+            [797, -158],
+            [941, -102],
+            [1804, -164],
+            [110, 1627]
+        ],
+        [
+            [3443, 7703, 0],
+            [-4, -34],
+            [-44, 4],
+            [-34, -129],
+            [34, -7],
+            [-9, -71],
+            [277, -40],
+            [23, 100],
+            [18, -6],
+            [-2, -23],
+            [83, -13],
+            [6, 22],
+            [46, -8],
+            [18, 55],
+            [151, -17],
+            [-3, -12],
+            [54, -15],
+            [238, -39],
+            [27, 81],
+            [-26, 3],
+            [10, 67],
+            [-256, 37],
+            [-23, -37],
+            [-584, 82]
+        ],
+        [
+            [3866, 7472, 0],
+            [-26, -93],
+            [93, -19],
+            [-6, -18],
+            [-43, 9],
+            [-20, -80],
+            [46, -12],
+            [-25, -98],
+            [350, -47],
+            [17, 82],
+            [-228, 36],
+            [18, 85],
+            [203, -30],
+            [34, 138],
+            [-278, 39],
+            [-9, -16],
+            [-126, 24]
+        ],
+        [
+            [2976, 6696, 0],
+            [-35, -151],
+            [442, -58],
+            [438, -66],
+            [32, 152],
+            [-877, 123]
+        ],
+        [
+            [2488, 7736, 0],
+            [-956, 161],
+            [-51, -135],
+            [965, -164],
+            [42, 138]
+        ],
+        [
+            [887, 7905, 0],
+            [-72, -387],
+            [111, -21],
+            [27, 136],
+            [16, 86],
+            [62, -7],
+            [-23, -104],
+            [98, -15],
+            [100, -20],
+            [17, 53],
+            [36, -8],
+            [1, -14],
+            [194, -30],
+            [23, 55],
+            [49, -10],
+            [11, -38],
+            [148, -22],
+            [57, 128],
+            [-252, 43],
+            [-177, 8],
+            [22, 181],
+            [-26, 3],
+            [-7, -26],
+            [-67, 5],
+            [-50, -34],
+            [-298, 38]
+        ],
+        [
+            [1091, 7392, 0],
+            [-32, -155],
+            [488, -65],
+            [20, 146],
+            [-476, 74]
+        ],
+        [
+            [2564, 6752, 0],
+            [-830, 117],
+            [-24, -145],
+            [825, -107],
+            [29, 135]
+        ],
+        [
+            [1744, 6579, 0],
+            [-20, -87],
+            [40, -26],
+            [-17, -57],
+            [-10, -129],
+            [418, -59],
+            [15, 31],
+            [86, -2],
+            [-4, -65],
+            [165, -22],
+            [44, 177],
+            [-69, 0],
+            [15, 93],
+            [-67, 6],
+            [5, 29],
+            [-367, 50],
+            [-12, -36],
+            [-72, 10],
+            [10, 61],
+            [-160, 26]
+        ],
+        [
+            [1687, 5910, 0],
+            [-24, -153],
+            [391, -46],
+            [32, 155],
+            [-399, 44]
+        ],
+        [
+            [719, 7104, 0],
+            [-47, -224],
+            [301, -39],
+            [49, 214],
+            [-303, 49]
+        ],
+        [
+            [1128, 7001, 0],
+            [-32, -117],
+            [409, -53],
+            [20, 117],
+            [-397, 53]
+        ],
+        [
+            [764, 7415, 0],
+            [-47, -255],
+            [148, -10],
+            [39, 246],
+            [-140, 19]
+        ],
+        [
+            [660, 6810, 0],
+            [-18, -98],
+            [124, -15],
+            [-5, -19],
+            [100, -10],
+            [4, 18],
+            [154, -20],
+            [19, 95],
+            [-378, 49]
+        ],
+        [
+            [589, 6197, 0],
+            [-22, -95],
+            [197, -26],
+            [76, -151],
+            [108, 30],
+            [-78, 145],
+            [152, 152],
+            [-96, 66],
+            [-140, -145],
+            [-197, 24]
+        ],
+        [
+            [1175, 6413, 0],
+            [62, -161],
+            [113, 34],
+            [-81, 159],
+            [162, 142],
+            [-103, 56],
+            [-143, -133],
+            [-202, 26],
+            [-15, -101],
+            [207, -22]
+        ],
+        [
+            [1715, 5523, 0],
+            [-51, -197],
+            [161, -26],
+            [174, -26],
+            [73, 200],
+            [-148, 15],
+            [15, 84],
+            [-168, 25],
+            [-15, -79],
+            [-41, 4]
+        ],
+        [
+            [1665, 5319, 0],
+            [-61, -224],
+            [310, -37],
+            [30, 138],
+            [44, -4],
+            [10, 74],
+            [-333, 53]
+        ],
+        [
+            [2078, 5489, 0],
+            [2, -19],
+            [-72, -195],
+            [-8, -49],
+            [114, -15],
+            [19, 57],
+            [43, -8],
+            [-18, -81],
+            [223, -33],
+            [107, 66],
+            [229, -29],
+            [11, 40],
+            [83, -11],
+            [8, 38],
+            [-40, 4],
+            [8, 37],
+            [-28, -1],
+            [10, 55],
+            [-113, 12],
+            [24, 84],
+            [-58, 4],
+            [-104, -73],
+            [-149, 22],
+            [-9, 13],
+            [-70, 12],
+            [-16, -13],
+            [-80, 12],
+            [-32, 59],
+            [-84, 12]
+        ],
+        [
+            [3083, 4971, 0],
+            [-20, -95],
+            [185, -22],
+            [12, 100],
+            [-177, 17]
+        ],
+        [
+            [3316, 5705, 0],
+            [-35, -148],
+            [47, -6],
+            [-47, -182],
+            [-111, 17],
+            [-76, -342],
+            [30, 0],
+            [-37, -68],
+            [177, -16],
+            [12, 32],
+            [35, 4],
+            [10, 36],
+            [-42, 14],
+            [32, 148],
+            [406, -65],
+            [-37, -177],
+            [104, -13],
+            [22, 71],
+            [54, -8],
+            [64, 262],
+            [32, -2],
+            [30, 166],
+            [-32, 10],
+            [39, 160],
+            [-677, 107]
+        ],
+        [
+            [2850, 6482, 0],
+            [-98, -424],
+            [413, -97],
+            [626, -57],
+            [49, 445],
+            [-990, 133]
+        ],
+        [
+            [3799, 7169, 0],
+            [-64, -266],
+            [118, -16],
+            [2, 36],
+            [375, -57],
+            [42, 210],
+            [-45, 3],
+            [10, 32],
+            [-438, 58]
+        ],
+        [
+            [3151, 4620, 0],
+            [-111, -359],
+            [199, -89],
+            [234, -50],
+            [257, 8],
+            [113, 371],
+            [-160, 73],
+            [-165, 42],
+            [-114, 15],
+            [-253, -11]
+        ],
+        [
+            [1229, 5232, 0],
+            [-64, -295],
+            [126, -14],
+            [5, 63],
+            [37, -2],
+            [44, 232],
+            [-148, 16]
+        ],
+        [
+            [4207, 3684, 0],
+            [10, -85],
+            [-5, -141],
+            [611, -39],
+            [13, 255],
+            [-451, 32],
+            [7, -41],
+            [-47, 9],
+            [-22, 36],
+            [-56, 12],
+            [-60, -38]
+        ],
+        [
+            [4276, 4307, 0],
+            [-12, -203],
+            [476, -29],
+            [22, 206],
+            [-486, 26]
+        ],
+        [
+            [4313, 4673, 0],
+            [-24, -269],
+            [458, -24],
+            [5, 61],
+            [37, 4],
+            [-3, 234],
+            [-349, 20],
+            [-10, -8],
+            [-59, 1],
+            [-7, -21],
+            [-48, 2]
+        ],
+        [
+            [4308, 5004, 0],
+            [-7, -178],
+            [35, -4],
+            [0, -24],
+            [470, -28],
+            [32, 313],
+            [-475, 34],
+            [-3, -117],
+            [-52, 4]
+        ],
+        [
+            [4350, 5343, 0],
+            [-12, -95],
+            [25, -4],
+            [-8, -58],
+            [456, -20],
+            [22, 159],
+            [-483, 18]
+        ],
+        [
+            [4375, 5616, 0],
+            [-16, -202],
+            [26, -3],
+            [-8, -60],
+            [138, -4],
+            [4, 70],
+            [32, -6],
+            [14, 190],
+            [-31, 4],
+            [0, 27],
+            [-125, 7],
+            [-7, -29],
+            [-27, 6]
+        ],
+        [
+            [5378, 4729, 0],
+            [-3, -224],
+            [163, -2],
+            [0, 45],
+            [66, 0],
+            [8, 179],
+            [-234, 2]
+        ],
+        [
+            [5851, 4358, 0],
+            [-363, 24],
+            [3, 36],
+            [-81, 7],
+            [-3, -31],
+            [-367, 24],
+            [-10, -105],
+            [382, -18],
+            [-2, -38],
+            [56, -6],
+            [3, 32],
+            [379, -18],
+            [3, 93]
+        ],
+        [
+            [5927, 5155, 0],
+            [-845, 35],
+            [-5, -67],
+            [39, -2],
+            [-49, -375],
+            [118, -10],
+            [10, 84],
+            [562, -32],
+            [-12, -79],
+            [150, -16],
+            [32, 462]
+        ],
+        [
+            [5991, 5515, 0],
+            [-746, 48],
+            [7, 31],
+            [-126, 10],
+            [-24, -152],
+            [44, -8],
+            [-30, -250],
+            [808, -35],
+            [13, 249],
+            [37, 0],
+            [17, 107]
+        ],
+        [
+            [4954, 6018, 0],
+            [-5, -126],
+            [527, -30],
+            [3, 135],
+            [-525, 21]
+        ],
+        [
+            [5520, 5989, 0],
+            [-4, -123],
+            [256, -18],
+            [2, 44],
+            [67, -4],
+            [-3, 29],
+            [229, -11],
+            [3, 128],
+            [-229, 8],
+            [7, 36],
+            [-59, 6],
+            [-12, -109],
+            [-257, 14]
+        ],
+        [
+            [5387, 7148, 0],
+            [-39, -309],
+            [7, -75],
+            [190, -18],
+            [133, -32],
+            [96, 12],
+            [125, 1],
+            [6, 41],
+            [35, 0],
+            [3, 40],
+            [53, 1],
+            [25, 305],
+            [-45, 2],
+            [5, 34],
+            [-562, 43],
+            [-7, -49],
+            [-25, 4]
+        ],
+        [
+            [5415, 7538, 0],
+            [-8, -113],
+            [52, -2],
+            [-7, -47],
+            [487, -34],
+            [5, 40],
+            [45, -6],
+            [-5, -40],
+            [49, 0],
+            [22, 163],
+            [-640, 39]
+        ],
+        [
+            [6540, 7445, 0],
+            [-14, -148],
+            [679, -58],
+            [13, 170],
+            [-678, 36]
+        ],
+        [
+            [7329, 7360, 0],
+            [-8, -89],
+            [370, -20],
+            [5, 85],
+            [-367, 24]
+        ],
+        [
+            [6511, 7160, 0],
+            [-32, -323],
+            [480, -38],
+            [10, 113],
+            [32, -6],
+            [27, 216],
+            [-517, 38]
+        ],
+        [
+            [7558, 7102, 0],
+            [-500, 24],
+            [-15, -123],
+            [254, -16],
+            [-8, -85],
+            [-258, 4],
+            [-13, -107],
+            [505, -45],
+            [35, 348]
+        ],
+        [
+            [6457, 6593, 0],
+            [-32, -347],
+            [133, -6],
+            [707, -37],
+            [-7, -145],
+            [275, -12],
+            [59, 630],
+            [-138, 8],
+            [0, -33],
+            [-140, 8],
+            [0, -22],
+            [-210, 22],
+            [-8, -97],
+            [-639, 31]
+        ],
+        [
+            [6395, 6005, 0],
+            [-37, -347],
+            [540, -31],
+            [25, -14],
+            [108, -8],
+            [22, 146],
+            [150, -51],
+            [143, -45],
+            [33, 5],
+            [20, 38],
+            [6, 48],
+            [42, -2],
+            [-10, -148],
+            [143, -5],
+            [24, 265],
+            [-123, 8],
+            [-13, -42],
+            [-52, 4],
+            [-7, -34],
+            [-192, 55],
+            [-215, 63],
+            [-75, 2],
+            [3, 61],
+            [-535, 32]
+        ],
+        [
+            [6346, 5475, 0],
+            [-29, -351],
+            [408, -20],
+            [-6, -64],
+            [129, -4],
+            [34, -22],
+            [32, -7],
+            [415, 92],
+            [37, -6],
+            [-14, -203],
+            [170, -10],
+            [18, 243],
+            [-175, 10],
+            [-30, 44],
+            [-25, 22],
+            [-100, -16],
+            [-295, -72],
+            [-65, 8],
+            [30, 330],
+            [-534, 26]
+        ],
+        [
+            [6299, 4919, 0],
+            [-20, -319],
+            [519, -34],
+            [24, -9],
+            [174, -12],
+            [10, 87],
+            [30, 5],
+            [96, -27],
+            [-5, -119],
+            [150, 0],
+            [7, 160],
+            [56, -9],
+            [143, -18],
+            [21, 139],
+            [4, 94],
+            [-147, 8],
+            [-15, -164],
+            [-69, 6],
+            [-389, 113],
+            [-25, -1],
+            [-25, -18],
+            [-9, 2],
+            [2, 96],
+            [-532, 20]
+        ],
+        [
+            [6284, 4380, 0],
+            [-24, -323],
+            [401, -22],
+            [2, -20],
+            [45, -3],
+            [42, -4],
+            [1, 18],
+            [21, -1],
+            [1, 31],
+            [141, -9],
+            [-8, -48],
+            [74, -5],
+            [1, -20],
+            [121, -9],
+            [0, -15],
+            [207, -9],
+            [36, 377],
+            [-521, 26],
+            [1, 18],
+            [-410, 30],
+            [-6, -19],
+            [-125, 7]
+        ],
+        [
+            [5282, 6179, 0],
+            [-249, 12],
+            [-18, -115],
+            [257, -4],
+            [10, 107]
+        ],
+        [
+            [7979, 5333, 0],
+            [-17, -159],
+            [-37, 0],
+            [-9, -76],
+            [27, -1],
+            [-6, -52],
+            [16, -2],
+            [-7, -77],
+            [353, -23],
+            [3, 22],
+            [46, -3],
+            [2, 31],
+            [35, -3],
+            [12, 98],
+            [-46, 1],
+            [21, 219],
+            [-393, 25]
+        ],
+        [
+            [7868, 4628, 0],
+            [-33, -424],
+            [457, -18],
+            [32, 420],
+            [-456, 22]
+        ],
+        [
+            [9398, 5380, 0],
+            [-77, 9],
+            [-2, -15],
+            [-220, 13],
+            [0, 20],
+            [-131, 8],
+            [-27, -232],
+            [138, -7],
+            [0, 22],
+            [213, -13],
+            [0, -26],
+            [15, 0],
+            [-8, -64],
+            [73, -1],
+            [26, 286]
+        ],
+        [
+            [9368, 4913, 0],
+            [-449, 41],
+            [-51, -416],
+            [453, -41],
+            [47, 416]
+        ],
+        [
+            [8883, 4166, 0],
+            [-34, -385],
+            [443, -19],
+            [22, 162],
+            [-44, 2],
+            [2, 75],
+            [-34, 4],
+            [7, 76],
+            [47, 0],
+            [7, 65],
+            [-416, 20]
+        ],
+        [
+            [7843, 4015, 0],
+            [-4, -21],
+            [-45, 5],
+            [-3, -58],
+            [22, -2],
+            [-24, -17],
+            [3, -18],
+            [6, -21],
+            [22, -10],
+            [-4, -13],
+            [397, -21],
+            [4, 19],
+            [23, -2],
+            [19, 52],
+            [14, 48],
+            [-6, 57],
+            [-13, 44],
+            [-124, 7],
+            [-9, -68],
+            [-278, 19]
+        ],
+        [
+            [7781, 2828, 0],
+            [-18, -273],
+            [271, -19],
+            [-2, -42],
+            [71, -4],
+            [25, 1],
+            [27, 15],
+            [14, 21],
+            [28, 292],
+            [-11, 15],
+            [-22, 12],
+            [-319, 18],
+            [-3, -22],
+            [-27, 2],
+            [-4, -17],
+            [-30, 1]
+        ],
+        [
+            [8399, 3416, 0],
+            [-16, -120],
+            [-25, -3],
+            [-1, -24],
+            [59, -7],
+            [-6, -44],
+            [-30, -1],
+            [-14, -123],
+            [687, -38],
+            [30, 129],
+            [-271, 18],
+            [7, 61],
+            [259, -4],
+            [49, 26],
+            [6, 72],
+            [-37, 1],
+            [3, 14],
+            [-700, 43]
+        ],
+        [
+            [9121, 2656, 0],
+            [-116, 10],
+            [-1, -22],
+            [-62, 2],
+            [4, 21],
+            [-123, 10],
+            [-10, -64],
+            [50, -2],
+            [-7, -74],
+            [-46, 3],
+            [-5, -53],
+            [58, -2],
+            [-1, -20],
+            [243, -14],
+            [16, 205]
+        ],
+        [
+            [4178, 3325, 0],
+            [-20, -219],
+            [91, -12],
+            [4, -54],
+            [487, -36],
+            [0, 110],
+            [108, -4],
+            [15, 117],
+            [-107, 7],
+            [1, 63],
+            [-143, 5],
+            [-1, -31],
+            [-249, 13],
+            [0, 29],
+            [-186, 12]
+        ],
+        [
+            [5078, 3182, 0],
+            [-6, -25],
+            [-39, 4],
+            [-5, -69],
+            [33, -1],
+            [2, -16],
+            [184, -12],
+            [-1, -36],
+            [162, -11],
+            [2, 40],
+            [234, -14],
+            [3, 29],
+            [32, -2],
+            [7, 55],
+            [-39, 1],
+            [0, 26],
+            [-569, 31]
+        ],
+        [
+            [5389, 2602, 0],
+            [-5, -78],
+            [108, -3],
+            [-12, -148],
+            [-101, 3],
+            [-4, -81],
+            [362, -14],
+            [5, 76],
+            [-188, 11],
+            [6, 96],
+            [194, -6],
+            [4, 130],
+            [-369, 14]
+        ],
+        [
+            [5973, 2660, 0],
+            [-8, -87],
+            [462, -20],
+            [5, 85],
+            [-189, 10],
+            [0, 30],
+            [-87, 2],
+            [-4, -31],
+            [-179, 11]
+        ],
+        [
+            [5927, 2367, 0],
+            [-4, -67],
+            [502, -26],
+            [3, 60],
+            [-501, 33]
+        ],
+        [
+            [6199, 2171, 0],
+            [-1, -36],
+            [-30, 1],
+            [-3, -62],
+            [27, -2],
+            [-4, -42],
+            [219, -11],
+            [4, 49],
+            [27, -2],
+            [6, 54],
+            [-33, 1],
+            [5, 38],
+            [-217, 12]
+        ],
+        [
+            [6143, 1879, 0],
+            [-7, -64],
+            [26, -2],
+            [-1, -43],
+            [218, -13],
+            [2, 45],
+            [20, -1],
+            [1, 18],
+            [10, -2],
+            [3, 42],
+            [-29, 1],
+            [4, 39],
+            [-203, 12],
+            [-1, -38],
+            [-43, 6]
+        ],
+        [
+            [4700, 2515, 0],
+            [-2, -48],
+            [19, -2],
+            [-2, -33],
+            [42, -8],
+            [223, -14],
+            [35, 7],
+            [3, 36],
+            [20, -3],
+            [2, 22],
+            [-46, 0],
+            [5, 45],
+            [-78, 3],
+            [12, 168],
+            [95, -7],
+            [-1, 31],
+            [29, 0],
+            [4, 29],
+            [-32, 0],
+            [2, 38],
+            [-26, 11],
+            [-221, 11],
+            [-43, -7],
+            [-4, -35],
+            [-20, 3],
+            [-4, -53],
+            [31, -4],
+            [1, -11],
+            [46, -2],
+            [-15, -164],
+            [-42, 3],
+            [-2, -16],
+            [-31, 0]
+        ],
+        [
+            [5084, 2177, 0],
+            [-14, -143],
+            [86, -10],
+            [7, 40],
+            [417, -30],
+            [0, -38],
+            [64, -4],
+            [17, 147],
+            [-577, 38]
+        ],
+        [
+            [4390, 1990, 0],
+            [-5, -48],
+            [-15, 2],
+            [-2, -24],
+            [41, -3],
+            [2, -21],
+            [59, -4],
+            [4, 15],
+            [309, -25],
+            [2, -16],
+            [118, -7],
+            [-2, -14],
+            [63, -2],
+            [61, 16],
+            [-1, 20],
+            [552, -35],
+            [0, -12],
+            [41, -2],
+            [5, 46],
+            [100, -7],
+            [8, 38],
+            [-144, 11],
+            [-1196, 72]
+        ],
+        [
+            [4168, 2648, 0],
+            [-54, -525],
+            [404, -20],
+            [59, 589],
+            [-402, 20],
+            [-7, -64]
+        ],
+        [
+            [8723, 1443, 0],
+            [-44, -727],
+            [418, -25],
+            [55, 735],
+            [-429, 17]
+        ],
+        [
+            [8890, 2282, 0],
+            [-19, -105],
+            [394, -24],
+            [10, 97],
+            [-385, 32]
+        ],
+        [
+            [8016, 7233, 0],
+            [-8, -51],
+            [67, -4],
+            [0, -30],
+            [195, -10],
+            [2, 26],
+            [133, -10],
+            [-5, -30],
+            [72, 0],
+            [5, 123],
+            [-64, 2],
+            [-3, -26],
+            [-71, 4],
+            [-72, -6],
+            [-251, 12]
+        ],
+        [
+            [8500, 7976, 0],
+            [-6, -68],
+            [31, -3],
+            [-2, -44],
+            [-32, 3],
+            [-7, -68],
+            [134, -8],
+            [5, 35],
+            [139, -9],
+            [-3, -32],
+            [128, -6],
+            [10, 65],
+            [-31, 1],
+            [5, 48],
+            [32, -1],
+            [6, 71],
+            [-132, 6],
+            [-2, -36],
+            [-144, 6],
+            [3, 36],
+            [-134, 4]
+        ],
+        [
+            [8112, 8212, 0],
+            [-9, -72],
+            [291, -23],
+            [10, 64],
+            [68, -4],
+            [6, 42],
+            [-338, 33],
+            [-1, -40],
+            [-27, 0]
+        ],
+        [
+            [8433, 8840, 0],
+            [-279, 14],
+            [-5, -47],
+            [15, -2],
+            [0, -20],
+            [11, -13],
+            [-3, -24],
+            [26, -1],
+            [-5, -115],
+            [-80, 6],
+            [-6, -54],
+            [19, -3],
+            [1, -17],
+            [24, -2],
+            [12, -26],
+            [347, -17],
+            [2, 44],
+            [-17, 2],
+            [1, 25],
+            [-13, 0],
+            [2, 24],
+            [-250, 14],
+            [11, 110],
+            [170, -4],
+            [43, 7],
+            [4, 34],
+            [-20, 4],
+            [4, 29],
+            [-19, 0],
+            [5, 32]
+        ],
+        [
+            [8614, 8841, 0],
+            [2, -15],
+            [-51, 2],
+            [-3, -109],
+            [44, -5],
+            [0, -56],
+            [87, -4],
+            [7, 57],
+            [34, 0],
+            [6, 41],
+            [133, -7],
+            [-5, -45],
+            [45, -4],
+            [-3, -67],
+            [77, -4],
+            [7, 66],
+            [38, 1],
+            [3, 40],
+            [23, -1],
+            [2, 67],
+            [-49, 1],
+            [1, 26],
+            [-398, 16]
+        ],
+        [
+            [9334, 7998, 0],
+            [-56, 3],
+            [2, 11],
+            [-45, 0],
+            [3, -19],
+            [-45, 2],
+            [-35, 4],
+            [-74, -1],
+            [7, -65],
+            [85, -2],
+            [3, -11],
+            [51, 0],
+            [2, 17],
+            [103, -3],
+            [-1, 64]
+        ],
+        [
+            [5210, 8439, 0],
+            [-15, -192],
+            [64, -3],
+            [-3, -69],
+            [151, -4],
+            [7, 64],
+            [131, -8],
+            [20, 202],
+            [-355, 10]
+        ],
+        [
+            [7171, 8729, 0],
+            [-5, -40],
+            [54, -9],
+            [-24, -240],
+            [453, -30],
+            [27, 232],
+            [-57, 6],
+            [15, 47],
+            [-140, 10],
+            [-5, 22],
+            [-261, 14],
+            [0, -22],
+            [-57, 10]
+        ],
+        [
+            [6549, 8326, 0],
+            [-7, -98],
+            [21, -2],
+            [-8, -115],
+            [205, -17],
+            [-3, 15],
+            [47, -2],
+            [10, 57],
+            [-21, 4],
+            [4, 23],
+            [-31, 4],
+            [-14, -24],
+            [-82, 1],
+            [-16, 21],
+            [17, 124],
+            [-122, 9]
+        ],
+        [
+            [5787, 9131, 0],
+            [-8, 66],
+            [-84, 6],
+            [-9, -70],
+            [-207, 14],
+            [7, 54],
+            [-493, 27],
+            [0, -67],
+            [-37, 0],
+            [-7, -143],
+            [301, -10],
+            [-10, -118],
+            [-35, 2],
+            [-2, -56],
+            [32, -4],
+            [-20, -111],
+            [-264, 12],
+            [-12, -103],
+            [-47, -2],
+            [-2, -26],
+            [49, -8],
+            [-25, -348],
+            [227, -14],
+            [20, 212],
+            [409, -14],
+            [177, 2]
+        ],
+        [
+            [5747, 8432, 0],
+            [40, 699]
+        ],
+        [
+            [5747, 8432, 0],
+            [685, -40],
+            [0, -49],
+            [86, -4],
+            [10, 81],
+            [153, -6],
+            [37, 373],
+            [143, -10],
+            [27, 333],
+            [-528, 33],
+            [-24, -273],
+            [-42, 2],
+            [7, 129],
+            [-189, 11],
+            [5, 72],
+            [-146, 6],
+            [3, 31],
+            [-187, 10]
+        ],
+        [
+            [3358, 8404, 0],
+            [-3, -93],
+            [219, -10],
+            [3, -65],
+            [263, -20],
+            [5, 59],
+            [375, -25],
+            [7, 138],
+            [42, 0],
+            [5, 86],
+            [126, -10],
+            [5, 103],
+            [-151, 6],
+            [3, 65],
+            [-72, 4],
+            [3, 117],
+            [-40, 2],
+            [-2, 45],
+            [-682, 42],
+            [-13, -139],
+            [35, -6],
+            [-25, -117],
+            [-111, 4],
+            [0, 56]
+        ],
+        [
+            [3350, 8646, 0],
+            [-91, 8],
+            [-17, -244],
+            [116, -6]
+        ],
+        [
+            [4395, 9405, 0],
+            [-342, 31],
+            [0, -24],
+            [-13, 0],
+            [-6, -67],
+            [23, -3],
+            [-7, -66],
+            [-22, 3],
+            [-6, -63],
+            [27, -2],
+            [-3, -22],
+            [311, -10],
+            [3, 20],
+            [26, -1],
+            [6, 45],
+            [32, 12],
+            [21, 14],
+            [4, 27],
+            [-12, 15],
+            [-28, 10],
+            [5, 52],
+            [-23, 3],
+            [4, 26]
+        ],
+        [
+            [4050, 9118, 0],
+            [-8, -76],
+            [190, -12],
+            [5, 82],
+            [-187, 6]
+        ],
+        [
+            [3451, 9191, 0],
+            [-2, -105],
+            [234, -20],
+            [12, 65],
+            [182, -19],
+            [13, 111],
+            [-175, 15],
+            [10, 111],
+            [160, -12],
+            [7, 58],
+            [40, -2],
+            [14, 109],
+            [-211, 16],
+            [7, 63],
+            [-274, 18],
+            [-9, -109],
+            [174, -12],
+            [-17, -289],
+            [-165, 2]
+        ],
+        [
+            [2333, 8406, 0],
+            [-441, 38],
+            [-17, -93],
+            [-32, -36],
+            [-27, -85],
+            [487, -44],
+            [30, 220]
+        ],
+        [
+            [1022, 8442, 0],
+            [-19, -93],
+            [303, -34],
+            [22, 81],
+            [-306, 46]
+        ],
+        [
+            [2986, 8767, 0],
+            [-318, 51],
+            [-45, 32],
+            [-54, -12],
+            [-12, -30],
+            [-5, -83],
+            [163, -14],
+            [-5, -41],
+            [128, -14],
+            [-25, -145],
+            [-327, 50],
+            [-5, -129],
+            [414, -62],
+            [19, 30],
+            [52, 16],
+            [15, 63],
+            [-57, 22],
+            [25, 145],
+            [46, 0],
+            [23, 107],
+            [-32, 14]
+        ],
+        [
+            [7306, 8168, 0],
+            [-9, -123],
+            [342, -27],
+            [27, 115],
+            [-360, 35]
+        ],
+        [
+            [7664, 8151, 0],
+            [9, 73],
+            [-322, 16],
+            [0, 53],
+            [-205, 8],
+            [3, -24],
+            [-52, 6],
+            [-5, -59],
+            [40, -8],
+            [0, -20],
+            [532, -45]
+        ],
+        [
+            [2143, 9145, 0],
+            [-17, 5],
+            [53, 223],
+            [238, -42],
+            [16, 57],
+            [-138, 21],
+            [20, 80],
+            [121, -20],
+            [38, 108],
+            [-311, 51],
+            [-43, -108],
+            [165, -22],
+            [-25, -83],
+            [-88, 16],
+            [-17, -56],
+            [-148, 18],
+            [-55, 8],
+            [-149, 17],
+            [-14, -67],
+            [28, -3],
+            [-27, -138],
+            [-162, 22],
+            [-24, -83],
+            [251, -37],
+            [-35, -121],
+            [-224, 35],
+            [-19, -81],
+            [224, -32],
+            [-27, -103],
+            [-124, 14],
+            [-17, -65],
+            [104, -8],
+            [-15, -40],
+            [-104, 12],
+            [-22, -95],
+            [279, -36],
+            [14, 94],
+            [-110, 17],
+            [9, 32],
+            [62, -4],
+            [12, 71],
+            [-42, 4],
+            [23, 92],
+            [22, -2],
+            [231, -34],
+            [13, 77],
+            [-242, 40],
+            [30, 119],
+            [224, -42],
+            [22, 89]
+        ],
+        [
+            [3195, 7356, 0],
+            [-74, -6],
+            [-32, -22],
+            [25, -37],
+            [34, -32],
+            [42, -48],
+            [0, -39],
+            [-49, -34],
+            [-62, 8],
+            [-37, -20],
+            [-2, -32],
+            [5, -27],
+            [24, -32],
+            [-9, -20],
+            [27, -12],
+            [42, -10],
+            [66, 16],
+            [101, 14],
+            [79, 8],
+            [34, -22],
+            [25, -26],
+            [44, 0],
+            [50, 18],
+            [12, 22],
+            [-7, 34],
+            [-20, 16],
+            [39, 59],
+            [20, 71],
+            [32, 26],
+            [5, 30],
+            [-30, 36],
+            [-46, -4],
+            [-37, -24],
+            [-35, 6],
+            [-34, 20],
+            [-37, 2],
+            [-20, -20],
+            [-62, 35],
+            [-42, 22],
+            [-29, 22],
+            [-42, 2]
+        ],
+        [
+            [2995, 7815, 0],
+            [-41, -303],
+            [-143, -598],
+            [-109, -380]
+        ],
+        [
+            [2702, 6534, 0],
+            [-157, -537],
+            [93, -16],
+            [242, 832],
+            [148, 630],
+            [44, 375],
+            [-77, -3]
+        ],
+        [
+            [1628, 7108, 0],
+            [63, -11],
+            [28, 251],
+            [74, 274],
+            [30, 0],
+            [1111, -161],
+            [741, -111],
+            [26, -11],
+            [4, -30],
+            [-126, -516],
+            [61, -9],
+            [120, 503],
+            [3, 33],
+            [-3, 32],
+            [-22, 27],
+            [-22, 14],
+            [-30, 11],
+            [-33, 8],
+            [-617, 86],
+            [-1201, 178],
+            [-27, 3],
+            [-31, -5],
+            [-29, -8],
+            [-14, -13],
+            [-23, -77],
+            [-47, -190],
+            [-36, -278]
+        ],
+        [
+            [1749, 7030, 0],
+            [-25, -56],
+            [1060, -129],
+            [795, -109],
+            [215, -40],
+            [73, -38],
+            [35, -35],
+            [27, -75],
+            [-7, -74],
+            [0, -121],
+            [-86, -543],
+            [66, -2],
+            [67, 391],
+            [34, 186],
+            [0, 117],
+            [5, 36],
+            [-10, 43],
+            [-42, 68],
+            [-47, 59],
+            [-64, 40],
+            [-143, 33],
+            [-189, 22],
+            [-614, 83],
+            [-1150, 144]
+        ],
+        [
+            [1577, 6288, 0],
+            [4, -103],
+            [-64, -436],
+            [-14, -91],
+            [-104, -466],
+            [-24, -111],
+            [0, -35],
+            [12, -48],
+            [32, -42],
+            [47, -29],
+            [81, -12],
+            [1298, -171],
+            [320, -53],
+            [727, -101],
+            [113, -16],
+            [138, -20],
+            [18, 85],
+            [-237, 38]
+        ],
+        [
+            [3924, 4677, 0],
+            [-177, 16],
+            [-153, 26],
+            [-704, 99],
+            [-1365, 178],
+            [-61, 34],
+            [-6, 54],
+            [3, 35],
+            [125, 559]
+        ],
+        [
+            [1586, 5678, 0],
+            [64, 436],
+            [8, 67]
+        ],
+        [
+            [1658, 6181, 0],
+            [-8, 77],
+            [-17, 414],
+            [5, 218],
+            [47, 0],
+            [30, 14],
+            [22, 14],
+            [19, 14],
+            [21, 51],
+            [-60, 23],
+            [-32, -50],
+            [-25, -10],
+            [-34, 0],
+            [-46, 26],
+            [-56, -8],
+            [43, -58],
+            [-8, -192],
+            [8, -157],
+            [10, -269]
+        ],
+        [
+            [1658, 6181, 0],
+            [-17, -81],
+            [1480, -260],
+            [1116, -129],
+            [0, 72],
+            [-98, 10],
+            [-296, 33],
+            [-714, 83],
+            [-567, 113],
+            [-904, 159]
+        ],
+        [
+            [3067, 5854, 0],
+            [-251, -1028],
+            [-143, -668],
+            [135, -18],
+            [118, 604],
+            [249, 1094],
+            [-108, 16]
+        ],
+        [
+            [1498, 6658, 0],
+            [34, -23],
+            [99, 2],
+            [64, -4],
+            [985, -155],
+            [22, 56]
+        ],
+        [
+            [2702, 6534, 0],
+            [-928, 152],
+            [-74, 4],
+            [-151, 10],
+            [-115, 16],
+            [-74, 4],
+            [-37, 0],
+            [-47, -10],
+            [-89, -16],
+            [-189, -47],
+            [-133, -30],
+            [-79, 4],
+            [-123, -6],
+            [-69, -44],
+            [-59, -247],
+            [-52, -270],
+            [-3, -75],
+            [25, -48],
+            [37, -35],
+            [44, -16],
+            [365, -50],
+            [209, -39],
+            [426, -113]
+        ],
+        [
+            [1586, 5678, 0],
+            [572, -87],
+            [840, -135],
+            [17, 64],
+            [-798, 130],
+            [-2, 30],
+            [22, 105],
+            [5, 39],
+            [-32, 22],
+            [-35, -28],
+            [-39, -152],
+            [-621, 97],
+            [-392, 107],
+            [-47, 105],
+            [-17, 47],
+            [5, 32],
+            [10, 56],
+            [36, 56],
+            [48, 53],
+            [-51, 42],
+            [-87, -94],
+            [-27, -73],
+            [-5, -62],
+            [10, -55],
+            [42, -99],
+            [-407, 59],
+            [-47, 14],
+            [-27, 34],
+            [-12, 63],
+            [44, 208],
+            [5, 70],
+            [25, 87],
+            [32, 121],
+            [39, 41],
+            [57, 10],
+            [96, 0],
+            [57, -12],
+            [342, 82],
+            [62, 9],
+            [46, 6],
+            [40, -2],
+            [39, -6],
+            [67, -4]
+        ],
+        [
+            [1498, 6658, 0],
+            [-77, -354],
+            [7, -45],
+            [35, -13],
+            [-76, -455],
+            [54, -10],
+            [67, 453],
+            [69, -9],
+            [0, 63]
+        ],
+        [
+            [1577, 6288, 0],
+            [-60, 16],
+            [50, 224],
+            [5, 109],
+            [-74, 21]
+        ],
+        [
+            [884, 6583, 0],
+            [-61, -276],
+            [-9, -16],
+            [-18, -14],
+            [-21, -5],
+            [-25, -3],
+            [-33, 7],
+            [37, 154],
+            [-22, 7],
+            [-45, -152],
+            [-92, 25],
+            [0, -22],
+            [162, -39],
+            [23, 4],
+            [25, 4],
+            [24, 10],
+            [17, 18],
+            [7, 21],
+            [57, 268],
+            [-26, 9]
+        ],
+        [
+            [1628, 7108, 0],
+            [-42, -8],
+            [-22, -12],
+            [-29, -15],
+            [-515, 87],
+            [-37, 11],
+            [22, 126],
+            [18, 107],
+            [18, 9],
+            [632, -91],
+            [11, 63],
+            [-330, 41],
+            [-337, 47],
+            [-29, -8],
+            [-25, -22],
+            [-20, -26],
+            [-54, -259],
+            [5, -20],
+            [17, -20],
+            [20, -10],
+            [579, -93],
+            [-5, -18],
+            [5, -19],
+            [37, -42],
+            [18, -7],
+            [31, 31],
+            [-5, 12],
+            [-14, 23],
+            [14, 26],
+            [18, 20],
+            [24, 8],
+            [30, 0],
+            [24, -22],
+            [18, -22],
+            [2, -20],
+            [59, -21],
+            [3, 63],
+            [-15, 32],
+            [-22, 20],
+            [-27, 15],
+            [-23, 6],
+            [-54, 8]
+        ],
+        [
+            [3924, 4677, 0],
+            [-113, -549],
+            [12, -22],
+            [-20, -101],
+            [35, -2],
+            [20, 99],
+            [34, 28],
+            [84, 448],
+            [-5, 103],
+            [37, 279],
+            [29, 391],
+            [50, 420],
+            [-29, 12],
+            [-57, -430],
+            [-35, -391],
+            [-42, -285]
+        ],
+        [
+            [5252, 2896, 0],
+            [12, 22],
+            [15, 17],
+            [35, 10],
+            [28, -4],
+            [23, -15],
+            [2, -27],
+            [-2, -23],
+            [64, -14],
+            [340, -55],
+            [72, -4],
+            [115, 998],
+            [-76, 2],
+            [-111, -943],
+            [-335, 50],
+            [-15, 49],
+            [-29, 30],
+            [-54, 10],
+            [-57, -6],
+            [-37, -16],
+            [-26, -17],
+            [-26, -30],
+            [-1032, 79],
+            [3, -36],
+            [480, -34],
+            [-20, -35],
+            [-9, -32],
+            [-83, -829],
+            [75, -6],
+            [30, 219],
+            [276, -24],
+            [-26, -204],
+            [75, -8],
+            [31, 208],
+            [797, -66],
+            [-3, 72],
+            [-1145, 85],
+            [49, 537],
+            [8, 34],
+            [24, 17],
+            [42, 1],
+            [428, -34],
+            [62, 22]
+        ],
+        [
+            [5252, 2896, 0],
+            [-9, 7],
+            [-55, -15],
+            [9, -23],
+            [9, -19],
+            [19, -13],
+            [16, -18],
+            [18, -5],
+            [-18, -128],
+            [9, -17],
+            [11, -12],
+            [-25, -328],
+            [33, 0],
+            [22, 316],
+            [479, -25],
+            [-8, -382],
+            [-6, -252],
+            [-1333, 91],
+            [-55, 0],
+            [-42, -13],
+            [-40, -30],
+            [-26, -47],
+            [-8, -50],
+            [4, -23],
+            [4, -29],
+            [32, -26],
+            [56, -11],
+            [66, -7],
+            [1363, -79]
+        ],
+        [
+            [5777, 1758, 0],
+            [32, 28],
+            [16, 163]
+        ],
+        [
+            [5825, 1949, 0],
+            [7, 479],
+            [519, -38],
+            [5, 54],
+            [-520, 33],
+            [6, 360],
+            [-65, -3],
+            [-4, -161],
+            [-466, 21],
+            [15, 106],
+            [35, 3],
+            [19, 11],
+            [27, 14],
+            [15, 12],
+            [25, 35],
+            [-36, 22],
+            [-41, -9],
+            [-18, -28],
+            [-26, -5],
+            [-18, 0],
+            [-19, 5],
+            [-11, 5],
+            [-16, 12],
+            [-6, 19]
+        ],
+        [
+            [5825, 1949, 0],
+            [-73, -20]
+        ],
+        [
+            [5752, 1929, 0],
+            [54, -24],
+            [19, 44]
+        ],
+        [
+            [5752, 1929, 0],
+            [-31, 2],
+            [-1271, 84],
+            [-42, 3],
+            [-34, 0],
+            [-21, -19],
+            [-17, -18],
+            [-14, -41],
+            [5, -33],
+            [27, -17],
+            [54, -7],
+            [1262, -76],
+            [38, 4],
+            [22, 20],
+            [11, 34],
+            [11, 42],
+            [0, 22]
+        ],
+        [
+            [5777, 1758, 0],
+            [-43, -1107],
+            [73, -4],
+            [13, 206],
+            [230, -10],
+            [-16, -216],
+            [80, -6],
+            [19, 238],
+            [372, 174],
+            [69, 32],
+            [73, 20],
+            [55, 6],
+            [47, -2],
+            [101, -4],
+            [325, -26],
+            [12, 62],
+            [-126, 15]
+        ],
+        [
+            [7061, 1136, 0],
+            [-78, 6],
+            [-131, 14],
+            [-180, 1],
+            [-213, -63],
+            [-243, -117],
+            [-74, -31],
+            [-77, -25],
+            [-108, -9],
+            [-134, 11],
+            [14, 325],
+            [10, 25],
+            [21, 0],
+            [900, -42],
+            [-1, 53],
+            [-916, 42],
+            [12, 421],
+            [596, -65],
+            [9, 57],
+            [19, 522],
+            [-43, 0],
+            [-28, -528],
+            [-300, 33],
+            [-257, 33],
+            [-73, 19],
+            [-38, -50],
+            [29, -10]
+        ],
+        [
+            [6144, 3784, 0],
+            [-79, -1031],
+            [332, -18],
+            [7, 81],
+            [-218, 14],
+            [49, 950],
+            [-91, 4]
+        ],
+        [
+            [7061, 1136, 0],
+            [68, -12],
+            [-27, 205],
+            [-39, 194],
+            [-10, 103],
+            [5, 89],
+            [3, 75],
+            [36, 64],
+            [160, 0],
+            [5, 67],
+            [-126, -4],
+            [10, 16],
+            [32, 51],
+            [35, 56],
+            [7, 45],
+            [3, 40],
+            [-25, 56],
+            [-76, 186],
+            [-37, 93],
+            [-67, 527],
+            [357, 55],
+            [0, 68],
+            [-364, -70],
+            [-37, 173],
+            [421, 105],
+            [3, 55],
+            [-434, -99],
+            [-170, 464],
+            [-89, 0],
+            [180, -470],
+            [20, -65],
+            [25, -127],
+            [78, -640],
+            [124, -257],
+            [19, -76],
+            [-17, -61],
+            [-49, -83],
+            [-313, -20],
+            [-47, 2],
+            [-10, 18],
+            [-123, 1787],
+            [-81, 6],
+            [106, -1791],
+            [10, -62],
+            [56, -24],
+            [365, 28],
+            [-35, -56],
+            [-19, -58],
+            [-5, -54],
+            [-5, -125],
+            [10, -95],
+            [67, -379]
+        ],
+        [
+            [4895, 2937, 0],
+            [76, -8],
+            [54, 934],
+            [-86, 8],
+            [-44, -934]
+        ],
+        [
+            [4917, 3383, 0],
+            [-733, 42],
+            [0, -36],
+            [730, -42],
+            [3, 36]
+        ],
+        [
+            [7565, 6736, 0],
+            [-190, 4],
+            [-167, -6],
+            [-148, -4],
+            [-37, 0],
+            [-77, -29],
+            [-674, 21],
+            [47, 525],
+            [662, -56],
+            [367, -29]
+        ],
+        [
+            [7348, 7162, 0],
+            [0, 55]
+        ],
+        [
+            [7348, 7217, 0],
+            [-1027, 74],
+            [30, 299]
+        ],
+        [
+            [6351, 7590, 0],
+            [-82, 2]
+        ],
+        [
+            [6269, 7592, 0],
+            [-112, -1225],
+            [0, 6],
+            [-59, 4],
+            [-39, 20],
+            [-29, 24],
+            [-29, 24],
+            [-62, 19],
+            [-329, 26],
+            [-181, -11],
+            [-88, -2],
+            [-78, 3],
+            [-293, 9],
+            [-70, 32],
+            [-399, 25],
+            [-24, -11],
+            [-101, -6],
+            [0, -19],
+            [104, 4],
+            [19, -19],
+            [466, -29],
+            [384, -12],
+            [60, 0],
+            [74, 1],
+            [122, 12],
+            [314, -24],
+            [55, -15],
+            [74, -67],
+            [56, -16],
+            [53, -5],
+            [-11, -204],
+            [476, -38],
+            [448, -54],
+            [131, -59],
+            [157, -48],
+            [264, -18],
+            [-8, 54],
+            [-123, 8],
+            [-182, 32],
+            [-104, 45],
+            [-155, 52],
+            [-113, 17],
+            [-724, 60],
+            [14, 168],
+            [37, 315],
+            [666, -29],
+            [86, 29],
+            [82, 13],
+            [115, 9],
+            [129, 1],
+            [46, 2],
+            [229, -14],
+            [92, -16],
+            [10, 51],
+            [-154, 20]
+        ],
+        [
+            [6269, 7592, 0],
+            [-199, -1904],
+            [-1128, 61],
+            [-24, 13],
+            [-10, 29],
+            [59, 692],
+            [96, 1055],
+            [-60, 3],
+            [-49, -520],
+            [-57, -550],
+            [-51, -672],
+            [3, -41],
+            [16, -31],
+            [-544, 34],
+            [-6, -41],
+            [548, -38],
+            [125, 0],
+            [1077, -52],
+            [-116, -1230],
+            [-54, -537],
+            [101, -6],
+            [96, 1129],
+            [833, -51],
+            [5, 55],
+            [-831, 56],
+            [52, 500],
+            [1451, -90],
+            [5, 60],
+            [-22, 1],
+            [-1430, 83],
+            [196, 1990]
+        ],
+        [
+            [5041, 5691, 0],
+            [-99, 12],
+            [-69, -634],
+            [-69, -776],
+            [-27, -367],
+            [93, -4],
+            [12, 216],
+            [455, -28],
+            [2, -8],
+            [4, -9],
+            [-2, -193],
+            [88, -6],
+            [13, 204],
+            [489, -25],
+            [-14, 10],
+            [7, 65],
+            [-1033, 68],
+            [20, 253],
+            [1062, -87],
+            [7, 63],
+            [-1058, 82],
+            [33, 340],
+            [86, 824]
+        ],
+        [
+            [7348, 7162, 0],
+            [121, -12],
+            [64, 12],
+            [49, 12],
+            [38, -14],
+            [1, -34],
+            [-19, -26],
+            [-20, -31],
+            [-17, -333]
+        ],
+        [
+            [7565, 6736, 0],
+            [79, -12],
+            [10, 309],
+            [10, 30],
+            [34, 47],
+            [5, 42],
+            [-10, 34],
+            [-24, 37],
+            [-37, 18],
+            [-50, -2],
+            [-46, -16],
+            [-32, -8],
+            [-35, -2],
+            [-121, 4]
+        ],
+        [
+            [8552, 7438, 0],
+            [-46, -411],
+            [-377, 26],
+            [-43, -6],
+            [-20, -14],
+            [-12, -13],
+            [-13, -18],
+            [-8, -24],
+            [-151, -1300],
+            [-87, 7],
+            [-6, -50],
+            [87, -7],
+            [-147, -1446],
+            [10, -18],
+            [12, -15],
+            [23, -14],
+            [26, -8],
+            [26, -7],
+            [503, -41],
+            [-40, -388],
+            [93, -5]
+        ],
+        [
+            [8382, 3686, 0],
+            [34, 450],
+            [-571, 37],
+            [-21, 8],
+            [-33, 18],
+            [153, 1426]
+        ],
+        [
+            [7944, 5625, 0],
+            [152, 1332],
+            [10, 24],
+            [18, 17],
+            [32, 4],
+            [355, -27],
+            [1032, -63],
+            [29, -12],
+            [11, -20],
+            [2, -48],
+            [-137, -1263],
+            [-7, -51],
+            [-36, -286],
+            [-13, -100],
+            [-5, -61],
+            [-5, -170],
+            [-9, -161],
+            [3, -103],
+            [-32, -286],
+            [-360, 11],
+            [0, -36],
+            [355, -11],
+            [-9, -225],
+            [-4, -175],
+            [-12, -163],
+            [-24, -15],
+            [-506, 21],
+            [-9, 93]
+        ],
+        [
+            [8775, 3851, 0],
+            [-71, 21],
+            [9, -155],
+            [565, -22],
+            [52, 7],
+            [41, 21],
+            [13, 23],
+            [18, 477],
+            [2, 119],
+            [38, 255],
+            [-4, 205],
+            [10, 268],
+            [23, 169],
+            [41, 349],
+            [40, 313],
+            [21, 172],
+            [40, 375],
+            [32, 311],
+            [9, 120],
+            [-15, 40],
+            [-33, 32],
+            [-55, 16],
+            [-971, 57],
+            [42, 430],
+            [-73, 5],
+            [3, -21]
+        ],
+        [
+            [7944, 5625, 0],
+            [528, -42],
+            [-5, -46],
+            [-542, 38],
+            [-13, -46],
+            [552, -43],
+            [-143, -1348],
+            [77, -8],
+            [162, 1453],
+            [289, -26],
+            [-168, -1625],
+            [-298, 18],
+            [-5, -75],
+            [397, -24]
+        ],
+        [
+            [8775, 3851, 0],
+            [157, 1704],
+            [520, -35],
+            [6, 51],
+            [-1516, 105],
+            [2, -51]
+        ],
+        [
+            [9331, 2912, 0],
+            [-83, 2]
+        ],
+        [
+            [9248, 2914, 0],
+            [-26, -471],
+            [-16, -30],
+            [-22, -8],
+            [-1076, 68],
+            [-328, 29],
+            [-47, 14],
+            [-18, 37],
+            [40, 420],
+            [510, -40]
+        ],
+        [
+            [8265, 2933, 0],
+            [117, 753]
+        ],
+        [
+            [8382, 3686, 0],
+            [-88, 25],
+            [-98, -712],
+            [-594, 41],
+            [-29, -21],
+            [-35, 2],
+            [6, -22],
+            [36, -4],
+            [22, -20],
+            [76, -4],
+            [-37, -420],
+            [9, -51],
+            [38, -37],
+            [50, -18],
+            [1034, -72],
+            [220, -11],
+            [-2, -65],
+            [35, -3],
+            [10, 58],
+            [178, -1],
+            [41, 9],
+            [26, 21],
+            [13, 39],
+            [38, 492]
+        ],
+        [
+            [8265, 2933, 0],
+            [983, -19]
+        ],
+        [
+            [9331, 2912, 0],
+            [8, 63],
+            [54, 501],
+            [-21, 23],
+            [-33, 11],
+            [-79, 8],
+            [-914, 40],
+            [-12, -74],
+            [901, -31],
+            [42, -2],
+            [36, -16],
+            [6, -35],
+            [-49, -423],
+            [-1010, 24],
+            [5, -68]
+        ],
+        [
+            [7494, 2404, 0],
+            [-13, -59],
+            [286, -14],
+            [49, -6],
+            [21, -32],
+            [-1, -112],
+            [25, -24],
+            [34, -14],
+            [30, -10],
+            [736, -44],
+            [13, 58],
+            [-680, 37],
+            [-64, 12],
+            [-22, 22],
+            [-10, 95],
+            [-13, 25],
+            [-21, 23],
+            [-35, 16],
+            [-47, 6],
+            [-288, 21]
+        ],
+        [
+            [8639, 1592, 0],
+            [-5, 26],
+            [-69, -4],
+            [1, -757],
+            [-11, -147],
+            [-14, -114],
+            [-52, -94],
+            [-187, -279],
+            [74, -24],
+            [202, 293],
+            [519, -162],
+            [13, 73],
+            [-500, 149],
+            [13, 122],
+            [5, 124],
+            [-4, 241],
+            [15, 553]
+        ],
+        [
+            [7831, 1832, 0],
+            [40, -117],
+            [29, -123],
+            [37, -254],
+            [44, -160],
+            [180, -341],
+            [-798, 256],
+            [-7, -30],
+            [815, -261],
+            [-22, -107],
+            [-99, 0],
+            [-177, -50],
+            [-554, 170],
+            [-5, -31],
+            [554, -169],
+            [104, 28],
+            [83, 24],
+            [87, 4],
+            [-109, -375],
+            [77, -22],
+            [137, 488],
+            [-2, 55],
+            [-30, 60],
+            [-155, 311],
+            [-39, 166],
+            [-37, 252],
+            [-62, 230],
+            [-91, -4]
+        ],
+        [
+            [8717, 7611, 0],
+            [3, 82],
+            [20, 12],
+            [254, -8],
+            [32, 162],
+            [12, 335],
+            [-16, 31],
+            [-35, 15],
+            [-385, 4],
+            [-34, 3],
+            [-18, 20],
+            [-14, 46],
+            [-25, 34],
+            [-57, 18],
+            [-408, 41],
+            [-5, -71],
+            [418, -34],
+            [20, -24],
+            [12, -39],
+            [40, -44],
+            [423, -16],
+            [-9, -313],
+            [-23, -107],
+            [-253, 10],
+            [-45, -28],
+            [-7, -119],
+            [100, -10]
+        ],
+        [
+            [9096, 8948, 0],
+            [-2, -342],
+            [-14, -37],
+            [-81, -2],
+            [-84, 2],
+            [0, -62],
+            [138, 0],
+            [84, 6],
+            [44, 38],
+            [5, 101],
+            [7, 288],
+            [-97, 8]
+        ],
+        [
+            [8447, 9047, 0],
+            [-64, 9],
+            [-7, -119],
+            [9, -33],
+            [43, -18],
+            [349, -34],
+            [9, 45],
+            [-2, -6],
+            [-278, 34],
+            [-43, 6],
+            [-22, 18],
+            [6, 98]
+        ],
+        [
+            [9076, 7578, 0],
+            [54, -4],
+            [25, 222],
+            [22, 15],
+            [82, -3],
+            [393, -18],
+            [11, 52],
+            [-444, 17],
+            [-1, 51],
+            [-25, 0],
+            [-7, -50],
+            [-38, -4],
+            [-27, -15],
+            [-17, -28],
+            [-28, -235]
+        ],
+        [
+            [7497, 7930, 0],
+            [11, 98],
+            [-70, 4],
+            [-7, -91],
+            [-467, 24],
+            [30, 335],
+            [37, 1],
+            [32, 9],
+            [21, 9],
+            [11, 11],
+            [3, 41],
+            [19, 385],
+            [657, -34],
+            [5, 62]
+        ],
+        [
+            [7779, 8784, 0],
+            [-660, 40],
+            [16, 263],
+            [-11, 34],
+            [-18, 24],
+            [-35, 12],
+            [-98, 13],
+            [-452, 43],
+            [-7, -68],
+            [408, -32],
+            [58, -8],
+            [46, -14],
+            [21, -19],
+            [-3, -40],
+            [0, -26],
+            [-25, -622],
+            [0, -26],
+            [-80, -1],
+            [-72, 5],
+            [-31, 3],
+            [-19, 11],
+            [0, 22],
+            [15, 140],
+            [-63, 3],
+            [-13, -142],
+            [4, -34],
+            [14, -27],
+            [13, -12],
+            [18, -7],
+            [36, -7],
+            [119, -9],
+            [-27, -332],
+            [-1126, 57],
+            [7, 235],
+            [-3, 26],
+            [-13, 18],
+            [-21, 13],
+            [-186, 14],
+            [-4, -18],
+            [183, -14],
+            [17, -13],
+            [2, -20],
+            [-4, -108],
+            [-244, 11],
+            [-1, -18],
+            [247, -11],
+            [-3, -109],
+            [-711, 40],
+            [-24, -2],
+            [-20, -5],
+            [-16, -11],
+            [-12, 16],
+            [-4, 24],
+            [-1, 48],
+            [3, 69],
+            [-107, 6],
+            [2, 223],
+            [-4, 154],
+            [-14, 34],
+            [-12, 29],
+            [-25, 27],
+            [-21, 20],
+            [55, 336],
+            [0, 37],
+            [-7, 28],
+            [-22, 34],
+            [-22, 17],
+            [-27, 23],
+            [-30, 18],
+            [-166, 69],
+            [-4, -57],
+            [116, -48],
+            [29, -15],
+            [38, -22],
+            [19, -22],
+            [10, -24],
+            [-2, -31],
+            [-45, -348],
+            [-13, -22],
+            [-25, -22],
+            [-35, -12],
+            [-63, -14],
+            [-70, -15],
+            [-5, -61],
+            [172, 43],
+            [33, 11],
+            [24, 15],
+            [19, 23],
+            [21, -22],
+            [11, -29],
+            [5, -57],
+            [-6, -324],
+            [3, -34],
+            [44, -7],
+            [49, -5],
+            [3, -81],
+            [-1, -16]
+        ],
+        [
+            [4926, 8072, 0],
+            [2, -17],
+            [12, -16],
+            [15, -19],
+            [-18, -27],
+            [-2, -22],
+            [-7, -105],
+            [68, -7],
+            [0, 122],
+            [11, 19],
+            [26, 17],
+            [38, 8],
+            [1250, -75],
+            [-20, -173],
+            [59, -6],
+            [24, 176],
+            [1053, -57],
+            [41, 2],
+            [13, 17],
+            [6, 21]
+        ],
+        [
+            [5715, 9408, 0],
+            [-73, 11],
+            [-9, -113],
+            [-13, -24],
+            [-34, -10],
+            [-550, 31],
+            [-6, -60],
+            [548, -32],
+            [35, 1],
+            [33, 6],
+            [28, 19],
+            [21, 25],
+            [8, 35],
+            [12, 111]
+        ],
+        [
+            [7497, 7930, 0],
+            [-71, -40],
+            [270, -15],
+            [27, 5],
+            [23, 19],
+            [17, 25],
+            [60, 792],
+            [4, 41],
+            [-18, 21],
+            [-30, 6]
+        ],
+        [
+            [7779, 8784, 0],
+            [-38, -59],
+            [25, -12],
+            [5, -12],
+            [2, -32],
+            [0, -54],
+            [-26, -285],
+            [-220, 13],
+            [-449, 29],
+            [-17, -28],
+            [397, -24],
+            [-4, -86],
+            [64, -3],
+            [4, 80],
+            [214, -16],
+            [-26, -330],
+            [-10, -34],
+            [-25, -11],
+            [-178, 10]
+        ],
+        [
+            [4926, 8072, 0],
+            [4, 27],
+            [-218, 25],
+            [20, 407],
+            [-28, -1],
+            [-33, -407],
+            [-36, -8],
+            [-17, -25],
+            [-11, -24],
+            [18, -26],
+            [31, -13],
+            [42, -7],
+            [148, -6],
+            [34, 10],
+            [21, 25],
+            [10, 25],
+            [15, -2]
+        ],
+        [
+            [4877, 8078, 0],
+            [13, -9],
+            [20, 5],
+            [-33, 4]
+        ],
+        [
+            [4877, 8078, 0],
+            [-47, 6],
+            [-99, 13],
+            [-48, 1],
+            [-23, -9],
+            [-10, -26],
+            [26, -12],
+            [170, -13],
+            [21, 19],
+            [10, 21]
+        ],
+        [
+            [3358, 8404, 0],
+            [-94, -2],
+            [-10, -47],
+            [-15, -34],
+            [-17, -38],
+            [-15, -37],
+            [25, 239],
+            [42, 385]
+        ],
+        [
+            [3274, 8870, 0],
+            [-64, 8]
+        ],
+        [
+            [3210, 8878, 0],
+            [-99, -856],
+            [82, -4],
+            [2, 69],
+            [62, 91],
+            [37, 62],
+            [64, 164]
+        ],
+        [
+            [3350, 8646, 0],
+            [-20, 36],
+            [-17, 31],
+            [-42, 42],
+            [5, 103],
+            [-2, 12]
+        ],
+        [
+            [3274, 8870, 0],
+            [-26, 45],
+            [-16, 165],
+            [83, 577],
+            [-33, 4],
+            [-82, -580],
+            [0, -88],
+            [2, -82],
+            [8, -33]
+        ],
+        [
+            [3210, 8878, 0],
+            [16, -45],
+            [22, -152],
+            [23, -17],
+            [4, -11],
+            [75, -7]
+        ],
+        [
+            [1622, 9636, 0],
+            [432, -67],
+            [-25, -175],
+            [30, -5],
+            [42, 265],
+            [-10, 16],
+            [-14, 12],
+            [-429, 66],
+            [6, 18],
+            [21, 20],
+            [36, 1],
+            [23, -1],
+            [721, -104],
+            [53, -9],
+            [38, -12],
+            [12, -11],
+            [16, -24],
+            [8, -36],
+            [-48, -257],
+            [48, -44],
+            [327, -42],
+            [20, -9],
+            [10, -18]
+        ],
+        [
+            [2939, 9220, 0],
+            [-4, -16]
+        ],
+        [
+            [2935, 9204, 0],
+            [64, -8],
+            [25, 0],
+            [29, 8],
+            [30, 13],
+            [32, 27],
+            [25, 27],
+            [13, 24],
+            [54, 282],
+            [-60, 7],
+            [-53, -268],
+            [-14, -23],
+            [-16, -21],
+            [-34, -18],
+            [-32, -7],
+            [-20, 26],
+            [-17, 12],
+            [-30, 9],
+            [-48, 6],
+            [-289, 40],
+            [49, 232],
+            [-1, 46],
+            [-16, 42],
+            [-14, 20],
+            [-27, 23],
+            [-30, 11],
+            [-41, 12],
+            [-63, 11],
+            [-652, 96],
+            [-60, 6],
+            [-52, 1],
+            [-41, -7],
+            [-36, -24],
+            [-19, -36],
+            [-199, -885],
+            [-5, -35],
+            [-4, -45],
+            [-2, -48],
+            [6, -42],
+            [10, -63],
+            [13, -48],
+            [19, -32],
+            [27, -29],
+            [44, -31],
+            [175, -26],
+            [-57, -314],
+            [64, -9],
+            [56, 313],
+            [644, -88],
+            [544, -96],
+            [15, 50],
+            [-43, 8],
+            [-592, 101],
+            [-742, 105],
+            [-43, 12],
+            [-26, 20],
+            [-21, 29],
+            [-11, 36],
+            [-10, 41],
+            [-7, 48],
+            [-3, 41],
+            [4, 34],
+            [6, 40],
+            [29, 138],
+            [140, 638]
+        ],
+        [
+            [1627, 9661, 0],
+            [-28, 5],
+            [-20, -24],
+            [43, -6]
+        ],
+        [
+            [1622, 9636, 0],
+            [5, 25]
+        ],
+        [
+            [1627, 9661, 0],
+            [431, -68],
+            [10, 57],
+            [-16, 16],
+            [-410, 62],
+            [-15, -67]
+        ],
+        [
+            [2935, 9204, 0],
+            [-16, -10],
+            [-48, -5],
+            [-60, 3],
+            [-54, 6],
+            [-57, 8],
+            [-52, 8],
+            [-47, 4],
+            [-39, 8],
+            [-17, 16],
+            [12, 27],
+            [42, 28],
+            [-53, 43],
+            [-25, -22],
+            [-23, -22],
+            [-10, -29],
+            [-9, -33],
+            [13, -27],
+            [38, -27],
+            [48, -12],
+            [75, -12],
+            [73, -7],
+            [114, -10],
+            [50, -1],
+            [43, 5],
+            [30, 11],
+            [25, 15],
+            [19, 35],
+            [-68, 16]
+        ]
+    ],
+    "transform": { "scale": [0.000001088818881887271, 0.0000012229322932294747], "translate": [120.2136657, 22.9914284] },
+    "bbox": [120.2136657, 22.9914284, 120.2245528, 23.0036565]
+}

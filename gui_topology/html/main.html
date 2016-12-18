@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Network Visualization</title>
+    <!-- Plugin CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/c3/c3.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="/static/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/map.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/netjsongraph/netjsongraph.css" rel="stylesheet">
+    <!--<link href="/static/css/netjsongraph/netjsongraph-theme.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="/static/css/netjsongraph/netjson-dark.css" type="text/css">
+    <!-- JQuery -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/vendor/d3/d3.v3.min.js"></script>
+    <script src="/static/vendor/c3/c3.min.js"></script>
+    <script src="/static/vendor/topojson/topojson.v1.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/static/js/main_navbar.js"></script>
+    <script src="/static/js/c3_wrapper.js"></script>
+    <script src="/static/js/ryu.topology.js"></script>
+    <script src="/static/js/dpi_oper.js"></script>
+    <script src="/static/js/ui_oper.js"></script>
+    <!-- Load c3.css -->
+    <style>
+    .c3-grid .c3-xgrid-focus {
+        visibility: hidden !important;
+    }
+    </style>
+</head>
+
+<body onload="sizeChange()">
+    <!-- right-side nav -->
+    <div class="container container-navbar">
+        <!-- sidetab -->
+        <div class="sidetab">
+            <!-- tab-map -->
+            <div class="sidetab-tab sidetab-map" id="tab-map">
+                <!-- map-content -->
+                <div class="tab-content">
+                    <!-- content-top -->
+                    <div class="content-top">
+                        <div class="content-back">
+                            <a href="#" class="top-icon hvr-btr" id="map-back"><i class="fa fa-chevron-left"></i></a>
+                        </div>
+                        <div class="content-title" id="map-title">
+                            <p class="title-top"> Map</p>
+                        </div>
+                    </div>
+                    <!-- content-main -->
+                    <div class="content-main">
+                        <div class="map-basic">
+                            <div class="map-pos">
+                                <p class="detail-camp" id="select-camp"></p>
+                                <p class="detail-dept" id="select-dept"></p>
+                            </div>
+                            <div class="map-dpid">
+                                <div class="map-col">
+                                    <p class="col col-map_dpid"><span>DPID</span></p>
+                                </div>
+                                <p class="detail-map_dpid">1</p>
+                            </div>
+                            <div class="map-switches">
+                                <div class="map-col">
+                                    <p class="col col-switches"><span>Switched</span></p>
+                                </div>
+                                <p class="detail-switches">3</p>
+                            </div>
+                            <div class="map-hosts">
+                                <div class="map-col">
+                                    <p class="col col-hosts"><span>Hosts</span></p>
+                                </div>
+                                <p class="detail-hosts">6</p>
+                            </div>
+                        </div>
+                        <div class="map-optn">
+                            <div class="optn-map_bp">
+                                <a href="" class="optn-icon hvr-btr" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                            </div>
+                            <div class="optn-map_hislen">
+                                <form class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-map_hislen" placeholder="Interval">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-map_hislen" id="btn-map_hislen">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="map-chart" id="map-chart-top">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Protocol info.</p>
+                                </div>
+                                <div class="chart-main" id="out_dpi_chart">
+                                    <!--<img src="img/dpi_chart.png">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-chart" id="map-chart-btm">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Port info.</p>
+                                </div>
+                                <div class="chart-main" id="out_port_chart">
+                                    <!--<img src="img/port_chart.png">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- tab-info -->
+            <div class="sidetab-tab sidetab-info" id="tab-info">
+                <!-- info-content -->
+                <div class="tab-content">
+                    <!-- content-top -->
+                    <div class="content-top">
+                        <div class="content-back">
+                            <a href="#" class="top-icon hvr-btr" id="info-back"><i class="fa fa-chevron-left"></i></a>
+                        </div>
+                        <div class="content-title" id="info-title">
+                            <p class="title-top">Information</p>
+                        </div>
+                    </div>
+                    <!-- content-main -->
+                    <div class="content-main">
+                        <div class="info-basic">
+                            <div class="info-pos">
+                                <p class="detail-camp" id="select-camp"></p>
+                                <p class="detail-dept" id="select-dept"></p>
+                            </div>
+                            <div class="info-dpid">
+                                <div class="info-col">
+                                    <p class="col col-info_dpid"><span>DPID</span></p>
+                                </div>
+                                <p class="detail-info_dpid">1</p>
+                            </div>
+                        </div>
+                        <div class="info-optn">
+                            <div class="optn-info_bp">
+                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                            </div>
+                            <div class="optn-top">
+                                <form class="form-inline">
+                                    <div class="input-top">
+                                        <input type="text" class="form-control form-top" placeholder="Top">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-top" id="btn-top">Submit</button>
+                                </form>
+                            </div>
+                            <div class="optn-info_hislen">
+                                <form class="form-inline">
+                                    <div class="input-info_hislen">
+                                        <input type="text" class="form-control form-info_hislen" placeholder="History">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-info_hislen" id="btn-info_hislen">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="info-chart-top">
+                            <div class="chart-block-left">
+                                <div class="chart-title">
+                                    <p class="">Protocols</p>
+                                </div>
+                                <div class="chart-main" id="protos_pie">
+                                    <!--<img src="img/protos_pie.png">-->
+                                </div>
+                            </div>
+                            <div class="chart-block-right">
+                                <div class="chart-title">
+                                    <p class="">Source of HTTP</p>
+                                </div>
+                                <div class="chart-main" id="proto_source">
+                                    <!--<img src="img/proto_source.png">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="info-chart-mid">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Protocol Info.</p>
+                                </div>
+                                <div class="chart-main" id="in_line_chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-default sidebar-collapse" role="navigation">
+                <div class="sidebar-nav">
+                    <!-- nav-menu -->
+                    <ul class="nav-menu" id="menu">
+                        <li>
+                            <a href="#map" class="nav-icon hvr-btr" id="icon-map"><i class="fa fa-map-o fa-lg"></i></a>
+                        </li>
+                        <li>
+                            <a href="#info" class="nav-icon hvr-btr" id="icon-info"><i class="fa fa-info-circle"></i></a>
+                        </li>
+                        <li>
+                            <a href="#stat" class="nav-icon hvr-btr" id="icon-stat"><i class="fa fa-area-chart"></i></a>
+                        </li>
+                    </ul>
+                    <!-- nav-hint -->
+                    <ul class="nav-hint" id="hint">
+                        <li>
+                            <a href="#home" class="nav-icon hvr-btr" id="icon-home"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li>
+                            <a href="#optn" class="nav-icon hvr-btr" id="icon-optn"><i class="fa fa-cogs fa-lg"></i></a>
+                        </li>
+                        <li>
+                            <a href="#help" class="nav-icon hvr-btr" id="icon-help"><i class="fa fa-question-circle fa-lg"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- left-sdie map -->
+    <div class="container container-main">
+        <!-- map -->
+        <div class="container-map">
+            <div class="map-demo"></div>
+            <script src="/static/js/main_map.js"></script>
+        </div>
+        <!--<div id="left"></div>-->
+    </div>
+    <!--netjsongraph css-->
+    <!--<script src="/static/js/netjsongraph.js"></script>
+    <script>
+    main({
+        "netjsongraph": d3.netJsonGraph
+    }); // disable initialize_maplogy()
+    /* XXX: testing for netjsongraph */
+    //$(".map").hide();
+    </script>-->
+</body>
