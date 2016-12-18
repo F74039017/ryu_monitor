@@ -28,9 +28,15 @@
     <script src="/static/vendor/topojson/topojson.v1.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="/static/js/main_navbar.js"></script>
+<<<<<<< HEAD
     <script src="/static/js/c3_wrapper.js"></script>
     <script src="/static/js/ryu.topology.js"></script>
     <script src="/static/js/dpi_oper.js"></script>
+=======
+    <script src="/static/js/c3_wrapper.js" charset="utf-8"></script>
+    <script src="/static/js/ryu.topology.js" charset="utf-8"></script>
+    <script src="/static/js/dpi_oper.js" charset="utf-8"></script>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     <script src="/static/js/ui_oper.js"></script>
     <!-- Load c3.css -->
     <style>
@@ -40,11 +46,16 @@
     </style>
 </head>
 
+<<<<<<< HEAD
 <body onload="sizeChange()">
+=======
+<body onload="sizeChange();">
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     <!-- right-side nav -->
     <div class="container container-navbar">
         <!-- sidetab -->
         <div class="sidetab">
+<<<<<<< HEAD
             <!-- tab-map -->
             <div class="sidetab-tab sidetab-map" id="tab-map">
                 <!-- map-content -->
@@ -122,6 +133,10 @@
             </div>
             <!-- tab-info -->
             <div class="sidetab-tab sidetab-info" id="tab-info">
+=======
+            <!-- tab-topo -->
+            <div class="sidetab-tab sidetab-info hidden" id="tab-topo">
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 <!-- info-content -->
                 <div class="tab-content">
                     <!-- content-top -->
@@ -130,15 +145,24 @@
                             <a href="#" class="top-icon hvr-btr" id="info-back"><i class="fa fa-chevron-left"></i></a>
                         </div>
                         <div class="content-title" id="info-title">
+<<<<<<< HEAD
                             <p class="title-top">Information</p>
+=======
+                            <p class="title-top">Basic Information</p>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         </div>
                     </div>
                     <!-- content-main -->
                     <div class="content-main">
                         <div class="info-basic">
                             <div class="info-pos">
+<<<<<<< HEAD
                                 <p class="detail-camp" id="select-camp"></p>
                                 <p class="detail-dept" id="select-dept"></p>
+=======
+                                <p class="detail-camp">成功校區</p>
+                                <p class="detail-dept">資訊系館</p>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                             </div>
                             <div class="info-dpid">
                                 <div class="info-col">
@@ -149,9 +173,17 @@
                         </div>
                         <div class="info-optn">
                             <div class="optn-info_bp">
+<<<<<<< HEAD
                                 <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
                             </div>
                             <div class="optn-top">
+=======
+                                <span class="tooltip">Byte/Packet</span>
+                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                            </div>
+                            <div class="optn-top">
+                                <span class="tooltip">Top</span>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                                 <form class="form-inline">
                                     <div class="input-top">
                                         <input type="text" class="form-control form-top" placeholder="Top">
@@ -160,6 +192,10 @@
                                 </form>
                             </div>
                             <div class="optn-info_hislen">
+<<<<<<< HEAD
+=======
+                                <span class="tooltip">History Length</span>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                                 <form class="form-inline">
                                     <div class="input-info_hislen">
                                         <input type="text" class="form-control form-info_hislen" placeholder="History">
@@ -197,6 +233,86 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <!-- tab-info -->
+            <div class="sidetab-tab sidetab-topo hidden" id="tab-info">
+                <!-- topo-content -->
+                <div class="tab-content">
+                    <!-- content-top -->
+                    <div class="content-top">
+                        <div class="content-back">
+                            <a href="#" class="top-icon hvr-btr" id="topo-back"><i class="fa fa-chevron-left"></i></a>
+                        </div>
+                        <div class="content-title" id="topo-title">
+                            <p class="title-top"> Basic Information</p>
+                        </div>
+                    </div>
+                    <!-- content-main -->
+                    <div class="content-main">
+                        <div class="topo-basic">
+                            <div class="topo-pos">
+                                <p class="detail-camp">成功校區</p>
+                                <p class="detail-dept">資訊系館</p>
+                            </div>
+                            <div class="topo-dpid">
+                                <div class="topo-col">
+                                    <p class="col col-topo_dpid"><span>DPID</span></p>
+                                </div>
+                                <p class="detail-topo_dpid">1</p>
+                            </div>
+                            <div class="topo-switches">
+                                <div class="topo-col">
+                                    <p class="col col-switches"><span>Switched</span></p>
+                                </div>
+                                <p class="detail-switches">3</p>
+                            </div>
+                            <div class="topo-hosts">
+                                <div class="topo-col">
+                                    <p class="col col-hosts"><span>Hosts</span></p>
+                                </div>
+                                <p class="detail-hosts">6</p>
+                            </div>
+                        </div>
+                        <div class="topo-optn">
+                            <div class="optn-topo_bp">
+                                <span class="tooltip">bp</span>
+                                <a href="" class="optn-icon hvr-btr" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                            </div>
+                            <div class="optn-topo_hislen">
+                                <span class="tooltip">hislen</span>
+                                <form class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-topo_hislen" placeholder="Interval">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-topo_hislen" id="btn-topo_hislen">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="topo-chart" id="topo-chart-top">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Protocol info.</p>
+                                </div>
+                                <div class="chart-main" id="out_dpi_chart">
+                                    <!--<img src="img/dpi_chart.png">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="topo-chart" id="topo-chart-btm">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Port info.</p>
+                                </div>
+                                <div class="chart-main" id="out_port_chart">
+                                    <!--<img src="img/port_chart.png">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         </div>
         <!-- sidebar -->
         <div class="sidebar">
@@ -205,7 +321,11 @@
                     <!-- nav-menu -->
                     <ul class="nav-menu" id="menu">
                         <li>
+<<<<<<< HEAD
                             <a href="#map" class="nav-icon hvr-btr" id="icon-map"><i class="fa fa-map-o fa-lg"></i></a>
+=======
+                            <a href="#topo" class="nav-icon hvr-btr" id="icon-topo"><i class="fa fa-map-o fa-lg"></i></a>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         </li>
                         <li>
                             <a href="#info" class="nav-icon hvr-btr" id="icon-info"><i class="fa fa-info-circle"></i></a>
@@ -235,6 +355,7 @@
         <!-- map -->
         <div class="container-map">
             <div class="map-demo"></div>
+<<<<<<< HEAD
             <script src="/static/js/main_map.js"></script>
         </div>
         <!--<div id="left"></div>-->
@@ -248,4 +369,19 @@
     /* XXX: testing for netjsongraph */
     //$(".map").hide();
     </script>-->
+=======
+            <script src="js/main_map.js"></script>
+        </div>
+        <div id="left"></div>
+    </div>
+    <!--netjsongraph css-->
+    <script src="/static/netjsongraph.js"></script>
+    <script>
+    main({
+        "netjsongraph": d3.netJsonGraph
+    }); // disable initialize_topology()
+    /* XXX: testing for netjsongraph */
+    //$(".map").hide();
+    </script>
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 </body>

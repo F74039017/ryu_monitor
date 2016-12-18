@@ -6,7 +6,11 @@
     display: none;
 }
 
+<<<<<<< HEAD
 .tooltip {
+=======
+div.tooltip {
+>>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     color: #222;
     background-color: #fff;
     padding: .5em;
