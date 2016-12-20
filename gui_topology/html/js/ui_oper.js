@@ -1,16 +1,7 @@
-<<<<<<< HEAD
 /* init chart */
 (function() {
 
     $(document).ready(function() {
-=======
-
-
-/* init chart */
-(function() {
-
-    $(document).ready(function(){
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         //initialize_topology(); // init topology
 
         /** OUTER **/
@@ -149,24 +140,16 @@ function sigleClickOnDepartment(id) {
 
 /* reset outer DPI chart */
 function ui_reconstructDPI_O(id) {
-<<<<<<< HEAD
-    //window.dp_stat = 1; // default dpi mode
 
-=======
-	//window.dp_stat = 1; // default dpi mode
-    
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
+    //window.dp_stat = 1; // default dpi mode
     ui_resetAllStat();
     // TODO: reset btn status
     c3w.destroy(window.live_dpi_chart);
 }
 
 /* reset all stat flags except io_stat */
-<<<<<<< HEAD
+
 function ui_resetAllStat(bp = 1, rt = 1, dp = 1) {
-=======
-function ui_resetAllStat(bp=1, rt=1, dp=1) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     window.bp_stat = bp;
     window.rt_stat = rt; // only node need
     window.dp_stat = dp; // 1: dpi, 2: port
@@ -174,9 +157,9 @@ function ui_resetAllStat(bp=1, rt=1, dp=1) {
 
 window.io_stat = 1; // 1: out, 2: in
 /* show and hide view page according to io_stat */
-// TODO: 
+// TODO:
 function io_exchange() {
-<<<<<<< HEAD
+
     if (window.io_stat == 1) {
         // hide in_view
         // show out_view
@@ -186,19 +169,6 @@ function io_exchange() {
         // show in_view
         // resetide_o
     } else {
-=======
-    if(window.io_stat == 1) {
-        // hide in_view
-        // show out_view
-        // resetide_i
-    }
-    else if(window.io_stat){
-        // hide out_view
-        // show in_view
-        // resetide_o
-    }
-    else {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         throw "unknown io_stat";
     }
 }
@@ -223,22 +193,14 @@ function dp_changePage_i() {
 /***************************************/
 
 function intro_proto() {
-<<<<<<< HEAD
+
     c3w.connectData(dpi_lineChart, 1, null, { port_no: null, bp_flag: 1 });
-=======
-    c3w.connectData(dpi_lineChart, 1, null, {port_no: null, bp_flag: 1});
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.startShowLine(dpi_lineChart, 'dpi', 3);
 }
 
 function intro_port() {
-<<<<<<< HEAD
+
     c3w.connectData(port_lineChart, 1, null, { port_no: null, bp_flag: 1 });
-    c3w.startShowLine(port_lineChart, 'port', 1);
-=======
-    c3w.connectData(port_lineChart, 1, null, {port_no: null, bp_flag: 1});
-    c3w.startShowLine(port_lineChart, 'port', 1); 
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 }
 
 function intro_out() {
@@ -249,11 +211,8 @@ function intro_out() {
 /***************************************/
 
 function intro_innerLine() {
-<<<<<<< HEAD
+
     c3w.connectData(in_lineChart, 1, null, { port_no: null, bp_flag: 1 });
-=======
-    c3w.connectData(in_lineChart, 1, null, {port_no: null, bp_flag: 1});
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.startShowLine(in_lineChart, 'dpi', 3);
 }
 
@@ -270,11 +229,8 @@ function pie_click(d, i) {
     c3w.destroy(contribute_chart);
     console.log(d.name);
     var shareChart = in_lineChart;
-<<<<<<< HEAD
+
     var shareConn = c3w.chart2conn(shareChart);
-=======
-    var shareConn= c3w.chart2conn(shareChart);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     var id = shareConn.id;
     c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
 }

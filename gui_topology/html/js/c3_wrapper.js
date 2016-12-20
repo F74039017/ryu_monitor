@@ -42,7 +42,7 @@
  *  clearData(chart):
  *      clear all records
  *
- *  XXX: BUG in tot_xxx field... 
+ *  XXX: BUG in tot_xxx field...
  *  Do not use it.
  *
  *  XXX: host port info. => info. contain in port 1.
@@ -50,11 +50,7 @@
  * */
 
 function c3_wrapper(dpi_oper) {
-<<<<<<< HEAD
     this.manager;
-=======
-    this.manager; 
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     this.idCnt; // use increment number as id. According to ES5, id can up to 2^53-1.
     this.dpi_oper;
     this.tryPeriod; // if dpi_oper not ready, try after 100ms
@@ -62,11 +58,7 @@ function c3_wrapper(dpi_oper) {
 
     /* constructor */
 
-<<<<<<< HEAD
     this.manager = []; // [connections..]
-=======
-    this.manager = [];  // [connections..]
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     this.idCnt = 0;
     this.dpi_oper = null;
     this.tryPeriod = 100; // try to connect dpi_oper every 100ms at most 10 times
@@ -83,25 +75,20 @@ c3_wrapper.prototype.destroy_delay = 0;
 
 /* process obj {name: 'A', value: int} */
 c3_wrapper.prototype.protoCMP = function(a, b) {
-<<<<<<< HEAD
+
     if (a.value == b.value) {
         return a.name.localeCompare(b.name);
     }
     return a.value - b.value;
-=======
-    if(a.value==b.value) {
-        return a.name.localeCompare(b.name);
-    }
-    return a.value-b.value;
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 }
 
 c3_wrapper.prototype.updateDPIrank = function(conn) {
     var db = conn.data['dpi'];
     var dpi_rank = conn['dpi_rank'];
-<<<<<<< HEAD
+
     var proto_byte = [],
         proto_pkt = [];
+
     for (var x in db) {
         var field = x; // protoName_byte or protoName_pkt
         var last_char = field.charAt(field.length - 1);
@@ -127,38 +114,6 @@ c3_wrapper.prototype.updateDPIrank = function(conn) {
             proto_pkt.push({ name: protoName, value: avg_byte_ref[protoName] });
         } else {
             throw "error dpi field: " + field;
-=======
-    var proto_byte=[], proto_pkt=[];
-    for(var x in db) {
-        var field = x; // protoName_byte or protoName_pkt
-        var last_char = field.charAt(field.length-1);
-        var protoName;
-        var len = db[x].length;
-        if(last_char=='e') {
-            var protoName = field.substring(0, field.length-5);
-            var avg_byte_ref = dpi_rank['avg_byte'];
-            if(!avg_byte_ref.hasOwnProperty(protoName)) {
-                avg_byte_ref[protoName] = 0.125*db[x][len-1] + 0.875*0;
-            }
-            else {
-                avg_byte_ref[protoName] = 0.125*db[x][len-1] + 0.875*avg_byte_ref[protoName];
-            }
-            proto_byte.push({name: protoName, value: avg_byte_ref[protoName]});
-        }
-        else if(last_char=='t') {
-            var protoName = field.substring(0, field.length-4);
-            var avg_pkt_ref = dpi_rank['avg_pkt'];
-            if(!avg_pkt_ref.hasOwnProperty(protoName)) {
-                avg_pkt_ref[protoName] = 0.125*db[x][len-1] + 0.875*0;
-            }
-            else {
-                avg_pkt_ref[protoName] = 0.125*db[x][len-1] + 0.875*avg_pkt_ref[protoName];
-            }
-            proto_pkt.push({name: protoName, value: avg_byte_ref[protoName]});
-        }
-        else {
-            throw "error dpi field: "+field;
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         }
     }
 
@@ -176,7 +131,6 @@ c3_wrapper.prototype.genId = function() {
  * if dpi filter is null, then it will collect all dpi data.
  * */
 c3_wrapper.prototype.setConnFilter = function(filter, conn) {
-<<<<<<< HEAD
     if (!filter.hasOwnProperty('dpi'))
         throw "lack of dpi field";
     if (!filter.hasOwnProperty('port'))
@@ -211,48 +165,6 @@ c3_wrapper.prototype.setConnFilter = function(filter, conn) {
     } else if (Object.prototype.toString.call(filter['dpi']) === '[object Array]') {
         conn['connFilter']['dpi'] = filter['dpi'].slice();
     } else
-=======
-    if(!filter.hasOwnProperty('dpi'))
-        throw "lack of dpi field";
-    if(!filter.hasOwnProperty('port'))
-        throw "lack of port field";
-
-    /* set port filter */
-    if(filter['port'] == null) {
-        //conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte', 'tot_pkt', 'tot_byte'];
-        
-        // Some bugs in tot_xxx
-        conn['connFilter']['port'] = ['rx_pkt', 'rx_byte', 'tx_pkt', 'tx_byte'];
-    }
-    else if(typeof filter['port'] === 'string') {
-        // one param
-		if(!this.isPortInfo(filter['port']))
-			throw "wrong port field name: "+filter['port'];
-        conn['connFilter']['port'].push(filter['port']);
-    }
-    else if(Object.prototype.toString.call(filter['port']) === '[object Array]') {
-		for(var x in filter['port']) {
-			if(!this.isPortInfo(filter['port'][x]))
-				throw "wrong port field name: "+filter['port'][x];
-		}
-        conn['connFilter']['port'] = filter['port'].slice();
-    }
-    else
-        throw "wrong port type";
-
-    /* set dpi filter */
-    if(filter['dpi'] == null) {
-        conn['connFilter']['dpi'] = null; // this will collect all protocol info
-    }
-    else if(typeof filter['dpi'] === 'string') {
-        // one param
-        conn['connFilter']['dpi'].push(filter['dpi']);
-    }
-    else if(Object.prototype.toString.call(filter['dpi']) === '[object Array]') {
-        conn['connFilter']['dpi'] = filter['dpi'].slice();
-    }
-    else
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         throw "wrong dpi type";
 }
 
@@ -262,7 +174,6 @@ c3_wrapper.prototype.setConnFilter = function(filter, conn) {
  * if dpi filter is null, then it will show protocols info. as many as possible
  * */
 c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
-<<<<<<< HEAD
     if (!showFilter.hasOwnProperty('dpi'))
         showFilter['dpi'] = null;
     if (!showFilter.hasOwnProperty('port'))
@@ -270,24 +181,12 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
 
     /* reset showFilter in connection */
     conn.showFilter = { 'dpi': [], 'port': [] };
-=======
-    if(!showFilter.hasOwnProperty('dpi'))
-        showFilter['dpi'] = null;
-    if(!showFilter.hasOwnProperty('port'))
-        showFilter['port'] = null;
-
-    /* reset showFilter in connection */
-    conn.showFilter = {'dpi': [], 'port': []};
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
-
 
     var dpi_list = showFilter['dpi'];
     var port_list = showFilter['port'];
 
     try {
-
         /* set port filter */
-<<<<<<< HEAD
         if (port_list == null) {
             conn['showFilter']['port'] = conn['connFilter']['port'].slice();
         } else if (typeof port_list === 'string') {
@@ -302,7 +201,6 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         if (!showFilter.hasOwnProperty('port_no')) {
             showFilter['port_no'] = null; // null port_no will show all ports
         } else if (showFilter['port_no'] != null) {
-
             if (typeof showFilter['port_no'] == 'number') { // only one port
                 conn['showFilter']['port_no'] = [showFilter['port_no']];
             } else { // port array
@@ -310,35 +208,6 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
                 for (var x in showFilter['port_no']) {
                     var port = showFilter['port_no'][x];
                     if (!Number.isInteger(port))
-=======
-        if(port_list == null) {
-            conn['showFilter']['port'] = conn['connFilter']['port'].slice();
-        }
-        else if(typeof port_list === 'string') {
-            this.tryAppend(port_list, conn['connFilter']['port'], conn['showFilter']['port']);
-        }
-        else if(Object.prototype.toString.call(port_list) === '[object Array]') {
-            for(var x in port_list) {
-                this.tryAppend(port_list[x], conn['connFilter']['port'], conn['showFilter']['port']);
-            }
-        }
-        else
-            throw "wrong port type";
-
-        if(!showFilter.hasOwnProperty('port_no')) {
-            showFilter['port_no'] = null; // null port_no will show all ports
-        }
-        else if(showFilter['port_no']!=null){
-
-            if(typeof showFilter['port_no'] == 'number') { // only one port
-                conn['showFilter']['port_no'] = [showFilter['port_no']];
-            }
-            else { // port array
-                /* int validate */
-                for(var x in showFilter['port_no']) {
-                    var port = showFilter['port_no'][x];
-                    if(!Number.isInteger(port))
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         throw "showFilter: port_no not integer";
                 }
                 conn['showFilter']['port_no'] = showFilter['port_no'].slice();
@@ -346,7 +215,6 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         }
 
         /* set dpi filter */
-<<<<<<< HEAD
         if (dpi_list == null) {
             if (conn['connFilter']['dpi'] == null)
                 conn['showFilter']['dpi'] = null;
@@ -368,35 +236,6 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
         } else
             throw " bp_flag not integer in showFilter";
     } catch (err) {
-=======
-        if(dpi_list == null) {
-            if(conn['connFilter']['dpi'] == null)
-                conn['showFilter']['dpi'] = null;
-            else
-                conn['showFilter']['dpi'] = conn['connFilter']['dpi'].slice();
-        }
-        else if(typeof dpi_list === 'string') {
-            this.tryAppend(dpi_list, conn['connFilter']['dpi'], conn['showFilter']['dpi']);
-        }
-        else if(Object.prototype.toString.call(dpi_list) === '[object Array]') {
-            for(var x in dpi_list) {
-                this.tryAppend(dpi_list[x], conn['connFilter']['dpi'], conn['showFilter']['dpi']);
-            }
-        }
-        else
-            throw "wrong dpi type";
-
-        if(!showFilter.hasOwnProperty('bp_flag') || showFilter['bp_flag']==null) {
-            conn['showFilter']['bp_flag'] = 3; // show both port and byte
-        }
-        else if(Number.isInteger(showFilter['bp_flag'])) {
-            conn['showFilter']['bp_flag'] = showFilter['bp_flag'];
-        }
-        else
-            throw " bp_flag not integer in showFilter";
-    }
-    catch(err) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log(err);
         throw err; // rethrow
     }
@@ -404,38 +243,24 @@ c3_wrapper.prototype.setShowFilter = function(showFilter, conn) {
 
 /* if element in carr, then push to iarr */
 c3_wrapper.prototype.tryAppend = function(element, carr, iarr) {
-<<<<<<< HEAD
     if (this.inArray(element, carr))
-=======
-    if(this.inArray(element, carr))
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         iarr.push(element);
     else
         throw "showFilter must be subset of connFilter";
 }
 
 c3_wrapper.prototype.inArray = function(str, arr) {
-<<<<<<< HEAD
     for (var x in arr) {
         var tmp = arr[x];
         if (tmp == str)
-=======
-    for(var x in arr) {
-        var tmp = arr[x];
-        if(tmp == str)
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return true;
     }
     return false;
 }
 
-<<<<<<< HEAD
+
 c3_wrapper.prototype.isPortInfo = function(str) {
     if (str == 'rx_pkt' || str == 'rx_byte' || str == 'tx_pkt' || str == 'tx_byte' || str == 'tot_pkt' || str == 'tot_byte')
-=======
-c3_wrapper.prototype.isPortInfo= function(str) {
-    if(str=='rx_pkt' || str=='rx_byte' || str=='tx_pkt' || str=='tx_byte' || str=='tot_pkt' || str=='tot_byte')
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return true;
     else
         return false;
@@ -443,11 +268,11 @@ c3_wrapper.prototype.isPortInfo= function(str) {
 
 /*
  * connection:
- * {   'ref': obj, 
+ * {   'ref': obj,
  *      'dpi_ts': []
  *      'dpi_sts': int // ts counter, set chart => data: {x: 'dpi_ts'}
  *      'port_ts': []
- *      'port_sts': int 
+ *      'port_sts': int
  *      'size': size, // For gauge, we can set it to 1 to keep only current value.
  *      'connFilter': {'dpi': [string ...], 'port': [string ...]}
  *      'showFilter': {'dpi': [string ...], 'port': [string ...], 'port_no'}
@@ -458,12 +283,11 @@ c3_wrapper.prototype.isPortInfo= function(str) {
  *      'intervalId': setInterval id
  *      'dpi_rank': {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}} // avg is the average value
  * }
- *  
+ *
  * */
 c3_wrapper.prototype.genConnection = function(chart, id, connFilter, showFilter, size) {
     var _id = this.genId();
 
-<<<<<<< HEAD
     if (chart == null)
         throw "chart is null";
 
@@ -471,15 +295,6 @@ c3_wrapper.prototype.genConnection = function(chart, id, connFilter, showFilter,
         throw "size can not <= 0";
 
     var conn = { ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: { 'dpi': [], 'port': [] }, showFilter: { 'dpi': [], 'port': [] }, data: { 'dpi': {}, 'port': {} }, cb_name: _id, id: id, port_data_ready: false, intervalId: null, dpi_rank: { byte: [], pkt: [], avg_byte: {}, avg_pkt: {} } };
-=======
-    if(chart==null)
-        throw "chart is null";
-
-    if(size<=0)
-        throw "size can not <= 0";
-
-    var conn =  {ref: chart, dpi_ts: ['ts'], dpi_sts: null, port_ts: ['ts'], port_sts: null, size: size, connFilter: {'dpi': [], 'port': []}, showFilter: {'dpi': [], 'port': []}, data: {'dpi': {}, 'port': {}}, cb_name: _id, id: id, port_data_ready: false, intervalId: null, dpi_rank: {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}}};
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     this.setConnFilter(connFilter, conn);
     this.setShowFilter(showFilter, conn);
 
@@ -488,11 +303,7 @@ c3_wrapper.prototype.genConnection = function(chart, id, connFilter, showFilter,
 
 /* check dpi_oper is ready */
 c3_wrapper.prototype.isReady = function() {
-<<<<<<< HEAD
     if (this.dpi_oper && this.dpi_oper.isReady()) {
-=======
-    if(this.dpi_oper && this.dpi_oper.isReady()) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return true;
     }
     return false;
@@ -502,13 +313,13 @@ c3_wrapper.prototype.deepCloneObj = function(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-/* 
+/*
  * db => data array
  * protoName
  * value => [byte, pkt]
  * head_padding => if not exist field, padding head 0
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding = 0) {
     var pkt_field = protoName + "_pkt";
     var byte_field = protoName + "_byte";
@@ -518,22 +329,11 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
         db[byte_field] = [];
         if (head_padding != 0) {
             db[byte_field] = Array(head_padding + 1).fill(0);
-=======
-c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding=0) {
-    var pkt_field = protoName+"_pkt";
-    var byte_field = protoName+"_byte";
-
-    /* padding head 0 */
-    if(!db.hasOwnProperty(byte_field)) {
-        db[byte_field] = [];
-        if(head_padding!=0) {
-            db[byte_field] = Array(head_padding+1).fill(0);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         }
         // XXX: both byte and pkt data's tag are protoName!!
         // Do not show them at the same time...
         db[byte_field][0] = protoName;
-<<<<<<< HEAD
+
     }
     db[byte_field].push(value[0]);
 
@@ -544,25 +344,13 @@ c3_wrapper.prototype.appendDPIData = function(db, protoName, value, head_padding
         }
         db[pkt_field][0] = protoName;
     }
-=======
-    }  
-    db[byte_field].push(value[0]);
-
-    if(!db.hasOwnProperty(pkt_field)) {
-        db[pkt_field] = [];
-        if(head_padding!=0) {
-            db[pkt_field] = Array(head_padding+1).fill(0);
-        }
-        db[pkt_field][0] = protoName;
-    }  
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     db[pkt_field].push(value[1]);
 }
 
 /* process one kind of field. e.g rx_pkt */
 c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size, dpi) {
     var db = conn.data['port'];
-<<<<<<< HEAD
+
     if (!this.isPortInfo(fieldName))
         throw "error port field";
 
@@ -594,42 +382,6 @@ c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size,
                     db[port_no][fieldName].push(port_data[port_no][fieldName] - last);
                     db[port_no][fieldName].push(port_data[port_no][fieldName]);
                     this.rmOldData(db[port_no][fieldName], size + 1); // +1 => last record
-=======
-    if(!this.isPortInfo(fieldName))
-        throw "error port field";
-
-    if(fieldName=='tot_pkt' || fieldName=='tot_byte') {
-        if(!db.hasOwnProperty(fieldName)) {
-            db[fieldName] = [fieldName, port_data[fieldName]];
-        }  
-        else {
-            var last = db[fieldName].pop();
-            db[fieldName].push(port_data[fieldName]-last);
-            db[fieldName].push(port_data[fieldName]);
-            this.rmOldData(db[fieldName], size+1); // +1 => last record
-        }
-    }
-    else {
-        for(var x in port_data) {
-            if(!isNaN(parseInt(x))) {
-                var port_no = x;
-                var dst_id = dpi.idPort2id(conn.id, port_no);
-                if(dst_id==null)
-                    continue;
-                if(!db.hasOwnProperty(port_no)) {
-                    db[port_no] = {};
-                }
-
-                if(!db[port_no].hasOwnProperty(fieldName)) {
-                    //db[port_no][fieldName] = [port_no+"_"+fieldName, port_data[port_no][fieldName]];
-                    db[port_no][fieldName] = [dst_id[1].toString()+"_"+fieldName, port_data[port_no][fieldName]];
-                }
-                else {
-                    var last = db[port_no][fieldName].pop();
-                    db[port_no][fieldName].push(port_data[port_no][fieldName]-last);
-                    db[port_no][fieldName].push(port_data[port_no][fieldName]);
-                    this.rmOldData(db[port_no][fieldName], size+1); // +1 => last record
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 }
             }
         }
@@ -638,13 +390,8 @@ c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size,
 }
 
 c3_wrapper.prototype.rmOldData = function(arr, size) {
-<<<<<<< HEAD
     if (arr.length > size + 1) {
         var delta = arr.length - size - 1;
-=======
-    if(arr.length > size+1) {
-        var delta = arr.length-size-1;
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         arr.splice(1, delta);
     }
 }
@@ -654,11 +401,7 @@ c3_wrapper.prototype.rmOldData = function(arr, size) {
  * if chart.unload_flag is true, unload all, set the flag false and reload columns
  * */
 c3_wrapper.prototype.checkUnload = function(chart, columns) {
-<<<<<<< HEAD
     if (chart.hasOwnProperty('unload_flag') && chart.unload_flag) {
-=======
-    if(chart.hasOwnProperty('unload_flag') && chart.unload_flag) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         chart.unload({
             done: function() {
                 /* update c3 chart */
@@ -668,11 +411,7 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
                     x: 'ts',
                     columns: columns,
                     done: function() {
-<<<<<<< HEAD
                         setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                        setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     }
                 });
             }
@@ -681,7 +420,7 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
     }
 
     var unload_list = [];
-<<<<<<< HEAD
+
     for (var x in chart.internal.legend[0][0].childNodes) { // all legends
         var name = chart.internal.legend[0][0].childNodes[x].__data__;
         var ok = false;
@@ -689,32 +428,17 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
             continue;
         for (var i in columns) { // in columns
             if (name == columns[i][0]) {
-=======
-    for(var x in chart.internal.legend[0][0].childNodes) { // all legends
-        var name = chart.internal.legend[0][0].childNodes[x].__data__;
-        var ok = false;
-        if(typeof name == "undefined")
-            continue;
-        for(var i in columns) { // in columns
-            if(name == columns[i][0]) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 ok = true;
                 break;
             }
         }
-<<<<<<< HEAD
+
         if (!ok) {
             unload_list.push(name);
         }
     }
+
     if (unload_list.length != 0) {
-=======
-        if(!ok) {
-            unload_list.push(name);
-        }
-    }
-    if(unload_list.length!=0) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         chart.unload({
             ids: unload_list,
             done: function() {
@@ -724,11 +448,7 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
                     x: 'ts',
                     columns: columns,
                     done: function() {
-<<<<<<< HEAD
                         setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                        setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     }
                 });
             }
@@ -747,20 +467,14 @@ c3_wrapper.prototype.checkUnload = function(chart, columns) {
  * XXX: not allow duplicated field in filter
  * bp_flag: 1=>byte, 2=>pkt
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.connectData = function(chart, id, connFilter = { dpi: null, port: null }, showFilter = { dpi: null, port: null, bp_flag: null, port_no: null }, size = 10, failTime = 0) {
-
     if (c3w.chart2conn(chart)) {
-=======
-c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, port: null}, showFilter={dpi: null, port: null, bp_flag: null, port_no: null}, size=10, failTime=0) {
-
-    if(c3w.chart2conn(chart)) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("already connected");
         return null;
     }
 
-<<<<<<< HEAD
+
     if (failTime == this.tryLimit) {
         throw "can not connect dpi_oper";
     }
@@ -776,41 +490,16 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
         connFilter = { dpi: null, port: null };
     if (showFilter == null)
         showFilter = { dpi: null, port: null, bp_flag: null, port_no: null };
-=======
-	if(failTime==this.tryLimit) {
-		throw "can not connect dpi_oper";
-	}
-
-    /* wait for ready */
-	if(!this.isReady()) {
-		var _this = this;
-		setTimeout(function(){_this.connectData(chart, id, connFilter, showFilter, size, failTime+1)}, this.tryPeriod);
-		return;
-	}
-
-    if(connFilter == null)
-        connFilter = {dpi: null, port: null};
-    if(showFilter == null)
-        showFilter = {dpi: null, port: null, bp_flag: null, port_no: null};
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 
     var conn = this.genConnection(chart, id, connFilter, showFilter, size);
 
     /* register dpi_oper callback */
     try {
-<<<<<<< HEAD
+
         _this = this;
 
         /* Register dpi data */
         this.dpi_oper.regCallBack('dpi', conn.cb_name, id, function(dpi_data) {
-
-=======
-        _this = this; 
-
-        /* Register dpi data */
-        this.dpi_oper.regCallBack('dpi', conn.cb_name, id, function(dpi_data){
-            
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             var db = conn.data['dpi'];
             //console.log(dpi_data);
 
@@ -818,19 +507,11 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
             var diff_time = addTS('dpi', conn);
 
             /* add dpi data */
-<<<<<<< HEAD
             for (var x in dpi_data) {
                 if (conn.connFilter['dpi'] == null || this.inArray(dpi_data[x]['protoName'], conn.connFilter['dpi'])) { // check connFilter
                     var protoName = dpi_data[x]['protoName'];
                     // diff_time = null if not first data
                     _this.appendDPIData(db, protoName, [dpi_data[x]['bytes'], dpi_data[x]['packets']], Math.round(diff_time / 1000));
-=======
-            for(var x in dpi_data) {
-                if(conn.connFilter['dpi']==null || this.inArray(dpi_data[x]['protoName'], conn.connFilter['dpi'])) { // check connFilter
-                    var protoName = dpi_data[x]['protoName'];
-                    // diff_time = null if not first data
-                    _this.appendDPIData(db, protoName, [dpi_data[x]['bytes'], dpi_data[x]['packets']], Math.round(diff_time/1000));
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 }
             }
 
@@ -839,13 +520,9 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
              * Some protocols appear this sec, but not appear in next sec
              * */
             var len = conn['dpi_ts'].length;
-<<<<<<< HEAD
+
             for (var x in db) {
                 if (db[x].length < len) {
-=======
-            for(var x in db) {
-                if(db[x].length<len) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     db[x].push(0);
                 }
 
@@ -860,9 +537,8 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 
 
         /* Register port data */
-<<<<<<< HEAD
-        this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data) {
 
+        this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data) {
             /* add ts */
             if (conn.port_data_ready) {
                 addTS('port', conn);
@@ -870,17 +546,6 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 
             /* add port data */
             for (var x in conn.connFilter['port']) { // try to add all field in connFilter
-=======
-        this.dpi_oper.regCallBack('port', conn.cb_name, id, function(port_data){
-            
-            /* add ts */
-            if(conn.port_data_ready) {
-               addTS('port', conn);
-            }
-
-            /* add port data */
-            for(var x in conn.connFilter['port']) { // try to add all field in connFilter
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 var fieldName = conn.connFilter['port'][x];
                 _this.appendPortData(conn, fieldName, port_data, conn.size, this.dpi_oper); // port_data = {port_no: {} || tot_xxx: int}
             }
@@ -892,44 +557,26 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 
         }, this)
 
-<<<<<<< HEAD
+
     } catch (err) {
         console.log("connectData error: " + err);
-=======
-    }
-    catch(err) {
-        console.log("connectData error: "+err);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return;
     }
 
     /* return diff time */
     function addTS(type, conn) {
-<<<<<<< HEAD
         if (type != 'port' && type != 'dpi') {
-=======
-        if(type!='port' && type!='dpi') {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             throw "wrong type in addTS()";
         }
 
         var diff_time = null;
-<<<<<<< HEAD
+
         if (conn[type + '_sts'] == null) {
             conn[type + '_sts'] = (new Date()).getTime();
             conn[type + '_ts'].push(0);
         } else {
             diff_time = (new Date()).getTime() - conn[type + '_sts'];
             conn[type + '_ts'].push(Math.round(diff_time / 1000));
-=======
-        if(conn[type+'_sts']==null) {
-            conn[type+'_sts'] = (new Date()).getTime();
-            conn[type+'_ts'].push(0);
-        }
-        else {
-            diff_time = (new Date()).getTime() - conn[type+'_sts'];
-            conn[type+'_ts'].push(Math.round(diff_time/1000));
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         }
 
         return diff_time;
@@ -944,7 +591,7 @@ c3_wrapper.prototype.connectData = function(chart, id, connFilter={dpi: null, po
 /*
  * clear dpi_oper callback and remove connection from manager
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.destroy = function(chart, callback = null, tryCnt = 0) {
     // delay and try
     //console.log(chart.loading);
@@ -954,86 +601,52 @@ c3_wrapper.prototype.destroy = function(chart, callback = null, tryCnt = 0) {
             throw "can't destroy chart, keep loading?";
         }
         setTimeout(function() { _this.destroy(chart, callback, tryCnt + 1) }, 100);
-=======
-c3_wrapper.prototype.destroy = function(chart, callback=null, tryCnt=0) {
-    // delay and try
-    //console.log(chart.loading);
-    if(chart.hasOwnProperty('loading') && chart.loading) {
-        var _this = this;
-        if(tryCnt==10) {
-            throw "can't destroy chart, keep loading?";
-        }
-        setTimeout(function(){ _this.destroy(chart, callback, tryCnt+1)}, 100);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return;
     }
 
     console.log("stop and destroy");
     this.stopShow(chart);
     var conn = this.removeConnByChart(chart); // if chart==null or can't be found, conn=null
-<<<<<<< HEAD
+
     if (conn) {
-=======
-    if(conn) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         var dpi = this.dpi_oper;
         try {
             dpi.removeCallback('dpi', conn.cb_name);
             dpi.removeCallback('port', conn.cb_name);
-<<<<<<< HEAD
+
         } catch (err) {
             console.log("Destroy error: " + err); // not rethrow
         }
         // XXX: c3 internal async bug.
         //chart.destroy();
     } else {
-=======
-        }
-        catch (err) {
-            console.log("Destroy error: "+err); // not rethrow
-        }
-        // XXX: c3 internal async bug.
-        //chart.destroy();
-    }
-    else {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         // shareConn chart
         //chart.destroy();
     }
 
-<<<<<<< HEAD
+
     if (callback) {
-=======
-    if(callback) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         callback();
     }
 }
 
-/* 
- * show data on chart 
+/*
+ * show data on chart
  * data_type: dpi or port
- * rt_rank: 
+ * rt_rank:
  *      port => 0: both, 1: rx, 2: tx
  *      dpi => only show top rank
  * return: false => not start successfully
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank = null) {
-
     var conn = this.chart2conn(chart);
+
     if (chart.hasOwnProperty("intervalId")) {
-=======
-c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
-
-    var conn = this.chart2conn(chart);
-    if(chart.hasOwnProperty("intervalId")) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("The chart is showed as proto pie");
         return false;
     }
 
-<<<<<<< HEAD
     if (!conn) {
         console.log("can not found connection");
         return false;
@@ -1041,17 +654,6 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
         console.log("already start show: " + conn.intervalId.toString());
         return false;
     } else if (rt_rank != null && !Number.isInteger(rt_rank)) {
-=======
-    if(!conn) {
-        console.log("can not found connection");
-        return false;
-    }
-    else if(conn.intervalId) {
-        console.log("already start show: "+conn.intervalId.toString());
-        return false;
-    }
-    else if(rt_rank!=null && !Number.isInteger(rt_rank)) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("rt_rank isn't integer");
         return false;
     }
@@ -1060,7 +662,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
     var _this = this;
     var setId;
 
-<<<<<<< HEAD
+
     if (rt_rank == null) {
         if (data_type == 'port') {
             chart.rt_rank = 1; // default show byte port info.
@@ -1073,22 +675,6 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
     chart.transform('line');
     if (data_type == 'port') {
         setId = setInterval(function() {
-=======
-    if(rt_rank==null) {
-        if(data_type=='port') {
-            chart.rt_rank = 1; // default show byte port info.
-        }
-        else {
-            chart.rt_rank = 3; // default show top 3 protocols
-        }
-    }
-    else
-        chart.rt_rank = rt_rank;
-
-    chart.transform('line');
-    if(data_type=='port') {
-        setId = setInterval(function(){
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             var db = conn.data['port'];
             var rt_flag = chart.rt_rank;
             window.rt_stat = rt_flag;
@@ -1097,7 +683,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             var columns = [];
             columns.push(conn['port_ts']);
             //for(var x in conn.showFilter['port']) {
-<<<<<<< HEAD
+
             //var fieldName = conn.showFilter['port'][x];
             //if(fieldName.substring(0, 3)=='tot') { // tot_xxx
             //if(typeof db[fieldName] != 'undefined') {
@@ -1115,37 +701,17 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             //}
             //}
             //}
-=======
-                //var fieldName = conn.showFilter['port'][x];
-                //if(fieldName.substring(0, 3)=='tot') { // tot_xxx
-                    //if(typeof db[fieldName] != 'undefined') {
-                        //columns.push(db[fieldName].slice(0, -1));
-                    //}
-                //}
-                //else {
-                    //for(var x in db) {
-                        //var port = parseInt(x);
-                        //// check show port_no
-                        //if(!isNaN(port) && (conn.showFilter['port_no']==null || _this.inArray(port, conn.showFilter['port_no']))) { 
-                            //if(typeof db[x][fieldName] != 'undefined') {
-                                //columns.push(db[x][fieldName].slice(0, -1));
-                            //}
-                        //}
-                    //}
-                //}
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             //}
 
             var flag = conn.showFilter['bp_flag'];
             window.bp_stat = flag;
-<<<<<<< HEAD
+
             for (var x in conn.showFilter['port']) {
                 var fieldName = conn.showFilter['port'][x];
                 if ((rt_flag & 1) > 0 && fieldName.charAt(0) != 'r') // rx
                     continue;
                 if ((rt_flag & 2) > 0 && fieldName.charAt(0) != 't') // tx
                     continue;
-
                 if (fieldName.substring(0, 3) == 'tot') { // tot_xxx
                     continue; // not show tot_xxx because of bug
                 } else {
@@ -1160,31 +726,6 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
                                 if ((fieldName == 'rx_byte' || fieldName == 'tx_byte') && (1 & flag) > 0) { // byte
                                     columns.push(db[x][fieldName].slice(0, -1));
                                 } else if ((fieldName == 'rx_pkt' || fieldName == 'tx_pkt') && (2 & flag) > 0) { // pkt
-=======
-            for(var x in conn.showFilter['port']) {
-                var fieldName = conn.showFilter['port'][x];
-                if((rt_flag&1)>0 && fieldName.charAt(0)!='r') // rx
-                    continue;
-                if((rt_flag&2)>0 && fieldName.charAt(0)!='t') // tx
-                    continue;
-
-                if(fieldName.substring(0, 3)=='tot') { // tot_xxx
-                    continue; // not show tot_xxx because of bug
-                }
-                else {
-                    for(var x in db) {
-                        var port = parseInt(x);
-                        // check show port_no
-                        if(port == 4294967294) // exclude controller port
-                            continue;
-                        
-                        if(!isNaN(port) && (conn.showFilter['port_no']==null || _this.inArray(port, conn.showFilter['port_no']))) { 
-                            if(typeof db[x][fieldName] != 'undefined') {
-                                if((fieldName=='rx_byte'||fieldName=='tx_byte') && (1&flag)>0) { // byte
-                                    columns.push(db[x][fieldName].slice(0, -1));
-                                }
-                                else if((fieldName=='rx_pkt'||fieldName=='tx_pkt') && (2&flag)>0) { // pkt
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                                     columns.push(db[x][fieldName].slice(0, -1));
                                 }
                             }
@@ -1195,39 +736,24 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
 
             console.log(JSON.stringify(columns));
             /* update c3 chart */
-<<<<<<< HEAD
             if (conn.port_data_ready && conn['port_sts']) {
                 var same = _this.checkUnload(chart, columns);
                 if (same) {
-=======
-            if(conn.port_data_ready && conn['port_sts']) {
-                var same = _this.checkUnload(chart, columns);
-                if(same) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     /* update c3 chart */
                     chart.loading = true;
                     chart.load({
                         x: 'ts',
                         columns: columns,
                         done: function() {
-<<<<<<< HEAD
                             setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                            setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         }
                     });
                 }
             }
         }, 1000);
-<<<<<<< HEAD
+
     } else if (data_type == 'dpi') {
         setId = setInterval(function() {
-=======
-    }
-    else if(data_type=='dpi') {
-        setId = setInterval(function(){
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             var db = conn.data['dpi'];
             var rank = chart.rt_rank;
 
@@ -1235,7 +761,7 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             var columns = [];
             columns.push(conn['dpi_ts']);
             //for(var x in db) {
-<<<<<<< HEAD
+
             //var field = x; // protoName_byte or protoName_pkt
             //var last_char = field.charAt(field.length-1);
             //var protoName;
@@ -1259,77 +785,31 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
             //}
             //}
             //}
-
             var flag = conn.showFilter['bp_flag'];
             window.bp_stat = flag;
             // XXX: because of protocol tag, flag==3 => show only byte
             if ((1 & flag) > 0) { // byte
                 addDPIcolumn.call(_this, conn, columns, 'byte', rank);
             } else if ((2 & flag) > 0) { // pkt
-=======
-                //var field = x; // protoName_byte or protoName_pkt
-                //var last_char = field.charAt(field.length-1);
-                //var protoName;
-                //var byteORpkt; // byte: 1, pkt: 2
-                //if(last_char=='e') {
-                    //protoName = field.slice(0, -5);
-                    //byteORpkt = 1;
-                //}
-                //else if(last_char=='t') {
-                    //protoName = field.slice(0, -4);
-                    //byteORpkt = 2;
-                //}
-                //else {
-                    //throw "error dpi field: "+field;
-                //}
-
-                //if(conn.showFilter['dpi']==null || _this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
-                    //var flag = conn.showFilter['bp_flag'];
-                    //if((byteORpkt&flag)>0) { // check byte and pkt flag
-                        //columns.push(db[x]);
-                    //}
-                //}
-            //}
-            
-            var flag = conn.showFilter['bp_flag'];
-            window.bp_stat = flag;
-            // XXX: because of protocol tag, flag==3 => show only byte
-            if((1&flag)>0) { // byte
-                addDPIcolumn.call(_this, conn, columns, 'byte', rank);
-            }
-            else if((2&flag)>0) { // pkt
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 addDPIcolumn.call(_this, conn, columns, 'pkt', rank);
             }
 
             // type => byte or pkt
             function addDPIcolumn(conn, columns, type, rankLimit) {
-<<<<<<< HEAD
                 if (type != 'byte' && type != 'pkt')
-=======
-                if(type!='byte' && type!='pkt')
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     throw "unknown type in addDPIcolumn";
 
                 // [{name: protoName, value: int}, ...]
                 var cnt = 0;
                 var arr = conn.dpi_rank[type];
                 var db = conn.data['dpi'];
-<<<<<<< HEAD
+
                 for (var x in arr) {
                     var protoName = arr[x]['name'];
                     if (conn.showFilter['dpi'] == null || this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
                         columns.push(db[protoName + '_' + type]);
                         cnt++;
                         if (cnt == rankLimit)
-=======
-                for(var x in arr) {
-                    var protoName = arr[x]['name'];
-                    if(conn.showFilter['dpi']==null || this.inArray(protoName, conn.showFilter['dpi'])) { // check protocol showFilter
-                        columns.push(db[protoName+'_'+type]);
-                        cnt++;
-                        if(cnt==rankLimit)
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                             return;
                     }
                 }
@@ -1339,11 +819,8 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
 
             /* check whether same protocol rank list */
             var same = _this.checkUnload(chart, columns);
-<<<<<<< HEAD
+
             if (same) {
-=======
-            if(same) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 /* update c3 chart */
                 console.log(JSON.stringify(columns));
                 chart.loading = true;
@@ -1351,26 +828,16 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
                     x: 'ts',
                     columns: columns,
                     done: function() {
-<<<<<<< HEAD
                         setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                        setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     }
                 });
             }
 
         }, 1000);
-<<<<<<< HEAD
+
     } else
         throw "unknown type";
 
-=======
-    }
-    else
-        throw "unknown type";
-    
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     conn.intervalId = setId;
     chart.unload_flag = true;
     chart.show_type = 'line';
@@ -1378,17 +845,13 @@ c3_wrapper.prototype.startShowLine = function(chart, data_type, rt_rank=null) {
 }
 
 c3_wrapper.prototype.stopShow = function(chart) {
-<<<<<<< HEAD
     if (!chart.hasOwnProperty("show_type")) {
-=======
-    if(!chart.hasOwnProperty("show_type")) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("chart was not showed yet");
         return false;
     }
 
     // XXX: hard code... pie and gauge can have connection
-<<<<<<< HEAD
+
     if (chart.show_type == "pie" || chart.show_type == 'gauge') {
         clearInterval(chart.intervalId);
         delete chart.intervalId;
@@ -1397,77 +860,45 @@ c3_wrapper.prototype.stopShow = function(chart) {
         var conn = this.chart2conn(chart);
         if (conn) {
             if (conn.intervalId) {
-=======
-    if(chart.show_type=="pie" || chart.show_type=='gauge') {
-        clearInterval(chart.intervalId);
-        delete chart.intervalId;
-        return true;
-    }
-    else { // line
-        var conn = this.chart2conn(chart);
-        if(conn) {
-            if(conn.intervalId) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 clearInterval(conn.intervalId);
                 delete conn.intervalId;
                 return true;
             }
         }
     }
-
 }
 
 c3_wrapper.prototype.setHistorySize = function(chart, size) {
     var conn = this.chart2conn(chart);
-<<<<<<< HEAD
+
     if (conn) {
-=======
-    if(conn) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         conn.size = size;
     }
 }
 
 c3_wrapper.prototype.clearData = function(chart) {
     var conn = this.chart2conn(chart);
-<<<<<<< HEAD
+
     if (conn) {
-=======
-    if(conn) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         conn['dpi_ts'] = ['ts'];
         conn['port_ts'] = ['ts'];
         conn['dpi_sts'] = null;
         conn['port_sts'] = null;
-<<<<<<< HEAD
         conn['data'] = { 'dpi': {}, 'port': {} };
         conn['port_data_ready'] = false;
         conn['dpi_rank'] = { byte: [], pkt: [], avg_byte: {}, avg_pkt: {} };
-=======
-        conn['data'] = {'dpi': {}, 'port': {}};
-        conn['port_data_ready'] = false;
-        conn['dpi_rank'] = {byte: [], pkt: [], avg_byte: {}, avg_pkt: {}};
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         chart.unload_flag = true;
     }
 }
 
 c3_wrapper.prototype.chart2conn = function(chart) {
-<<<<<<< HEAD
+
     if (chart == null)
         return null;
 
     for (var x in this.manager) {
         var conn = this.manager[x];
         if (conn.ref == chart) {
-=======
-    if(chart==null)
-        return null;
-
-    for(var x in this.manager) {
-        var conn = this.manager[x];
-        if(conn.ref == chart) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return conn;
         }
     }
@@ -1476,21 +907,13 @@ c3_wrapper.prototype.chart2conn = function(chart) {
 
 /* similar to chart2conn, but remove before return */
 c3_wrapper.prototype.removeConnByChart = function(chart) {
-<<<<<<< HEAD
+
     if (chart == null)
         return null;
 
     for (var x in this.manager) {
         var conn = this.manager[x];
         if (conn.ref == chart) {
-=======
-    if(chart==null)
-        return null;
-
-    for(var x in this.manager) {
-        var conn = this.manager[x];
-        if(conn.ref == chart) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             this.manager.splice(x, 1); // remove
             return conn;
         }
@@ -1504,7 +927,7 @@ c3_wrapper.prototype.removeConnByChart = function(chart) {
  * XXX: For convenience, does not use connection conception...
  * Instead, record show_type and intervalId in chart
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, shareChart = null, interval = 2000) {
     if (chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
@@ -1515,39 +938,17 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
         return false;
     }
     if (shareChart == null) {
-=======
-c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, shareChart=null, interval=2000) {
-    if(chart.hasOwnProperty('intervalId')) {
-        console.log("chart already showed");
-        return false;
-    }
-    if(typeof protoName == 'undefined') {
-        console.log("undefined protoName");
-        return false;
-    }
-    if(shareChart==null) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("null shareChart");
         return false;
     }
 
     var _this = this;
-<<<<<<< HEAD
     var myfunc = function() {
         var dpi = _this.dpi_oper;
         var child_list;
         try {
             child_list = dpi.tree[dpid].child;
         } catch (err) {
-=======
-    var myfunc = function(){
-        var dpi = _this.dpi_oper; 
-        var child_list;
-        try {
-            child_list = dpi.tree[dpid].child;
-        }
-        catch (err) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             console.log(err.stack);
             return;
         }
@@ -1555,10 +956,10 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
         var shareConn = _this.chart2conn(shareChart);
         var bp_flag = shareConn.showFilter['bp_flag']; // bp depends on line chart
         var data = dpi.getDPIById(child_list);
-<<<<<<< HEAD
         var columns = [
             ['ts', 0]
         ];
+
         for (var x in data) {
             var cdpid_str = x.toString();
             var dpi_list = data[x];
@@ -1570,46 +971,25 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
                     if (bp_flag == 1) {
                         columns.push([cdpid_str, entry['bytes']]);
                     } else if (bp_flag == 2) {
-=======
-        var columns = [['ts', 0]];
-        for(var x in data) {
-            var cdpid_str = x.toString();
-            var dpi_list = data[x];
-            var found = false;
-            for(var i in dpi_list) {
-                var entry = dpi_list[i];
-                if(entry['protoName']==protoName) {
-                    found = true;
-                    if(bp_flag==1) {
-                        columns.push([cdpid_str, entry['bytes']]);
-                    }
-                    else if(bp_flag==2) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         columns.push([cdpid_str, entry['packets']]);
                     }
                     break;
                 }
             }
-<<<<<<< HEAD
+
             if (!found) {
-=======
-            if(!found) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 columns.push([cdpid_str, 0]); // not found
             }
         }
 
         var host_list = dpi.sw_host_table[dpid];
-<<<<<<< HEAD
+
         for (var x in host_list) {
-=======
-        for(var x in host_list) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             //console.log(JSON.stringify(host_list[x]));
             var host_name = host_list[x];
             var host_data = dpi.getDPIById(host_name);
             var found = false;
-<<<<<<< HEAD
+
             for (var i in host_data) {
                 var entry = host_data[i];
                 if (entry['protoName'] == protoName) {
@@ -1617,26 +997,13 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
                     if (bp_flag == 1) {
                         columns.push([host_name, entry['bytes']]);
                     } else if (bp_flag == 2) {
-=======
-            for(var i in host_data) {
-                var entry = host_data[i];
-                if(entry['protoName']==protoName) {
-                    found = true;
-                    if(bp_flag==1) {
-                        columns.push([host_name, entry['bytes']]);
-                    }
-                    else if(bp_flag==2) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                         columns.push([host_name, entry['packets']]);
                     }
                     break;
                 }
             }
-<<<<<<< HEAD
+
             if (!found) {
-=======
-            if(!found) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 columns.push([host_name, 0]); // not found
             }
         }
@@ -1644,20 +1011,13 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
         //console.log(JSON.stringify(columns));
         chart.transform('pie');
         var same = _this.checkUnload(chart, columns);
-<<<<<<< HEAD
+
         if (same) {
-=======
-        if(same) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             chart.loading = true;
             chart.load({
                 columns: columns,
                 done: function() {
-<<<<<<< HEAD
                     setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                    setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 }
             });
         }
@@ -1675,29 +1035,22 @@ c3_wrapper.prototype.showProtoContributePie = function(chart, dpid, protoName, s
  * If set, sync type, data, legend of line chart // including rank and showFilter
  * bp_flag: 1=> byte, 2=>pkt
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag = 1, interval = 2000, shareChart = null) {
     if (chart.hasOwnProperty('intervalId')) {
         console.log("chart already showed");
         return false;
     }
+
     if (shareChart == null && bp_flag != 1 && bp_flag != 2) {
-=======
-c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000, shareChart=null) {
-    if(chart.hasOwnProperty('intervalId')) {
-        console.log("chart already showed");
-        return false;
-    }
-    if(shareChart==null && bp_flag!=1 && bp_flag!=2) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("unknown bp_flag in showProtoPie");
         return false;
     }
 
     var _this = this;
-<<<<<<< HEAD
     var dpi = this.dpi_oper;
     var myfunc;
+
     if (shareChart == null) {
         myfunc = function() {
             var data = dpi.getDPIById(id);
@@ -1709,20 +1062,6 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000
                 if (bp_flag == 1) {
                     columns.push([entry['protoName'], entry['bytes']]);
                 } else if (bp_flag == 2) {
-=======
-    var dpi = this.dpi_oper; 
-    var myfunc;
-    if(shareChart==null) {
-        myfunc = function(){
-            var data = dpi.getDPIById(id);
-            var columns = [['ts', 0]];
-            for(var x in data) {
-                var entry = data[x];
-                if(bp_flag==1) {
-                    columns.push([entry['protoName'], entry['bytes']]);
-                }
-                else if(bp_flag==2) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     columns.push([entry['protoName'], entry['packets']]);
                 }
             }
@@ -1730,101 +1069,63 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000
             //console.log(JSON.stringify(columns));
             chart.transform('pie');
             var same = _this.checkUnload(chart, columns);
-<<<<<<< HEAD
+
             if (same) {
-=======
-            if(same) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 chart.loading = true;
                 chart.load({
                     columns: columns,
                     done: function() {
-<<<<<<< HEAD
                         setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                        setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     }
                 });
             }
         };
-<<<<<<< HEAD
+
     } else {
         var shareConn = this.chart2conn(shareChart);
         myfunc = function() {
-=======
-    }
-    else {
-        var shareConn = this.chart2conn(shareChart);
-        myfunc = function(){
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             var columns = [];
             var rt_rank = shareChart.internal.legend[0][0].childNodes.length;
             columns.push(shareConn['dpi_ts']);
             var bp_flag = shareConn.showFilter['bp_flag'];
-<<<<<<< HEAD
+
             if (bp_flag == 1) { // byte
                 addDPIcolumn.call(_this, shareConn, columns, 'byte', rt_rank);
             } else if (bp_flag == 2) { // pkt
-=======
-            if(bp_flag==1) { // byte
-                addDPIcolumn.call(_this, shareConn, columns, 'byte', rt_rank);
-            }
-            else if(bp_flag==2) { // pkt
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 addDPIcolumn.call(_this, shareConn, columns, 'pkt', rt_rank);
             }
 
             chart.transform('pie');
             var same = _this.checkUnload(chart, columns);
-<<<<<<< HEAD
+
             if (same) {
-=======
-            if(same) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                 /* update c3 chart */
                 chart.loading = true;
                 chart.load({
                     x: 'ts',
                     columns: columns,
                     done: function() {
-<<<<<<< HEAD
                         setTimeout(function() { chart.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                        setTimeout(function(){chart.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     }
                 });
             }
 
             // type => byte or pkt
             function addDPIcolumn(shareConn, columns, type, rankLimit) {
-<<<<<<< HEAD
                 if (type != 'byte' && type != 'pkt')
-=======
-                if(type!='byte' && type!='pkt')
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                     throw "unknown type in addDPIcolumn";
 
                 // [{name: protoName, value: int}, ...]
                 var cnt = 0;
                 var arr = shareConn.dpi_rank[type];
                 var db = shareConn.data['dpi'];
-<<<<<<< HEAD
+
                 for (var x in arr) {
                     var protoName = arr[x]['name'];
                     if (shareConn.showFilter['dpi'] == null || _this.inArray(protoName, shareConn.showFilter['dpi'])) { // check protocol showFilter
                         columns.push(db[protoName + '_' + type]);
                         cnt++;
                         if (cnt == rankLimit)
-=======
-                for(var x in arr) {
-                    var protoName = arr[x]['name'];
-                    if(shareConn.showFilter['dpi']==null || _this.inArray(protoName, shareConn.showFilter['dpi'])) { // check protocol showFilter
-                        columns.push(db[protoName+'_'+type]);
-                        cnt++;
-                        if(cnt==rankLimit)
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
                             return;
                     }
                 }
@@ -1839,13 +1140,13 @@ c3_wrapper.prototype.showProtoPie = function(chart, id, bp_flag=1, interval=2000
     return true;
 }
 
-/* 
+/*
  * show link gauge on two chart
  * use src port data to prepare columns
  * ids: [src_id, dst_id] // src_id must be dpid
  * port_no: src_id's port_no => dst_id
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no = null, shareChart = null, interval = 1000) {
     if (shareChart == null || port_no == null) {
         console.log("shareChart or port_no is null");
@@ -1856,47 +1157,24 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no =
         return false;
     }
     if (chart_ts.hasOwnProperty('intervalId')) {
-=======
-c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=null, shareChart=null, interval=1000) {
-    if(shareChart==null || port_no==null) {
-        console.log("shareChart or port_no is null");
-        return false;
-    }
-    if(chart_st.hasOwnProperty('intervalId')) {
-        console.log("chart_st already showed");
-        return false;
-    }
-    if(chart_ts.hasOwnProperty('intervalId')) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("chart_ts already showed");
         return false;
     }
 
-    // byte and pkt flag define in line chart 
+    // byte and pkt flag define in line chart
     var shareConn = this.chart2conn(shareChart);
-<<<<<<< HEAD
+
     if (shareConn == null) {
-=======
-    if(shareConn==null) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("null conn");
         return false;
     }
 
     var _this = this;
-<<<<<<< HEAD
     var dpi = this.dpi_oper;
 
     var st_func;
     st_func = function() {
         if (!shareConn.port_data_ready || !shareConn['port_sts'])
-=======
-    var dpi = this.dpi_oper; 
-
-    var st_func;
-    st_func = function() {
-        if(!shareConn.port_data_ready || !shareConn['port_sts'])
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return;
 
         var columns = [];
@@ -1905,18 +1183,11 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
 
         var len = data['tx_byte'].length;
         var bp_flag = shareConn.showFilter['bp_flag'];
-<<<<<<< HEAD
+
         if (bp_flag == 1) { // byte
             columns.push(['data', Math.floor(data['tx_byte'][len - 2] / 1024)]);
         } else { // pkt
             columns.push(['data', Math.floor(data['tx_pkt'][len - 2])]);
-=======
-        if(bp_flag==1) { // byte
-            columns.push(['data', Math.floor(data['tx_byte'][len-2]/1024)]);
-        }
-        else { // pkt
-            columns.push(['data', Math.floor(data['tx_pkt'][len-2])]);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         }
 
         /* update c3 chart */
@@ -1924,11 +1195,7 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
         chart_st.load({
             columns: columns,
             done: function() {
-<<<<<<< HEAD
                 setTimeout(function() { chart_st.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                setTimeout(function(){chart_st.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         });
     };
@@ -1939,31 +1206,19 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
 
     var ts_func;
     ts_func = function() {
-<<<<<<< HEAD
         if (!shareConn.port_data_ready || !shareConn['port_sts'])
-=======
-        if(!shareConn.port_data_ready || !shareConn['port_sts'])
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return;
 
         var columns = [];
         var db = shareConn.data['port'];
         var data = db[port_no];
-
         var len = data['rx_byte'].length;
         var bp_flag = shareConn.showFilter['bp_flag'];
-<<<<<<< HEAD
+
         if (bp_flag == 1) { // byte
             columns.push(['data', Math.floor(data['rx_byte'][len - 2] / 1024)]);
         } else { // pkt
             columns.push(['data', Math.floor(data['rx_pkt'][len - 2])]);
-=======
-        if(bp_flag==1) { // byte
-            columns.push(['data', Math.floor(data['rx_byte'][len-2]/1024)]);
-        }
-        else { // pkt
-            columns.push(['data', Math.floor(data['rx_pkt'][len-2])]);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         }
 
         /* update c3 chart */
@@ -1971,11 +1226,7 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
         chart_ts.load({
             columns: columns,
             done: function() {
-<<<<<<< HEAD
                 setTimeout(function() { chart_ts.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                setTimeout(function(){chart_ts.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         });
     };
@@ -1987,7 +1238,7 @@ c3_wrapper.prototype.showLinkGauge = function(chart_st, chart_ts, ids, port_no=n
     return true;
 }
 
-<<<<<<< HEAD
+
 c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart = null, interval = 1000) {
     if (shareChart == null) {
         console.log("shareChart is null");
@@ -1998,76 +1249,40 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart = nul
         return false;
     }
     if (chart_tx.hasOwnProperty('intervalId')) {
-=======
-c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null, interval=1000) {
-    if(shareChart==null) {
-        console.log("shareChart is null");
-        return false;
-    }
-    if(chart_rx.hasOwnProperty('intervalId')) {
-        console.log("chart_rx already showed");
-        return false;
-    }
-    if(chart_tx.hasOwnProperty('intervalId')) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("chart_tx already showed");
         return false;
     }
 
-    // byte and pkt flag define in line chart 
+    // byte and pkt flag define in line chart
     var shareConn = this.chart2conn(shareChart);
-<<<<<<< HEAD
+
     if (shareConn == null) {
-=======
-    if(shareConn==null) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("null conn");
         return false;
     }
 
     var _this = this;
-<<<<<<< HEAD
     var dpi = this.dpi_oper;
 
     var tx_func;
     tx_func = function() {
         if (!shareConn.port_data_ready || !shareConn['port_sts'])
-=======
-    var dpi = this.dpi_oper; 
-
-    var tx_func;
-    tx_func = function() {
-        if(!shareConn.port_data_ready || !shareConn['port_sts'])
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return;
 
         var columns = [];
         var db = shareConn.data['port'];
-<<<<<<< HEAD
+        var sum = 0;
 
-        var sum = 0;
         for (var port_no in db) {
-=======
-    
-        var sum = 0;
-        for(var port_no in db) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             // XXX: suppose no tot_xxx fields
             var data = db[port_no];
             var len = data['tx_byte'].length;
             var bp_flag = shareConn.showFilter['bp_flag'];
-<<<<<<< HEAD
+
             if (bp_flag == 1) { // byte
                 sum += data['tx_byte'][len - 2] / 1024;
             } else { // pkt
                 sum += data['tx_pkt'][len - 2];
-=======
-            if(bp_flag==1) { // byte
-                sum += data['tx_byte'][len-2]/1024;
-            }
-            else { // pkt
-                sum += data['tx_pkt'][len-2];
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         }
         columns.push(['data', Math.floor(sum)]);
@@ -2077,11 +1292,7 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
         chart_tx.load({
             columns: columns,
             done: function() {
-<<<<<<< HEAD
                 setTimeout(function() { chart_tx.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                setTimeout(function(){chart_tx.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         });
     };
@@ -2092,38 +1303,24 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
 
     var rx_func;
     rx_func = function() {
-<<<<<<< HEAD
         if (!shareConn.port_data_ready || !shareConn['port_sts'])
-=======
-        if(!shareConn.port_data_ready || !shareConn['port_sts'])
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             return;
 
         var columns = [];
         var db = shareConn.data['port'];
 
         var sum = 0;
-<<<<<<< HEAD
+
         for (var port_no in db) {
-=======
-        for(var port_no in db) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             // XXX: suppose no tot_xxx fields
             var data = db[port_no];
             var len = data['rx_byte'].length;
             var bp_flag = shareConn.showFilter['bp_flag'];
-<<<<<<< HEAD
+
             if (bp_flag == 1) { // byte
                 sum += data['rx_byte'][len - 2] / 1024;
             } else { // pkt
                 sum += data['rx_pkt'][len - 2];
-=======
-            if(bp_flag==1) { // byte
-                sum += data['rx_byte'][len-2]/1024;
-            }
-            else { // pkt
-                sum += data['rx_pkt'][len-2];
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         }
         columns.push(['data', Math.floor(sum)]);
@@ -2133,11 +1330,7 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
         chart_rx.load({
             columns: columns,
             done: function() {
-<<<<<<< HEAD
                 setTimeout(function() { chart_rx.loading = false; }, c3_wrapper.prototype.destroy_delay);
-=======
-                setTimeout(function(){chart_rx.loading = false;}, c3_wrapper.prototype.destroy_delay);
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
             }
         });
     };
@@ -2150,20 +1343,11 @@ c3_wrapper.prototype.showSwGauge = function(chart_rx, chart_tx, shareChart=null,
 }
 
 c3_wrapper.prototype.changeRT_RANK = function(chart, rt_rank) {
-<<<<<<< HEAD
     if (chart.hasOwnProperty('rt_rank')) {
         chart.rt_rank = rt_rank;
         chart.unload_flag = true;
         return true;
     } else {
-=======
-    if(chart.hasOwnProperty('rt_rank')) {
-        chart.rt_rank = rt_rank;
-        chart.unload_flag = true;
-        return true;
-    }
-    else {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("line chart must be started first");
         return false;
     }
@@ -2171,11 +1355,7 @@ c3_wrapper.prototype.changeRT_RANK = function(chart, rt_rank) {
 
 c3_wrapper.prototype.changeBP_FLAG = function(chart, bp_flag) {
     var conn = this.chart2conn(chart);
-<<<<<<< HEAD
     if (bp_flag > 3 || bp_flag <= 0) {
-=======
-    if(bp_flag>3 || bp_flag<=0) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         console.log("bp_flag error");
         return false;
     }
@@ -2189,31 +1369,19 @@ c3_wrapper.prototype.changeBP_FLAG = function(chart, bp_flag) {
  * type: pie, line, gauge
  * bind: bind element
  * */
-<<<<<<< HEAD
+
 c3_wrapper.prototype.genSimpleChart = function(dimension = null, type = null, bind = null) {
     if (!dimension || !type || !bind) {
-=======
-c3_wrapper.prototype.genSimpleChart = function(dimension=null, type=null, bind=null) {
-    if(!dimension || !type || !bind) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         throw "param error";
         return;
     }
     console.log(type);
-<<<<<<< HEAD
     if (type != 'pie' && type != 'line' && type != 'gauge') {
-=======
-    if(type!='pie' && type!='line' && type!='gauge') {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         throw "type error";
         return;
     }
 
-<<<<<<< HEAD
     if (type == 'pie') {
-=======
-    if(type=='pie') {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return c3.generate({
             bindto: bind,
             size: {
@@ -2226,12 +1394,8 @@ c3_wrapper.prototype.genSimpleChart = function(dimension=null, type=null, bind=n
                 columns: []
             },
         });
-<<<<<<< HEAD
+
     } else if (type == 'gauge') {
-=======
-    }
-    else if(type=='gauge') {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return c3.generate({
             bindto: bind,
             size: {
@@ -2253,12 +1417,8 @@ c3_wrapper.prototype.genSimpleChart = function(dimension=null, type=null, bind=n
                 units: 'K bits'
             }
         });
-<<<<<<< HEAD
+
     } else if (type == 'line') {
-=======
-    }
-    else if(type=='line') {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         return c3.generate({
             bindto: bind,
             size: {
@@ -2278,11 +1438,7 @@ c3_wrapper.prototype.genSimpleChart = function(dimension=null, type=null, bind=n
 
 function demo(node) {
     var id = node.id;
-<<<<<<< HEAD
     c3w.connectData(live_dpi_chart, id, null, { port_no: null, bp_flag: 1 }); // show all protocols info. of dpid 1
-=======
-    c3w.connectData(live_dpi_chart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.startShowLine(live_dpi_chart, 'dpi', 3);
     c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
     //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
@@ -2292,7 +1448,6 @@ function demo(node) {
 
 /* link demo */
 function demo2(link) {
-
     /* prepare variable */
     // variable => port_no, src, dst
     var ids = [link.source.id, link.target.id];
@@ -2302,66 +1457,37 @@ function demo2(link) {
     sw_or_host.push(dpi.checkIPv4(ids[1]));
 
     /* link check */
-<<<<<<< HEAD
     if (sw_or_host[0] && sw_or_host[1]) { // both host
         console.log("two hosts?");
         return false;
     } else if (sw_or_host[0]) { // former host
-=======
-    if(sw_or_host[0] && sw_or_host[1]) { // both host
-        console.log("two hosts?");
-        return false;
-    }
-    else if(sw_or_host[0]) { // former host
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         var tmp = ids[0];
         ids[0] = ids[1];
         ids[1] = tmp;
         port_no = link.properties.sw_in_port;
-<<<<<<< HEAD
     } else if (sw_or_host[1]) { // lattar host
         port_no = link.properties.sw_in_port;
     } else { // no host
-=======
-    }
-    else if(sw_or_host[1]) { // lattar host
-        port_no = link.properties.sw_in_port;
-    }
-    else { // no host
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         port_no = link.properties.src_port;
     }
 
     /* show line chart */
-<<<<<<< HEAD
     c3w.connectData(live_dpi_chart, ids[0], { dpi: [], port: null }, { bp_flag: 1, port_no: port_no }); // bp_flag==2 -> show pkt info
-=======
-    c3w.connectData(live_dpi_chart, ids[0], {dpi: [], port: null}, {bp_flag: 1, port_no: port_no}); // bp_flag==2 -> show pkt info
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.startShowLine(live_dpi_chart, 'port', 0); // chart, type, bp_flag==0 -> show both rx and tx
 
     /* gauge chart */
     c3w.showLinkGauge(rx_gauge, tx_gauge, ids, port_no, live_dpi_chart);
 
     /* change title */
-<<<<<<< HEAD
     $("#tx_title").text(ids[0].toString() + "  =>  " + ids[1].toString());
     $("#rx_title").text(ids[1].toString() + "  =>  " + ids[0].toString());
-=======
-    $("#tx_title").text(ids[0].toString()+"  =>  "+ids[1].toString());
-    $("#rx_title").text(ids[1].toString()+"  =>  "+ids[0].toString());
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 
     console.log(port_no);
     return ids;
 }
 
 function reconstructPort() {
-<<<<<<< HEAD
     window.dp_stat = 1; // default dpi mode
-=======
-	window.dp_stat = 1; // default dpi mode
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.destroy(window.live_dpi_chart);
     c3w.destroy(window.rx_gauge);
     c3w.destroy(window.tx_gauge);
@@ -2369,11 +1495,7 @@ function reconstructPort() {
 }
 
 function reconstructDPI() {
-<<<<<<< HEAD
     window.dp_stat = 1; // default dpi mode
-=======
-	window.dp_stat = 1; // default dpi mode
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.destroy(window.live_dpi_chart);
     c3w.destroy(window.pie_chart);
     c3w.destroy(window.contribute_chart);
@@ -2383,24 +1505,14 @@ function reconstructDPI() {
  * XXX: init without delay will make the chart broken
  * */
 function initChart() {
-<<<<<<< HEAD
     window.live_dpi_chart = c3w.genSimpleChart([300, 520], 'line', "#line_chart");
     window.rx_gauge = c3w.genSimpleChart([225, 275], 'gauge', "#rx_gauge");
     window.tx_gauge = c3w.genSimpleChart([225, 275], 'gauge', "#tx_gauge");
-=======
-    window.live_dpi_chart = c3w.genSimpleChart([300, 520], 'line',"#line_chart");
-    window.rx_gauge = c3w.genSimpleChart([225, 275], 'gauge',"#rx_gauge");
-    window.tx_gauge = c3w.genSimpleChart([225, 275], 'gauge',"#tx_gauge");
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
 }
 
 /******   NODE DEMO   ********/
 function demo3() {
-<<<<<<< HEAD
     c3w.connectData(live_dpi_chart, 1, null, { port_no: null, bp_flag: 1 }); // show all protocols info. of dpid 1
-=======
-    c3w.connectData(live_dpi_chart, 1, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     c3w.startShowLine(live_dpi_chart, 'dpi', 3);
     c3w.showProtoPie(pie_chart, 1, 2, 2000, live_dpi_chart); // chart, id, bp_flag, shareChart, rt_rank
     //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
@@ -2408,11 +1520,7 @@ function demo3() {
 
 function demo4(node) {
     var id = node.id;
-<<<<<<< HEAD
     c3w.connectData(live_dpi_chart, id, null, { port_no: null, bp_flag: 1 }); // show all protocols info. of dpid 1
-=======
-    c3w.connectData(live_dpi_chart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
     //c3w.stopShow(live_dpi_chart);
     c3w.startShowLine(live_dpi_chart, 'port', 1);
     c3w.showSwGauge(rx_gauge, tx_gauge, live_dpi_chart);
@@ -2424,21 +1532,12 @@ window.dp_stat = 1; // 1: dpi, 2: port
 window.cur_id = null;
 
 function dp_changePage() {
-<<<<<<< HEAD
     if (window.dp_stat == 1) {
-=======
-    if(window.dp_stat == 1) {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         $("#rx_gauge").hide();
         $("#tx_gauge").hide();
         $("#proto_pie_chart").show();
         $("#contribute_pie_chart").show();
-<<<<<<< HEAD
     } else {
-=======
-    }
-    else {
->>>>>>> f686840757ffebc3be8a86f532ed95271d9d6f6c
         $("#rx_gauge").show();
         $("#tx_gauge").show();
         $("#proto_pie_chart").hide();
