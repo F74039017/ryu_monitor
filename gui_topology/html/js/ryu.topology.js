@@ -47,7 +47,7 @@ var topo = {
             this.nodes.push(nodes[i]);
         }
         this.refresh_node_index();
-		// console.log(nodes); // debug
+        // console.log(nodes); // debug
     },
     add_links: function (links) {
         for (var i = 0; i < links.length; i++) {
@@ -180,67 +180,67 @@ var rpc = {
         //elem.update();
         return "";
     },
-	event_port_info: function(data) {
-		//console.log("port_info message");
-		//console.log(JSON.stringify(data));
-		//console.log(JSON.stringify(data[0]));
-		
-		//console.log("port info message");
-		if(typeof window.dpi == "undefined") {
-			window.dpi = new dpi_oper(null);
-			window.c3w = new c3_wrapper(dpi);
-		}
-		
-		dpi.updatePort(data[0]);
+    event_port_info: function(data) {
+        //console.log("port_info message");
+        //console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data[0]));
+        
+        //console.log("port info message");
+        if(typeof window.dpi == "undefined") {
+            window.dpi = new dpi_oper(null);
+            window.c3w = new c3_wrapper(dpi);
+        }
+        
+        dpi.updatePort(data[0]);
 
-		return "";
-	},
-	event_dpi_info: function(data) {
-		console.log("dpi info message");
-		//console.log(JSON.stringify(data));
-		//console.log(JSON.stringify(data[0]));
-		
-		/* init dpi operator */
-		if(typeof window.dpi == "undefined") {
-			window.dpi = new dpi_oper(trimInt(data[0]['dpid']), data[0]['period']);
-			window.c3w = new c3_wrapper(dpi);
-		}
-		else if(window.dpi.dpid == null) {
-			window.dpi.setRootDpid(trimInt(data[0]['dpid']));
-			window.dpi.setPeriod(data[0]['period']);
-		}
+        return "";
+    },
+    event_dpi_info: function(data) {
+        console.log("dpi info message");
+        //console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data[0]));
+        
+        /* init dpi operator */
+        if(typeof window.dpi == "undefined") {
+            window.dpi = new dpi_oper(trimInt(data[0]['dpid']), data[0]['period']);
+            window.c3w = new c3_wrapper(dpi);
+        }
+        else if(window.dpi.dpid == null) {
+            window.dpi.setRootDpid(trimInt(data[0]['dpid']));
+            window.dpi.setPeriod(data[0]['period']);
+        }
 
-		dpi.updateDPI(data[0]);
+        dpi.updateDPI(data[0]);
 
-		return "";
-	},
+        return "";
+    },
 }
 var init_flag = false; // TEST - LIVE DPI EXAMPLE
 
 /* define netjsongraph's node and link event */
 function testOnNodeClick(data) {
-	console.log(data);
-	if(window.dp_stat == 1) {
-		reconstructDPI();
-	}
-	else {
-		reconstructPort();
-	}
-	dp_changePage();
-	contribute_chart.unload();
-	//demo4(data);
-	demo(data);
+    console.log(data);
+    if(window.dp_stat == 1) {
+        reconstructDPI();
+    }
+    else {
+        reconstructPort();
+    }
+    dp_changePage();
+    contribute_chart.unload();
+    //demo4(data);
+    demo(data);
 }
 
 function testOnLinkClick(data) {
-	console.log(data);
-	if(window.dp_stat == 1) {
-		reconstructDPI();
-	}
-	else {
-		reconstructPort();
-	}
-	console.log(demo2(data));
+    console.log(data);
+    if(window.dp_stat == 1) {
+        reconstructDPI();
+    }
+    else {
+        reconstructPort();
+    }
+    console.log(demo2(data));
 }
 
 function initialize_topology(callback) {
@@ -249,16 +249,16 @@ function initialize_topology(callback) {
             d3.json("/v1.0/topology/hosts", function(error, hosts) {
                 topo.initialize({switches: switches, links: links});
                 console.log(hosts);
-				console.log(links);
+                console.log(links);
                 console.log(switches);
-				console.log(topo);
+                console.log(topo);
                 //elem.update();
                 netdata.update(hosts);
                 //console.log("init netdata => callback netJsonGraph");
                 console.log(JSON.stringify(netdata));
-				if(callback) {
-					callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick, defaultStyle: false}); // callback netJsonGraph
-				}
+                if(callback) {
+                    callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
+                }
             });
         });
     });
@@ -266,54 +266,54 @@ function initialize_topology(callback) {
 
 window.dv_oper = {};
 function main(callback) { // pass callbacks
-	var netjsongraph = callback.netjsongraph;
-	if(netjsongraph) {
-		initialize_topology(netjsongraph);
-	}
-	else {
-		console.log("netjsongraph callback error!");
-	}
+    var netjsongraph = callback.netjsongraph;
+    if(netjsongraph) {
+        initialize_topology(netjsongraph);
+    }
+    else {
+        console.log("netjsongraph callback error!");
+    }
 }
 
 //main(); // to combine netJsonGraph and topo data => call in index.html js with callback
 
 /* helper function for netdata */
 function trimInt(x) {
-	return parseInt(trim_zero(x));
+    return parseInt(trim_zero(x));
 }
 /* netjson */
 // {dpid: port: dpid}
 window.sw_port_table = {}; // XXX: del in future
 var netdata = {
-	update: function(hosts) {
-		topo.nodes.forEach( function(x) {
-			netdata.nodes.push({id: trimInt(x.dpid), properties: {type: "switch"}});
-		});
-		topo.links.forEach( function(x) {
-			// put links between switches
-			var src_dpid = trimInt(x.port.src.dpid);
-			var dst_dpid = trimInt(x.port.dst.dpid);
-			var src_port = trimInt(x.port.src.port_no);
-			var dst_port = trimInt(x.port.dst.port_no);
-			netdata.links.push({source: src_dpid, target: dst_dpid,
-				properties: {src_mac: x.port.src.hw_addr, src_port: src_port,
-							dst_mac: x.port.dst.hw_addr, dst_port: dst_port}});
-			if(!window.sw_port_table.hasOwnProperty(src_dpid)) {
-				window.sw_port_table[src_dpid] = {};
-			}
-			window.sw_port_table[src_dpid][src_port] = dst_dpid;
-			if(!window.sw_port_table.hasOwnProperty(dst_dpid)) {
-				window.sw_port_table[dst_dpid] = {};
-			}
-			window.sw_port_table[dst_dpid][dst_port] = src_dpid;
-		});
-		hosts.forEach(function(host) {
-			netdata.nodes.push({id: host.ipv4[0], properties: {type: "host"}});
-			// put links between host and switch
-			netdata.links.push({source: host.ipv4[0], target: trimInt(host.port.dpid), 
-				properties: {src_mac: host.mac, dst_mac: host.port.hw_addr, sw_in_port: trimInt(host.port.port_no)}});
-		});
-	}	
+    update: function(hosts) {
+        topo.nodes.forEach( function(x) {
+            netdata.nodes.push({id: trimInt(x.dpid), properties: {type: "switch"}});
+        });
+        topo.links.forEach( function(x) {
+            // put links between switches
+            var src_dpid = trimInt(x.port.src.dpid);
+            var dst_dpid = trimInt(x.port.dst.dpid);
+            var src_port = trimInt(x.port.src.port_no);
+            var dst_port = trimInt(x.port.dst.port_no);
+            netdata.links.push({source: src_dpid, target: dst_dpid,
+                properties: {src_mac: x.port.src.hw_addr, src_port: src_port,
+                            dst_mac: x.port.dst.hw_addr, dst_port: dst_port}});
+            if(!window.sw_port_table.hasOwnProperty(src_dpid)) {
+                window.sw_port_table[src_dpid] = {};
+            }
+            window.sw_port_table[src_dpid][src_port] = dst_dpid;
+            if(!window.sw_port_table.hasOwnProperty(dst_dpid)) {
+                window.sw_port_table[dst_dpid] = {};
+            }
+            window.sw_port_table[dst_dpid][dst_port] = src_dpid;
+        });
+        hosts.forEach(function(host) {
+            netdata.nodes.push({id: host.ipv4[0], properties: {type: "host"}});
+            // put links between host and switch
+            netdata.links.push({source: host.ipv4[0], target: trimInt(host.port.dpid), 
+                properties: {src_mac: host.mac, dst_mac: host.port.hw_addr, sw_in_port: trimInt(host.port.port_no)}});
+        });
+    }   
 };
 netdata['type'] = "NetworkGraph";
 netdata['label'] = "Topology";

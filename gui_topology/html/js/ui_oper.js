@@ -1,13 +1,15 @@
+
+
 /* init chart */
 (function() {
 
-    $(document).ready(function() {
-        //initialize_topology(); // init topology
+    $(document).ready(function(){
+        initialize_topology(); // init topology
 
         /** OUTER **/
 
         var dpi_lineChart_sel = "#out_dpi_chart"; // TODO
-        var dpi_lineChart_dimen = [415, 180];
+        var dpi_lineChart_dimen = [370, 185];
         window.dpi_lineChart = c3.generate({
             bindto: dpi_lineChart_sel,
             size: {
@@ -21,7 +23,7 @@
         });
 
         var port_lineChart_sel = "#out_port_chart"; // TODO
-        var port_lineChart_dimen = [415, 180];
+        var port_lineChart_dimen = [370, 185];
         window.port_lineChart = c3.generate({
             bindto: port_lineChart_sel,
             size: {
@@ -37,7 +39,7 @@
         /** INNER **/
 
         var in_lineChart_sel = "#in_line_chart"; // TODO
-        var in_lineChart_dimen = [415, 180];
+        var in_lineChart_dimen = [370, 185];
         window.in_lineChart = c3.generate({
             bindto: in_lineChart_sel,
             size: {
@@ -51,7 +53,7 @@
         });
 
         var pie_chart_sel = "#protos_pie"; // TODO
-        var pie_chart_dimen = [210, 175];
+        var pie_chart_dimen = [180, 180];
         window.pie_chart = c3.generate({
             bindto: pie_chart_sel,
             size: {
@@ -67,7 +69,7 @@
         });
 
         var con_pie_chart_sel = "#proto_source"; // TODO
-        var con_pie_chart_dimen = [210, 175];
+        var con_pie_chart_dimen = [180, 180];
         window.contribute_chart = c3.generate({
             bindto: con_pie_chart_sel,
             size: {
@@ -81,7 +83,6 @@
             },
         });
 
-        /*
         var tx_gauge_sel = "#line_chart"; // TODO
         var tx_gauge_dimen = [380, 190];
         window.tx_gauge = c3.generate({
@@ -129,7 +130,6 @@
                 units: 'K bits'
             }
         });
-        */
     });
 
 })();
@@ -140,16 +140,15 @@ function sigleClickOnDepartment(id) {
 
 /* reset outer DPI chart */
 function ui_reconstructDPI_O(id) {
-
     //window.dp_stat = 1; // default dpi mode
+    
     ui_resetAllStat();
     // TODO: reset btn status
     c3w.destroy(window.live_dpi_chart);
 }
 
 /* reset all stat flags except io_stat */
-
-function ui_resetAllStat(bp = 1, rt = 1, dp = 1) {
+function ui_resetAllStat(bp=1, rt=1, dp=1) {
     window.bp_stat = bp;
     window.rt_stat = rt; // only node need
     window.dp_stat = dp; // 1: dpi, 2: port
@@ -157,18 +156,19 @@ function ui_resetAllStat(bp = 1, rt = 1, dp = 1) {
 
 window.io_stat = 1; // 1: out, 2: in
 /* show and hide view page according to io_stat */
-// TODO:
+// TODO: 
 function io_exchange() {
-
-    if (window.io_stat == 1) {
+    if(window.io_stat == 1) {
         // hide in_view
         // show out_view
         // resetide_i
-    } else if (window.io_stat) {
+    }
+    else if(window.io_stat){
         // hide out_view
         // show in_view
         // resetide_o
-    } else {
+    }
+    else {
         throw "unknown io_stat";
     }
 }
@@ -193,14 +193,13 @@ function dp_changePage_i() {
 /***************************************/
 
 function intro_proto() {
-
-    c3w.connectData(dpi_lineChart, 1, null, { port_no: null, bp_flag: 1 });
+    c3w.connectData(dpi_lineChart, 1, null, {port_no: null, bp_flag: 1});
     c3w.startShowLine(dpi_lineChart, 'dpi', 3);
 }
 
 function intro_port() {
-
-    c3w.connectData(port_lineChart, 1, null, { port_no: null, bp_flag: 1 });
+    c3w.connectData(port_lineChart, 1, null, {port_no: null, bp_flag: 1});
+    c3w.startShowLine(port_lineChart, 'port', 1); 
 }
 
 function intro_out() {
@@ -211,8 +210,7 @@ function intro_out() {
 /***************************************/
 
 function intro_innerLine() {
-
-    c3w.connectData(in_lineChart, 1, null, { port_no: null, bp_flag: 1 });
+    c3w.connectData(in_lineChart, 1, null, {port_no: null, bp_flag: 1});
     c3w.startShowLine(in_lineChart, 'dpi', 3);
 }
 
@@ -229,8 +227,7 @@ function pie_click(d, i) {
     c3w.destroy(contribute_chart);
     console.log(d.name);
     var shareChart = in_lineChart;
-
-    var shareConn = c3w.chart2conn(shareChart);
+    var shareConn= c3w.chart2conn(shareChart);
     var id = shareConn.id;
     c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
 }
