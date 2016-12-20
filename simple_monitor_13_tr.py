@@ -65,6 +65,12 @@ class SimpleMonitor(app_manager.RyuApp):
         self.border_mac = set()
         self.dpiq = Queue.Queue()
 
+        # traceroute variable
+        self.host_ip_mac = {}
+        self.host_ip_dpid = {}
+        self.forward_list = []
+        self.trace_ts = 0
+
         # dpi recorder
         self.proto_acc = {'Yahoo': 0, 'Facebook': 0, 'Google': 0}
 
@@ -145,6 +151,10 @@ class SimpleMonitor(app_manager.RyuApp):
         if not vla:
             pass
         else:
+            # prevent the probing packet packet_in immediately
+            if self.forward_list[0] != dpid:
+                self.forward_list.append(dpid)
+            self.trace_ts = int(round(time.time() * 1000))
             print dpid
 
         # self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
@@ -447,6 +457,7 @@ class ResponseController(ControllerBase):
     def __init__(self, req, link, data, **config):
         super(ResponseController, self).__init__(req, link, data, **config)
         self.response_app = data['response_app']
+        self.host_ip_mac = {}
 
     @route('ForwardPath', '/ForwardPath/{src}/{dst}', methods=['GET'])
     def forward_path(self, req, **kwargs):
@@ -496,6 +507,7 @@ class ResponseController(ControllerBase):
 
     @route('dpi_init', '/dpi/connect', methods=['POST'])
     def dpi_init(self, req, **kwargs):
+
         # get post data
         post_data = req.text.split(",")
         try:
@@ -598,10 +610,15 @@ class ResponseController(ControllerBase):
         # XXX: handle Full exception
         self.response_app.dpiq.put(self.response_app.dpi_info)
 
+        # add trace flow and update hosts' data
+        self.trace_flow(None)
+
         return "DPI_INIT_OK"
 
     @route('add_trace_flow', '/trace_flow', methods=['GET'])
     def trace_flow(self, req, **kwargs):
+
+        ## insert trace flow
         ret = get_switch(self.response_app)
         for sw in ret:
             datapath = sw.dp
@@ -613,21 +630,57 @@ class ResponseController(ControllerBase):
             for port in data['ports']:
                 match = parser.OFPMatch(vlan_vid=(0x1000, 0x1000), in_port=str_to_port_no(port['port_no']))
                 self.response_app.add_flow(datapath, 12345, match, actions)
+
+            
+        ## create host's ip mac table
+        hosts = get_host(self.response_app)
+        for host in hosts:
+            try:
+                self.response_app.host_ip_mac[host.ipv4[0]] = host.mac
+                self.response_app.host_ip_dpid[host.ipv4[0]] = host.port.dpid
+            except:
+                pass
+
         return "trace flow"
 
-    @route('send_packet', '/send_packet', methods=['GET'])
+    @route('send_packet', '/send_packet/{src}/{dst}', methods=['GET'])
     def send_packet(self, req, **kwargs):
-        ret = get_switch(self.response_app, 2)
+
+        # XXX: match flow enties instead
+        # print self.response_app.host_ip_mac
+        src_ip = kwargs['src'].encode('utf-8')
+        dst_ip = kwargs['dst'].encode('utf-8')
+        src_mac = self.response_app.host_ip_mac[src_ip]
+        try:
+            dst_mac = self.response_app.host_ip_mac[dst_ip]
+        except:
+            dst_mac = "00:00:00:ff:00:00"
+        dpid = self.response_app.host_ip_dpid[src_ip]
+        
+        ret = get_switch(self.response_app, dpid)
         # print ret[0].to_dict()
         # return json.dumps(ret[0].to_dict())
         datapath = ret[0].dp
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
-        packet = Scapy.Ether(dst='00:00:00:ff:00:00', src='4a:da:9f:0c:0e:f7')/Scapy.IP(src="10.0.0.2", dst="10.0.0.5")/Scapy.UDP()/"Hello World"
+        packet = Scapy.Ether(src=src_mac, dst=dst_mac)/Scapy.IP(src=src_ip, dst=dst_ip)/Scapy.UDP()/"Hello World"
         packet = str(packet)
 
         actions = [parser.OFPActionPushVlan(), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
         out = parser.OFPPacketOut(datapath=datapath, buffer_id=ofproto.OFP_NO_BUFFER,
                                   in_port=ofproto.OFPP_CONTROLLER, actions=actions, data=packet)
         datapath.send_msg(out)
-        return "send_msg"
+
+        ## XXX: pretty bad... sleep will hang the controller
+        # timeout 300 ms
+        timeout = 300
+        delta = 50
+
+        self.response_app.forward_list = [dpid]
+        cur_ts = int(round(time.time() * 1000))
+        self.response_app.trace_ts = cur_ts
+        while(cur_ts-self.response_app.trace_ts < timeout):
+            time.sleep(delta/1000)
+            cur_ts = int(round(time.time() * 1000))
+
+        return json.dumps(self.response_app.forward_list)
