@@ -258,25 +258,25 @@
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "type": "dept", "reg": 2, "name": "成大醫院門診大樓" },
+                "properties": { "type": "dept", "reg": 1, "name": "成大醫院門診大樓" },
                 "arcs": [
                     [91, 92]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "type": "dept", "reg": 2, "name": "統一健康大樓" },
+                "properties": { "type": "dept", "reg": 1, "name": "統一健康大樓" },
                 "arcs": [
                     [93]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "type": "dept", "reg": 2, "name": "心理健康中心" },
+                "properties": { "type": "dept", "reg": 1, "name": "心理健康中心" },
                 "arcs": [
                     [94]
                 ]
             }, {
                 "type": "Polygon",
-                "properties": { "type": "dept", "reg": 2, "name": "醫護大樓" },
+                "properties": { "type": "dept", "reg": 1, "name": "醫護大樓" },
                 "arcs": [
                     [95]
                 ]

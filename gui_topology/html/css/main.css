@@ -1,5 +1,6 @@
 /* Import Fonts */
 
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
 
 /* Framework */
 
@@ -10,6 +11,7 @@ body {
 
 body {
     background-color: #2A3F54;
+    font-family: 'PT Sans Caption', sans-serif;
 }
 
 
@@ -24,9 +26,70 @@ body {
 }
 
 
+/* Mode - Campus/Topo */
+
+.container-mode {
+    height: 20px;
+    width: 20%;
+    float: top;
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    z-index: 1500;
+}
+
+.container-mode .mode-campus_topo {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.container-mode .mode-campus_topo .mode-btn {
+    height: 100%;
+    width: 47.7%;
+    position: absolute;
+    top: 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: #0066cc;
+    border-color: #0066cc;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.container-mode .mode-campus_topo .mode-btn:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border-color: #003366;
+}
+
+.container-mode .mode-campus_topo #btn-campus {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    left: 0;
+}
+
+.container-mode .mode-campus_topo #btn-topo {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    right: 0;
+}
+
+.container-mode .mode-campus_topo .mode-btn.active {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+
 /* container-map */
 
-.container-map .map {
+.container-map.active .map {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -34,12 +97,54 @@ body {
     left: 0;
 }
 
-.container-map .map-demo {
+.container-map.active .map-demo {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+
+/* container-topo */
+
+.container-topo.active {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.container-topo.active .topo-reset {
+    height: 6em;
+    width: 10em;
+    position: relative;
+    background-color: #fff;
+    border: 2px solid #ccc;
+}
+
+.container-top.active .topo-reset:before,
+.container-top.active .topo-reset:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.container-topo.active .topo-reset:before {
+    border-width: 1.5em;
+    border-top-color: #ccc;
+    border-right-color: #ccc;
+}
+
+.container-topo.active .topo-reset:after {
+    border-radius: 0.4em;
+    border-width: 1.35em;
+    border-top-color: #0c0;
+    border-right-color: #0c0;
 }
 
 
@@ -366,13 +471,12 @@ body {
     top: 0;
     padding-top: 22px;
     color: #ffffff;
+    font-family: 'PT Sans Caption', sans-serif;
     font-size: 14px;
     text-align: center;
-    text-transform: uppercase;
     line-height: 10px;
-    background-color: #003366;
-    border: 1px solid #e0e0e0;
-    border-radius: 0;
+    background-color: #0066cc;
+    transition: background-color 0.2s ease;
 }
 
 .map-optn .optn-map_bp {
@@ -384,7 +488,7 @@ body {
 }
 
 .map-optn .optn-map_bp .optn-icon:hover {
-    background-color: #2A76B9;
+    background-color: #003366;
 }
 
 .map-optn .optn-map_hislen {
@@ -455,7 +559,7 @@ body {
 
 #map-chart-top .chart-main {
     height: 80%;
-    top: 20px;
+    top: 5px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
@@ -464,14 +568,13 @@ body {
 #map-chart-top .chart-main img {
     height: 100%;
     width: 100%;
-    //position: absolute;
 }
 
 .content-main #map-chart-btm {
     height: 310px;
     width: 95%;
     position: absolute;
-    top: 515px;
+    top: 475px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -487,7 +590,7 @@ body {
 
 #map-chart-btm .chart-main {
     height: 85%;
-    top: 20px;
+    top: 5px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
@@ -703,13 +806,13 @@ body {
     top: 0;
     padding-top: 22px;
     color: #ffffff;
+    font-family: 'PT Sans Caption', sans-serif;
     font-size: 14px;
+    font-weight: bold;
     text-align: center;
-    text-transform: uppercase;
     line-height: 10px;
-    background-color: #003366;
-    border: 1px solid #e0e0e0;
-    border-radius: 0;
+    background-color: #0066cc;
+    transition: background-color 0.2s ease;
 }
 
 .info-optn .optn-info_bp {
@@ -721,7 +824,7 @@ body {
 }
 
 .info-optn .optn-info_bp .optn-icon:hover {
-    background-color: #2A76B9;
+    background-color: #003366;
 }
 
 .info-optn .optn-top {
@@ -877,7 +980,8 @@ body {
     border-radius: 5px;
 }
 
-.content-main #info-chart-btm {
+
+/*.content-main #info-chart-btm {
     height: 190px;
     width: 95%;
     position: absolute;
@@ -909,6 +1013,57 @@ body {
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
+}*/
+
+
+/* Mode - Proto/Port */
+
+.sidetab-info .content-main .mode-proto_port {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 700px;
+    left: 0;
+    right: 0;
+}
+
+.sidetab-info .mode-proto_port .mode-btn {
+    height: 100%;
+    width: 47.7%;
+    position: absolute;
+    top: 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: #0066cc;
+    border-color: #0066cc;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sidetab-info .mode-proto_port .mode-btn:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border-color: #003366;
+}
+
+.sidetab-info .mode-proto_port #btn-proto {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    left: 0;
+}
+
+.sidetab-info .mode-proto_port #btn-port {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    right: 0;
+}
+
+.sidetab-info .mode-proto_port .mode-btn.active {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
 }
 
 

@@ -43,6 +43,7 @@ var active = d3.select(null),
     select_camp = '',
     select_dept = '';
 
+$('.container-map').addClass('active');
 
 /* Draw map with TopoJSON */
 d3.json('/static/data/topojson/ncku.json', function(error, map) {
@@ -229,16 +230,11 @@ function zoomDept(d) {
 
     if (clicks === 1) {
         timer = setTimeout(function() {
-
-            if ($('#tab-map').hasClass('visible')) {
-                $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
-            }
-
             if ($('#tab-info').hasClass('visible')) {
                 $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
             }
 
-            $('#tab-map').animate({ 'right': '0px' }, 500).addClass('visible');
+            $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
 
             clicks = 0;
         }, DELAY);

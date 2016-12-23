@@ -86,7 +86,7 @@
                         </div>
                         <div class="map-optn">
                             <div class="optn-map_bp">
-                                <a href="" class="optn-icon hvr-btr" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
                             </div>
                             <div class="optn-map_hislen">
                                 <form class="form-inline">
@@ -149,7 +149,7 @@
                         </div>
                         <div class="info-optn">
                             <div class="optn-info_bp">
-                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> Byte/Pkt</i></a>
+                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
                             </div>
                             <div class="optn-top">
                                 <form class="form-inline">
@@ -171,7 +171,7 @@
                         <div class="info-chart" id="info-chart-top">
                             <div class="chart-block-left">
                                 <div class="chart-title">
-                                    <p class="">Protocols</p>
+                                    <p class="title-left">Protocols</p>
                                 </div>
                                 <div class="chart-main" id="protos_pie">
                                     <!--<img src="img/protos_pie.png">-->
@@ -179,7 +179,7 @@
                             </div>
                             <div class="chart-block-right">
                                 <div class="chart-title">
-                                    <p class="">Source of HTTP</p>
+                                    <p class="title-right">Source of HTTP</p>
                                 </div>
                                 <div class="chart-main" id="proto_source">
                                     <!--<img src="img/proto_source.png">-->
@@ -193,6 +193,10 @@
                                 </div>
                                 <div class="chart-main" id="in_line_chart"></div>
                             </div>
+                        </div>
+                        <div class="mode-toggle mode-proto_port">
+                            <a href="#protocol" class="mode-btn btn btn-primary active" id="btn-proto">Protocol</a>
+                            <a href="#port" class="mode-btn btn btn-primary" id="btn-port">Port</a>
                         </div>
                     </div>
                 </div>
@@ -232,20 +236,29 @@
     </div>
     <!-- left-sdie map -->
     <div class="container container-main">
+        <!-- mode -->
+        <div class="container-mode">
+            <div class="mode-toggle mode-campus_topo">
+                <a href="#campus" class="mode-btn btn btn-primary active" id="btn-campus">Campus View</a>
+                <a href="#topo" class="mode-btn btn btn-primary" id="btn-topo">Topology View</a>
+            </div>
+        </div>
         <!-- map -->
-        <div class="container-map">
+        <div class="container-map active">
             <div class="map-demo"></div>
             <script src="/static/js/main_map.js"></script>
         </div>
-        <!--<div id="left"></div>-->
+        <div class="container-topo">
+            <div class="topo-demo" id="left"></div>
+        </div>
     </div>
     <!--netjsongraph css-->
-    <!--<script src="/static/js/netjsongraph.js"></script>
+    <script src="/static/js/netjsongraph.js"></script>
     <script>
     main({
         "netjsongraph": d3.netJsonGraph
     }); // disable initialize_maplogy()
     /* XXX: testing for netjsongraph */
     //$(".map").hide();
-    </script>-->
+    </script>
 </body>
