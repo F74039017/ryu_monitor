@@ -29,16 +29,18 @@ body {
 /* Mode - Campus/Topo */
 
 .container-mode {
+    visibility: hidden;
     height: 20px;
     width: 20%;
     float: top;
     position: absolute;
     bottom: 30px;
     left: 10px;
-    z-index: 1500;
+    z-index: 2;
 }
 
 .container-mode .mode-campus_topo {
+    visibility: inherit;
     height: 40px;
     width: 100%;
     position: absolute;
@@ -48,6 +50,7 @@ body {
 }
 
 .container-mode .mode-campus_topo .mode-btn {
+    visibility: inherit;
     height: 100%;
     width: 47.7%;
     position: absolute;
@@ -63,24 +66,28 @@ body {
 }
 
 .container-mode .mode-campus_topo .mode-btn:hover {
+    visibility: inherit;
     background-color: #003366;
     color: #ffffff;
     border-color: #003366;
 }
 
 .container-mode .mode-campus_topo #btn-campus {
+    visibility: inherit;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     left: 0;
 }
 
 .container-mode .mode-campus_topo #btn-topo {
+    visibility: inherit;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     right: 0;
 }
 
 .container-mode .mode-campus_topo .mode-btn.active {
+    visibility: inherit;
     background-color: #0066cc;
     color: #ffffff;
     border-color: #0066cc;
@@ -89,7 +96,7 @@ body {
 
 /* container-map */
 
-.container-map.active .map {
+.container-map .map {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -97,71 +104,28 @@ body {
     left: 0;
 }
 
-.container-map.active .map-demo {
+.container-map .map-demo {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    //background-color: #2A3F54;
 }
 
 
 /* container-topo */
 
-.container-topo.active {
+/*.container-topo {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.container-topo.active .topo-reset {
-    height: 6em;
-    width: 10em;
-    position: relative;
-    background-color: #fff;
-    border: 2px solid #ccc;
-}
-
-.container-top.active .topo-reset:before,
-.container-top.active .topo-reset:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-color: transparent;
-    border-style: solid;
-}
-
-.container-topo.active .topo-reset:before {
-    border-width: 1.5em;
-    border-top-color: #ccc;
-    border-right-color: #ccc;
-}
-
-.container-topo.active .topo-reset:after {
-    border-radius: 0.4em;
-    border-width: 1.35em;
-    border-top-color: #0c0;
-    border-right-color: #0c0;
-}
-
-
-/* container-netjsongraph */
-
-
-/*#left { 
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 1800;
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.2);
     border: 2px groove #c0c0c0;
     border-radius: 5px;
-
 }*/
 
 
@@ -565,11 +529,6 @@ body {
     border-radius: 5px;
 }
 
-#map-chart-top .chart-main img {
-    height: 100%;
-    width: 100%;
-}
-
 .content-main #map-chart-btm {
     height: 310px;
     width: 95%;
@@ -594,12 +553,6 @@ body {
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
-}
-
-#map-chart-btm .chart-main img {
-    height: 100%;
-    width: 100%;
-    //position: absolute;
 }
 
 
@@ -945,11 +898,6 @@ body {
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
-}
-
-#info-chart-top .chart-main img {
-    height: 100%;
-    width: 100%;
 }
 
 .content-main #info-chart-mid {

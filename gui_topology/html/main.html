@@ -16,7 +16,7 @@
     <link href="/static/css/main.css" rel="stylesheet" type="text/css">
     <link href="/static/css/map.css" rel="stylesheet" type="text/css">
     <link href="/static/css/netjsongraph/netjsongraph.css" rel="stylesheet">
-    <!--<link href="/static/css/netjsongraph/netjsongraph-theme.css" rel="stylesheet">-->
+    <link href="/static/css/netjsongraph/netjsongraph-theme.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/netjsongraph/netjson-dark.css" type="text/css">
     <!-- JQuery -->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
@@ -103,7 +103,6 @@
                                     <p class="">Protocol info.</p>
                                 </div>
                                 <div class="chart-main" id="out_dpi_chart">
-                                    <!--<img src="img/dpi_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -113,7 +112,6 @@
                                     <p class="">Port info.</p>
                                 </div>
                                 <div class="chart-main" id="out_port_chart">
-                                    <!--<img src="img/port_chart.png">-->
                                 </div>
                             </div>
                         </div>
@@ -174,7 +172,8 @@
                                     <p class="title-left">Protocols</p>
                                 </div>
                                 <div class="chart-main" id="protos_pie">
-                                    <!--<img src="img/protos_pie.png">-->
+                                </div>
+                                <div class="chart-main" id="rx_gauge">
                                 </div>
                             </div>
                             <div class="chart-block-right">
@@ -182,7 +181,8 @@
                                     <p class="title-right">Source of HTTP</p>
                                 </div>
                                 <div class="chart-main" id="proto_source">
-                                    <!--<img src="img/proto_source.png">-->
+                                </div>
+                                <div class="chart-main" id="tx_gauge">
                                 </div>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
             </div>
         </div>
     </div>
-    <!-- left-sdie map -->
+    <!-- left-side map -->
     <div class="container container-main">
         <!-- mode -->
         <div class="container-mode">
@@ -244,21 +244,19 @@
             </div>
         </div>
         <!-- map -->
-        <div class="container-map active">
-            <div class="map-demo"></div>
+        <div class="container-map">
+            <div class="map-demo active"></div>
             <script src="/static/js/main_map.js"></script>
         </div>
-        <div class="container-topo">
             <div class="topo-demo" id="left"></div>
-        </div>
+            <script src="/static/js/netjsongraph.js"></script>
+        <!--netjsongraph css-->
+        <script>
+        main({
+            "netjsongraph": d3.netJsonGraph
+        }); // disable initialize_maplogy()
+        /* XXX: testing for netjsongraph */
+        //$(".map").hide();
+        </script>
     </div>
-    <!--netjsongraph css-->
-    <script src="/static/js/netjsongraph.js"></script>
-    <script>
-    main({
-        "netjsongraph": d3.netJsonGraph
-    }); // disable initialize_maplogy()
-    /* XXX: testing for netjsongraph */
-    //$(".map").hide();
-    </script>
 </body>

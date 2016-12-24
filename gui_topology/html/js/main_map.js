@@ -43,7 +43,7 @@ var active = d3.select(null),
     select_camp = '',
     select_dept = '';
 
-$('.container-map').addClass('active');
+//('.container-map').addClass('active');
 
 /* Draw map with TopoJSON */
 d3.json('/static/data/topojson/ncku.json', function(error, map) {
@@ -118,6 +118,8 @@ function hover_show(d) {
 function zoom_reset(d) {
     active.classed('active', false);
 
+     $('.container-mode').css('visibility', 'hidden');
+
     if (d.properties.type == "reg") {
         active = d3.select(null);
 
@@ -133,7 +135,7 @@ function zoom_reset(d) {
         active = region[d.properties.reg];
 
         $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
-        document.getElementById('select-dept').innerHTML = '';
+        //document.getElementById('select-dept').innerHTML = '';
 
         for (i = 0; i < 8; ++i) {
             region[i].transition()
@@ -158,6 +160,8 @@ function zoom_reset(d) {
 
 /* Click to zoom-in of region. */
 function zoomReg(d) {
+    $('.container-mode').css('visibility', 'hidden');
+
     if (active.node() === this)
         return zoom_reset(d);
 
@@ -235,6 +239,8 @@ function zoomDept(d) {
             }
 
             $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
+            // Show switch between topology and campus view.
+            $('.container-mode').css('visibility', 'visible');
 
             clicks = 0;
         }, DELAY);
