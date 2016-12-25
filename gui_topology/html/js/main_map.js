@@ -134,7 +134,7 @@ function zoom_reset(d) {
     } else if (d.properties.type == "dept") {
         active = region[d.properties.reg];
 
-        $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+        $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
         //document.getElementById('select-dept').innerHTML = '';
 
         for (i = 0; i < 8; ++i) {
@@ -234,11 +234,11 @@ function zoomDept(d) {
 
     if (clicks === 1) {
         timer = setTimeout(function() {
-            if ($('#tab-info').hasClass('visible')) {
-                $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+            if ($('#tab-map').hasClass('visible')) {
+                $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
             }
 
-            $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
+            $('#tab-map').animate({ 'right': '0px' }, 500).addClass('visible');
             // Show switch between topology and campus view.
             $('.container-mode').css('visibility', 'visible');
 
