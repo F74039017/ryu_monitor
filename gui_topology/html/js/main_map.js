@@ -223,6 +223,16 @@ function zoomDept(d) {
     document.getElementById('map-dept').innerHTML = select_dept;
     document.getElementById('info-dept').innerHTML = select_dept;
 
+    if (select_dept == '資訊系館') {
+        document.getElementById('dpid').innerHTML = '1';
+        document.getElementById('switches').innerHTML = '3';
+        document.getElementById('hosts').innerHTML = '6';
+    } else {
+        document.getElementById('dpid').innerHTML = 'N/A';
+        document.getElementById('switches').innerHTML = 'N/A';
+        document.getElementById('hosts').innerHTML = 'N/A';
+    }
+
     active.classed('active', false);
     active = d3.select(this).classed('active', true);
 

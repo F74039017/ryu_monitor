@@ -52,13 +52,13 @@ function zoomTopo() {
     $('.topo-demo').fadeIn('slow');
     $('.topo-demo').addClass('active');
 
-    if ($('#tab-map').hasClass('visible')) {
-        $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
-    }
     if ($('#tab-info').hasClass('visible')) {
         $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
     }
-    $('#tab-map').animate({ 'right': '0px' }, 500).addClass('visible');
+    if ($('#tab-map').hasClass('visible')) {
+        $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+    }
+    $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
 }
 
 function zoomTopo_reset() {
@@ -67,11 +67,11 @@ function zoomTopo_reset() {
     $('.map-demo').fadeIn('slow');
     $('.map-demo').addClass('active');
 
-    if ($('#tab-info').hasClass('visible')) {
-        $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
-    }
     if ($('#tab-map').hasClass('visible')) {
         $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
     }
-    $('#tab-info').animate({ 'right': '0px' }, 500).addClass('visible');
+    if ($('#tab-info').hasClass('visible')) {
+        $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+    }
+    $('#tab-map').animate({ 'right': '0px' }, 500).addClass('visible');
 }
