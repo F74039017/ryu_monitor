@@ -118,7 +118,7 @@ function hover_show(d) {
 function zoom_reset(d) {
     active.classed('active', false);
 
-     $('.container-mode').css('visibility', 'hidden');
+    $('.container-mode').css('visibility', 'hidden');
 
     if (d.properties.type == "reg") {
         active = d3.select(null);
@@ -218,23 +218,6 @@ function zoomDept(d) {
 
     select_dept = d.properties.name;
 
-    document.getElementById('map-camp').innerHTML = select_camp;
-    document.getElementById('info-camp').innerHTML = select_camp;
-    document.getElementById('map-dept').innerHTML = select_dept;
-    document.getElementById('info-dept').innerHTML = select_dept;
-
-    if (select_dept == '資訊系館') {
-        document.getElementById('dpid1').innerHTML = '1';
-        document.getElementById('dpid2').innerHTML = '1';
-        document.getElementById('switches').innerHTML = '3';
-        document.getElementById('hosts').innerHTML = '6';
-    } else {
-        document.getElementById('dpid1').innerHTML = 'N/A';
-        document.getElementById('dpid2').innerHTML = 'N/A';
-        document.getElementById('switches').innerHTML = 'N/A';
-        document.getElementById('hosts').innerHTML = 'N/A';
-    }
-
     active.classed('active', false);
     active = d3.select(this).classed('active', true);
 
@@ -250,9 +233,50 @@ function zoomDept(d) {
                 $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
             }
 
-            $('#tab-map').animate({ 'right': '0px' }, 500).addClass('visible');
+            $('#tab-map').animate({ 'right': '0px' }, {
+                duration: 500,
+                progress: function() {
+                        document.getElementById('map-camp').innerHTML = select_camp;
+                        document.getElementById('info-camp').innerHTML = select_camp;
+                        document.getElementById('map-dept').innerHTML = select_dept;
+                        document.getElementById('info-dept').innerHTML = select_dept;
+
+                        // Show switch between topology and campus view.
+                        if (select_dept == '資訊系館') {
+                            $('.container-mode').css('visibility', 'visible');
+                            document.getElementById('dpid1').innerHTML = '1';
+                            document.getElementById('dpid2').innerHTML = '1';
+                            document.getElementById('switches').innerHTML = '3';
+                            document.getElementById('hosts').innerHTML = '6';
+                        } else {
+                            $('.container-mode').css('visibility', 'hidden');
+                            document.getElementById('dpid1').innerHTML = 'N/A';
+                            document.getElementById('dpid2').innerHTML = 'N/A';
+                            document.getElementById('switches').innerHTML = 'N/A';
+                            document.getElementById('hosts').innerHTML = 'N/A';
+                        }
+                    }
+            }).addClass('visible');
+
+            /*document.getElementById('map-camp').innerHTML = select_camp;
+            document.getElementById('info-camp').innerHTML = select_camp;
+            document.getElementById('map-dept').innerHTML = select_dept;
+            document.getElementById('info-dept').innerHTML = select_dept;
+
             // Show switch between topology and campus view.
-            $('.container-mode').css('visibility', 'visible');
+            if (select_dept == '資訊系館') {
+                $('.container-mode').css('visibility', 'visible');
+                document.getElementById('dpid1').innerHTML = '1';
+                document.getElementById('dpid2').innerHTML = '1';
+                document.getElementById('switches').innerHTML = '3';
+                document.getElementById('hosts').innerHTML = '6';
+            } else {
+                $('.container-mode').css('visibility', 'hidden');
+                document.getElementById('dpid1').innerHTML = 'N/A';
+                document.getElementById('dpid2').innerHTML = 'N/A';
+                document.getElementById('switches').innerHTML = 'N/A';
+                document.getElementById('hosts').innerHTML = 'N/A';
+            }*/
 
             clicks = 0;
         }, DELAY);
