@@ -83,8 +83,8 @@
             },
         });
 
-        var tx_gauge_sel = "#line_chart"; // TODO
-        var tx_gauge_dimen = [380, 190];
+        var tx_gauge_sel = "#tx_gauge"; // TODO
+        var tx_gauge_dimen = [180, 170];
         window.tx_gauge = c3.generate({
             bindto: tx_gauge_sel,
             size: {
@@ -104,11 +104,14 @@
                 min: 0,
                 max: 5000,
                 units: 'K bits'
+            },
+            padding: {
+                bottom: 25
             }
         });
 
-        var rx_gauge_sel = "#line_chart"; // TODO
-        var rx_gauge_dimen = [380, 190];
+        var rx_gauge_sel = "#rx_gauge"; // TODO
+        var rx_gauge_dimen = [180, 170];
         window.rx_gauge = c3.generate({
             bindto: rx_gauge_sel,
             size: {
@@ -128,24 +131,14 @@
                 min: 0,
                 max: 5000,
                 units: 'K bits'
+            },
+            padding: {
+                bottom: 25
             }
         });
     });
 
 })();
-
-function sigleClickOnDepartment(id) {
-
-}
-
-/* reset outer DPI chart */
-function ui_reconstructDPI_O(id) {
-    //window.dp_stat = 1; // default dpi mode
-    
-    ui_resetAllStat();
-    // TODO: reset btn status
-    c3w.destroy(window.live_dpi_chart);
-}
 
 /* reset all stat flags except io_stat */
 function ui_resetAllStat(bp=1, rt=1, dp=1) {
@@ -173,21 +166,35 @@ function io_exchange() {
     }
 }
 
-function resetSide_i() {
-    resetInfo_i();
+/**************   button events    *****************/
 
+function bp_btn_func() {
+    if(window.bp_stat==1) {
+        window.bp_stat = 2;
+        rx_gauge.internal.config.gauge_max = 3000;
+        tx_gauge.internal.config.gauge_max = 3000;
+        rx_gauge.internal.config.gauge_units = "Packets";
+        tx_gauge.internal.config.gauge_units = "Packets";
+    }
+    else {
+        window.bp_stat = 1;
+        rx_gauge.internal.config.gauge_max = 5000;
+        tx_gauge.internal.config.gauge_max = 5000;
+        rx_gauge.internal.config.gauge_units = "K bits";
+        tx_gauge.internal.config.gauge_units = "K bits";
+    }
+    c3w.changeBP_FLAG(in_lineChart, window.bp_stat);
 }
 
-function reconstruct_i() {
+function rt_btn_func() {
 
-}
-
-function resetInfo_i() {
-
-}
-
-function dp_changePage_i() {
-
+    if(window.rt_stat==1) {
+        window.rt_stat = 2;
+    }
+    else {
+        window.rt_stat = 1;
+    }
+    c3w.changeRT_RANK(live_dpi_chart, window.rt_stat);
 }
 
 /***************************************/

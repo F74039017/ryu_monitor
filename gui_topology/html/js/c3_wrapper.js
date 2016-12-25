@@ -21,7 +21,7 @@
  *  stopShow(chart):
  *      stop load new data to chart
  *
- *  setHistorySize(size):
+ *  setHistorySize(chart, size):
  *      set the number of nodes shown in the chart.
  *      if the size is greater than that of present, append new data.
  *      else if size is less than that of present, only keep the latest number of data.
@@ -1438,6 +1438,14 @@ function demo(node) {
     //c3w.showProtoContributePie(contribute_chart, 1, 'HTTP', 'pkt');
 }
 
+function clickNodeEvent(node) {
+    window.dp_stat = 1;
+    var id = node.id;
+    c3w.connectData(in_lineChart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
+    c3w.startShowLine(in_lineChart, 'dpi', 3);
+    c3w.showProtoPie(pie_chart, 1, 2, 2000, in_lineChart); // chart, id, bp_flag, shareChart, rt_rank
+}
+
 /******   LINK DEMO   ********/
 
 /* link demo */
@@ -1484,9 +1492,62 @@ function demo2(link) {
     return ids;
 }
 
+function clickLinkEvent(link) {
+
+    window.dp_stat = 2;
+
+    /* prepare variable */
+    // variable => port_no, src, dst
+    var ids = [link.source.id, link.target.id];
+    var port_no;
+    var sw_or_host = [];
+    sw_or_host.push(dpi.checkIPv4(ids[0]));
+    sw_or_host.push(dpi.checkIPv4(ids[1]));
+
+    /* link check */
+    if(sw_or_host[0] && sw_or_host[1]) { // both host
+        console.log("two hosts?");
+        return false;
+    }
+    else if(sw_or_host[0]) { // former host
+        var tmp = ids[0];
+        ids[0] = ids[1];
+        ids[1] = tmp;
+        port_no = link.properties.sw_in_port;
+    }
+    else if(sw_or_host[1]) { // lattar host
+        port_no = link.properties.sw_in_port;
+    }
+    else { // no host
+        port_no = link.properties.src_port;
+    }
+
+    /* show line chart */
+    c3w.connectData(in_lineChart, ids[0], {dpi: [], port: null}, {bp_flag: 1, port_no: port_no}); // bp_flag==2 -> show pkt info
+    c3w.startShowLine(in_lineChart, 'port', 0); // chart, type, bp_flag==0 -> show both rx and tx
+
+    /* gauge chart */
+    c3w.showLinkGauge(tx_gauge, rx_gauge, ids, port_no, in_lineChart);
+
+    /* change title */
+    $(".title-right").text(ids[0].toString()+"  =>  "+ids[1].toString());
+    $(".title-left").text(ids[1].toString()+"  =>  "+ids[0].toString());
+
+    console.log(port_no);
+    return ids;
+}
+
 function reconstructPort() {
     window.dp_stat = 1; // default dpi mode
     c3w.destroy(window.live_dpi_chart);
+    c3w.destroy(window.rx_gauge);
+    c3w.destroy(window.tx_gauge);
+    //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
+}
+
+function reconstructPort_i() {
+    window.dp_stat = 1; // default dpi mode
+    c3w.destroy(window.in_lineChart);
     c3w.destroy(window.rx_gauge);
     c3w.destroy(window.tx_gauge);
     //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
@@ -1497,6 +1558,19 @@ function reconstructDPI() {
     c3w.destroy(window.live_dpi_chart);
     c3w.destroy(window.pie_chart);
     c3w.destroy(window.contribute_chart);
+}
+
+function reconstructDPI_i() {
+    window.dp_stat = 1; // default dpi mode
+    c3w.destroy(window.in_lineChart);
+    c3w.destroy(window.pie_chart);
+    c3w.destroy(window.contribute_chart);
+}
+
+function reconstructOut() {
+    c3w.destroy(window.dpi_lineChart);
+    c3w.destroy(window.port_lineChart);
+    //intro_out();
 }
 
 /*
@@ -1533,13 +1607,13 @@ function dp_changePage() {
     if(window.dp_stat == 1) {
         $("#rx_gauge").hide();
         $("#tx_gauge").hide();
-        $("#proto_pie_chart").show();
-        $("#contribute_pie_chart").show();
+        $("#protos_pie").show();
+        $("#proto_source").show();
     }
     else {
         $("#rx_gauge").show();
         $("#tx_gauge").show();
-        $("#proto_pie_chart").hide();
-        $("#contribute_pie_chart").hide();
+        $("#protos_pie").hide();
+        $("#proto_source").hide();
     }
 }

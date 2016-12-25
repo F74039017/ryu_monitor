@@ -221,26 +221,31 @@ var init_flag = false; // TEST - LIVE DPI EXAMPLE
 function testOnNodeClick(data) {
     console.log(data);
     if(window.dp_stat == 1) {
-        reconstructDPI();
+        reconstructDPI_i();
     }
     else {
-        reconstructPort();
+        reconstructPort_i();
     }
-    dp_changePage();
     contribute_chart.unload();
     //demo4(data);
-    demo(data);
+    //demo(data);
+    clickNodeEvent(data);
+    dp_changePage();
 }
 
 function testOnLinkClick(data) {
     console.log(data);
     if(window.dp_stat == 1) {
-        reconstructDPI();
+        reconstructDPI_i();
     }
     else {
-        reconstructPort();
+        reconstructPort_i();
     }
-    console.log(demo2(data));
+    rx_gauge.unload();
+    tx_gauge.unload();
+    //console.log(demo2(data));
+    clickLinkEvent(data);
+    dp_changePage();
 }
 
 function initialize_topology(callback) {
