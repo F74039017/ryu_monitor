@@ -263,7 +263,7 @@
             }
         }, opts);
 
-        console.log(opts);
+        netjson_el['opts'] = opts;
 
         // init callback
         opts.onInit(url, opts);
@@ -431,6 +431,11 @@
                                        .attr('dy', opts.labelDy)
                                        .attr('class', 'njg-tooltip');
 
+                netjson_el['link'] = link[0];
+                netjson_el['groups'] = groups[0];
+                netjson_el['node'] = node[0];
+                netjson_el['labels'] = labels[0];
+
                 // Close overlay
                 closeOverlay.on("click", function() {
                     removeOpenClass();
@@ -568,3 +573,5 @@
         }
      };
 })();
+
+var netjson_el = {};
