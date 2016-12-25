@@ -258,26 +258,6 @@ function zoomDept(d) {
                     }
             }).addClass('visible');
 
-            /*document.getElementById('map-camp').innerHTML = select_camp;
-            document.getElementById('info-camp').innerHTML = select_camp;
-            document.getElementById('map-dept').innerHTML = select_dept;
-            document.getElementById('info-dept').innerHTML = select_dept;
-
-            // Show switch between topology and campus view.
-            if (select_dept == '資訊系館') {
-                $('.container-mode').css('visibility', 'visible');
-                document.getElementById('dpid1').innerHTML = '1';
-                document.getElementById('dpid2').innerHTML = '1';
-                document.getElementById('switches').innerHTML = '3';
-                document.getElementById('hosts').innerHTML = '6';
-            } else {
-                $('.container-mode').css('visibility', 'hidden');
-                document.getElementById('dpid1').innerHTML = 'N/A';
-                document.getElementById('dpid2').innerHTML = 'N/A';
-                document.getElementById('switches').innerHTML = 'N/A';
-                document.getElementById('hosts').innerHTML = 'N/A';
-            }*/
-
             clicks = 0;
         }, DELAY);
     }
