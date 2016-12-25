@@ -1,9 +1,8 @@
-#topology {  
-    border: 1px solid #000000;  
+#topology {
+    border: 1px solid #000000;
 }
 
-.node {
-}
+.node {}
 
 .node.fixed {
     fill: #C0C0C0;
@@ -27,4 +26,3 @@
 .port text {
     font-size: 10px;
 }
-

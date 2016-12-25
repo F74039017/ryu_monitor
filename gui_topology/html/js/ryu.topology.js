@@ -257,7 +257,7 @@ function initialize_topology(callback) {
                 //console.log("init netdata => callback netJsonGraph");
                 console.log(JSON.stringify(netdata));
                 if(callback) {
-                    callback(netdata, {el: "#left", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
+                    callback(netdata, {el: ".topo-demo", onClickNode: testOnNodeClick, onClickLink: testOnLinkClick}); // callback netJsonGraph
                 }
             });
         });

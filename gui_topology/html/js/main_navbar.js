@@ -36,25 +36,21 @@ $(function() {
     $('#btn-campus').click(function() {
         $('#btn-campus').addClass('active');
         $('#btn-topo').removeClass('active');
-        $('.container-map').addClass('active');
-        $('.container-topo').removeClass('active');
         zoomTopo_reset();
     });
 
     $('#btn-topo').click(function() {
         $('#btn-topo').addClass('active');
         $('#btn-campus').removeClass('active');
-        $('.container-topo').addClass('active');
-        $('.container-map').removeClass('active');
         zoomTopo();
     });
 });
 
 function zoomTopo() {
-    $('.container-map').fadeOut('slow');
-    $('.container-map').removeClass('active');
-    $('.container-topo').fadeIn('slow');
-    $('.container-topo').addClass('active');
+    $('.map-demo').fadeOut('slow');
+    $('.map-demo').removeClass('active');
+    $('.topo-demo').fadeIn('slow');
+    $('.topo-demo').addClass('active');
 
     if ($('#tab-map').hasClass('visible')) {
         $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
@@ -66,10 +62,10 @@ function zoomTopo() {
 }
 
 function zoomTopo_reset() {
-    $('.container-topo').fadeOut('slow');
-    $('.container-topo').removeClass('active');
-    $('.container-map').fadeIn('slow');
-    $('.container-map').addClass('active');
+    $('.topo-demo').fadeOut('slow');
+    $('.topo-demo').removeClass('active');
+    $('.map-demo').fadeIn('slow');
+    $('.map-demo').addClass('active');
 
     if ($('#tab-info').hasClass('visible')) {
         $('#tab-info').animate({ 'right': '-1000px' }, 500).removeClass('visible');

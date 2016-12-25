@@ -17,7 +17,7 @@
     <link href="/static/css/map.css" rel="stylesheet" type="text/css">
     <link href="/static/css/netjsongraph/netjsongraph.css" rel="stylesheet">
     <link href="/static/css/netjsongraph/netjsongraph-theme.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/netjsongraph/netjson-dark.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/netjsongraph/netjsongraph.css" type="text/css">
     <!-- JQuery -->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/metisMenu/metisMenu.min.js"></script>
@@ -243,20 +243,20 @@
                 <a href="#topo" class="mode-btn btn btn-primary" id="btn-topo">Topology View</a>
             </div>
         </div>
-        <!-- map -->
         <div class="container-map">
+            <!-- map -->
             <div class="map-demo active"></div>
             <script src="/static/js/main_map.js"></script>
-        </div>
+            <!-- topo -->
             <div class="topo-demo" id="left"></div>
             <script src="/static/js/netjsongraph.js"></script>
-        <!--netjsongraph css-->
-        <script>
-        main({
-            "netjsongraph": d3.netJsonGraph
-        }); // disable initialize_maplogy()
-        /* XXX: testing for netjsongraph */
-        //$(".map").hide();
-        </script>
+            <script>
+            main({
+                "netjsongraph": d3.netJsonGraph
+            }); // disable initialize_maplogy()
+            /* XXX: testing for netjsongraph */
+            //$(".map").hide();
+            </script>
+        </div>
     </div>
 </body>
