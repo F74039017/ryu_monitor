@@ -12,6 +12,9 @@ body {
 body {
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: #2A3F54;
     font-family: 'PT Sans Caption', sans-serif;
 }
@@ -112,30 +115,21 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    //background-color: #2A3F54;
+    background-color: #2A3F54;
+}
+
+.container-map .topo-demo {
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .container-map .topo-demo.active {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    visibility: visible;
 }
-
-.container-map .topo-demo.active svg {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    border: 0;
-    left: 0;
-    right: 0;
-    padding-top: 25%;
-}
-
 
 /* nav - sidetab */
 
