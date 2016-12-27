@@ -131,6 +131,7 @@ body {
     visibility: visible;
 }
 
+
 /* nav - sidetab */
 
 .sidetab {
@@ -595,6 +596,57 @@ body {
 }
 
 
+/* Mode - Proto/Port */
+
+.sidetab-map .content-main .map-proto_port {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 725px;
+    left: 0;
+    right: 0;
+}
+
+.sidetab-map .map-proto_port .mode-btn {
+    height: 100%;
+    width: 47.7%;
+    position: absolute;
+    top: 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: #0066cc;
+    border-color: #0066cc;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sidetab-map .map-proto_port .mode-btn:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border-color: #003366;
+}
+
+.sidetab-map .map-proto_port #map-btn-proto {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    left: 0;
+}
+
+.sidetab-map .map-proto_port #map-btn-port {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    right: 0;
+}
+
+.sidetab-map .map-proto_port .mode-btn.active {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+
 /* info-basic */
 
 .content-main .info-basic {
@@ -1005,7 +1057,7 @@ body {
 
 /* Mode - Proto/Port */
 
-.sidetab-info .content-main .mode-proto_port {
+.sidetab-info .content-main .info-proto_port {
     height: 40px;
     width: 100%;
     position: absolute;
@@ -1014,7 +1066,7 @@ body {
     right: 0;
 }
 
-.sidetab-info .mode-proto_port .mode-btn {
+.sidetab-info .info-proto_port .mode-btn {
     height: 100%;
     width: 47.7%;
     position: absolute;
@@ -1029,25 +1081,25 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.sidetab-info .mode-proto_port .mode-btn:hover {
+.sidetab-info .info-proto_port .mode-btn:hover {
     background-color: #003366;
     color: #ffffff;
     border-color: #003366;
 }
 
-.sidetab-info .mode-proto_port #btn-proto {
+.sidetab-info .info-proto_port #info-btn-proto {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     left: 0;
 }
 
-.sidetab-info .mode-proto_port #btn-port {
+.sidetab-info .info-proto_port #info-btn-port {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     right: 0;
 }
 
-.sidetab-info .mode-proto_port .mode-btn.active {
+.sidetab-info .info-proto_port .mode-btn.active {
     background-color: #0066cc;
     color: #ffffff;
     border-color: #0066cc;
