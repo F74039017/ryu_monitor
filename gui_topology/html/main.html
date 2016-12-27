@@ -30,6 +30,7 @@
     <script src="/static/js/ryu.topology.js"></script>
     <script src="/static/js/dpi_oper.js"></script>
     <script src="/static/js/c3_wrapper.js"></script>
+    <script src="/static/js/btn_event.js"></script>
     <script src="/static/js/ui_oper.js"></script>
     <!-- Load c3.css -->
     <style>
@@ -51,7 +52,7 @@
                     <!-- content-top -->
                     <div class="content-top">
                         <div class="content-back">
-                            <a href="#" class="top-icon hvr-btr" id="map-back"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#" class="top-icon hvr-btr" id="btn-map_back"><i class="fa fa-chevron-left"></i></a>
                         </div>
                         <div class="content-title" id="map-title">
                             <p class="title-top"> Map</p>
@@ -85,14 +86,14 @@
                         </div>
                         <div class="map-optn">
                             <div class="optn-map_bp">
-                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
+                                <a href="" class="btn btn-primary" id="btn-map_bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
                             </div>
                             <div class="optn-map_top">
                                 <form class="form-inline">
                                     <div class="input-map_top">
                                         <input type="text" class="form-control form-map_top" placeholder="Top">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-map_top" id="btn-map_top">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-map_top">Submit</button>
                                 </form>
                             </div>
                             <div class="optn-map_hislen">
@@ -100,7 +101,7 @@
                                     <div class="input-map_hislen">
                                         <input type="text" class="form-control form-map_hislen" placeholder="History interval">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-map_hislen" id="btn-map_hislen">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-map_hislen">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -123,8 +124,8 @@
                             </div>
                         </div>
                         <div class="map-mode_toggle map-proto_port">
-                            <a href="#protocol" class="mode-btn btn btn-primary active" id="map-btn-proto">Protocol</a>
-                            <a href="#port" class="mode-btn btn btn-primary" id="map-btn-port">Port</a>
+                            <a href="#protocol" class="mode-btn btn btn-primary active" id="btn-map_proto">Protocol</a>
+                            <a href="#port" class="mode-btn btn btn-primary" id="btn-map_port">Port</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +137,7 @@
                     <!-- content-top -->
                     <div class="content-top">
                         <div class="content-back">
-                            <a href="#" class="top-icon hvr-btr" id="info-back"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#" class="top-icon hvr-btr" id="btn-info_back"><i class="fa fa-chevron-left"></i></a>
                         </div>
                         <div class="content-title" id="info-title">
                             <p class="title-top">Information</p>
@@ -158,14 +159,14 @@
                         </div>
                         <div class="info-optn">
                             <div class="optn-info_bp">
-                                <a href="" class="optn-icon btn btn-primary" id="icon-bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
+                                <a href="" class="btn btn-primary" id="btn-info_bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
                             </div>
                             <div class="optn-info_top">
                                 <form class="form-inline">
                                     <div class="input-info_top">
                                         <input type="text" class="form-control form-info_top" placeholder="Top">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-info_top" id="btn-info_top">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-info_top">Submit</button>
                                 </form>
                             </div>
                             <div class="optn-info_hislen">
@@ -173,7 +174,7 @@
                                     <div class="input-info_hislen">
                                         <input type="text" class="form-control form-info_hislen" placeholder="History interval">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-info_hislen" id="btn-info_hislen">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-info_hislen">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -206,8 +207,8 @@
                             </div>
                         </div>
                         <div class="info-mode_toggle info-proto_port">
-                            <a href="#protocol" class="mode-btn btn btn-primary active" id="info-btn-proto">Protocol</a>
-                            <a href="#port" class="mode-btn btn btn-primary" id="info-btn-port">Port</a>
+                            <a href="#protocol" class="mode-btn btn btn-primary active" id="btn-info_proto">Protocol</a>
+                            <a href="#port" class="mode-btn btn btn-primary" id="btn-info_port">Port</a>
                         </div>
                     </div>
                 </div>

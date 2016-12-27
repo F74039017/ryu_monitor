@@ -3,7 +3,7 @@ $(function() {
         $('#tab-map').animate({ "right": "0px" }, 500).addClass('visible');
     });
 
-    $('#map-back').click(function() {
+    $('#btn-map_back').click(function() {
         $('#tab-map').animate({ "right": "-1000px" }, 500).removeClass('visible');
     });
 
@@ -11,40 +11,48 @@ $(function() {
         $('#tab-info').animate({ "right": "0px" }, 500).addClass('visible');
     });
 
-    $('#info-back').click(function() {
+    $('#btn-info_back').click(function() {
         $('#tab-info').animate({ "right": "-1000px" }, 500).removeClass('visible');
     });
 
-    $('#map-btn-proto').click(function() {
-        $('#map-btn-proto').addClass('active');
-        $('#map-btn-port').removeClass('active');
+    $('#btn-map_bp').click(function() {
+        console.log('右側側欄-map byte/pkt');
+    });
+
+    $('#btn-map_proto').click(function() {
+        $('#btn-map_proto').addClass('active');
+        $('#btn-map_port').removeClass('active');
         //$('.title-left').text('Protocols');
         //$('.title-right').text('Source of HTTP');
         //$('.chart-block-left .chart-main').attr('id', 'protos_pie');
         //$('.chart-block-right .chart-main').attr('id', 'proto_source');
     });
 
-    $('#map-btn-port').click(function() {
-        $('#map-btn-port').addClass('active');
-        $('#map-btn-proto').removeClass('active');
+    $('#btn-map_port').click(function() {
+        $('#btn-map_port').addClass('active');
+        $('#btn-map_proto').removeClass('active');
         //$('.title-left').text('Receive');
         //$('.title-right').text('Transmission');
         //$('.chart-block-left .chart-main').attr('id', 'rx_gauge');
         //$('.chart-block-right .chart-main').attr('id', 'tx_gauge');
     });
 
-    $('#info-btn-proto').click(function() {
-        $('#info-btn-proto').addClass('active');
-        $('#info-btn-port').removeClass('active');
+    $('#btn-info_bp').click(function() {
+        console.log('右側側欄-information byte/pkt');
+    });
+
+    $('#btn-info_proto').click(function() {
+        $('#btn-info_proto').addClass('active');
+        $('#btn-info_port').removeClass('active');
         $('.title-left').text('Protocols');
         $('.title-right').text('Source of HTTP');
         $('.chart-block-left .chart-main').attr('id', 'protos_pie');
         $('.chart-block-right .chart-main').attr('id', 'proto_source');
     });
 
-    $('#info-btn-port').click(function() {
-        $('#info-btn-port').addClass('active');
-        $('#info-btn-proto').removeClass('active');
+    $('#btn-info_port').click(function() {
+        $('#btn-info_port').addClass('active');
+        $('#btn-info_proto').removeClass('active');
         $('.title-left').text('Receive');
         $('.title-right').text('Transmission');
         $('.chart-block-left .chart-main').attr('id', 'rx_gauge');
