@@ -457,11 +457,48 @@ body {
     background-color: #003366;
 }
 
+.map-optn .optn-map_top {
+    height: 27px;
+    width: 70%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 29%;
+}
+
+.map-optn .optn-map_top .input-map_top {
+    height: 27px;
+    width: 70%;
+    top: 0;
+}
+
+.map-optn .optn-map_top .form-map_top {
+    height: 27px;
+    width: 70%;
+    position: absolute;
+    top: 0;
+    border: 2px solid #2A76B9;
+    border-radius: 0;
+}
+
+.map-optn .optn-map_top .btn-map_top {
+    height: 25px;
+    width: 25%;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding-top: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 0;
+}
+
 .map-optn .optn-map_hislen {
     height: 27px;
     width: 70%;
     position: absolute;
-    top: 30%;
+    bottom: 0;
     left: 0;
     margin-left: 29%;
 }
@@ -469,13 +506,13 @@ body {
 .map-optn .optn-map_hislen .input-map_hislen {
     height: 27px;
     width: 70%;
-    top: 0;
+    bottom: 0;
 }
 
 .map-optn .optn-map_hislen .form-map_hislen {
     height: 27px;
     width: 100%;
-    top: 0;
+    bottom: 0;
     border: 2px solid #2A76B9;
     border-radius: 0;
 }
@@ -484,7 +521,7 @@ body {
     height: 25px;
     width: 25%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 5px;
     padding-top: 3px;
     font-size: 14px;
@@ -509,7 +546,7 @@ body {
     height: 310px;
     width: 95%;
     position: absolute;
-    top: 225px;
+    top: 235px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -535,7 +572,7 @@ body {
     height: 310px;
     width: 95%;
     position: absolute;
-    top: 475px;
+    top: 480px;
     left: 0;
     right: 0;
     margin-left: 10px;
@@ -782,7 +819,7 @@ body {
     background-color: #003366;
 }
 
-.info-optn .optn-top {
+.info-optn .optn-info_top {
     height: 27px;
     width: 70%;
     position: absolute;
@@ -791,13 +828,13 @@ body {
     margin-left: 29%;
 }
 
-.info-optn .optn-top .input-top {
+.info-optn .optn-info_top .input-info_top {
     height: 27px;
     width: 70%;
     top: 0;
 }
 
-.info-optn .optn-top .form-top {
+.info-optn .optn-info_top .form-info_top {
     height: 27px;
     width: 70%;
     position: absolute;
@@ -806,7 +843,7 @@ body {
     border-radius: 0;
 }
 
-.info-optn .optn-top .btn-top {
+.info-optn .optn-info_top .btn-info_top {
     height: 25px;
     width: 25%;
     position: absolute;
@@ -896,7 +933,7 @@ body {
 #info-chart-top .chart-main {
     height: 80%;
     position: absolute;
-    top: 15px;
+    top: 5px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;
@@ -924,7 +961,7 @@ body {
     height: 90%;
     width: 100%;
     position: absolute;
-    top: 15px;
+    top: 5px;
     background-color: #f6f6f6;
     border: 2px groove #c0c0c0;
     border-radius: 5px;

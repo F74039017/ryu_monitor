@@ -118,7 +118,36 @@ function hover_show(d) {
 function zoom_reset(d) {
     active.classed('active', false);
 
-    $('.container-mode').css('visibility', 'hidden');
+    var DELAY = 100,
+        clicks = 0,
+        timer = null;
+
+    clicks++; //count clicks
+
+    if (clicks === 1) {
+        timer = setTimeout(function() {
+            if ($('#tab-map').hasClass('visible')) {
+                $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+            }
+
+            $('#tab-map').animate({ 'right': '0px' }, {
+                duration: 500,
+                progress: function() {
+                    $('#map-camp').text('國立成功大學');
+                    $('#info-camp').text('國立成功大學');
+                    $('#map-dept').text('校本部');
+                    $('#info-dept').text('校本部');
+
+                    $('#dpid1').text('N/A');
+                    $('#dpid2').text('N/A');
+                    $('#switches').text('N/A');
+                    $('#hosts').text('N/A');
+                }
+            }).addClass('visible');
+
+            clicks = 0;
+        }, DELAY);
+    }
 
     if (d.properties.type == "reg") {
         active = d3.select(null);
@@ -169,6 +198,37 @@ function zoomReg(d) {
 
     active.classed('active', false);
     active = d3.select(this).classed('active', true);
+
+    var DELAY = 100,
+        clicks = 0,
+        timer = null;
+
+    clicks++; //count clicks
+
+    if (clicks === 1) {
+        timer = setTimeout(function() {
+            if ($('#tab-map').hasClass('visible')) {
+                $('#tab-map').animate({ 'right': '-1000px' }, 500).removeClass('visible');
+            }
+
+            $('#tab-map').animate({ 'right': '0px' }, {
+                duration: 500,
+                progress: function() {
+                    $('#map-camp').text('校本部');
+                    $('#info-camp').text('校本部');
+                    $('#map-dept').text(select_camp);
+                    $('#info-dept').text(select_camp);
+
+                    $('#dpid1').text('N/A');
+                    $('#dpid2').text('N/A');
+                    $('#switches').text('N/A');
+                    $('#hosts').text('N/A');
+                }
+            }).addClass('visible');
+
+            clicks = 0;
+        }, DELAY);
+    }
 
     var bounds = path.bounds(d),
         dx = bounds[1][0] - bounds[0][0],
@@ -236,26 +296,26 @@ function zoomDept(d) {
             $('#tab-map').animate({ 'right': '0px' }, {
                 duration: 500,
                 progress: function() {
-                        document.getElementById('map-camp').innerHTML = select_camp;
-                        document.getElementById('info-camp').innerHTML = select_camp;
-                        document.getElementById('map-dept').innerHTML = select_dept;
-                        document.getElementById('info-dept').innerHTML = select_dept;
+                    $('#map-camp').text(select_camp);
+                    $('#info-camp').text(select_camp);
+                    $('#map-dept').text(select_dept);
+                    $('#info-dept').text(select_dept);
 
-                        // Show switch between topology and campus view.
-                        if (select_dept == '資訊系館') {
-                            $('.container-mode').css('visibility', 'visible');
-                            document.getElementById('dpid1').innerHTML = '1';
-                            document.getElementById('dpid2').innerHTML = '1';
-                            document.getElementById('switches').innerHTML = '3';
-                            document.getElementById('hosts').innerHTML = '6';
-                        } else {
-                            $('.container-mode').css('visibility', 'hidden');
-                            document.getElementById('dpid1').innerHTML = 'N/A';
-                            document.getElementById('dpid2').innerHTML = 'N/A';
-                            document.getElementById('switches').innerHTML = 'N/A';
-                            document.getElementById('hosts').innerHTML = 'N/A';
-                        }
+                    // Show switch between topology and campus view.
+                    if (select_dept == '資訊系館') {
+                        $('.container-mode').css('visibility', 'visible');
+                        $('#dpid1').text('1');
+                        $('#dpid2').text('1');
+                        $('#switches').text('3');
+                        $('#hosts').text('6');
+                    } else {
+                        $('.container-mode').css('visibility', 'hidden');
+                        $('#dpid1').text('N/A');
+                        $('#dpid2').text('N/A');
+                        $('#switches').text('N/A');
+                        $('#hosts').text('N/A');
                     }
+                }
             }).addClass('visible');
 
             clicks = 0;
