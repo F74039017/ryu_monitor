@@ -884,6 +884,7 @@ c3_wrapper.prototype.stopShow = function(chart) {
 }
 
 c3_wrapper.prototype.setHistorySize = function(chart, size) {
+    size = parseInt(size);
     var conn = this.chart2conn(chart);
     if(conn) {
         conn.size = size;
@@ -1359,6 +1360,10 @@ c3_wrapper.prototype.changeBP_FLAG = function(chart, bp_flag) {
     return true;
 }
 
+c3_wrapper.prototype.getBP_FLAG = function(chart) {
+    return this.chart2conn(chart).showFilter['bp_flag'];
+}
+
 /*
  * dimension: [width, height]
  * type: pie, line, gauge
@@ -1573,6 +1578,11 @@ function reconstructOut() {
     //intro_out();
 }
 
+function unloadOut() {
+    window.dpi_lineChart.unload();
+    window.port_lineChart.unload();
+}
+
 /*
  * XXX: init without delay will make the chart broken
  * */
@@ -1597,11 +1607,6 @@ function demo4(node) {
     c3w.startShowLine(live_dpi_chart, 'port', 1);
     c3w.showSwGauge(rx_gauge, tx_gauge, live_dpi_chart);
 }
-
-window.bp_stat = 1;
-window.rt_stat = 1; // only node need
-window.dp_stat = 1; // 1: dpi, 2: port
-window.cur_id = null;
 
 function dp_changePage() {
     if(window.dp_stat == 1) {

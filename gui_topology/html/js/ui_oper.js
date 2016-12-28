@@ -238,3 +238,9 @@ function pie_click(d, i) {
     var id = shareConn.id;
     c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
 }
+
+window.bp_stat = 1;
+window.rt_stat = 1; // only node need
+window.dp_stat = 1; // 1: dpi, 2: port
+window.cur_id = null;
+window.lv_stat = 1;

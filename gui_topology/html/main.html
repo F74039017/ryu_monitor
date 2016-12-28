@@ -26,12 +26,12 @@
     <script src="/static/vendor/c3/c3.min.js"></script>
     <script src="/static/vendor/topojson/topojson.v1.min.js"></script>
     <!-- Custom JavaScript -->
+    <script src="/static/js/ui_oper.js"></script>
     <script src="/static/js/main_navbar.js"></script>
     <script src="/static/js/ryu.topology.js"></script>
     <script src="/static/js/dpi_oper.js"></script>
     <script src="/static/js/c3_wrapper.js"></script>
     <script src="/static/js/btn_event.js"></script>
-    <script src="/static/js/ui_oper.js"></script>
     <!-- Load c3.css -->
     <style>
     .c3-grid .c3-xgrid-focus {
@@ -91,7 +91,7 @@
                             <div class="optn-map_top">
                                 <form class="form-inline">
                                     <div class="input-map_top">
-                                        <input type="text" class="form-control form-map_top" placeholder="Top">
+                                        <input type="number" class="form-control form-map_top" id="outer_top_input" min="1" placeholder="Top:3">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-map_top">Submit</button>
                                 </form>
@@ -99,7 +99,7 @@
                             <div class="optn-map_hislen">
                                 <form class="form-inline">
                                     <div class="input-map_hislen">
-                                        <input type="text" class="form-control form-map_hislen" placeholder="History interval">
+                                        <input type="number" class="form-control form-map_hislen" id="outer_his_input" min="5" placeholder="History interval:10">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-map_hislen">Submit</button>
                                 </form>
@@ -124,8 +124,8 @@
                             </div>
                         </div>
                         <div class="map-mode_toggle map-proto_port">
-                            <a href="#protocol" class="mode-btn btn btn-primary active" id="btn-map_proto">Protocol</a>
-                            <a href="#port" class="mode-btn btn btn-primary" id="btn-map_port">Port</a>
+                            <a href="#protocol" class="mode-btn btn btn-primary active" id="btn-map_proto">Receive</a>
+                            <a href="#port" class="mode-btn btn btn-primary" id="btn-map_port">Transmit</a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
                             <div class="optn-info_top">
                                 <form class="form-inline">
                                     <div class="input-info_top">
-                                        <input type="text" class="form-control form-info_top" placeholder="Top">
+                                        <input type="number" class="form-control form-info_top" id="inner_top_input" min="1" placeholder="Top:3">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-info_top">Submit</button>
                                 </form>
@@ -172,7 +172,7 @@
                             <div class="optn-info_hislen">
                                 <form class="form-inline">
                                     <div class="input-info_hislen">
-                                        <input type="text" class="form-control form-info_hislen" placeholder="History interval">
+                                        <input type="number" class="form-control form-info_hislen" id="inner_his_input" min="5" placeholder="History interval:10">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-info_hislen">Submit</button>
                                 </form>
@@ -185,7 +185,7 @@
                                 </div>
                                 <div class="chart-main" id="protos_pie">
                                 </div>
-                                <div class="chart-main" id="rx_gauge">
+                                <div class="chart-main hidden_default" id="rx_gauge">
                                 </div>
                             </div>
                             <div class="chart-block-right">
@@ -194,7 +194,7 @@
                                 </div>
                                 <div class="chart-main" id="proto_source">
                                 </div>
-                                <div class="chart-main" id="tx_gauge">
+                                <div class="chart-main hidden_default" id="tx_gauge">
                                 </div>
                             </div>
                         </div>

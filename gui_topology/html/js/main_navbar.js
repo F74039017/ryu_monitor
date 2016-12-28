@@ -44,19 +44,19 @@ $(function() {
     $('#btn-info_proto').click(function() {
         $('#btn-info_proto').addClass('active');
         $('#btn-info_port').removeClass('active');
-        $('.title-left').text('Protocols');
-        $('.title-right').text('Source of HTTP');
-        $('.chart-block-left .chart-main').attr('id', 'protos_pie');
-        $('.chart-block-right .chart-main').attr('id', 'proto_source');
+        //$('.title-left').text('Protocols');
+        //$('.title-right').text('Source of HTTP');
+        //$('.chart-block-left .chart-main').attr('id', 'protos_pie');
+        //$('.chart-block-right .chart-main').attr('id', 'proto_source');
     });
 
     $('#btn-info_port').click(function() {
         $('#btn-info_port').addClass('active');
         $('#btn-info_proto').removeClass('active');
-        $('.title-left').text('Receive');
-        $('.title-right').text('Transmission');
-        $('.chart-block-left .chart-main').attr('id', 'rx_gauge');
-        $('.chart-block-right .chart-main').attr('id', 'tx_gauge');
+        //$('.title-left').text('Receive');
+        //$('.title-right').text('Transmission');
+        //$('.chart-block-left .chart-main').attr('id', 'rx_gauge');
+        //$('.chart-block-right .chart-main').attr('id', 'tx_gauge');
     });
 
     $('#btn-campus').click(function() {

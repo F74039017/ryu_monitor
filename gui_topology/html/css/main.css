@@ -19,6 +19,10 @@ body {
     font-family: 'PT Sans Caption', sans-serif;
 }
 
+.hidden_default {
+    display: none;
+}
+
 
 /* container-main */
 

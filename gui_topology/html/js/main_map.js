@@ -117,6 +117,13 @@ function hover_show(d) {
 /* Click to reset the zoom-in of region. */
 function zoom_reset(d) {
     active.classed('active', false);
+    window.lv_stat = 1;
+    // XXX: hard code...
+    reconstructOut();
+    unloadOut();
+    /* reset recv and trans switch */
+    $('#btn-map_port').removeClass('active');
+    $('#btn-map_proto').addClass('active');
 
     var DELAY = 100,
         clicks = 0,
@@ -190,6 +197,13 @@ function zoom_reset(d) {
 /* Click to zoom-in of region. */
 function zoomReg(d) {
     $('.container-mode').css('visibility', 'hidden');
+    window.lv_stat = 2;
+    // XXX: hard code...
+    reconstructOut();
+    unloadOut();
+    /* reset recv and trans switch */
+    $('#btn-map_port').removeClass('active');
+    $('#btn-map_proto').addClass('active');
 
     if (active.node() === this)
         return zoom_reset(d);
@@ -275,6 +289,10 @@ function zoomReg(d) {
 function zoomDept(d) {
     if (active.node() === this)
         return zoom_reset(d);
+    window.lv_stat = 3;
+    /* reset recv and trans switch */
+    $('#btn-map_port').removeClass('active');
+    $('#btn-map_proto').addClass('active');
 
     select_dept = d.properties.name;
 
@@ -308,6 +326,8 @@ function zoomDept(d) {
                         $('#dpid2').text('1');
                         $('#switches').text('3');
                         $('#hosts').text('6');
+                        // XXX: hard code...
+                        intro_out();
                     } else {
                         $('.container-mode').css('visibility', 'hidden');
                         $('#dpid1').text('N/A');
