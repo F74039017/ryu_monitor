@@ -25,6 +25,22 @@ $(function() {
         e.preventDefault();
         //console.log('右側側欄-map byte/pkt');
         console.log("outer sidebar bp btn");
+        if(c3w.getBP_FLAG(dpi_lineChart)==1) {
+            c3w.changeBP_FLAG(dpi_lineChart, 2);
+            c3w.changeBP_FLAG(port_lineChart, 2);
+            //rx_gauge.internal.config.gauge_max = 3000;
+            //tx_gauge.internal.config.gauge_max = 3000;
+            //rx_gauge.internal.config.gauge_units = "Packets";
+            //tx_gauge.internal.config.gauge_units = "Packets";
+        }
+        else {
+            c3w.changeBP_FLAG(dpi_lineChart, 1);
+            c3w.changeBP_FLAG(port_lineChart, 1);
+            //rx_gauge.internal.config.gauge_max = 5000;
+            //tx_gauge.internal.config.gauge_max = 5000;
+            //rx_gauge.internal.config.gauge_units = "K bits";
+            //tx_gauge.internal.config.gauge_units = "K bits";
+        }
     });
 
     $('#btn-map_proto').click(function() {
@@ -72,6 +88,20 @@ $(function() {
         e.preventDefault();
         //console.log('右側側欄-information byte/pkt');
         console.log("inner sidebar bp btn");
+        if(c3w.getBP_FLAG(in_lineChart)==1) {
+            c3w.changeBP_FLAG(in_lineChart, 2);
+            rx_gauge.internal.config.gauge_max = 3000;
+            tx_gauge.internal.config.gauge_max = 3000;
+            rx_gauge.internal.config.gauge_units = "Packets";
+            tx_gauge.internal.config.gauge_units = "Packets";
+        }
+        else {
+            c3w.changeBP_FLAG(in_lineChart, 1);
+            rx_gauge.internal.config.gauge_max = 5000;
+            tx_gauge.internal.config.gauge_max = 5000;
+            rx_gauge.internal.config.gauge_units = "K bits";
+            tx_gauge.internal.config.gauge_units = "K bits";
+        }
     });
 
     $('#btn-info_proto').click(function() {
@@ -83,6 +113,8 @@ $(function() {
         //$('.chart-block-left .chart-main').attr('id', 'protos_pie');
         //$('.chart-block-right .chart-main').attr('id', 'proto_source');
         console.log("inner protocol btn");
+        // TODO: chnage to inner proto chart
+        //c3w.changeRT_RANK(port_lineChart, 1);
     });
 
     $('#btn-info_port').click(function() {
@@ -94,16 +126,23 @@ $(function() {
         //$('.chart-block-left .chart-main').attr('id', 'rx_gauge');
         //$('.chart-block-right .chart-main').attr('id', 'tx_gauge');
         console.log("inner port btn");
+        //c3w.changeRT_RANK(port_lineChart, 2);
     });
 
     $('#btn-info_top').click(function() {
-        console.log("inner top btn");
-
+        console.log("outer top btn");
+        if(window.dp_stat==2) {
+            var outer_top_input = $("#outer_top_input");
+            var val = outer_top_input.val();
+            c3w.changeRT_RANK(window.in_lineChart, val);
+        }
     })
 
     $('#btn-info_hislen').click(function() {
         console.log("inner his btn");
-
+        var outer_his_input = $("#outer_his_input");
+        var val = outer_his_input.val();
+        c3w.setHistorySize(window.in_lineChart, val);
     })
 
     /****  view button  ****/
@@ -114,6 +153,7 @@ $(function() {
         //$('#btn-campus').addClass('active');
         //$('#btn-topo').removeClass('active');
         //zoomTopo_reset();
+        intro_out();
     });
 
     $('#btn-topo').click(function() {
@@ -122,6 +162,7 @@ $(function() {
         //$('#btn-topo').addClass('active');
         //$('#btn-campus').removeClass('active');
         //zoomTopo();
+        resetOutSideChart();
     });
 });
 

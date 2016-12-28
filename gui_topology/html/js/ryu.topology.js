@@ -231,6 +231,7 @@ function testOnNodeClick(data) {
     //demo(data);
     clickNodeEvent(data);
     dp_changePage();
+    resetInSideChart();
 }
 
 function testOnLinkClick(data) {
@@ -246,6 +247,7 @@ function testOnLinkClick(data) {
     //console.log(demo2(data));
     clickLinkEvent(data);
     dp_changePage();
+    resetInSideChart();
 }
 
 function initialize_topology(callback) {

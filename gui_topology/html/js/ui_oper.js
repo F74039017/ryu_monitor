@@ -186,19 +186,6 @@ function bp_btn_func() {
     c3w.changeBP_FLAG(in_lineChart, window.bp_stat);
 }
 
-function rt_btn_func() {
-
-    if(window.rt_stat==1) {
-        window.rt_stat = 2;
-    }
-    else {
-        window.rt_stat = 1;
-    }
-    c3w.changeRT_RANK(live_dpi_chart, window.rt_stat);
-}
-
-/***************************************/
-
 function intro_proto() {
     c3w.connectData(dpi_lineChart, 1, null, {port_no: null, bp_flag: 1});
     c3w.startShowLine(dpi_lineChart, 'dpi', 3);
@@ -212,6 +199,15 @@ function intro_port() {
 function intro_out() {
     intro_proto();
     intro_port();
+}
+
+function resetOutSideChart() {
+    // XXX: hard code...
+    reconstructOut();
+    unloadOut();
+    /* reset recv and trans switch */
+    $('#btn-map_port').removeClass('active');
+    $('#btn-map_proto').addClass('active');
 }
 
 /***************************************/
@@ -237,6 +233,12 @@ function pie_click(d, i) {
     var shareConn= c3w.chart2conn(shareChart);
     var id = shareConn.id;
     c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
+}
+
+function resetInSideChart() {
+    /* reset recv and trans switch */
+    $('#btn-info_port').removeClass('active');
+    $('#btn-info_proto').addClass('active');
 }
 
 window.bp_stat = 1;

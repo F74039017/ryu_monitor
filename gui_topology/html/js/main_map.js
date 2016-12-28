@@ -118,12 +118,7 @@ function hover_show(d) {
 function zoom_reset(d) {
     active.classed('active', false);
     window.lv_stat = 1;
-    // XXX: hard code...
-    reconstructOut();
-    unloadOut();
-    /* reset recv and trans switch */
-    $('#btn-map_port').removeClass('active');
-    $('#btn-map_proto').addClass('active');
+    resetOutSideChart();
 
     var DELAY = 100,
         clicks = 0,
@@ -198,12 +193,7 @@ function zoom_reset(d) {
 function zoomReg(d) {
     $('.container-mode').css('visibility', 'hidden');
     window.lv_stat = 2;
-    // XXX: hard code...
-    reconstructOut();
-    unloadOut();
-    /* reset recv and trans switch */
-    $('#btn-map_port').removeClass('active');
-    $('#btn-map_proto').addClass('active');
+    resetOutSideChart();
 
     if (active.node() === this)
         return zoom_reset(d);
