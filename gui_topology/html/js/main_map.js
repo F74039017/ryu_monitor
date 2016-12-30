@@ -43,8 +43,6 @@ var active = d3.select(null),
     select_camp = '',
     select_dept = '';
 
-//('.container-map').addClass('active');
-
 /* Draw map with TopoJSON */
 d3.json('/static/data/topojson/ncku.json', function(error, map) {
     if (error)

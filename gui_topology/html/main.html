@@ -86,7 +86,7 @@
                         </div>
                         <div class="map-optn">
                             <div class="optn-map_bp">
-                                <a href="" class="btn btn-primary" id="btn-map_bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
+                                <a href="" class="btn btn-primary" id="btn-map_bp"><i class="fa fa-exchange" aria-hidden="true"></i>  BYTE/PKT</a>
                             </div>
                             <div class="optn-map_top">
                                 <form class="form-inline">
@@ -159,7 +159,7 @@
                         </div>
                         <div class="info-optn">
                             <div class="optn-info_bp">
-                                <a href="" class="btn btn-primary" id="btn-info_bp"><i class="fa fa-exchange" aria-hidden="true"> BYTE/PKT</i></a>
+                                <a href="" class="btn btn-primary" id="btn-info_bp"><i class="fa fa-exchange" aria-hidden="true"></i>  BYTE/PKT</a>
                             </div>
                             <div class="optn-info_top">
                                 <form class="form-inline">
@@ -202,6 +202,14 @@
                             <div class="chart-block">
                                 <div class="chart-title">
                                     <p class="">Protocol Info.</p>
+                                </div>
+                                <div class="chart-main" id="in_line_chart"></div>
+                            </div>
+                        </div>
+                        <div class="info-chart" id="info-chart-btm">
+                            <div class="chart-block">
+                                <div class="chart-title">
+                                    <p class="">Port Info.</p>
                                 </div>
                                 <div class="chart-main" id="in_line_chart"></div>
                             </div>
@@ -262,6 +270,7 @@
             <!-- topo -->
             <div class="topo-demo" id="left"></div>
             <script src="/static/js/netjsongraph.js"></script>
+            <script src="/static/js/main_traceroute.js"></script>
             <script>
             main({
                 "netjsongraph": d3.netJsonGraph
