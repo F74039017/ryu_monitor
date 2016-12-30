@@ -220,34 +220,45 @@ var init_flag = false; // TEST - LIVE DPI EXAMPLE
 /* define netjsongraph's node and link event */
 function testOnNodeClick(data) {
     console.log(data);
-    if(window.dp_stat == 1) {
-        reconstructDPI_i();
-    }
-    else {
-        reconstructPort_i();
-    }
-    contribute_chart.unload();
+    window.nl_stat = 1;
+    reconstructIn();
     //demo4(data);
     //demo(data);
     clickNodeEvent(data);
     dp_changePage();
-    resetInSideChart();
+
+    /* reset recv and trans toggle */
+    $('#btn-info_port').removeClass('active');
+    $('#btn-info_proto').addClass('active');
+
+    /* hide recv and trans toggle */
+    $('#btn-info_port').show();
+    $('#btn-info_proto').show();
+
+    /* show port chart and title */
+    $('#in_line_chart2').show();
+    $('#in_port_title').show();
 }
 
 function testOnLinkClick(data) {
     console.log(data);
-    if(window.dp_stat == 1) {
-        reconstructDPI_i();
-    }
-    else {
-        reconstructPort_i();
-    }
-    rx_gauge.unload();
-    tx_gauge.unload();
+    window.nl_stat = 2;
+    reconstructIn();
     //console.log(demo2(data));
     clickLinkEvent(data);
     dp_changePage();
-    resetInSideChart();
+
+    /* reset recv and trans toggle */
+    $('#btn-info_port').removeClass('active');
+    $('#btn-info_proto').addClass('active');
+
+    /* hide recv and trans toggle */
+    $('#btn-info_port').hide();
+    $('#btn-info_proto').hide();
+
+    /* hide port chart and title */
+    $('#in_line_chart2').hide();
+    $('#in_port_title').hide();
 }
 
 function initialize_topology(callback) {
@@ -290,7 +301,7 @@ function trimInt(x) {
 }
 /* netjson */
 // {dpid: port: dpid}
-window.sw_port_table = {}; // XXX: del in future
+window.port_table = {}; // XXX: del in future
 var netdata = {
     update: function(hosts) {
         topo.nodes.forEach( function(x) {
@@ -305,20 +316,32 @@ var netdata = {
             netdata.links.push({source: src_dpid, target: dst_dpid,
                 properties: {src_mac: x.port.src.hw_addr, src_port: src_port,
                             dst_mac: x.port.dst.hw_addr, dst_port: dst_port}});
-            if(!window.sw_port_table.hasOwnProperty(src_dpid)) {
-                window.sw_port_table[src_dpid] = {};
+            if(!window.port_table.hasOwnProperty(src_dpid)) {
+                window.port_table[src_dpid] = {};
             }
-            window.sw_port_table[src_dpid][src_port] = dst_dpid;
-            if(!window.sw_port_table.hasOwnProperty(dst_dpid)) {
-                window.sw_port_table[dst_dpid] = {};
+            window.port_table[src_dpid][src_port] = dst_dpid;
+            if(!window.port_table.hasOwnProperty(dst_dpid)) {
+                window.port_table[dst_dpid] = {};
             }
-            window.sw_port_table[dst_dpid][dst_port] = src_dpid;
+            window.port_table[dst_dpid][dst_port] = src_dpid;
         });
         hosts.forEach(function(host) {
             netdata.nodes.push({id: host.ipv4[0], properties: {type: "host"}});
             // put links between host and switch
             netdata.links.push({source: host.ipv4[0], target: trimInt(host.port.dpid), 
                 properties: {src_mac: host.mac, dst_mac: host.port.hw_addr, sw_in_port: trimInt(host.port.port_no)}});
+            var host_port = 1;
+            var sw_port = trimInt(host.port.port_no);
+            var host_ip = host.ipv4[0];
+            var host_conn_dpid = trimInt(host.port.dpid);
+            if(!window.port_table.hasOwnProperty(host_ip)) {
+                window.port_table[host_ip] = {};
+            }
+            window.port_table[host_ip][host_port] = host_conn_dpid;
+            if(!window.port_table.hasOwnProperty(host_conn_dpid)) {
+                window.port_table[host_conn_dpid] = {};
+            }
+            window.port_table[host_conn_dpid][sw_port] = host_ip;
         });
     }   
 };

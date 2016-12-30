@@ -28,41 +28,19 @@ $(function() {
         if(c3w.getBP_FLAG(dpi_lineChart)==1) {
             c3w.changeBP_FLAG(dpi_lineChart, 2);
             c3w.changeBP_FLAG(port_lineChart, 2);
-            //rx_gauge.internal.config.gauge_max = 3000;
-            //tx_gauge.internal.config.gauge_max = 3000;
-            //rx_gauge.internal.config.gauge_units = "Packets";
-            //tx_gauge.internal.config.gauge_units = "Packets";
         }
         else {
             c3w.changeBP_FLAG(dpi_lineChart, 1);
             c3w.changeBP_FLAG(port_lineChart, 1);
-            //rx_gauge.internal.config.gauge_max = 5000;
-            //tx_gauge.internal.config.gauge_max = 5000;
-            //rx_gauge.internal.config.gauge_units = "K bits";
-            //tx_gauge.internal.config.gauge_units = "K bits";
         }
     });
 
     $('#btn-map_proto').click(function() {
-        //console.log('右側側欄-map 下方的protocol');
-        //$('#btn-map_proto').addClass('active');
-        //$('#btn-map_port').removeClass('active');
-        //---$('.title-left').text('Protocols');
-        //---$('.title-right').text('Source of HTTP');
-        //---$('.chart-block-left .chart-main').attr('id', 'protos_pie');
-        //---$('.chart-block-right .chart-main').attr('id', 'proto_source');
         console.log("outer receive btn");
         c3w.changeRT_RANK(port_lineChart, 1);
     });
 
     $('#btn-map_port').click(function() {
-        //console.log('右側側欄-map 下方的port');
-        //$('#btn-map_port').addClass('active');
-        //$('#btn-map_proto').removeClass('active');
-        //---$('.title-left').text('Receive');
-        //---$('.title-right').text('Transmission');
-        //---$('.chart-block-left .chart-main').attr('id', 'rx_gauge');
-        //---$('.chart-block-right .chart-main').attr('id', 'tx_gauge');
         console.log("outer transmit btn");
         c3w.changeRT_RANK(port_lineChart, 2);
     });
@@ -71,6 +49,9 @@ $(function() {
         console.log("outer top btn");
         var outer_top_input = $("#outer_top_input");
         var val = outer_top_input.val();
+        if(val=="") {
+            val = 3;
+        }
         c3w.changeRT_RANK(window.dpi_lineChart, val);
     })
 
@@ -78,6 +59,9 @@ $(function() {
         console.log("outer his btn");
         var outer_his_input = $("#outer_his_input");
         var val = outer_his_input.val();
+        if(val=="") {
+            val = 10;
+        }
         c3w.setHistorySize(window.dpi_lineChart, val);
         c3w.setHistorySize(window.port_lineChart, val);
     })
@@ -89,60 +73,76 @@ $(function() {
         //console.log('右側側欄-information byte/pkt');
         console.log("inner sidebar bp btn");
         if(c3w.getBP_FLAG(in_lineChart)==1) {
-            c3w.changeBP_FLAG(in_lineChart, 2);
-            rx_gauge.internal.config.gauge_max = 3000;
-            tx_gauge.internal.config.gauge_max = 3000;
-            rx_gauge.internal.config.gauge_units = "Packets";
-            tx_gauge.internal.config.gauge_units = "Packets";
+            if(window.nl_stat==1) {
+                c3w.changeBP_FLAG(in_lineChart, 2);
+                c3w.changeBP_FLAG(in_lineChart2, 2);
+            }
+            else {
+                c3w.changeBP_FLAG(in_lineChart, 2);
+                rx_gauge.internal.config.gauge_max = 3000;
+                tx_gauge.internal.config.gauge_max = 3000;
+                rx_gauge.internal.config.gauge_units = "Packets";
+                tx_gauge.internal.config.gauge_units = "Packets";
+            }
         }
         else {
-            c3w.changeBP_FLAG(in_lineChart, 1);
-            rx_gauge.internal.config.gauge_max = 5000;
-            tx_gauge.internal.config.gauge_max = 5000;
-            rx_gauge.internal.config.gauge_units = "K bits";
-            tx_gauge.internal.config.gauge_units = "K bits";
+            if(window.nl_stat==1) {
+                c3w.changeBP_FLAG(in_lineChart, 1);
+                c3w.changeBP_FLAG(in_lineChart2, 1);
+            }
+            else {
+                c3w.changeBP_FLAG(in_lineChart, 1);
+                rx_gauge.internal.config.gauge_max = 5000;
+                tx_gauge.internal.config.gauge_max = 5000;
+                rx_gauge.internal.config.gauge_units = "K bits";
+                tx_gauge.internal.config.gauge_units = "K bits";
+            }
         }
     });
 
     $('#btn-info_proto').click(function() {
-        //console.log('右側側欄-information 下方的protocol');
-        //$('#btn-info_proto').addClass('active');
-        //$('#info-btn-port').removeClass('active');
-        //$('.title-left').text('Protocols');
-        //$('.title-right').text('Source of HTTP');
-        //$('.chart-block-left .chart-main').attr('id', 'protos_pie');
-        //$('.chart-block-right .chart-main').attr('id', 'proto_source');
         console.log("inner protocol btn");
-        // TODO: chnage to inner proto chart
-        //c3w.changeRT_RANK(port_lineChart, 1);
+        if(window.nl_stat==1) {
+            c3w.changeRT_RANK(in_lineChart2, 1);
+        }
+        else {
+            c3w.changeRT_RANK(in_lineChart, 1);
+        }
     });
 
     $('#btn-info_port').click(function() {
-        //console.log('右側側欄-information 下方的port');
-        //$('#info-btn-port').addClass('active');
-        //$('#btn-info_proto').removeClass('active');
-        //$('.title-left').text('Receive');
-        //$('.title-right').text('Transmission');
-        //$('.chart-block-left .chart-main').attr('id', 'rx_gauge');
-        //$('.chart-block-right .chart-main').attr('id', 'tx_gauge');
         console.log("inner port btn");
-        //c3w.changeRT_RANK(port_lineChart, 2);
+        if(window.nl_stat==1) {
+            c3w.changeRT_RANK(in_lineChart2, 2);
+        }
+        else {
+            c3w.changeRT_RANK(in_lineChart, 2);
+        }
     });
 
     $('#btn-info_top').click(function() {
-        console.log("outer top btn");
-        if(window.dp_stat==2) {
-            var outer_top_input = $("#outer_top_input");
-            var val = outer_top_input.val();
+        console.log("in top btn");
+        var inner_top_input = $("#inner_top_input");
+        var val = inner_top_input.val();
+        if(val=="") {
+            val = 3;
+        }
+        if(window.nl_stat==1) {
             c3w.changeRT_RANK(window.in_lineChart, val);
         }
     })
 
     $('#btn-info_hislen').click(function() {
         console.log("inner his btn");
-        var outer_his_input = $("#outer_his_input");
-        var val = outer_his_input.val();
+        var inner_his_input = $("#inner_his_input");
+        var val = inner_his_input.val();
+        if(val=="") {
+            val = 10;
+        }
         c3w.setHistorySize(window.in_lineChart, val);
+        if(window.nl_stat==1) {
+            c3w.setHistorySize(window.in_lineChart2, val);
+        }
     })
 
     /****  view button  ****/
@@ -153,6 +153,7 @@ $(function() {
         //$('#btn-campus').addClass('active');
         //$('#btn-topo').removeClass('active');
         //zoomTopo_reset();
+        resetInSideChart();
         intro_out();
     });
 

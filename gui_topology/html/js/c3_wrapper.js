@@ -385,6 +385,8 @@ c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size,
         for(var x in port_data) {
             if(!isNaN(parseInt(x))) {
                 var port_no = x;
+                if(port_no=="4294967294")
+                    continue;
                 var dst_id = dpi.idPort2id(conn.id, port_no);
                 if(dst_id==null)
                     continue;
@@ -394,7 +396,14 @@ c3_wrapper.prototype.appendPortData = function(conn, fieldName, port_data, size,
 
                 if(!db[port_no].hasOwnProperty(fieldName)) {
                     //db[port_no][fieldName] = [port_no+"_"+fieldName, port_data[port_no][fieldName]];
-                    db[port_no][fieldName] = [dst_id[1].toString()+"_"+fieldName, port_data[port_no][fieldName]];
+                    try {
+                        db[port_no][fieldName] = [dst_id[1].toString()+"_"+fieldName, port_data[port_no][fieldName]];
+                    }
+                    catch (err) {
+                        console.log(dst_id);
+                        console.log(conn.id, port_no);
+                        throw err;
+                    }
                 }
                 else {
                     var last = db[port_no][fieldName].pop();
@@ -1449,6 +1458,13 @@ function clickNodeEvent(node) {
     c3w.connectData(in_lineChart, id, null, {port_no: null, bp_flag: 1}); // show all protocols info. of dpid 1
     c3w.startShowLine(in_lineChart, 'dpi', 3);
     c3w.showProtoPie(pie_chart, 1, 2, 2000, in_lineChart); // chart, id, bp_flag, shareChart, rt_rank
+    c3w.connectData(in_lineChart2, id, null, {port_no: null, bp_flag: 1});
+    c3w.startShowLine(in_lineChart2, 'port', 1); 
+    in_lineChart.unload();
+    rx_gauge.unload();
+    tx_gauge.unload();
+    $("#inner_top_input").removeAttr('disabled');
+    $("#btn-info_top").prop('disabled', false);
 }
 
 /******   LINK DEMO   ********/
@@ -1539,6 +1555,12 @@ function clickLinkEvent(link) {
     $(".title-left").text(ids[1].toString()+"  =>  "+ids[0].toString());
 
     console.log(port_no);
+    in_lineChart.unload();
+    in_lineChart2.unload();
+    contribute_chart.unload();
+    pie_chart.unload();
+    $("#inner_top_input").attr('disabled', 'disabled');
+    $("#btn-info_top").prop('disabled', true);
     return ids;
 }
 
@@ -1550,13 +1572,14 @@ function reconstructPort() {
     //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
 }
 
-function reconstructPort_i() {
-    window.dp_stat = 1; // default dpi mode
-    c3w.destroy(window.in_lineChart);
-    c3w.destroy(window.rx_gauge);
-    c3w.destroy(window.tx_gauge);
-    //setTimeout(initChart, 300); // need some delay or chart can't be visualized...
-}
+//function reconstructPort_i() {
+    //window.dp_stat = 1; // default dpi mode
+    //c3w.destroy(window.in_lineChart);
+    //c3w.destroy(window.in_lineChart2);
+    //c3w.destroy(window.rx_gauge);
+    //c3w.destroy(window.tx_gauge);
+    ////setTimeout(initChart, 300); // need some delay or chart can't be visualized...
+//}
 
 function reconstructDPI() {
     window.dp_stat = 1; // default dpi mode
@@ -1565,9 +1588,19 @@ function reconstructDPI() {
     c3w.destroy(window.contribute_chart);
 }
 
-function reconstructDPI_i() {
+//function reconstructDPI_i() {
+    //window.dp_stat = 1; // default dpi mode
+    //c3w.destroy(window.in_lineChart);
+    //c3w.destroy(window.pie_chart);
+    //c3w.destroy(window.contribute_chart);
+//}
+
+function reconstructIn() {
     window.dp_stat = 1; // default dpi mode
     c3w.destroy(window.in_lineChart);
+    c3w.destroy(window.in_lineChart2);
+    c3w.destroy(window.rx_gauge);
+    c3w.destroy(window.tx_gauge);
     c3w.destroy(window.pie_chart);
     c3w.destroy(window.contribute_chart);
 }
@@ -1581,6 +1614,15 @@ function reconstructOut() {
 function unloadOut() {
     window.dpi_lineChart.unload();
     window.port_lineChart.unload();
+}
+
+function unloadIn() {
+    window.in_lineChart.unload();
+    window.in_lineChart2.unload();
+    window.rx_gauge.unload();
+    window.tx_gauge.unload();
+    window.pie_chart.unload();
+    window.contribute_chart.unload();
 }
 
 /*

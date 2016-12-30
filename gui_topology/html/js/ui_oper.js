@@ -8,7 +8,7 @@
 
         /** OUTER **/
 
-        var dpi_lineChart_sel = "#out_dpi_chart"; // TODO
+        var dpi_lineChart_sel = "#out_dpi_chart"; 
         var dpi_lineChart_dimen = [370, 185];
         window.dpi_lineChart = c3.generate({
             bindto: dpi_lineChart_sel,
@@ -22,7 +22,7 @@
             },
         });
 
-        var port_lineChart_sel = "#out_port_chart"; // TODO
+        var port_lineChart_sel = "#out_port_chart"; 
         var port_lineChart_dimen = [370, 185];
         window.port_lineChart = c3.generate({
             bindto: port_lineChart_sel,
@@ -38,7 +38,7 @@
 
         /** INNER **/
 
-        var in_lineChart_sel = "#in_line_chart"; // TODO
+        var in_lineChart_sel = "#in_line_chart"; 
         var in_lineChart_dimen = [370, 185];
         window.in_lineChart = c3.generate({
             bindto: in_lineChart_sel,
@@ -52,7 +52,21 @@
             },
         });
 
-        var pie_chart_sel = "#protos_pie"; // TODO
+        var in_lineChart2_sel = "#in_line_chart2"; 
+        var in_lineChart2_dimen = [370, 185];
+        window.in_lineChart2 = c3.generate({
+            bindto: in_lineChart2_sel,
+            size: {
+                width: in_lineChart2_dimen[0],
+                height: in_lineChart2_dimen[1]
+            },
+            data: {
+                x: 'ts',
+                columns: []
+            },
+        });
+
+        var pie_chart_sel = "#protos_pie"; 
         var pie_chart_dimen = [180, 180];
         window.pie_chart = c3.generate({
             bindto: pie_chart_sel,
@@ -68,7 +82,7 @@
             },
         });
 
-        var con_pie_chart_sel = "#proto_source"; // TODO
+        var con_pie_chart_sel = "#proto_source"; 
         var con_pie_chart_dimen = [180, 180];
         window.contribute_chart = c3.generate({
             bindto: con_pie_chart_sel,
@@ -83,7 +97,7 @@
             },
         });
 
-        var tx_gauge_sel = "#tx_gauge"; // TODO
+        var tx_gauge_sel = "#tx_gauge"; 
         var tx_gauge_dimen = [180, 170];
         window.tx_gauge = c3.generate({
             bindto: tx_gauge_sel,
@@ -110,7 +124,7 @@
             }
         });
 
-        var rx_gauge_sel = "#rx_gauge"; // TODO
+        var rx_gauge_sel = "#rx_gauge"; 
         var rx_gauge_dimen = [180, 170];
         window.rx_gauge = c3.generate({
             bindto: rx_gauge_sel,
@@ -145,25 +159,6 @@ function ui_resetAllStat(bp=1, rt=1, dp=1) {
     window.bp_stat = bp;
     window.rt_stat = rt; // only node need
     window.dp_stat = dp; // 1: dpi, 2: port
-}
-
-window.io_stat = 1; // 1: out, 2: in
-/* show and hide view page according to io_stat */
-// TODO: 
-function io_exchange() {
-    if(window.io_stat == 1) {
-        // hide in_view
-        // show out_view
-        // resetide_i
-    }
-    else if(window.io_stat){
-        // hide out_view
-        // show in_view
-        // resetide_o
-    }
-    else {
-        throw "unknown io_stat";
-    }
 }
 
 /**************   button events    *****************/
@@ -235,7 +230,11 @@ function pie_click(d, i) {
     c3w.showProtoContributePie(contribute_chart, id, d.name, shareChart);
 }
 
+
 function resetInSideChart() {
+    console.log("work");
+    reconstructIn();
+    unloadIn();
     /* reset recv and trans switch */
     $('#btn-info_port').removeClass('active');
     $('#btn-info_proto').addClass('active');
@@ -246,3 +245,4 @@ window.rt_stat = 1; // only node need
 window.dp_stat = 1; // 1: dpi, 2: port
 window.cur_id = null;
 window.lv_stat = 1;
+window.nl_stat = 1; // 1: node, 2: link
