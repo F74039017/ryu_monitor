@@ -91,7 +91,7 @@
                             <div class="optn-map_top">
                                 <form class="form-inline">
                                     <div class="input-map_top">
-                                        <input type="number" class="form-control form-map_top" id="outer_top_input" min="1" placeholder="Top:3">
+                                        <input type="number" class="form-control form-map_top" id="outer_top_input" min="1" placeholder="Top: 3">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-map_top">Submit</button>
                                 </form>
@@ -99,7 +99,7 @@
                             <div class="optn-map_hislen">
                                 <form class="form-inline">
                                     <div class="input-map_hislen">
-                                        <input type="number" class="form-control form-map_hislen" id="outer_his_input" min="5" placeholder="History interval:10">
+                                        <input type="number" class="form-control form-map_hislen" id="outer_his_input" min="5" placeholder="History interval: 10">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-map_hislen">Submit</button>
                                 </form>
@@ -134,6 +134,25 @@
             <div class="sidetab-tab sidetab-info" id="tab-info">
                 <!-- info-content -->
                 <div class="tab-content">
+                    <!-- content-route -->
+                    <div class="content-route">
+                        <form class="form-inline" id="traceroute-flag">
+                            <div class="route-type">
+                                <select class="form-control" id="sel-route_type">
+                                    <!-- <option>TCP</option> -->
+                                    <option>UDP</option>
+                                </select>
+                            </div>
+                            <div class="route-main">
+                                <div class="input-route">
+                                    <input class="form-control form-route_src" id="" placeholder="Source IP addr.">
+                                    <input class="form-control form-route_dst" id="" placeholder="Destination IP addr.">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="btn-route_go">Go</button>
+                                <button type="reset" class="btn btn-primary" id="btn-route_reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
                     <!-- content-top -->
                     <div class="content-top">
                         <div class="content-back">
@@ -164,7 +183,7 @@
                             <div class="optn-info_top">
                                 <form class="form-inline">
                                     <div class="input-info_top">
-                                        <input type="number" class="form-control form-info_top" id="inner_top_input" min="1" placeholder="Top:3">
+                                        <input type="number" class="form-control form-info_top" id="inner_top_input" min="1" placeholder="Top: 3">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-info_top">Submit</button>
                                 </form>
@@ -172,7 +191,7 @@
                             <div class="optn-info_hislen">
                                 <form class="form-inline">
                                     <div class="input-info_hislen">
-                                        <input type="number" class="form-control form-info_hislen" id="inner_his_input" min="5" placeholder="History interval:10">
+                                        <input type="number" class="form-control form-info_hislen" id="inner_his_input" min="5" placeholder="History interval: 10">
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="btn-info_hislen">Submit</button>
                                 </form>

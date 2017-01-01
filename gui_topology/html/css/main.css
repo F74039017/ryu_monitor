@@ -465,6 +465,7 @@ body {
     color: #ffffff;
     font-family: 'PT Sans Caption', sans-serif;
     font-size: 14px;
+    font-weight: bold;
     text-align: center;
     line-height: 10px;
     background-color: #0066cc;
@@ -496,7 +497,7 @@ body {
     position: absolute;
     top: 0;
     border: 2px solid #2A76B9;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .map-optn .optn-map_top #btn-map_top {
@@ -537,7 +538,7 @@ body {
     width: 100%;
     bottom: 0;
     border: 2px solid #2A76B9;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .map-optn .optn-map_hislen #btn-map_hislen {
@@ -630,7 +631,7 @@ body {
     height: 40px;
     width: 100%;
     position: absolute;
-    bottom: 150px;
+    bottom: 170px;
     left: 0;
     right: 0;
 }
@@ -678,6 +679,131 @@ body {
     background-color: #003366;
     color: #ffffff;
     border-color: #003366;
+}
+
+
+/* info-route */
+
+.sidetab-info .tab-content .content-route {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.sidetab-info .content-route .route-type {
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.sidetab-info .route-type #sel-route_type {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    transition: background-color 0.2s ease;
+}
+
+.sidetab-info .route-type #sel-route_type:hover {
+    background-color: #003366;
+}
+
+.sidetab-info .route-type #sel-route_type option {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    transition: background-color 0.2s ease;
+}
+
+.sidetab-info .route-type #sel-route_type option:hover {
+    background-color: #003366;
+}
+
+.sidetab-info .content-route .route-main {
+    height: 100%;
+    width: 75%;
+    position: absolute;
+    top: 0;
+    left: 24%;
+}
+
+.sidetab-info .route-main .input-route {
+    height: 100%;
+    width: 60%;
+    top: 0;
+    left: 0;
+}
+
+.sidetab-info .route-main .form-route_src {
+    height: 27px;
+    width: 60%;
+    position: absolute;
+    top: 20px;
+    border: 2px solid #2A76B9;
+    border-radius: 5px;
+}
+
+.sidetab-info .route-main .form-route_dst {
+    height: 27px;
+    width: 60%;
+    position: absolute;
+    top: 55px;
+    border: 2px solid #2A76B9;
+    border-radius: 5px;
+}
+
+.sidetab-info .route-main #btn-route_go {
+    height: 60px;
+    width: 17.5%;
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    background-color: #0066cc;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    transition: background-color 0.2s ease;
+}
+
+.sidetab-info .route-main #btn-route_reset {
+    height: 60px;
+    width: 17.5%;
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    background-color: #0066cc;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    transition: background-color 0.2s ease;
+}
+
+.sidetab-info .route-main #btn-route_go:hover {
+    background-color: #003366;
+}
+
+.sidetab-info .route-main #btn-route_reset:hover {
+    background-color: #003366;
 }
 
 
@@ -926,7 +1052,7 @@ body {
     position: absolute;
     top: 0;
     border: 2px solid #2A76B9;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .info-optn .optn-info_top #btn-info_top {
@@ -936,6 +1062,7 @@ body {
     top: 0;
     right: 5px;
     padding-top: 3px;
+    background-color: #0066cc;
     font-size: 14px;
     font-weight: bold;
     border: 0;
@@ -966,7 +1093,7 @@ body {
     width: 100%;
     bottom: 0;
     border: 2px solid #2A76B9;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .info-optn .optn-info_hislen #btn-info_hislen {
@@ -976,6 +1103,7 @@ body {
     bottom: 0;
     right: 5px;
     padding-top: 3px;
+    background-color: #0066cc;
     font-size: 14px;
     font-weight: bold;
     border: 0;

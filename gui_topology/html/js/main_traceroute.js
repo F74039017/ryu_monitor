@@ -1,6 +1,12 @@
 $(function() {
     var route = ["10.0.0.1", "1", "3", "10.0.0.4"];
     //getRoute();
+    //
+    // btn go
+    $('#btn-route_go').click(function() {
+        alert('src: ' + $('.form-route_src').val() + '\ndst: ' + $('.form-route_dst').val());
+        // call getRoute();
+    });
 });
 
 function getRoute(route) {

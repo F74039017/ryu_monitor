@@ -1,4 +1,6 @@
 $(function() {
+    $('#traceroute-flag :input').prop('disabled', true);
+
     $('#icon-map').click(function() {
         $('#tab-map').animate({ "right": "0px" }, 500).addClass('visible');
     });
@@ -62,12 +64,14 @@ $(function() {
     $('#btn-campus').click(function() {
         $('#btn-campus').addClass('active');
         $('#btn-topo').removeClass('active');
+        $('#traceroute-flag :input').prop('disabled', true);
         zoomTopo_reset();
     });
 
     $('#btn-topo').click(function() {
         $('#btn-topo').addClass('active');
         $('#btn-campus').removeClass('active');
+        $('#traceroute-flag :input').prop('disabled', false);
         zoomTopo();
     });
 });
