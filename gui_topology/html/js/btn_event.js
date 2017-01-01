@@ -165,6 +165,48 @@ $(function() {
         //zoomTopo();
         resetOutSideChart();
     });
+
+    /****  traceroute  ****/
+    $('#btn-route_go').click(function(e) {
+        e.preventDefault();
+        var src_addr = $('#src_addr').val();
+        var dst_addr = $('#dst_addr').val();
+        if(src_addr=="" || dst_addr=="") {
+            alert("src or dst field is empty");
+            return;
+        }
+        if(!checkIPv4(src_addr) || !checkIPv4(dst_addr)) {
+            alert("src or dst is illegal ipv4 format");
+            return;
+        }
+        if(!validateIds(src_addr)) {
+            alert("src address can not be found in the network");
+            return;
+        }
+
+        // XXX: little hack, webpage current directory is /static
+        var query_str = "../send_packet/";
+        query_str += src_addr+"/";
+        query_str += dst_addr;
+        $.get(query_str, function(data) {
+            console.log(data);
+            // TODO: 
+            //  clear path color
+            /* appending src and dst addr */
+            data.unshift(src_addr);
+            if(validateIds(dst_addr))
+                data.push(dst_addr);
+            getRoute(data);
+        }, "json" );
+
+    });
+
+    $('#btn-route_reset').click(function(e) {
+        e.preventDefault();
+        $('#src_addr').val("");
+        $('#dst_addr').val("");
+        // TODO: clear path color
+    });
 });
 
 /*function zoomTopo() {

@@ -240,6 +240,66 @@ function resetInSideChart() {
     $('#btn-info_proto').addClass('active');
 }
 
+/**************************************/
+
+/* 
+ * ids: an string, int, or array.
+ *      id includes host's ipv4 or dpid
+ *
+ * return true/false
+ * */
+function validateIds(ids) {
+    /* create id table depending on netjson_el */
+    var table = {};
+    for(var x in netjson_el.node) {
+        try {
+            table[netjson_el.node[x].__data__.id] = true;
+        }
+        catch(err) {
+            // parent node <g>, just pass it
+        }
+    }
+
+
+    if(Object.prototype.toString.call(ids) == "[object Array]") {
+        for(var x in ids) {
+            if(!validate(ids[x]))
+                return false;
+        }
+        return true;
+    }
+    else {
+        return validate(ids);
+    }
+
+    function validate(id) {
+        var type = typeof id;
+        if(type!="number" && type!="string")
+            throw "wrong type for id: "+type;
+        if(type=="string") {
+            if(!checkIPv4(id))
+                throw "wrong ipv4 format";
+        }
+        else {
+            if(id!=parseInt(id))
+                throw "not integer";
+        }
+        
+        if(table.hasOwnProperty(id))
+            return true;
+        else
+            return false;
+    }
+}
+
+function checkIPv4(str) {
+    if (/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/.test(str)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 window.bp_stat = 1;
 window.rt_stat = 1; // only node need
 window.dp_stat = 1; // 1: dpi, 2: port
