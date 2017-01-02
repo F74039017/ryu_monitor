@@ -167,6 +167,7 @@ $(function() {
     });
 
     /****  traceroute  ****/
+    var last_path = null;
     $('#btn-route_go').click(function(e) {
         e.preventDefault();
         var src_addr = $('#src_addr').val();
@@ -190,13 +191,17 @@ $(function() {
         query_str += dst_addr;
         $.get(query_str, function(data) {
             console.log(data);
-            // TODO: 
-            //  clear path color
+            if(last_path!=null) {
+                clearRoute(last_path);
+            }
+
             /* appending src and dst addr */
             data.unshift(src_addr);
             if(validateIds(dst_addr))
                 data.push(dst_addr);
             getRoute(data);
+
+            last_path = data.slice();
         }, "json" );
 
     });
@@ -205,7 +210,10 @@ $(function() {
         e.preventDefault();
         $('#src_addr').val("");
         $('#dst_addr').val("");
-        // TODO: clear path color
+        if(last_path!=null) {
+            clearRoute(last_path);
+        }
+        last_path = null;
     });
 });
 
