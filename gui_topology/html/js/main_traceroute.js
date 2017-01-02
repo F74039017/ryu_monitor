@@ -3,10 +3,10 @@ $(function() {
     //getRoute();
     //
     // btn go
-    $('#btn-route_go').click(function() {
-        alert('src: ' + $('.form-route_src').val() + '\ndst: ' + $('.form-route_dst').val());
-        // call getRoute();
-    });
+    //$('#btn-route_go').click(function() {
+        //alert('src: ' + $('.form-route_src').val() + '\ndst: ' + $('.form-route_dst').val());
+        //// call getRoute();
+    //});
 });
 
 function getRoute(route) {
