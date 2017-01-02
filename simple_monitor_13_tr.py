@@ -68,6 +68,7 @@ class SimpleMonitor(app_manager.RyuApp):
         # traceroute variable
         self.host_ip_mac = {}
         self.host_ip_dpid = {}
+        self.host_ip_port = {}
         self.forward_list = []
         self.trace_ts = 0
 
@@ -148,14 +149,30 @@ class SimpleMonitor(app_manager.RyuApp):
         dpid = datapath.id
         self.mac_to_port.setdefault(dpid, {})
 
+        tablemiss_flag = True
         if not vla:
             pass
         else:
-            # prevent the probing packet packet_in immediately
-            if self.forward_list[0] != dpid:
+            # probing packet packet_in because of table miss
+            if self.forward_list[-1] != dpid:
                 self.forward_list.append(dpid)
-            self.trace_ts = int(round(time.time() * 1000))
-            print dpid
+                tablemiss_flag = False
+                self.trace_ts = int(round(time.time() * 1000))
+
+            vid = vla[0].vid
+            # print dpid
+            # print vid
+            # print "-----"
+
+            if not tablemiss_flag:
+                if vid==1:
+                    actions = [parser.OFPActionSetField(vlan_vid=2), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
+                else:
+                    actions = [parser.OFPActionSetField(vlan_vid=1), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
+                out = parser.OFPPacketOut(datapath=datapath, buffer_id=ofproto.OFP_NO_BUFFER,
+                                          in_port=in_port, actions=actions, data=msg.data)
+                datapath.send_msg(out)
+                return
 
         # self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 
@@ -626,10 +643,16 @@ class ResponseController(ControllerBase):
             parser = datapath.ofproto_parser
             actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER,
                                               ofproto.OFPCML_NO_BUFFER)]
-            data = sw.to_dict()
-            for port in data['ports']:
-                match = parser.OFPMatch(vlan_vid=(0x1000, 0x1000), in_port=str_to_port_no(port['port_no']))
-                self.response_app.add_flow(datapath, 12345, match, actions)
+            # data = sw.to_dict()
+            # for port in data['ports']:
+                # match = parser.OFPMatch(vlan_vid=(0x1000, 0x1000), in_port=str_to_port_no(port['port_no']))
+                # self.response_app.add_flow(datapath, 12345, match, actions)
+
+            if datapath.id == 1:
+                match = parser.OFPMatch(vlan_vid=(0x1000 | 2))
+            else:
+                match = parser.OFPMatch(vlan_vid=(0x1000 | 1))
+            self.response_app.add_flow(datapath, 12345, match, actions)
 
             
         ## create host's ip mac table
@@ -638,6 +661,7 @@ class ResponseController(ControllerBase):
             try:
                 self.response_app.host_ip_mac[host.ipv4[0]] = host.mac
                 self.response_app.host_ip_dpid[host.ipv4[0]] = host.port.dpid
+                self.response_app.host_ip_port[host.ipv4[0]] = host.port.port_no
             except:
                 pass
 
@@ -666,9 +690,15 @@ class ResponseController(ControllerBase):
         packet = Scapy.Ether(src=src_mac, dst=dst_mac)/Scapy.IP(src=src_ip, dst=dst_ip)/Scapy.UDP()/"Hello World"
         packet = str(packet)
 
-        actions = [parser.OFPActionPushVlan(), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
+        # XXX; pretty hard code....
+        # dpid==1 => send vid=1
+        if datapath.id == 1:
+            actions = [parser.OFPActionPushVlan(), parser.OFPActionSetField(vlan_vid=1), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
+        else:
+            actions = [parser.OFPActionPushVlan(), parser.OFPActionSetField(vlan_vid=2), parser.OFPActionOutput(ofproto.OFPP_TABLE)]
+
         out = parser.OFPPacketOut(datapath=datapath, buffer_id=ofproto.OFP_NO_BUFFER,
-                                  in_port=ofproto.OFPP_CONTROLLER, actions=actions, data=packet)
+                                  in_port=self.response_app.host_ip_port[src_ip], actions=actions, data=packet)
         datapath.send_msg(out)
 
         ## XXX: pretty bad... sleep will hang the controller
