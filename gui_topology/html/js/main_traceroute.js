@@ -59,10 +59,73 @@ function getRoute(route) {
                 $(this).css('stroke-width', '3');
                 $(this).css('color', 'rgba(102, 255, 102, 1)');
             } else if ($(this).attr('x1') == linkX2 && $(this).attr('y1') == linkY2 && $(this).attr('x2') == linkX1 && $(this).attr('y2') == linkY1) {
-            	$(this).css('stroke', 'rgb(102, 255, 102)');
+                $(this).css('stroke', 'rgb(102, 255, 102)');
                 $(this).css('stroke-opacity', '0.5')
                 $(this).css('stroke-width', '3');
                 $(this).css('color', 'rgba(102, 255, 102, 1)');
+            }
+        });
+
+        linkX1 = linkX2;
+        linkY1 = linkY2;
+    }
+}
+
+function clearRoute(route) {
+    var linkX1,
+        linkX2,
+        linkY1,
+        linkY2;
+
+    $('#left svg g > .njg-node').each(function() {
+        if ($(this).parent().children('.njg-tooltip').text() == route[0]) {
+            if ($(this).hasClass('route_host')) {
+                $(this).removeClass('route_host');
+                $(this).css('stroke', '#ffffff');
+                $(this).css('stroke-opacity', '0.5');
+                $(this).css('color', '');
+            } else if ($(this).hasClass('route_sw')) {
+                $(this).removeClass('route_sw');
+                $(this).css('stroke', '#ffffff');
+                $(this).css('stroke-opacity', '0.5');
+                $(this).css('color', '');
+            }
+            linkX1 = $(this).attr('cx');
+            linkY1 = $(this).attr('cy');
+        }
+    });
+
+    for (var i = 1; i < route.length; ++i) {
+        $('#left svg g > .njg-node').each(function() {
+            if ($(this).parent().children('.njg-tooltip').text() == route[i]) {
+                if ($(this).hasClass('route_host')) {
+                    $(this).removeClass('route_host');
+                    $(this).css('stroke', '#ffffff');
+                    $(this).css('stroke-opacity', '0.5');
+                    $(this).css('color', '');
+                } else if ($(this).hasClass('route_sw')) {
+                    $(this).removeClass('route_sw');
+                    $(this).css('stroke', '#ffffff');
+                    $(this).css('stroke-opacity', '0.5');
+                    $(this).css('color', '');
+                }
+
+                linkX2 = $(this).attr('cx');
+                linkY2 = $(this).attr('cy');
+            }
+        });
+
+        $('#left svg g > .njg-link').each(function() {
+            if ($(this).attr('x1') == linkX1 && $(this).attr('y1') == linkY1 && $(this).attr('x2') == linkX2 && $(this).attr('y2') == linkY2) {
+                $(this).css('stroke', '#999999');
+                $(this).css('stroke-opacity', '025')
+                $(this).css('stroke-width', '2');
+                $(this).css('color', '');
+            } else if ($(this).attr('x1') == linkX2 && $(this).attr('y1') == linkY2 && $(this).attr('x2') == linkX1 && $(this).attr('y2') == linkY1) {
+                $(this).css('stroke', '#999999');
+                $(this).css('stroke-opacity', '0.25')
+                $(this).css('stroke-width', '2');
+                $(this).css('color', '');
             }
         });
 
